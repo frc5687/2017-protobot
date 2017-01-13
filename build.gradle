@@ -1,0 +1,87 @@
+plugins {
+    id "java"
+    id "eclipse"
+    id "idea"
+    id "jaci.openrio.gradle.GradleRIO" version "2017.0.5"
+}
+
+apply plugin: "jaci.openrio.gradle.GradleRIO"
+apply plugin: "java"
+apply plugin: "eclipse"
+apply plugin: "idea"
+
+frc {
+    team = "5687"
+    robotClass = "org.frc5687.steamworks.protobot.Robot"
+    rioIP="10.56.87.95"
+}
+
+wpi {
+    wpilibVersion = "+"                   // The WPILib version to use. For this version of GradleRIO, must be a 2017 version
+    ntcoreVersion = "+"                   // The NetworkTables Core version to use.
+    opencvVersion = "+"                   // The OpenCV version to use
+    cscoreVersion = "+"                   // The CSCore version to use
+    talonSrxVersion = "+"                 // The CTRE Toolsuite (Talon SRX) version to use.
+}
+
+dependencies {
+    compile wpilib()
+    compile talonSrx()
+    compile fileTree(dir: 'lib', include: '**/*.jar')
+}
+
+def robotManifest = {
+  attributes 'Main-Class': 'edu.wpi.first.wpilibj.RobotBase'
+  attributes 'Robot-Class': frc.robotClass
+}
+
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    manifest robotManifest
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.2.1'
+}
+
+task genJavadoc(type: Jar, dependsOn: javadoc) {
+  classifier = 'javadoc'
+  from javadoc.destinationDir
+}
+
+artifacts {
+  archives genJavadoc
+}
+
+task gitInfo(dependsOn: build) {
+  description = 'Logs git branch and version to build'
+  def cmd = 'git rev-parse --abbrev-ref HEAD'
+  project.ext.branch = cmd.execute().text.trim()
+  cmd = 'git rev-parse --short HEAD'
+  project.ext.revision = cmd.execute().text.trim()
+
+  println '[branch] ' + project.branch
+  println '[commit] ' + project.revision
+}
+
+task access << {
+  description = 'Grants access permission to robot code'
+  def robot = 'Christine'
+  println 'User-agent: ' + robot + ' \nDisallow: '
+  println '\nUser-agent: * \nDisallow: /'
+}
+
+task gitLog << {
+  description = 'Logs git branch and version to log file when deploy'
+  def logFile = new File('src/main/java/org/usfirst/frc/team5687/robot/utils/Reader.java')
+
+  def cmd = 'git diff HEAD --shortstat'
+  def mod = cmd.execute().text.trim()
+  def modified = (mod != null && mod.length() != 0) ? ' *' : ''
+  def br = '\n\n'
+  def reader = 'package org.usfirst.frc.team5687.robot.utils;' + br
+  reader += '/**\n * A file reader class to read current Git information from deployed robot code\n * @author wilstenholme\n */' + br
+  reader += 'public class Reader {\n' + '    public static final String gitInfo = \"' + project.branch + ' ' + project.revision + modified + '\";\n }'
+  logFile.text = reader
+}
+deploy.dependsOn(gitLog)
