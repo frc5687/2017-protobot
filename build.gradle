@@ -2,7 +2,7 @@ plugins {
     id "java"
     id "eclipse"
     id "idea"
-    id "jaci.openrio.gradle.GradleRIO" version "2017.0.5"
+    id "jaci.openrio.gradle.GradleRIO" version "2017.0.7"
 }
 
 apply plugin: "jaci.openrio.gradle.GradleRIO"
@@ -66,7 +66,7 @@ task gitInfo(dependsOn: build) {
 
 task access << {
   description = 'Grants access permission to robot code'
-  def robot = 'Christine'
+  def robot = 'Protobot'
   println 'User-agent: ' + robot + ' \nDisallow: '
   println '\nUser-agent: * \nDisallow: /'
 }
