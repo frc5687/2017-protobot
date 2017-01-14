@@ -2,12 +2,15 @@ package org.frc5687.steamworks.protobot;
 
 import org.frc5687.steamworks.protobot.Utils.Gamepad;
 import org.frc5687.steamworks.protobot.Utils.Helpers;
+import org.frc5687.steamworks.protobot.Constants;
 
 /**
  * Created by Ben Bernard on 1/12/2017.
  */
 public class OI {
     private Gamepad gamepad;
+    boolean isReversed =Constants.Encoders.Defaults.REVERSED;
+
 
     public static final int REVERSE = Gamepad.Buttons.BACK.getNumber();
 
@@ -20,4 +23,13 @@ public class OI {
         result = Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
         result = Helpers.applySensitivityTransform(result);
         return result;
+    }
+    public double getLeftSpeed(){
+        return transformStickToSpeed(Gamepad.Axes.LEFT_Y);
+
+    }
+    public double getRightSpeed(){
+        return transformStickToSpeed(Gamepad.Axes.RIGHT_Y);
+    }
+
 }
