@@ -6,11 +6,6 @@ import org.frc5687.steamworks.protobot.Utils.Gamepad;
  * Created by Ben Bernard on 1/12/2017.
  */
 public class Constants {
-    //Starting or default values for the robot
-    public class Defaults {
-        //the direction the robot starts moving
-        int initialDirection = 1;
-    }
 
     public class Deadbands {
         /**
