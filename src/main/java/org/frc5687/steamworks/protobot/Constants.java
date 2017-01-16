@@ -25,6 +25,15 @@ public class Constants {
          */
         public static final double ACCELERATION_CAP = TIME_OF_ACCEL / CYCLES_PER_SECOND * 100;
     }
+    public class Calibration {
+        /***
+         * Controls the sensitivity algorithm.
+         * 0 results in a linear control-to-speed relationship, while 1 results in cubed.
+         *
+         * NEVER SET ABOVE 1 OR BELOW 0
+         */
+        public static final double SENSITIVITY_FACTOR = .2;
+    }
 
     public class Encoders {
         public class Defaults {
@@ -44,18 +53,8 @@ public class Constants {
         public static final double INCHES_PER_PULSE = Encoders.Defaults.INCHES_PER_PULSE;
     }
 
-    public class LeftDrive {
+
         public static final boolean REVERSED = true;
         public static final double INCHES_PER_PULSE = Encoders.Defaults.INCHES_PER_PULSE;
     }
 }
-    public class Calibration {
-        /***
-         * Controls the sensitivity algorithm.
-         * 0 results in a linear control-to-speed relationship, while 1 results in cubed.
-         *
-         * NEVER SET ABOVE 1 OR BELOW 0
-         */
-        public static final double SENSITIVITY_FACTOR = .2;
-    }
-    }
