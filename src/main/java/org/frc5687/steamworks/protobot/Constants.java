@@ -25,6 +25,7 @@ public class Constants {
          */
         public static final double ACCELERATION_CAP = TIME_OF_ACCEL / CYCLES_PER_SECOND * 100;
     }
+
     public class Calibration {
         /***
          * Controls the sensitivity algorithm.
@@ -48,13 +49,15 @@ public class Constants {
         }
 
 
-    public class RightDrive {
-        public static final boolean REVERSED = Encoders.Defaults.REVERSED;
-        public static final double INCHES_PER_PULSE = Encoders.Defaults.INCHES_PER_PULSE;
-    }
+        public class RightDrive {
+            public static final boolean REVERSED = Encoders.Defaults.REVERSED;
+            public static final double INCHES_PER_PULSE = Encoders.Defaults.INCHES_PER_PULSE;
+        }
 
 
-        public static final boolean REVERSED = true;
-        public static final double INCHES_PER_PULSE = Encoders.Defaults.INCHES_PER_PULSE;
+        public class LeftDrive {
+            public static final boolean REVERSED = true;
+            public static final double INCHES_PER_PULSE = Defaults.INCHES_PER_PULSE;
+        }
     }
 }
