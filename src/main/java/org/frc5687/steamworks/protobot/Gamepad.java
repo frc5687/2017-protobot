@@ -1,4 +1,4 @@
-package org.frc5687.steamworks.protobot.Utils;
+package org.frc5687.steamworks.protobot;
 
 import edu.wpi.first.wpilibj.Joystick;
 

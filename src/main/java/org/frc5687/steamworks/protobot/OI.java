@@ -1,9 +1,5 @@
 package org.frc5687.steamworks.protobot;
 
-import org.frc5687.steamworks.protobot.Utils.Gamepad;
-import org.frc5687.steamworks.protobot.Utils.Helpers;
-import org.frc5687.steamworks.protobot.Constants;
-
 /**
  * Created by Ben Bernard on 1/12/2017.
  */
