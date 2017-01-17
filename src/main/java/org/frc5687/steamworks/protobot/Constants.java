@@ -6,6 +6,14 @@ package org.frc5687.steamworks.protobot;
 public class Constants {
 
 
+    public class Drive {
+        public static final boolean LEFT_MOTOR_FRONT_INVERTED = true;
+        public static final boolean RIGHT_MOTOR_FRONT_INVERTED = true;
+        public static final boolean LEFT_MOTOR_REAR_INVERTED = true;
+        public static final boolean RIGHT_MOTOR_REAR_INVERTED = true;
+    }
+
+
     public class Deadbands {
         /**
          * Deadband threshold for drive joysticks
