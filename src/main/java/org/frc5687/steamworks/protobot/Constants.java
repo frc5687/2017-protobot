@@ -58,13 +58,13 @@ public class Constants {
 
 
         public class RightDrive {
-            public static final boolean REVERSED = true;
+            public static final boolean REVERSED = Defaults.REVERSED;
             public static final double INCHES_PER_PULSE = Encoders.Defaults.INCHES_PER_PULSE;
         }
 
 
         public class LeftDrive {
-            public static final boolean REVERSED = true;
+            public static final boolean REVERSED = Defaults.REVERSED;
             public static final double INCHES_PER_PULSE = Defaults.INCHES_PER_PULSE;
         }
     }
