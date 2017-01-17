@@ -5,7 +5,6 @@ package org.frc5687.steamworks.protobot;
  */
 public class Constants {
 
-
     public class GearHandler {
         public static final double openSpeed = 1;
         public static final double closeSpeed = -.05;

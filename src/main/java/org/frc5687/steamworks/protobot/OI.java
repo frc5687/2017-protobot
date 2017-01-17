@@ -1,5 +1,7 @@
 package org.frc5687.steamworks.protobot;
 
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 /**
  * Created by Ben Bernard on 1/12/2017.
  */
@@ -10,6 +12,28 @@ public class OI {
 
     public static final int REVERSE = Gamepad.Buttons.BACK.getNumber();
 
+//Gear buttons
+    public static final int GEAR_IN = 5;  // Green button
+    public static final int GEAR_OUT = 6; // Yellow
+
+
+
+    public static final int EXPAND_PISTON = 2;
+    public static final int RETRACT_PISTON = 1;
+
+    private JoystickButton gearInButton;
+    private JoystickButton gearOutButton;
+    private JoystickButton cancelButton;
+
+    private JoystickLight capturedLight;
+    private JoystickLight intakeInLight;
+    private JoystickLight intakeOutLight;
+
+    private JoystickButton leftAccel;
+    private JoystickButton rightAccel;
+
+    private JoystickButton expandPistonButton;
+    private JoystickButton retractPistonButton;
     public OI() {
         gamepad = new Gamepad(0);
 
