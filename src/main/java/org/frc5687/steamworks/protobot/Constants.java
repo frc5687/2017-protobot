@@ -46,7 +46,7 @@ public class Constants {
 
     public class Encoders {
         public class Defaults {
-            public static final boolean REVERSED = false; //TODO change to new robot specifications
+            public static final boolean REVERSED = true; //TODO change to new robot specifications
             public static final int SAMPLES_TO_AVERAGE = 20;
             public static final int PULSES_PER_ROTATION = 1440;
             public static final double WHEEL_DIAMETER = 6;
@@ -58,7 +58,7 @@ public class Constants {
 
 
         public class RightDrive {
-            public static final boolean REVERSED = Encoders.Defaults.REVERSED;
+            public static final boolean REVERSED = true;
             public static final double INCHES_PER_PULSE = Encoders.Defaults.INCHES_PER_PULSE;
         }
 
