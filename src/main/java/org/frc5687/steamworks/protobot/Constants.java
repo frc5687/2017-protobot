@@ -5,7 +5,6 @@ package org.frc5687.steamworks.protobot;
  */
 public class Constants {
 
-    public static final int CYCLES_PER_SECOND = 50;
 
     public class Deadbands {
         /**
@@ -18,6 +17,7 @@ public class Constants {
         /***
          * Minimum time (in milliseconds) it should take to go from 0 to 1 (stop to full)
          */
+        public static final int CYCLES_PER_SECOND = 50;
         public static final double TIME_OF_ACCEL = 250;
 
         /***
