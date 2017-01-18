@@ -3,6 +3,7 @@ package org.frc5687.steamworks.protobot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import org.frc5687.steamworks.protobot.subsystems.DriveTrain;
 import org.frc5687.steamworks.protobot.subsystems.GearHandler;
+import org.frc5687.steamworks.protobot.subsystems.Pneumatics;
 
 /**
  * Created by Ben Bernard on 1/12/2017.
@@ -23,5 +24,10 @@ public class Robot extends IterativeRobot {
      * Represents the robot's gear handler
      */
     public static GearHandler gearHandler;
+
+    /**
+     * Represents the pneumatics
+     */
+    public static Pneumatics pneumatics;
 
 }

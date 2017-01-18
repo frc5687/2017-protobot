@@ -1,12 +1,17 @@
 package org.frc5687.steamworks.protobot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.frc5687.steamworks.protobot.commands.ExpandPiston;
+import org.frc5687.steamworks.protobot.commands.RetractPiston;
 
 /**
  * Created by Ben Bernard on 1/12/2017.
  */
 public class OI {
     private Gamepad gamepad;
+    private Joystick joystick;
+
     boolean isReversed =Constants.Encoders.Defaults.REVERSED;
 
 
@@ -23,21 +28,25 @@ public class OI {
 
     private JoystickButton gearInButton;
     private JoystickButton gearOutButton;
-    private JoystickButton cancelButton;
-
-    private JoystickLight capturedLight;
-    private JoystickLight intakeInLight;
-    private JoystickLight intakeOutLight;
-
-    private JoystickButton leftAccel;
-    private JoystickButton rightAccel;
 
     private JoystickButton expandPistonButton;
     private JoystickButton retractPistonButton;
     public OI() {
         gamepad = new Gamepad(0);
+        joystick = new Joystick(1);
 
+        // Joystick Buttons
+        gearInButton = new JoystickButton(joystick, GEAR_IN);
+        gearOutButton = new JoystickButton(joystick, GEAR_OUT);
+
+        expandPistonButton = new JoystickButton(joystick, EXPAND_PISTON);
+        retractPistonButton = new JoystickButton(joystick, RETRACT_PISTON);
+
+        // Pneumatics Commands
+        expandPistonButton.whenPressed(new ExpandPiston());
+        retractPistonButton.whenPressed(new RetractPiston());
     }
+
     private double transformStickToSpeed(Gamepad.Axes stick) {
         double result = gamepad.getRawAxis(stick);
         result = Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
