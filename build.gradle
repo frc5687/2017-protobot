@@ -13,7 +13,7 @@ apply plugin: "idea"
 frc {
     team = "5687"
     robotClass = "org.frc5687.steamworks.protobot.Robot"
-    rioIP="10.56.87.95"
+    rioIP="10.56.87.21"
 }
 
 wpi {
@@ -73,13 +73,13 @@ task access << {
 
 task gitLog << {
   description = 'Logs git branch and version to log file when deploy'
-  def logFile = new File('src/main/java/org/usfirst/frc/team5687/robot/utils/Reader.java')
+  def logFile = new File('src/main/java/org/frc5687/steamworks/protobot/Reader.java')
 
   def cmd = 'git diff HEAD --shortstat'
   def mod = cmd.execute().text.trim()
   def modified = (mod != null && mod.length() != 0) ? ' *' : ''
   def br = '\n\n'
-  def reader = 'package org.usfirst.frc.team5687.robot.utils;' + br
+  def reader = 'package org.frc5687.steamworks.protobot;' + br
   reader += '/**\n * A file reader class to read current Git information from deployed robot code\n * @author wilstenholme\n */' + br
   reader += 'public class Reader {\n' + '    public static final String gitInfo = \"' + project.branch + ' ' + project.revision + modified + '\";\n }'
   logFile.text = reader
