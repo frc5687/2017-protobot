@@ -17,12 +17,15 @@ public class OI {
 
     public static final int REVERSE = Gamepad.Buttons.BACK.getNumber();
 
-//Gear buttons
+    /**
+     * Gear buttons
+     */
     public static final int GEAR_IN = 5;  // Green button
     public static final int GEAR_OUT = 6; // Yellow
 
-
-
+    /**
+     * Pneumatic buttons
+     */
     public static final int EXPAND_PISTON = 2;
     public static final int RETRACT_PISTON = 1;
 
@@ -31,6 +34,7 @@ public class OI {
 
     private JoystickButton expandPistonButton;
     private JoystickButton retractPistonButton;
+
     public OI() {
         gamepad = new Gamepad(0);
         joystick = new Joystick(1);
