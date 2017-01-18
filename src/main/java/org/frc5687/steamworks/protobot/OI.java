@@ -52,4 +52,12 @@ public class OI {
         return transformStickToSpeed(Gamepad.Axes.RIGHT_Y);
     }
 
+    public boolean isGearInPressed() {
+        return gearInButton.get();
+    }
+
+    public boolean isGearOutPressed() {
+        return gearOutButton.get();
+    }
+
 }

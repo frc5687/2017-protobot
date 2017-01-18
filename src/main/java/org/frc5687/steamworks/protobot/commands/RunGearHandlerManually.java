@@ -12,7 +12,7 @@ package org.frc5687.steamworks.protobot.commands;
 public class RunGearHandlerManually extends Command {
 
     public  RunGearHandlerManually() {
-        requires(GearHandler);
+        requires(gearHandler);
     }
 
     @Override
