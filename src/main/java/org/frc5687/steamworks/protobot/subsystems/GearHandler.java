@@ -1,7 +1,6 @@
 package org.frc5687.steamworks.protobot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,8 +19,10 @@ public class GearHandler extends Subsystem {
 
     public GearHandler() {
         gearMotor = new VictorSP(RobotMap.GearHandler.GEAR_MOTOR);
-        minExtensionSensor = new DigitalInput(RobotMap.GearHandler.MIN_EXTENSION__HALL);
-        maxExtensionSensor = new DigitalInput(RobotMap.GearHandler.MAX__ETENSION_HALL);
+        minExtensionSensor = new DigitalInput(RobotMap.GearHandler.MIN_EXTENSION_HALL);
+        maxExtensionSensor = new DigitalInput(RobotMap.GearHandler.MAX_EXTENSION_HALL);
+        SmartDashboard.putBoolean("MaxHall", false);
+        SmartDashboard.putBoolean("MinHall", false);
     }
 
     public void open() {
@@ -38,13 +39,10 @@ public class GearHandler extends Subsystem {
 
     public boolean isAtMaxExtension() {
         return !maxExtensionSensor.get();
-
     }
 
     public boolean isAtMinExtension() {
         return !minExtensionSensor.get();
-
-
     }
 
 
@@ -55,6 +53,6 @@ public class GearHandler extends Subsystem {
 
     public void updateDashboard() {
         SmartDashboard.putBoolean("MaxHall", isAtMaxExtension());
-        SmartDashboard.putBoolean("inHall", isAtMinExtension());
+        SmartDashboard.putBoolean("MinHall", isAtMinExtension());
     }
 }

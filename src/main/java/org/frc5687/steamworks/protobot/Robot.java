@@ -47,9 +47,8 @@ public class Robot extends IterativeRobot {
         driveTrain = new DriveTrain();
         gearHandler = new GearHandler();
         pneumatics = new Pneumatics();
+        oi = new OI(); // must be initialized after subsystems
 
-        // must be initialized after subsystems
-        oi = new OI();
     }
 
     @Override
@@ -99,7 +98,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void updateDashboard(){
-    gearHandler.updateDashboard();
+        gearHandler.updateDashboard();
     }
 
 }
