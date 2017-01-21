@@ -1,6 +1,7 @@
 package org.frc5687.steamworks.protobot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import org.frc5687.steamworks.protobot.subsystems.DriveTrain;
 import org.frc5687.steamworks.protobot.subsystems.GearHandler;
 import org.frc5687.steamworks.protobot.subsystems.Pneumatics;
@@ -35,10 +36,61 @@ public class Robot extends IterativeRobot {
     public Robot() {
     }
 
+    @Override
+    public void startCompetition() {
+        super.startCompetition();
+    }
+
     public void robotInit() {
         robot = this;
-        // initialize subsystems
         driveTrain = new DriveTrain();
         oi = new OI();
     }
+
+    @Override
+    public void disabledInit() {
+        super.disabledInit();
+    }
+
+    @Override
+    public void autonomousInit() {
+        super.autonomousInit();
+    }
+
+    @Override
+    public void teleopInit() {
+        super.teleopInit();
+    }
+
+    @Override
+    public void testInit() {
+        super.testInit();
+    }
+
+    @Override
+    public void robotPeriodic() {
+        super.robotPeriodic();
+    }
+
+    @Override
+    public void disabledPeriodic() {
+        super.disabledPeriodic();
+    }
+
+    @Override
+    public void autonomousPeriodic() {
+        super.autonomousPeriodic();
+    }
+
+    @Override
+    public void teleopPeriodic() {
+        Scheduler.getInstance().run();
+    }
+
+    @Override
+    public void testPeriodic() {
+        super.testPeriodic();
+    }
+
+
 }
