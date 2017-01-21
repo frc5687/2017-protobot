@@ -47,3 +47,4 @@ run/
 .gradle/
 gradle/.launch/
 !gradle/*/*.jar
+src/main/java/org/frc5687/steamworks/protobot/utils/Reader.java

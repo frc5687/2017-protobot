@@ -30,4 +30,15 @@ public class Robot extends IterativeRobot {
      */
     public static Pneumatics pneumatics;
 
+    public static Robot robot;
+
+    public Robot() {
+    }
+
+    public void robotInit() {
+        robot = this;
+        // initialize subsystems
+        driveTrain = new DriveTrain();
+        oi = new OI();
+    }
 }

@@ -1,5 +1,7 @@
 package org.frc5687.steamworks.protobot;
 
+import org.frc5687.steamworks.protobot.utils.Gamepad;
+import org.frc5687.steamworks.protobot.utils.Helpers;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.frc5687.steamworks.protobot.commands.ExpandPiston;
