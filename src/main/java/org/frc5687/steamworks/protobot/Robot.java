@@ -24,6 +24,12 @@ public class Robot extends IterativeRobot {
 
     public void robotInit() {
         robot = this;
+
+        /**
+         * Commands need to be instantiated AFTER the subsystems.
+         * Since the OI constructor instantiates several commands, we need it to be instantiated last.
+         */
+         oi = new OI();
     }
 
     public void disabledInit() {
