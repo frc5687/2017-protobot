@@ -5,6 +5,12 @@ package org.frc5687.steamworks.protobot;
  */
 public class Constants {
 
+    public class GearHandler {
+        public static final double openSpeed = 1;
+        public static final double closeSpeed = -.05;
+        public static final double clampSpeed = -.1;
+
+    }
 
     public class Drive {
         public static final boolean LEFT_MOTOR_FRONT_INVERTED = true;

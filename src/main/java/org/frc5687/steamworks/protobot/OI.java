@@ -2,21 +2,57 @@ package org.frc5687.steamworks.protobot;
 
 import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.frc5687.steamworks.protobot.commands.ExpandPiston;
+import org.frc5687.steamworks.protobot.commands.RetractPiston;
 
 /**
  * Created by Ben Bernard on 1/12/2017.
  */
 public class OI {
     private Gamepad gamepad;
+    private Joystick joystick;
+
     boolean isReversed =Constants.Encoders.Defaults.REVERSED;
 
 
     public static final int REVERSE = Gamepad.Buttons.BACK.getNumber();
 
+    /**
+     * Gear buttons
+     */
+    public static final int GEAR_IN = 5;  // Green button
+    public static final int GEAR_OUT = 6; // Yellow
+
+    /**
+     * Pneumatic buttons
+     */
+    public static final int EXPAND_PISTON = 2;
+    public static final int RETRACT_PISTON = 1;
+
+    private JoystickButton gearInButton;
+    private JoystickButton gearOutButton;
+
+    private JoystickButton expandPistonButton;
+    private JoystickButton retractPistonButton;
+
     public OI() {
         gamepad = new Gamepad(0);
+        joystick = new Joystick(1);
 
+        // Joystick Buttons
+        gearInButton = new JoystickButton(joystick, GEAR_IN);
+        gearOutButton = new JoystickButton(joystick, GEAR_OUT);
+
+        expandPistonButton = new JoystickButton(joystick, EXPAND_PISTON);
+        retractPistonButton = new JoystickButton(joystick, RETRACT_PISTON);
+
+        // Pneumatics Commands
+        expandPistonButton.whenPressed(new ExpandPiston());
+        retractPistonButton.whenPressed(new RetractPiston());
     }
+
     private double transformStickToSpeed(Gamepad.Axes stick) {
         double result = gamepad.getRawAxis(stick);
         result = Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
@@ -29,6 +65,14 @@ public class OI {
     }
     public double getRightSpeed(){
         return transformStickToSpeed(Gamepad.Axes.RIGHT_Y);
+    }
+
+    public boolean isGearInPressed() {
+        return gearInButton.get();
+    }
+
+    public boolean isGearOutPressed() {
+        return gearOutButton.get();
     }
 
 }

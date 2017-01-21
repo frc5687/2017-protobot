@@ -31,6 +31,23 @@ public class RobotMap {
         public static final int LEFT_ENCODER_CHANNEL_B = 7;
         public static final int RIGHT_ENCODER_CHANNEL_A = 8;
         public static final int RIGHT_ENCODER_CHANNEL_B = 9;
+
     }
 
+    /**
+     * Gear Handler ports
+     */
+    public static class GearHandler {
+        public static final int MOTOR_PORT = 4;
+        public static final int HOME_SENSOR_PORT = 4;
+        public static final int EXTENSION_SENSOR_PORT = 5;
+     }
+
+    /**
+     * Pneumatics ports
+     */
+    public static class Pneumatics {
+        public static final int expandPort = 1;
+        public static final int retractPort = 0;
+    }
 }
