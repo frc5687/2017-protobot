@@ -18,7 +18,7 @@ public class Pneumatics extends Subsystem {
      */
     public Pneumatics() {
         // Sets the double solenoid to channels 0 and 1 of PCM
-        doubleSolenoid = new DoubleSolenoid(RobotMap.Pneumatics.expandPort, RobotMap.Pneumatics.retractPort);
+        doubleSolenoid = new DoubleSolenoid(RobotMap.Pneumatics.PISTON_EXTENDER, RobotMap.Pneumatics.PISTON_RETRACTOR);
     }
 
     /**

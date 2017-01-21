@@ -1,7 +1,6 @@
 package org.frc5687.steamworks.protobot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,13 +14,15 @@ import org.frc5687.steamworks.protobot.commands.RunGearHandlerManually;
 public class GearHandler extends Subsystem {
 
     private VictorSP gearMotor;
-    private DigitalInput homeSensor;
-    private DigitalInput extensionSensor;
+    private DigitalInput minExtensionSensor;
+    private DigitalInput maxExtensionSensor;
 
     public GearHandler() {
-        gearMotor = new VictorSP(RobotMap.GearHandler.MOTOR_PORT);
-        homeSensor = new DigitalInput(RobotMap.GearHandler.HOME_SENSOR_PORT);
-        extensionSensor = new DigitalInput(RobotMap.GearHandler.EXTENSION_SENSOR_PORT);
+        gearMotor = new VictorSP(RobotMap.GearHandler.GEAR_MOTOR);
+        minExtensionSensor = new DigitalInput(RobotMap.GearHandler.MIN_EXTENSION_HALL);
+        maxExtensionSensor = new DigitalInput(RobotMap.GearHandler.MAX_EXTENSION_HALL);
+        SmartDashboard.putBoolean("MaxHall", false);
+        SmartDashboard.putBoolean("MinHall", false);
     }
 
     public void open() {
@@ -36,12 +37,12 @@ public class GearHandler extends Subsystem {
         gearMotor.set(0);
     }
 
-    public boolean isOpen() {
-        return false;
+    public boolean isAtMaxExtension() {
+        return !maxExtensionSensor.get();
     }
 
-    public boolean isClosed() {
-        return false;
+    public boolean isAtMinExtension() {
+        return !minExtensionSensor.get();
     }
 
 
@@ -49,5 +50,9 @@ public class GearHandler extends Subsystem {
     protected void initDefaultCommand() {
         setDefaultCommand(new RunGearHandlerManually());
     }
-}
 
+    public void updateDashboard() {
+        SmartDashboard.putBoolean("MaxHall", isAtMaxExtension());
+        SmartDashboard.putBoolean("MinHall", isAtMinExtension());
+    }
+}
