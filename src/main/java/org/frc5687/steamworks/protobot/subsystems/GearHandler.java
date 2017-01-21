@@ -42,7 +42,7 @@ public class GearHandler extends Subsystem {
     }
 
     public boolean isAtMinExtension() {
-        return !isAtMinExtension();
+        return !minExtensionSensor.get();
 
 
     }
@@ -55,6 +55,6 @@ public class GearHandler extends Subsystem {
 
     public void updateDashboard() {
         SmartDashboard.putBoolean("MaxHall", isAtMaxExtension());
-        SmartDashboard.putBoolean("minHall", isAtMinExtension());
+        SmartDashboard.putBoolean("inHall", isAtMinExtension());
     }
 }
