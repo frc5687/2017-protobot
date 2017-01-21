@@ -43,7 +43,12 @@ public class Robot extends IterativeRobot {
 
     public void robotInit() {
         robot = this;
+
         driveTrain = new DriveTrain();
+        gearHandler = new GearHandler();
+        pneumatics = new Pneumatics();
+
+        // must be initialized after subsystems
         oi = new OI();
     }
 
