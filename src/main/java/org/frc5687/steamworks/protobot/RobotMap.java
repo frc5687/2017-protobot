@@ -39,8 +39,8 @@ public class RobotMap {
      */
     public static class GearHandler {
         public static final int GEAR_MOTOR = 4;
-        public static final int MAX__ETENSION_HALL = 7; //TODO Change to ports on robot
-        public static final int MIN_EXTENSION__HALL = 6;
+        public static final int MAX__ETENSION_HALL = 2; //TODO Change to ports on robot
+        public static final int MIN_EXTENSION__HALL = 1;
      }
 
     /**

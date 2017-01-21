@@ -52,6 +52,7 @@ public class GearHandler extends Subsystem {
     protected void initDefaultCommand() {
         setDefaultCommand(new RunGearHandlerManually());
     }
+
     public void updateDashboard() {
         SmartDashboard.putBoolean("MaxHall", isAtMaxExtension());
         SmartDashboard.putBoolean("minHall", isAtMinExtension());

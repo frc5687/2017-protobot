@@ -90,6 +90,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        updateDashboard();
     }
 
     @Override
@@ -97,5 +98,8 @@ public class Robot extends IterativeRobot {
         super.testPeriodic();
     }
 
+    public void updateDashboard(){
+    gearHandler.updateDashboard();
+    }
 
 }
