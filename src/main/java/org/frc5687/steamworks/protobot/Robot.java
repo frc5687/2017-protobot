@@ -46,6 +46,7 @@ public class Robot extends IterativeRobot {
 
         driveTrain = new DriveTrain();
         gearHandler = new GearHandler();
+        pneumatics = new Pneumatics();
 
         // must be initialized after subsystems
         oi = new OI();
