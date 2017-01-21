@@ -15,13 +15,13 @@ import org.frc5687.steamworks.protobot.commands.RunGearHandlerManually;
 public class GearHandler extends Subsystem {
 
     private VictorSP gearMotor;
-    private DigitalInput homeSensor;
-    private DigitalInput extensionSensor;
+    private DigitalInput minExtensionSensor;
+    private DigitalInput maxExtensionSensor;
 
     public GearHandler() {
-        gearMotor = new VictorSP(RobotMap.GearHandler.MOTOR_PORT);
-        homeSensor = new DigitalInput(RobotMap.GearHandler.HOME_SENSOR_PORT);
-        extensionSensor = new DigitalInput(RobotMap.GearHandler.EXTENSION_SENSOR_PORT);
+        gearMotor = new VictorSP(RobotMap.GearHandler.GEAR_MOTOR);
+        minExtensionSensor = new DigitalInput(RobotMap.GearHandler.MIN_EXTENSION__HALL);
+        maxExtensionSensor = new DigitalInput(RobotMap.GearHandler.MAX__ETENSION_HALL);
     }
 
     public void open() {
@@ -36,12 +36,13 @@ public class GearHandler extends Subsystem {
         gearMotor.set(0);
     }
 
-    public boolean isOpen() {
-        return false;
+    public boolean isAtMaxExtension() {
+        return !maxExtensionSensor.get();
+
     }
 
-    public boolean isClosed() {
-        return false;
+    public boolean isAtMinExtension() {
+        return !isAtMinExtension();
     }
 
 

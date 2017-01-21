@@ -38,16 +38,16 @@ public class RobotMap {
      * Gear Handler ports
      */
     public static class GearHandler {
-        public static final int MOTOR_PORT = 4;
-        public static final int HOME_SENSOR_PORT = 4;
-        public static final int EXTENSION_SENSOR_PORT = 5;
+        public static final int GEAR_MOTOR = 4;
+        public static final int MAX__ETENSION_HALL = 3;
+        public static final int MIN_EXTENSION__HALL = 5;
      }
 
     /**
      * Pneumatics ports
      */
     public static class Pneumatics {
-        public static final int expandPort = 1;
-        public static final int retractPort = 0;
+        public static final int PISTON_EXTENDER = 1;
+        public static final int PISTON_RETRACTOR = 0;
     }
 }
