@@ -13,9 +13,11 @@ public class OpenGearHandler extends Command {
     public  OpenGearHandler() {
         requires(gearHandler);
     }
+
     protected void initialize(){
 
     }
+
     protected void execute() {
         gearHandler.open();
     }
@@ -25,10 +27,10 @@ public class OpenGearHandler extends Command {
     }
 
     protected void end() {
-
+        gearHandler.stop();
     }
 
     protected void interrupted() {
-
+        end();
     }
 }

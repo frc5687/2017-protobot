@@ -41,8 +41,6 @@ public class OI {
     private JoystickButton expandPistonButton;
     private JoystickButton retractPistonButton;
 
-    private JoystickButton openGearHandler;
-    private JoystickButton closeGearHandler;
 
     public OI() {
         gamepad = new Gamepad(0);

@@ -13,6 +13,7 @@ public class CloseGearHandler extends Command {
     public  CloseGearHandler() {
         requires(gearHandler);
     }
+
     protected void initialize(){
 
     }
@@ -25,10 +26,10 @@ public class CloseGearHandler extends Command {
     }
 
     protected void end() {
-
+        gearHandler.stop();
     }
 
     protected void interrupted() {
-
+        end();
     }
 }
