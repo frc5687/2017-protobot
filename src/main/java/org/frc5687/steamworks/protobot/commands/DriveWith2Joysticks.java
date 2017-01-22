@@ -34,7 +34,12 @@ public class DriveWith2Joysticks extends Command {
      * @see edu.wpi.first.wpilibj.command.Command#execute()
      */
     protected void execute() {
-        driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed());
+        if (oi.getLeftTrigger()){
+            driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed());
+        }
+        else {
+            driveTrain.oneStickDrive(oi.getRightSpeed(), false);
+        }
     }
 
     /*
