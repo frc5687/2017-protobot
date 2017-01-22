@@ -132,6 +132,10 @@ public class DriveTrain extends Subsystem {
             // Limit change in rightSpeed to +/- ACCELERATION_CAP
             rightSpeed = Math.min(rightSpeed, rightFrontMotor.get() + Constants.Limits.ACCELERATION_CAP);
             rightSpeed = Math.max(rightSpeed, rightFrontMotor.get() - Constants.Limits.ACCELERATION_CAP);
+
+            rightSpeed = Math.min(rightSpeed, leftFrontMotor.get() + Constants.Limits.ACCELERATION_CAP);
+            rightSpeed = Math.max(rightSpeed, leftFrontMotor.get() - Constants.Limits.ACCELERATION_CAP);
+
         }
 
 
