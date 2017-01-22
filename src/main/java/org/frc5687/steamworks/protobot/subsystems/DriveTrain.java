@@ -121,11 +121,27 @@ public class DriveTrain extends Subsystem {
             rightSpeed = Math.max(rightSpeed, rightFrontMotor.get() - Constants.Limits.ACCELERATION_CAP);
         }
 
+
         // DriverStation.reportError("Driving " + leftSpeed + ", " + rightSpeed, false);
         drive.tankDrive(leftSpeed, rightSpeed, false);
 
 
     }
+    public void oneStickDrive(double rightSpeed, boolean overrideCaps) {
+        if (!overrideCaps) {
+            // Limit change in rightSpeed to +/- ACCELERATION_CAP
+            rightSpeed = Math.min(rightSpeed, rightFrontMotor.get() + Constants.Limits.ACCELERATION_CAP);
+            rightSpeed = Math.max(rightSpeed, rightFrontMotor.get() - Constants.Limits.ACCELERATION_CAP);
+        }
+
+
+        // DriverStation.reportError("Driving " + leftSpeed + ", " + rightSpeed, false);
+        drive.tankDrive(rightSpeed, rightSpeed, false);
+
+
+    }
+
+
 
     public void setSafeMode(boolean enabled) {
         drive.setSafetyEnabled(enabled);
