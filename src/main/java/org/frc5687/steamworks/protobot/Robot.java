@@ -55,6 +55,7 @@ public class Robot extends IterativeRobot {
         oi = new OI(); // must be initialized after subsystems
 
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+        camera.setResolution(640, 480);
     }
 
     @Override
