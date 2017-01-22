@@ -74,4 +74,7 @@ public class Constants {
             public static final double INCHES_PER_PULSE = Defaults.INCHES_PER_PULSE;
         }
     }
+        public class OI{
+            public static final double triggerThreshhold = 0.5; //TODO find actual when pressed value
+        }
 }
