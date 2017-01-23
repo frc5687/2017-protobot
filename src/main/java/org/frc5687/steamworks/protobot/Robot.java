@@ -35,8 +35,6 @@ public class Robot extends IterativeRobot {
 
     public static Robot robot;
 
-    Thread visionThread;
-
     public Robot() {
     }
 
