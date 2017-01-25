@@ -44,9 +44,18 @@ public class GearHandler extends Subsystem {
         return !maxExtensionSensor.get();
     }
 
-    public boolean isAtMinHall() {
-        return !minExtensionSensor.get();
+    public boolean isAtMinHall() {return !minExtensionSensor.get();
     }
+
+    public boolean isAtMaxPot() {
+        if (Constants.Encoders.Potentiometer.potentiometerMaxLimit > limitPotentiometer.get()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 
 
     @Override
