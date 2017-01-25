@@ -48,12 +48,7 @@ public class GearHandler extends Subsystem {
     }
 
     public boolean isAtMaxPot() {
-        if (Constants.Encoders.Potentiometer.potentiometerMaxLimit > limitPotentiometer.get()){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return Constants.Encoders.Potentiometer.potentiometerMaxLimit > limitPotentiometer.get();
     }
 
 
@@ -66,6 +61,6 @@ public class GearHandler extends Subsystem {
     public void updateDashboard() {
         SmartDashboard.putBoolean("MaxHall", isAtMaxHall());
         SmartDashboard.putBoolean("MinHall", isAtMinHall());
-        SmartDashboard.putBoolean("MaxPotentiometer", isAtMaxPot();
+        SmartDashboard.putBoolean("MaxPotentiometer", isAtMaxPot());
     }
 }
