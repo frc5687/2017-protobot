@@ -41,6 +41,7 @@ public class RobotMap {
         public static final int GEAR_MOTOR = 4;
         public static final int MAX_EXTENSION_HALL = 2; //TODO Change to ports on robot
         public static final int MIN_EXTENSION_HALL = 1;
+        public static final int GEAR_POTENTIOMETER = 3;
      }
 
     /**
