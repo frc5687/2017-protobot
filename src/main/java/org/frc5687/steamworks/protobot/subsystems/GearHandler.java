@@ -66,5 +66,6 @@ public class GearHandler extends Subsystem {
     public void updateDashboard() {
         SmartDashboard.putBoolean("MaxHall", isAtMaxHall());
         SmartDashboard.putBoolean("MinHall", isAtMinHall());
+        SmartDashboard.putBoolean("MaxPotentiometer", isAtMaxPot();
     }
 }
