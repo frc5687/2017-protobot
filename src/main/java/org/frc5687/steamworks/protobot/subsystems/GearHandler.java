@@ -65,6 +65,6 @@ public class GearHandler extends Subsystem {
         SmartDashboard.putBoolean("MaxHall", isAtMaxHall());
         SmartDashboard.putBoolean("MinHall", isAtMinHall());
         SmartDashboard.putBoolean("MaxPotentiometer", isAtMaxPot());
-        SmartDashboard.putDouble("PotentiometerValue", potentiometerValue());
+        SmartDashboard.putNumber("PotentiometerValue", potentiometerValue());
     }
 }
