@@ -9,19 +9,22 @@ public class Constants {
         public static final double openSpeed = 1;
         public static final double closeSpeed = -.05;
         public static final double clampSpeed = -.1;
+        public static final double funnelReleaseSpeed = 1;
+        public static final long funnelReleaseTime = 167;
+        public static final double potentiometerMaxLimit = 0.5;
 
     }
 
-    public class Drive {
-        public static final boolean LEFT_MOTOR_FRONT_INVERTED = true;
-        public static final boolean RIGHT_MOTOR_FRONT_INVERTED = true;
-        public static final boolean LEFT_MOTOR_REAR_INVERTED = true;
-        public static final boolean RIGHT_MOTOR_REAR_INVERTED = true;
-    }
+         public class Drive {
+         public static final boolean LEFT_MOTOR_FRONT_INVERTED = true;
+         public static final boolean RIGHT_MOTOR_FRONT_INVERTED = true;
+         public static final boolean LEFT_MOTOR_REAR_INVERTED = true;
+         public static final boolean RIGHT_MOTOR_REAR_INVERTED = true;
+         }
 
 
-    public class Deadbands {
-        /**
+         public class Deadbands {
+         /**
          * Deadband threshold for drive joysticks
          */
         public static final double DRIVE_STICK = 0.15;
@@ -72,9 +75,6 @@ public class Constants {
         public class LeftDrive {
             public static final boolean REVERSED = Defaults.REVERSED;
             public static final double INCHES_PER_PULSE = Defaults.INCHES_PER_PULSE;
-        }
-        public class Potentiometer{
-            public static final double potentiometerMaxLimit = 0.5;
         }
     }
 

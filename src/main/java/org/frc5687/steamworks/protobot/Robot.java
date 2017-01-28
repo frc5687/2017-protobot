@@ -2,6 +2,7 @@ package org.frc5687.steamworks.protobot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import org.frc5687.steamworks.protobot.commands.ReleaseFunnel;
 import org.frc5687.steamworks.protobot.subsystems.DriveTrain;
 import org.frc5687.steamworks.protobot.subsystems.GearHandler;
 import org.frc5687.steamworks.protobot.subsystems.Pneumatics;
@@ -70,11 +71,13 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
+        Scheduler.getInstance().add(new ReleaseFunnel());
         super.autonomousInit();
     }
 
     @Override
     public void teleopInit() {
+        Scheduler.getInstance().add(new ReleaseFunnel());
         super.teleopInit();
     }
 
