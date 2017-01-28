@@ -1,10 +1,7 @@
 package org.frc5687.steamworks.protobot.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.*;
 import org.frc5687.steamworks.protobot.Constants;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.RobotMap;
@@ -21,7 +18,7 @@ public class DriveTrain extends Subsystem {
     private VictorSP rightRearMotor;
     private Encoder rightEncoder;
     private Encoder leftEncoder;
-    private AnalogInput IRsensor;
+    private Ultrasonic irsensor;
 
     public DriveTrain(){
         leftFrontMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_FRONT);
@@ -38,7 +35,8 @@ public class DriveTrain extends Subsystem {
         rightEncoder = initializeEncoder(RobotMap.Drive.RIGHT_ENCODER_CHANNEL_A, RobotMap.Drive.RIGHT_ENCODER_CHANNEL_B, Constants.Encoders.RightDrive.REVERSED, Constants.Encoders.RightDrive.INCHES_PER_PULSE);
         leftEncoder = initializeEncoder(RobotMap.Drive.LEFT_ENCODER_CHANNEL_A, RobotMap.Drive.LEFT_ENCODER_CHANNEL_B, Constants.Encoders.LeftDrive.REVERSED, Constants.Encoders.LeftDrive.INCHES_PER_PULSE);
 
-        IRsensor = new AnalogInput(RobotMap.Drive.IR_DRIVE_SENSOR);
+        irsensor = new Ultrasonic(RobotMap.Drive.IR_DRIVE_SENSOR, RobotMap.Drive.IR_DRIVE_SENSOR);
+
     }
 
     @Override
@@ -88,9 +86,6 @@ public class DriveTrain extends Subsystem {
     public double getRightRPS() {
         return getRightRate() / (Constants.Encoders.Defaults.PULSES_PER_ROTATION * Constants.Encoders.Defaults.INCHES_PER_PULSE);
     }
-
-    public double IRvalue = IRsensor.getValue();
-
     private Encoder initializeEncoder(int channelA, int channelB, boolean reversed, double distancePerPulse) {
         Encoder encoder = new Encoder(channelA, channelB, reversed, Encoder.EncodingType.k4X);
         encoder.setDistancePerPulse(distancePerPulse);
@@ -153,6 +148,6 @@ public class DriveTrain extends Subsystem {
         SmartDashboard.putNumber("drive/Right RPS" , getRightRPS());
         SmartDashboard.putNumber("drive/Left RPS" , getLeftRPS());
 
-        SmartDashboard.putNumber("irValue", IRvalue);
+        SmartDashboard.putNumber("irValue", irsensor.getRangeInches());
     }
 }

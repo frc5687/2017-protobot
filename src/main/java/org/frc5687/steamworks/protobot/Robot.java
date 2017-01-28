@@ -104,6 +104,7 @@ public class Robot extends IterativeRobot {
 
     public void updateDashboard(){
         gearHandler.updateDashboard();
+        driveTrain.updateDashboard();
     }
 
 }
