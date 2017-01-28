@@ -1,11 +1,7 @@
 package org.frc5687.steamworks.protobot.commands;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
-import org.frc5687.steamworks.protobot.OI;
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.oi;
 
