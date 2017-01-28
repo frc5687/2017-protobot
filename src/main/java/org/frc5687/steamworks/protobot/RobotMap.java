@@ -41,6 +41,7 @@ public class RobotMap {
         public static final int GEAR_MOTOR = 4;
         public static final int MAX_EXTENSION_HALL = 2; //TODO Change to ports on robot
         public static final int MIN_EXTENSION_HALL = 1;
+        public static final int GEAR_POTENTIOMETER = 3;
      }
 
     /**
@@ -49,5 +50,12 @@ public class RobotMap {
     public static class Pneumatics {
         public static final int PISTON_EXTENDER = 1;
         public static final int PISTON_RETRACTOR = 0;
+    }
+
+    /**
+     * Climber ports
+     */
+    public static class Climber {
+        public static final int CLIMBER_MOTOR = 5;
     }
 }
