@@ -54,8 +54,8 @@ public class OI {
         expandPistonButton = new JoystickButton(joystick, EXPAND_PISTON);
         retractPistonButton = new JoystickButton(joystick, RETRACT_PISTON);
 
-        ascendClimber = new JoystickButton(gamepad, Gamepad.Buttons.A.getNumber());
-        descendClimber = new JoystickButton(gamepad, Gamepad.Buttons.B.getNumber());
+        ascendClimber = new JoystickButton(gamepad, Gamepad.Buttons.Y.getNumber());
+        descendClimber = new JoystickButton(gamepad, Gamepad.Buttons.A.getNumber());
 
         // Pneumatics Commands
         expandPistonButton.whenPressed(new ExpandPiston());
