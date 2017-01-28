@@ -83,11 +83,11 @@ public class OI {
     }
 
     public boolean isLeftTriggerPressed(){
-        return(gamepad.getRawAxis(Gamepad.Axes.LEFT_TRIGGER) < Constants.OI.triggerThreshhold);
+        return(gamepad.getRawAxis(Gamepad.Axes.LEFT_TRIGGER) > Constants.OI.triggerThreshhold);
     }
 
     public boolean isRightTriggerPressed(){
-        return(gamepad.getRawAxis(Gamepad.Axes.RIGHT_TRIGGER) < Constants.OI.triggerThreshhold);
+        return(gamepad.getRawAxis(Gamepad.Axes.RIGHT_TRIGGER) > Constants.OI.triggerThreshhold);
     }
 
     public boolean isGearInPressed() {
