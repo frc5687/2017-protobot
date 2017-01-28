@@ -8,9 +8,6 @@ import org.frc5687.steamworks.protobot.commands.ExpandPiston;
 import org.frc5687.steamworks.protobot.commands.RetractPiston;
 import org.frc5687.steamworks.protobot.commands.OpenGearHandler;
 import org.frc5687.steamworks.protobot.commands.CloseGearHandler;
-import org.frc5687.steamworks.protobot.commands.AscendClimber;
-import org.frc5687.steamworks.protobot.commands.DescendClimber;
-import org.frc5687.steamworks.protobot.commands.StopClimber;
 
 /**
  * Created by Ben Bernard on 1/12/2017.
@@ -52,7 +49,6 @@ public class OI {
 
     private JoystickButton ascendClimber;
     private JoystickButton descendClimber;
-    private JoystickButton stopClimber;
 
     public OI() {
         gamepad = new Gamepad(0);
@@ -67,7 +63,6 @@ public class OI {
 
         ascendClimber = new JoystickButton(joystick, ASCEND_CLIMBER);
         descendClimber = new JoystickButton(joystick, DESCEND_CLIMBER);
-        stopClimber = new JoystickButton(joystick, STOP_CLIMBER);
 
         // Pneumatics Commands
         expandPistonButton.whenPressed(new ExpandPiston());
@@ -78,11 +73,6 @@ public class OI {
 
         gearInButton.whenPressed(new CloseGearHandler());
         gearOutButton.whenPressed(new OpenGearHandler());
-
-        // Climber Commands
-        ascendClimber.whenPressed(new AscendClimber());
-        descendClimber.whenPressed(new DescendClimber());
-        stopClimber.whenPressed(new StopClimber());
     }
 
     private double transformStickToSpeed(Gamepad.Axes stick) {
@@ -107,5 +97,12 @@ public class OI {
         return gearOutButton.get();
     }
 
+    public boolean isAscendClimberPressed() {
+        return ascendClimber.get();
+    }
+
+    public boolean isDescendClimberPressed() {
+        return descendClimber.get();
+    }
 
 }
