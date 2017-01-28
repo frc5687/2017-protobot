@@ -34,13 +34,6 @@ public class OI {
     public static final int EXPAND_PISTON = 2;
     public static final int RETRACT_PISTON = 1;
 
-    /**
-     * Climber buttons
-     */
-    public static final int ASCEND_CLIMBER = 0;
-    public static final int DESCEND_CLIMBER = 0;
-    public static final int STOP_CLIMBER = 0;
-
     private JoystickButton gearInButton;
     private JoystickButton gearOutButton;
 
@@ -61,8 +54,8 @@ public class OI {
         expandPistonButton = new JoystickButton(joystick, EXPAND_PISTON);
         retractPistonButton = new JoystickButton(joystick, RETRACT_PISTON);
 
-        ascendClimber = new JoystickButton(joystick, ASCEND_CLIMBER);
-        descendClimber = new JoystickButton(joystick, DESCEND_CLIMBER);
+        ascendClimber = new JoystickButton(gamepad, Gamepad.Buttons.A.getNumber());
+        descendClimber = new JoystickButton(gamepad, Gamepad.Buttons.B.getNumber());
 
         // Pneumatics Commands
         expandPistonButton.whenPressed(new ExpandPiston());
