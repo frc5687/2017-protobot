@@ -24,7 +24,7 @@ public class GearHandler extends Subsystem {
         gearMotor = new VictorSP(RobotMap.GearHandler.GEAR_MOTOR);
         minExtensionSensor = new DigitalInput(RobotMap.GearHandler.MIN_EXTENSION_HALL);
         maxExtensionSensor = new DigitalInput(RobotMap.GearHandler.MAX_EXTENSION_HALL);
-        limitPotentiometer = new AnalogPotentiometer(RobotMap.GearHandler.GEAR_POTENTIOMETER);
+        limitPotentiometer = new AnalogPotentiometer(RobotMap.GearHandler.GEAR_POTENTIOMETER); 
         SmartDashboard.putBoolean("MaxHall", false);
         SmartDashboard.putBoolean("MinHall", false);
     }
