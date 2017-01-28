@@ -23,7 +23,7 @@ public class OpenGearHandler extends Command {
     }
 
     protected boolean isFinished(){
-        return gearHandler.isAtMaxExtension();
+        return gearHandler.isAtMaxHall();
     }
 
     protected void end() {
