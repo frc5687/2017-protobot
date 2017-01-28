@@ -22,7 +22,7 @@ public class CloseGearHandler extends Command {
     }
 
     protected boolean isFinished(){
-        return gearHandler.isAtMinExtension();
+        return gearHandler.isAtMinHall();
     }
 
     protected void end() {

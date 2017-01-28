@@ -73,6 +73,9 @@ public class Constants {
             public static final boolean REVERSED = Defaults.REVERSED;
             public static final double INCHES_PER_PULSE = Defaults.INCHES_PER_PULSE;
         }
+        public class Potentiometer{
+            public static final double potentiometerMaxLimit = 0.5;
+        }
     }
 
     public class Climber {
