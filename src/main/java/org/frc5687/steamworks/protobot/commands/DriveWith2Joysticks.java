@@ -1,8 +1,10 @@
 package org.frc5687.steamworks.protobot.commands;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.OI;
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.oi;
@@ -34,12 +36,9 @@ public class DriveWith2Joysticks extends Command {
      * @see edu.wpi.first.wpilibj.command.Command#execute()
      */
     protected void execute() {
-        if (oi.getLeftTrigger()){
-            driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed());
-        }
-        else {
-            driveTrain.oneStickDrive(oi.getRightSpeed(), false);
-        }
+        if(oi.isLeftTriggerPressed()) driveTrain.tankDrive(Constants.Drive.FULL_SPEED);
+        else if (oi.isRightTriggerPressed()) driveTrain.tankDrive(-Constants.Drive.FULL_SPEED);
+        else driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed());
     }
 
     /*

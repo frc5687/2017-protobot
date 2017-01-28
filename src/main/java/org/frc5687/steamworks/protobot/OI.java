@@ -82,8 +82,12 @@ public class OI {
         return transformStickToSpeed(Gamepad.Axes.RIGHT_Y);
     }
 
-    public boolean getLeftTrigger(){
-        return(gamepad.getRawAxis(Gamepad.Axes.LEFT_TRIGGER)< Constants.OI.triggerThreshhold);
+    public boolean isLeftTriggerPressed(){
+        return(gamepad.getRawAxis(Gamepad.Axes.LEFT_TRIGGER) < Constants.OI.triggerThreshhold);
+    }
+
+    public boolean isRightTriggerPressed(){
+        return(gamepad.getRawAxis(Gamepad.Axes.RIGHT_TRIGGER) < Constants.OI.triggerThreshhold);
     }
 
     public boolean isGearInPressed() {

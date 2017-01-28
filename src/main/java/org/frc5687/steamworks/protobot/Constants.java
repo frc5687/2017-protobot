@@ -17,6 +17,8 @@ public class Constants {
         public static final boolean RIGHT_MOTOR_FRONT_INVERTED = true;
         public static final boolean LEFT_MOTOR_REAR_INVERTED = true;
         public static final boolean RIGHT_MOTOR_REAR_INVERTED = true;
+
+        public static final double FULL_SPEED = 1;
     }
 
 
@@ -51,6 +53,7 @@ public class Constants {
     }
 
     public class Encoders {
+
         public class Defaults {
             public static final boolean REVERSED = true; //TODO change to new robot specifications
             public static final int SAMPLES_TO_AVERAGE = 20;
@@ -62,27 +65,29 @@ public class Constants {
             public static final double MAX_PERIOD = 5;
         }
 
-
         public class RightDrive {
             public static final boolean REVERSED = Defaults.REVERSED;
             public static final double INCHES_PER_PULSE = Encoders.Defaults.INCHES_PER_PULSE;
         }
 
-
         public class LeftDrive {
             public static final boolean REVERSED = Defaults.REVERSED;
             public static final double INCHES_PER_PULSE = Defaults.INCHES_PER_PULSE;
         }
+
         public class Potentiometer{
             public static final double potentiometerMaxLimit = 0.5;
         }
+
     }
 
     public class Climber {
         public static final double ASCEND_SPEED = 0.1;
         public static final double DESCEND_SPEED = -0.1;
     }
-        public class OI{
-            public static final double triggerThreshhold = 0.5; //TODO find actual when pressed value
-        }
+
+    public class OI{
+        public static final double triggerThreshhold = 0.5; //TODO find actual when pressed value
+    }
+
 }
