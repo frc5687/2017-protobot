@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import org.frc5687.steamworks.protobot.subsystems.DriveTrain;
 import org.frc5687.steamworks.protobot.subsystems.GearHandler;
 import org.frc5687.steamworks.protobot.subsystems.Pneumatics;
+import org.frc5687.steamworks.protobot.subsystems.Climber;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.cscore.UsbCamera;
 
@@ -33,6 +34,11 @@ public class Robot extends IterativeRobot {
      */
     public static Pneumatics pneumatics;
 
+    /**
+     * Represents the climbing mechanism
+     */
+    public static Climber climber;
+
     public static Robot robot;
 
     public Robot() {
@@ -49,6 +55,7 @@ public class Robot extends IterativeRobot {
         driveTrain = new DriveTrain();
         gearHandler = new GearHandler();
         pneumatics = new Pneumatics();
+        climber = new Climber();
 
         oi = new OI(); // must be initialized after subsystems
 

@@ -1,6 +1,8 @@
 package org.frc5687.steamworks.protobot.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,11 +18,13 @@ public class GearHandler extends Subsystem {
     private VictorSP gearMotor;
     private DigitalInput minExtensionSensor;
     private DigitalInput maxExtensionSensor;
+    private AnalogPotentiometer limitPotentiometer;
 
     public GearHandler() {
         gearMotor = new VictorSP(RobotMap.GearHandler.GEAR_MOTOR);
         minExtensionSensor = new DigitalInput(RobotMap.GearHandler.MIN_EXTENSION_HALL);
         maxExtensionSensor = new DigitalInput(RobotMap.GearHandler.MAX_EXTENSION_HALL);
+        limitPotentiometer = new AnalogPotentiometer(RobotMap.GearHandler.GEAR_POTENTIOMETER); 
         SmartDashboard.putBoolean("MaxHall", false);
         SmartDashboard.putBoolean("MinHall", false);
     }
@@ -37,12 +41,18 @@ public class GearHandler extends Subsystem {
         gearMotor.set(0);
     }
 
-    public boolean isAtMaxExtension() {
+    public boolean isAtMaxHall() {
         return !maxExtensionSensor.get();
     }
 
-    public boolean isAtMinExtension() {
-        return !minExtensionSensor.get();
+    public boolean isAtMinHall() {return !minExtensionSensor.get();
+    }
+
+    public boolean isAtMaxPot() {
+        return Constants.Encoders.Potentiometer.potentiometerMaxLimit > limitPotentiometer.get();
+    }
+    public double potentiometerValue(){
+        return limitPotentiometer.get();
     }
 
 
@@ -52,7 +62,9 @@ public class GearHandler extends Subsystem {
     }
 
     public void updateDashboard() {
-        SmartDashboard.putBoolean("MaxHall", isAtMaxExtension());
-        SmartDashboard.putBoolean("MinHall", isAtMinExtension());
+        SmartDashboard.putBoolean("MaxHall", isAtMaxHall());
+        SmartDashboard.putBoolean("MinHall", isAtMinHall());
+        SmartDashboard.putBoolean("MaxPotentiometer", isAtMaxPot());
+        SmartDashboard.putNumber("PotentiometerValue", potentiometerValue());
     }
 }
