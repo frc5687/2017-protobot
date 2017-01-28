@@ -8,8 +8,15 @@ public class Constants {
     public class GearHandler {
         public static final double openSpeed = 1;
         public static final double closeSpeed = -.05;
-        public static final double clampSpeed = -.1;
 
+        public class PID {
+            public static final double kP = 1;
+            public static final double kI = 1;
+            public static final double kD = 1;
+            public static final double MIN_INPUT = 0.4;
+            public static final double MAX_INPUT = 0.6;
+            public static final double kTOLERANCE = 0.1;
+        }
     }
 
     public class Drive {

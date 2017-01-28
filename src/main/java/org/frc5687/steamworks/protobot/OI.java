@@ -2,12 +2,9 @@ package org.frc5687.steamworks.protobot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.frc5687.steamworks.protobot.commands.*;
 import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
-import org.frc5687.steamworks.protobot.commands.ExpandPiston;
-import org.frc5687.steamworks.protobot.commands.RetractPiston;
-import org.frc5687.steamworks.protobot.commands.OpenGearHandler;
-import org.frc5687.steamworks.protobot.commands.CloseGearHandler;
 
 /**
  * Created by Ben Bernard on 1/12/2017.
@@ -64,8 +61,8 @@ public class OI {
         gearInButton = new JoystickButton(joystick, CLOSE_GEAR);
         gearOutButton = new JoystickButton(joystick,OPEN_GEAR);
 
-        gearInButton.whenPressed(new CloseGearHandler());
-        gearOutButton.whenPressed(new OpenGearHandler());
+        gearInButton.whenPressed(new MoveGearHandler(Constants.GearHandler.PID.MIN_INPUT));
+        gearOutButton.whenPressed(new MoveGearHandler(Constants.GearHandler.PID.MAX_INPUT));
     }
 
     private double transformStickToSpeed(Gamepad.Axes stick) {
