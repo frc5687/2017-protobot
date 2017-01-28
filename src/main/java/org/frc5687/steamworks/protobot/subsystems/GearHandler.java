@@ -49,7 +49,7 @@ public class GearHandler extends Subsystem {
     }
 
     public boolean isAtMaxPot() {
-        return Constants.Encoders.Potentiometer.potentiometerMaxLimit > limitPotentiometer.get();
+        return Constants.GearHandler.potentiometerMaxLimit > limitPotentiometer.get();
     }
     public double potentiometerValue(){
         return limitPotentiometer.get();
