@@ -9,6 +9,8 @@ public class Constants {
         public static final double openSpeed = 1;
         public static final double closeSpeed = -.05;
         public static final double clampSpeed = -.1;
+        public static final double funnelReleaseSpeed = 1;
+        public static final double funnelReleaseTime = 1/6;
 
     }
 
