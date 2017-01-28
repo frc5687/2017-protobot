@@ -82,4 +82,7 @@ public class Constants {
         public static final double ASCEND_SPEED = 0.1;
         public static final double DESCEND_SPEED = -0.1;
     }
+        public class OI{
+            public static final double triggerThreshhold = 0.5; //TODO find actual when pressed value
+        }
 }
