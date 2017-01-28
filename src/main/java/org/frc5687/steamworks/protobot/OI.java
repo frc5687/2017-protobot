@@ -8,6 +8,7 @@ import org.frc5687.steamworks.protobot.commands.ExpandPiston;
 import org.frc5687.steamworks.protobot.commands.RetractPiston;
 import org.frc5687.steamworks.protobot.commands.OpenGearHandler;
 import org.frc5687.steamworks.protobot.commands.CloseGearHandler;
+
 /**
  * Created by Ben Bernard on 1/12/2017.
  */
@@ -18,8 +19,6 @@ public class OI {
     boolean isReversed =Constants.Encoders.Defaults.REVERSED;
     public static final int OPEN_GEAR = 1;  // Green button
     public static final int CLOSE_GEAR = 2; // Yellow
-
-
 
     public static final int REVERSE = Gamepad.Buttons.BACK.getNumber();
 
@@ -41,6 +40,8 @@ public class OI {
     private JoystickButton expandPistonButton;
     private JoystickButton retractPistonButton;
 
+    private JoystickButton ascendClimber;
+    private JoystickButton descendClimber;
 
     public OI() {
         gamepad = new Gamepad(0);
@@ -53,6 +54,9 @@ public class OI {
         expandPistonButton = new JoystickButton(joystick, EXPAND_PISTON);
         retractPistonButton = new JoystickButton(joystick, RETRACT_PISTON);
 
+        ascendClimber = new JoystickButton(gamepad, Gamepad.Buttons.A.getNumber());
+        descendClimber = new JoystickButton(gamepad, Gamepad.Buttons.B.getNumber());
+
         // Pneumatics Commands
         expandPistonButton.whenPressed(new ExpandPiston());
         retractPistonButton.whenPressed(new RetractPiston());
@@ -62,7 +66,6 @@ public class OI {
 
         gearInButton.whenPressed(new CloseGearHandler());
         gearOutButton.whenPressed(new OpenGearHandler());
-
     }
 
     private double transformStickToSpeed(Gamepad.Axes stick) {
@@ -87,5 +90,12 @@ public class OI {
         return gearOutButton.get();
     }
 
+    public boolean isAscendClimberPressed() {
+        return ascendClimber.get();
+    }
+
+    public boolean isDescendClimberPressed() {
+        return descendClimber.get();
+    }
 
 }
