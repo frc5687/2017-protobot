@@ -21,7 +21,7 @@ public class DriveTrain extends Subsystem {
     private VictorSP rightRearMotor;
     private Encoder rightEncoder;
     private Encoder leftEncoder;
-    private AnalogInput IRsensor;
+    private AnalogInput irSensor;
 
     public DriveTrain(){
         leftFrontMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_FRONT);
@@ -38,7 +38,7 @@ public class DriveTrain extends Subsystem {
         rightEncoder = initializeEncoder(RobotMap.Drive.RIGHT_ENCODER_CHANNEL_A, RobotMap.Drive.RIGHT_ENCODER_CHANNEL_B, Constants.Encoders.RightDrive.REVERSED, Constants.Encoders.RightDrive.INCHES_PER_PULSE);
         leftEncoder = initializeEncoder(RobotMap.Drive.LEFT_ENCODER_CHANNEL_A, RobotMap.Drive.LEFT_ENCODER_CHANNEL_B, Constants.Encoders.LeftDrive.REVERSED, Constants.Encoders.LeftDrive.INCHES_PER_PULSE);
 
-        IRsensor = new AnalogInput(RobotMap.Drive.IR_DRIVE_SENSOR);
+        irSensor = new AnalogInput(RobotMap.Drive.IR_DRIVE_SENSOR);
     }
 
     @Override
@@ -89,7 +89,6 @@ public class DriveTrain extends Subsystem {
         return getRightRate() / (Constants.Encoders.Defaults.PULSES_PER_ROTATION * Constants.Encoders.Defaults.INCHES_PER_PULSE);
     }
 
-    public double IRvalue = IRsensor.getValue();
 
     private Encoder initializeEncoder(int channelA, int channelB, boolean reversed, double distancePerPulse) {
         Encoder encoder = new Encoder(channelA, channelB, reversed, Encoder.EncodingType.k4X);
@@ -153,6 +152,6 @@ public class DriveTrain extends Subsystem {
         SmartDashboard.putNumber("drive/Right RPS" , getRightRPS());
         SmartDashboard.putNumber("drive/Left RPS" , getLeftRPS());
 
-        SmartDashboard.putNumber("irValue", IRvalue);
+        SmartDashboard.putNumber("irValue", irSensor.getValue());
     }
 }
