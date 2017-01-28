@@ -8,29 +8,9 @@ import static org.frc5687.steamworks.protobot.Robot.gearHandler;
 /**
  * Created by Caleb on 1/21/2017.
  */
-public class OpenGearHandler extends Command {
+public class OpenGearHandler extends MoveGearHandler {
 
     public  OpenGearHandler() {
-        requires(gearHandler);
-    }
-
-    protected void initialize(){
-
-    }
-
-    protected void execute() {
-        gearHandler.open();
-    }
-
-    protected boolean isFinished(){
-        return gearHandler.isAtMaxHall();
-    }
-
-    protected void end() {
-        gearHandler.stop();
-    }
-
-    protected void interrupted() {
-        end();
+        super(Constants.GearHandler.PID.MAX_INPUT);
     }
 }

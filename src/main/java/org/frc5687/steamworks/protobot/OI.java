@@ -61,8 +61,8 @@ public class OI {
         gearInButton = new JoystickButton(joystick, CLOSE_GEAR);
         gearOutButton = new JoystickButton(joystick,OPEN_GEAR);
 
-        gearInButton.whenPressed(new MoveGearHandler(Constants.GearHandler.PID.MIN_INPUT));
-        gearOutButton.whenPressed(new MoveGearHandler(Constants.GearHandler.PID.MAX_INPUT));
+        gearInButton.whenPressed(new CloseGearHandler());
+        gearOutButton.whenPressed(new OpenGearHandler());
     }
 
     private double transformStickToSpeed(Gamepad.Axes stick) {

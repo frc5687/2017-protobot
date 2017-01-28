@@ -8,28 +8,10 @@ import static org.frc5687.steamworks.protobot.Robot.gearHandler;
 /**
  * Created by Caleb on 1/21/2017.
  */
-public class CloseGearHandler extends Command {
+public class CloseGearHandler extends MoveGearHandler {
 
     public  CloseGearHandler() {
-        requires(gearHandler);
+        super(Constants.GearHandler.PID.MIN_INPUT);
     }
 
-    protected void initialize(){
-
-    }
-    protected void execute() {
-        gearHandler.close();
-    }
-
-    protected boolean isFinished(){
-        return gearHandler.isAtMinHall();
-    }
-
-    protected void end() {
-        gearHandler.stop();
-    }
-
-    protected void interrupted() {
-        end();
-    }
 }
