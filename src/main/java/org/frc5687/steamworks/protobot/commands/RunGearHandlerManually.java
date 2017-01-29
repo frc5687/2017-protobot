@@ -7,7 +7,8 @@ package org.frc5687.steamworks.protobot.commands;
         import static org.frc5687.steamworks.protobot.Robot.oi;
 
 /**
- * Created by Ben Bernard on 1/16/2017.
+ * Command for manually controlling the gear handler
+ * Default command for the GearHandler subsystem
  */
 public class RunGearHandlerManually extends Command {
 

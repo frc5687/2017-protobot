@@ -6,7 +6,7 @@ import org.frc5687.steamworks.protobot.Constants;
 import static org.frc5687.steamworks.protobot.Robot.gearHandler;
 
 /**
- * Created by Caleb on 1/21/2017.
+ * Command for closing the gear handler to the home position
  */
 public class CloseGearHandler extends Command {
 

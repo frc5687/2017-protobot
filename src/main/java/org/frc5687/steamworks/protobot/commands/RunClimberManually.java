@@ -6,7 +6,8 @@ import static org.frc5687.steamworks.protobot.Robot.climber;
 import static org.frc5687.steamworks.protobot.Robot.oi;
 
 /**
- * Created by Baxter on 1/28/2017.
+ * Command for manually controlling the climbing mechanism
+ * Default command for the Climber subsystem
  */
 public class RunClimberManually extends Command{
 

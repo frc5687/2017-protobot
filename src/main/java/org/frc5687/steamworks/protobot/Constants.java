@@ -9,7 +9,6 @@ public class Constants {
         public static final double openSpeed = 1;
         public static final double closeSpeed = -.05;
         public static final double clampSpeed = -.1;
-
     }
 
     public class Drive {
@@ -88,7 +87,7 @@ public class Constants {
     }
 
     public class OI{
-        public static final double triggerThreshhold = 0.5; //TODO find actual when pressed value
+        public static final double TRIGGER_THRESHOLD = 0.5; //TODO find actual when pressed value
     }
 
 }

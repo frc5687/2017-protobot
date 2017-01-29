@@ -10,7 +10,7 @@ import org.frc5687.steamworks.protobot.commands.OpenGearHandler;
 import org.frc5687.steamworks.protobot.commands.CloseGearHandler;
 
 /**
- * Created by Ben Bernard on 1/12/2017.
+ * Handles input from the operator
  */
 public class OI {
     private Gamepad gamepad;
@@ -83,11 +83,11 @@ public class OI {
     }
 
     public boolean isLeftTriggerPressed(){
-        return(gamepad.getRawAxis(Gamepad.Axes.LEFT_TRIGGER) > Constants.OI.triggerThreshhold);
+        return(gamepad.getRawAxis(Gamepad.Axes.LEFT_TRIGGER) > Constants.OI.TRIGGER_THRESHOLD);
     }
 
     public boolean isRightTriggerPressed(){
-        return(gamepad.getRawAxis(Gamepad.Axes.RIGHT_TRIGGER) > Constants.OI.triggerThreshhold);
+        return(gamepad.getRawAxis(Gamepad.Axes.RIGHT_TRIGGER) > Constants.OI.TRIGGER_THRESHOLD);
     }
 
     public boolean isGearInPressed() {

@@ -8,7 +8,7 @@ import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.DriveWith2Joysticks;
 
 /**
- * Created by Ben Bernard on 1/13/2017.
+ * Drivetrain subsystem
  */
 public class DriveTrain extends Subsystem {
     private RobotDrive drive;

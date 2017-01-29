@@ -1,10 +1,6 @@
 package org.frc5687.steamworks.protobot;
 
 /**
- * Created by Ben Bernard on 1/12/2017.
- */
-
-/**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers

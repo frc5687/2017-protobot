@@ -11,7 +11,7 @@ import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.RunGearHandlerManually;
 
 /**
- * Created by Ben Bernard on 1/16/2017.
+ * Gear handler subsystem
  */
 public class GearHandler extends Subsystem {
 

@@ -6,7 +6,7 @@ import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.oi;
 
 /**
- * Created by Ben Bernard on 1/13/2017.
+ * Command for manually driving the robot
  */
 public class DriveWith2Joysticks extends Command {
 

@@ -7,7 +7,7 @@ import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.commands.RunClimberManually;
 
 /**
- * Created by Baxter on 1/28/2017.
+ * Climbing mechanism subsystem
  */
 public class Climber extends Subsystem {
 

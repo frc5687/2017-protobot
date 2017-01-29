@@ -9,9 +9,6 @@ import org.frc5687.steamworks.protobot.subsystems.Climber;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.cscore.UsbCamera;
 
-/**
- * Created by Ben Bernard on 1/12/2017.
- */
 public class Robot extends IterativeRobot {
 
     /**

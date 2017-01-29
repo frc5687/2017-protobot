@@ -6,7 +6,7 @@ import org.frc5687.steamworks.protobot.subsystems.GearHandler;
 import static org.frc5687.steamworks.protobot.Robot.gearHandler;
 
 /**
- * Created by Caleb on 1/21/2017.
+ * Command for opening the gear handler to the fully open position
  */
 public class OpenGearHandler extends Command {
 
