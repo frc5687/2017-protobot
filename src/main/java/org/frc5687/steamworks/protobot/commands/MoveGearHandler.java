@@ -36,11 +36,12 @@ public class MoveGearHandler extends Command implements PIDOutput {
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return controller.onTarget();
     }
 
     @Override
     protected void end() {
+        gearHandler.stop();
     }
 
     @Override
