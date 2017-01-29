@@ -1,14 +1,17 @@
 package org.frc5687.steamworks.protobot.commands;
 
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
+import static org.frc5687.steamworks.protobot.Robot.imu;
 import static org.frc5687.steamworks.protobot.Robot.oi;
 
 /**
  * Created by Ben Bernard on 1/13/2017.
  */
-public class DriveWith2Joysticks extends Command {
+public class DriveWith2Joysticks extends Command implements PIDOutput {
 
     /*
      * Constructor
@@ -16,6 +19,14 @@ public class DriveWith2Joysticks extends Command {
     public DriveWith2Joysticks() {
         requires(driveTrain);
     }
+    public static PIDController turnController;
+    private static final double kP = 0.3;
+    private static final double kI = 0.05;
+    private static final double kD = 0.1;
+    private static final double kF = 0.0;
+    private static final double kToleranceDegrees = 2.0f;
+    private static final double targetAngle = 0;
+
 
     /*
      * Sets up the command
@@ -24,6 +35,14 @@ public class DriveWith2Joysticks extends Command {
      */
     protected void initialize() {
         driveTrain.resetDriveEncoders();
+        turnController = new PIDController(kP, kI, kD, kF, imu, this);
+        turnController.setInputRange(-180.0f,  180.0f);
+        turnController.setOutputRange(-0.6, 0.6);
+        turnController.setAbsoluteTolerance(kToleranceDegrees);
+        turnController.setContinuous(true);
+        turnController.setSetpoint(targetAngle);
+
+
     }
 
     /*
@@ -32,7 +51,10 @@ public class DriveWith2Joysticks extends Command {
      * @see edu.wpi.first.wpilibj.command.Command#execute()
      */
     protected void execute() {
-        if(oi.isLeftTriggerPressed()) driveTrain.tankDrive(Constants.Drive.FULL_FORWARDS_SPEED);
+        if(oi.isLeftTriggerPressed())
+            turnController = new PIDController(kP, kI, kD, kF, imu, this);
+
+
         else if (oi.isRightTriggerPressed()) driveTrain.tankDrive(Constants.Drive.FULL_BACKWARDS_SPEED);
         else driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed());
     }
