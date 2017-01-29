@@ -14,8 +14,6 @@ public class OI {
     private Joystick joystick;
 
     boolean isReversed = Constants.Encoders.Defaults.REVERSED;
-    public static final int OPEN_GEAR = 1;  // Green button
-    public static final int CLOSE_GEAR = 2; // Yellow
 
     public static final int REVERSE = Gamepad.Buttons.BACK.getNumber();
 
@@ -58,8 +56,6 @@ public class OI {
         expandPistonButton.whenPressed(new ExpandPiston());
         retractPistonButton.whenPressed(new RetractPiston());
 
-        gearInButton = new JoystickButton(joystick, CLOSE_GEAR);
-        gearOutButton = new JoystickButton(joystick,OPEN_GEAR);
 
         gearInButton.whenPressed(new CloseGearHandler());
         gearOutButton.whenPressed(new OpenGearHandler());

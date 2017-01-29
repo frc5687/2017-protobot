@@ -3,6 +3,7 @@ package org.frc5687.steamworks.protobot.commands;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.Constants.GearHandler.PID;
 import static org.frc5687.steamworks.protobot.Robot.gearHandler;
@@ -27,16 +28,17 @@ public class MoveGearHandler extends Command implements PIDOutput {
         controller.setOutputRange(Constants.GearHandler.closeSpeed, Constants.GearHandler.openSpeed);
         controller.setAbsoluteTolerance(PID.kTOLERANCE);
         controller.setSetpoint(setpoint);
-
         controller.enable();
     }
 
     @Override
     protected void execute() {
+        SmartDashboard.putBoolean("PID Enabled", controller.isEnabled());
     }
 
     @Override
     protected boolean isFinished() {
+        SmartDashboard.putBoolean("onTarget", controller.onTarget());
         return controller.onTarget();
     }
 
@@ -50,6 +52,7 @@ public class MoveGearHandler extends Command implements PIDOutput {
     public void pidWrite(double output) {
         synchronized (this) {
             gearHandler.setSpeed(output);
+            SmartDashboard.putNumber("PID Output", output);
         }
     }
 

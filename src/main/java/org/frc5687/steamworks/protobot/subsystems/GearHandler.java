@@ -52,9 +52,6 @@ public class GearHandler extends Subsystem {
     public boolean isAtMinHall() {return !minExtensionSensor.get();
     }
 
-    public boolean isAtMaxPot() {
-        return Constants.Encoders.Potentiometer.potentiometerMaxLimit > limitPotentiometer.get();
-    }
     public double potentiometerValue(){
         return limitPotentiometer.get();
     }
@@ -69,9 +66,7 @@ public class GearHandler extends Subsystem {
     }
 
     public void updateDashboard() {
-        SmartDashboard.putBoolean("MaxHall", isAtMaxHall());
-        SmartDashboard.putBoolean("MinHall", isAtMinHall());
-        SmartDashboard.putBoolean("MaxPotentiometer", isAtMaxPot());
         SmartDashboard.putNumber("PotentiometerValue", potentiometerValue());
+        SmartDashboard.putNumber("Gear Motor Speed", gearMotor.getSpeed());
     }
 }
