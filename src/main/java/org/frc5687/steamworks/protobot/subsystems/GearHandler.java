@@ -37,10 +37,6 @@ public class GearHandler extends Subsystem {
         gearMotor.set(Constants.GearHandler.closeSpeed);
     }
 
-    public void retain(){
-        gearMotor.set(Constants.GearHandler.clampSpeed);
-    }
-
     public void stop() {
         gearMotor.set(0);
     }
