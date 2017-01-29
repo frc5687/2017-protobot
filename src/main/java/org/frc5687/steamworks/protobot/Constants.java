@@ -6,16 +6,16 @@ package org.frc5687.steamworks.protobot;
 public class Constants {
 
     public class GearHandler {
-        public static final double openSpeed = 1;
+        public static final double openSpeed = 0.2;
         public static final double closeSpeed = -.05;
 
         public class PID {
-            public static final double kP = 1;
-            public static final double kI = 1;
-            public static final double kD = 1;
+            public static final double kP = 1.3;
+            public static final double kI = 0.8;
+            public static final double kD = 0.1;
             public static final double MIN_INPUT = 0.4;
             public static final double MAX_INPUT = 0.6;
-            public static final double kTOLERANCE = 0.1;
+            public static final double kTOLERANCE = 0.005;
         }
     }
 

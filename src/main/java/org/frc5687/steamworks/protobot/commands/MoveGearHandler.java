@@ -28,6 +28,7 @@ public class MoveGearHandler extends Command implements PIDOutput {
         controller.setAbsoluteTolerance(PID.kTOLERANCE);
         controller.setSetpoint(setpoint);
 
+        controller.enable();
     }
 
     @Override
@@ -42,6 +43,7 @@ public class MoveGearHandler extends Command implements PIDOutput {
     @Override
     protected void end() {
         gearHandler.stop();
+        controller.disable();
     }
 
     @Override
