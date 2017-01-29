@@ -47,6 +47,8 @@ public class AutoDrive extends Command implements PIDOutput {
 
     @Override
     public void pidWrite(double output) {
-
+        synchronized (this) {
+            driveTrain.tankDrive(output, output);
+        }
     }
 }
