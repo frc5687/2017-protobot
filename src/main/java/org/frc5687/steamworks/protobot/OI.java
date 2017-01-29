@@ -54,8 +54,8 @@ public class OI {
         expandPistonButton = new JoystickButton(joystick, EXPAND_PISTON);
         retractPistonButton = new JoystickButton(joystick, RETRACT_PISTON);
 
-        ascendClimber = new JoystickButton(gamepad, Gamepad.Buttons.A.getNumber());
-        descendClimber = new JoystickButton(gamepad, Gamepad.Buttons.B.getNumber());
+        ascendClimber = new JoystickButton(gamepad, Gamepad.Buttons.Y.getNumber());
+        descendClimber = new JoystickButton(gamepad, Gamepad.Buttons.A.getNumber());
 
         // Pneumatics Commands
         expandPistonButton.whenPressed(new ExpandPiston());
@@ -80,6 +80,14 @@ public class OI {
     }
     public double getRightSpeed(){
         return transformStickToSpeed(Gamepad.Axes.RIGHT_Y);
+    }
+
+    public boolean isLeftTriggerPressed(){
+        return(gamepad.getRawAxis(Gamepad.Axes.LEFT_TRIGGER) > Constants.OI.triggerThreshhold);
+    }
+
+    public boolean isRightTriggerPressed(){
+        return(gamepad.getRawAxis(Gamepad.Axes.RIGHT_TRIGGER) > Constants.OI.triggerThreshhold);
     }
 
     public boolean isGearInPressed() {

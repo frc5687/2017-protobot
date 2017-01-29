@@ -122,12 +122,10 @@ public class DriveTrain extends Subsystem {
             rightSpeed = Math.min(rightSpeed, rightFrontMotor.get() + Constants.Limits.ACCELERATION_CAP);
             rightSpeed = Math.max(rightSpeed, rightFrontMotor.get() - Constants.Limits.ACCELERATION_CAP);
         }
-
-        // DriverStation.reportError("Driving " + leftSpeed + ", " + rightSpeed, false);
         drive.tankDrive(leftSpeed, rightSpeed, false);
-
-
     }
+
+    public void tankDrive(double speed) { tankDrive(speed, speed); }
 
     public void setSafeMode(boolean enabled) {
         drive.setSafetyEnabled(enabled);
