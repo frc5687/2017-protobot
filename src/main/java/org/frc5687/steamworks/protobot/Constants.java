@@ -19,6 +19,8 @@ public class Constants {
 
         public static final double FULL_FORWARDS_SPEED = -1;
         public static final double FULL_BACKWARDS_SPEED = 1;
+        public static final double AUTONOMOUS_FORWARDS_SPEED = 0.3;
+        public static final double AUTONOMOUS_BACKWARDS_SPEED = -0.3;
 
         public class PID {
 
@@ -27,6 +29,8 @@ public class Constants {
                 public static final double kI = 1;
                 public static final double kD = 1;
                 public static final double TOLERANCE = 0.1;
+                public static final double MIN_INPUT = -180;
+                public static final double MAX_INPUT = 180;
             }
 
         }

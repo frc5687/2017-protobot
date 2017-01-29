@@ -105,6 +105,10 @@ public class DriveTrain extends Subsystem implements PIDSource {
         return (getLeftDistance()+getRightDistance())/2;
     }
 
+    public void stop() {
+        tankDrive(0, 0);
+    }
+
     /**
      * Run drive motors at specified speeds
      * @param leftSpeed  desired speed for left motors
