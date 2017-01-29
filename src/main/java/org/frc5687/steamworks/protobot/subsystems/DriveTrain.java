@@ -10,7 +10,7 @@ import org.frc5687.steamworks.protobot.commands.DriveWith2Joysticks;
 /**
  * Drivetrain subsystem
  */
-public class DriveTrain extends Subsystem {
+public class DriveTrain extends Subsystem implements PIDSource {
     private RobotDrive drive;
     private VictorSP leftFrontMotor;
     private VictorSP leftRearMotor;
@@ -19,6 +19,8 @@ public class DriveTrain extends Subsystem {
     private Encoder rightEncoder;
     private Encoder leftEncoder;
     private AnalogInput irSensor;
+
+    private PIDSourceType pidSourceType = PIDSourceType.kDisplacement;
 
     public DriveTrain(){
         leftFrontMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_FRONT);
@@ -148,5 +150,20 @@ public class DriveTrain extends Subsystem {
         SmartDashboard.putNumber("drive/Left RPS" , getLeftRPS());
 
         SmartDashboard.putNumber("irValue", irSensor.getValue());
+    }
+
+    @Override
+    public PIDSourceType getPIDSourceType() {
+        return pidSourceType;
+    }
+
+    @Override
+    public void setPIDSourceType(PIDSourceType pidSource) {
+        pidSourceType = pidSource;
+    }
+
+    @Override
+    public double pidGet() {
+        return getDistance();
     }
 }

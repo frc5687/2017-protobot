@@ -19,6 +19,18 @@ public class Constants {
 
         public static final double FULL_FORWARDS_SPEED = -1;
         public static final double FULL_BACKWARDS_SPEED = 1;
+
+        public class PID {
+
+            public class PIDDrive {
+                public static final double kP = 1;
+                public static final double kI = 1;
+                public static final double kD = 1;
+                public static final double TOLERANCE = 0.1;
+            }
+
+        }
+
     }
 
 
