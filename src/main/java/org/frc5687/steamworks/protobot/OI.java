@@ -20,8 +20,8 @@ public class OI {
     /**
      * Gear buttons
      */
-    public static final int GEAR_IN = 5;  // Green button
-    public static final int GEAR_OUT = 6; // Yellow
+    public static final int GEAR_IN = 1;  // Green button
+    public static final int GEAR_OUT = 2; // Yellow
 
     /**
      * Pneumatic buttons

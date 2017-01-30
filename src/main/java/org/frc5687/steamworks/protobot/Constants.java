@@ -10,12 +10,12 @@ public class Constants {
         public static final double closeSpeed = -.05;
 
         public class PID {
-            public static final double kP = 1.3;
-            public static final double kI = 0.8;
-            public static final double kD = 0.1;
-            public static final double MIN_INPUT = 0.12;
-            public static final double MAX_INPUT = 0.31;
-            public static final double kTOLERANCE = 0.01;
+            public static final double kP = 1.5;
+            public static final double kI = 0.3;
+            public static final double kD = 0.5;
+            public static final double MIN_INPUT = 0.138;
+            public static final double MAX_INPUT = 0.343;
+            public static final double TOLERANCE = 0.01;
         }
     }
 

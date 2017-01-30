@@ -26,7 +26,7 @@ public class MoveGearHandler extends Command implements PIDOutput {
         controller = new PIDController(PID.kP, PID.kI, PID.kD, gearHandler.getPotentiometer(), this);
         controller.setInputRange(PID.MIN_INPUT, PID.MAX_INPUT);
         controller.setOutputRange(Constants.GearHandler.closeSpeed, Constants.GearHandler.openSpeed);
-        controller.setAbsoluteTolerance(PID.kTOLERANCE);
+        controller.setAbsoluteTolerance(PID.TOLERANCE);
         controller.setSetpoint(setpoint);
         controller.enable();
     }
@@ -39,13 +39,18 @@ public class MoveGearHandler extends Command implements PIDOutput {
     @Override
     protected boolean isFinished() {
         SmartDashboard.putBoolean("onTarget", controller.onTarget());
-        return controller.onTarget();
+        return false;
     }
 
     @Override
     protected void end() {
         gearHandler.stop();
         controller.disable();
+    }
+
+    @Override
+    protected void interrupted() {
+        end();
     }
 
     @Override
