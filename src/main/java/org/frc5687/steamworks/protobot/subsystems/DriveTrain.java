@@ -18,7 +18,7 @@ public class DriveTrain extends Subsystem implements PIDSource {
     private VictorSP rightRearMotor;
     private Encoder rightEncoder;
     private Encoder leftEncoder;
-    private AnalogInput irSensor;
+    private AnalogInput distanceSensor;
 
     private PIDSourceType pidSourceType = PIDSourceType.kDisplacement;
 
@@ -37,7 +37,7 @@ public class DriveTrain extends Subsystem implements PIDSource {
         rightEncoder = initializeEncoder(RobotMap.Drive.RIGHT_ENCODER_CHANNEL_A, RobotMap.Drive.RIGHT_ENCODER_CHANNEL_B, Constants.Encoders.RightDrive.REVERSED, Constants.Encoders.RightDrive.INCHES_PER_PULSE);
         leftEncoder = initializeEncoder(RobotMap.Drive.LEFT_ENCODER_CHANNEL_A, RobotMap.Drive.LEFT_ENCODER_CHANNEL_B, Constants.Encoders.LeftDrive.REVERSED, Constants.Encoders.LeftDrive.INCHES_PER_PULSE);
 
-        irSensor = new AnalogInput(RobotMap.Drive.IR_DRIVE_SENSOR);
+        distanceSensor = new AnalogInput(RobotMap.Drive.IR_DRIVE_SENSOR);
     }
 
     @Override
@@ -153,7 +153,7 @@ public class DriveTrain extends Subsystem implements PIDSource {
         SmartDashboard.putNumber("drive/Right RPS" , getRightRPS());
         SmartDashboard.putNumber("drive/Left RPS" , getLeftRPS());
 
-        SmartDashboard.putNumber("irValue", irSensor.getValue());
+        SmartDashboard.putNumber("irValue", distanceSensor.getValue());
     }
 
     @Override
@@ -170,4 +170,9 @@ public class DriveTrain extends Subsystem implements PIDSource {
     public double pidGet() {
         return getDistance();
     }
+
+    public AnalogInput getDistanceSensor() {
+        return distanceSensor;
+    }
+
 }
