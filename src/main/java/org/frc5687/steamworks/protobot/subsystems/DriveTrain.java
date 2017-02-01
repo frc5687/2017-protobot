@@ -10,7 +10,7 @@ import org.frc5687.steamworks.protobot.commands.DriveWith2Joysticks;
 /**
  * Created by Ben Bernard on 1/13/2017.
  */
-public class DriveTrain extends Subsystem implements PIDSource{
+public class DriveTrain extends Subsystem{
     private RobotDrive drive;
     private VictorSP leftFrontMotor;
     private VictorSP leftRearMotor;
@@ -154,19 +154,5 @@ public class DriveTrain extends Subsystem implements PIDSource{
         SmartDashboard.putNumber("drive/Left RPS" , getLeftRPS());
 
         SmartDashboard.putNumber("irValue", irSensor.getValue());
-    }
-    @Override
-    public void setPIDSourceType(PIDSourceType pidSource) {
-        pidSourceType = pidSource;
-    }
-
-    @Override
-    public PIDSourceType getPIDSourceType() {
-        return pidSourceType;
-    }
-
-    @Override
-    public double pidGet() {
-        return pidSourceType.equals(PIDSourceType.kDisplacement) ? getDistance() : getSpeed();
     }
 }
