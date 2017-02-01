@@ -36,13 +36,14 @@ public class RunGearHandlerManually extends Command implements PIDOutput {
         if (oi.isGearInPressed()) {
             gearHandler.close();
             setpoint = gearHandler.potentiometerValue();
-            controller.disable();
+            if(controller.isEnabled()) controller.disable();
         } else if (oi.isGearOutPressed()) {
             gearHandler.open();
             setpoint = gearHandler.potentiometerValue();
-            controller.disable();
+            if(controller.isEnabled()) controller.disable();
         } else {
             gearHandler.setSpeed(pidOutput);
+            if(!controller.isEnabled()) controller.enable();
         }
     }
 
