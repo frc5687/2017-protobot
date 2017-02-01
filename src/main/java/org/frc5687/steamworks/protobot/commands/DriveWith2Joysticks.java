@@ -102,8 +102,6 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
             }else{
                 driveTrain.tankDrive(rotateToAngleRate + Constants.Drive.FULL_FORWARDS_SPEED, Constants.Drive.FULL_FORWARDS_SPEED - rotateToAngleRate);
             }
-            }
         }
     }
-
 }
