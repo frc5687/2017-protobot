@@ -1,5 +1,6 @@
 package org.frc5687.steamworks.protobot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
@@ -26,6 +27,8 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
     private static final double kF = 0.0;
     private static final double kToleranceDegrees = 2.0f;
     private static final double targetAngle = 0;
+    private double rotateToAngleRate = 0;
+    private boolean isReversed;
 
 
     /*
@@ -37,12 +40,11 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
         driveTrain.resetDriveEncoders();
         turnController = new PIDController(kP, kI, kD, kF, imu, this);
         turnController.setInputRange(-180.0f,  180.0f);
-        turnController.setOutputRange(-0.6, 0.6);
+        turnController.setOutputRange(-0.1, 0.1);
         turnController.setAbsoluteTolerance(kToleranceDegrees);
         turnController.setContinuous(true);
         turnController.setSetpoint(targetAngle);
-
-
+        turnController = new PIDController(kP, kI, kD, kF, imu, this);
     }
 
     /*
@@ -51,12 +53,18 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
      * @see edu.wpi.first.wpilibj.command.Command#execute()
      */
     protected void execute() {
-        if(oi.isLeftTriggerPressed())
-            turnController = new PIDController(kP, kI, kD, kF, imu, this);
+        if (oi.isLeftTriggerPressed()) {
+            isReversed = false;
+            turnController.enable();
 
+        } else if (oi.isRightTriggerPressed()){
+            isReversed = true;
+            turnController.enable();
+        } else {
+            turnController.disable();
+            driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed());
 
-        else if (oi.isRightTriggerPressed()) driveTrain.tankDrive(Constants.Drive.FULL_BACKWARDS_SPEED);
-        else driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed());
+        }
     }
 
     /*
@@ -83,6 +91,19 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
      * @see edu.wpi.first.wpilibj.command.Command#interrupted()
      */
     protected void interrupted() {
+
+    }
+    @Override
+    public void pidWrite(double output) {
+        synchronized (this) {
+            rotateToAngleRate = output;
+            if(isReversed) {
+                driveTrain.tankDrive(rotateToAngleRate + Constants.Drive.FULL_BACKWARDS_SPEED, Constants.Drive.FULL_BACKWARDS_SPEED - rotateToAngleRate);
+            }else{
+                driveTrain.tankDrive(rotateToAngleRate + Constants.Drive.FULL_FORWARDS_SPEED, Constants.Drive.FULL_FORWARDS_SPEED - rotateToAngleRate);
+            }
+            }
+        }
     }
 
 }
