@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
+import org.frc5687.steamworks.protobot.Constants.GearHandler.PID.Hold;
 
 import static org.frc5687.steamworks.protobot.Robot.gearHandler;
 import static org.frc5687.steamworks.protobot.Robot.oi;
@@ -24,10 +25,10 @@ public class RunGearHandlerManually extends Command implements PIDOutput {
     @Override
     protected void initialize() {
         setpoint = gearHandler.potentiometerValue();
-        controller = new PIDController(Constants.GearHandler.PID.Hold.kP, Constants.GearHandler.PID.Hold.kI, Constants.GearHandler.PID.Hold.kD, gearHandler.getPotentiometer(), this);
+        controller = new PIDController(Hold.kP, Hold.kI, Hold.kD, gearHandler.getPotentiometer(), this);
         controller.setInputRange(Constants.GearHandler.PID.MIN_INPUT, Constants.GearHandler.PID.MAX_INPUT);
-        controller.setOutputRange(Constants.GearHandler.closeSpeed, Constants.GearHandler.openSpeed);
-        controller.setAbsoluteTolerance(Constants.GearHandler.PID.Hold.TOLERANCE);
+        controller.setOutputRange(-Hold.MAX_SPEED, Hold.MAX_SPEED);
+        controller.setAbsoluteTolerance(Hold.TOLERANCE);
         controller.setSetpoint(setpoint);
         controller.enable();
     }
