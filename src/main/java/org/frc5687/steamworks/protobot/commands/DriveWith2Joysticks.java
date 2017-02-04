@@ -28,7 +28,6 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
     private static final double kF = 0.0;
     private static final double kToleranceDegrees = 2.0f;
     private static double targetAngle = 0;
-    private double rotateToAngleRate = 0;
     private boolean isReversed;
 
 
@@ -56,14 +55,21 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
     protected void execute() {
         if (oi.isLeftTriggerPressed()) {
             isReversed = false;
-            turnController.enable();
+            if(!turnController.isEnabled()) {
+                turnController.enable();
+            }
 
         } else if (oi.isRightTriggerPressed()){
             isReversed = true;
-            turnController.enable();
+            if(!turnController.isEnabled()){
+                turnController.enable();
+            }
         } else {
-            
-            turnController.disable();
+
+            if(turnController.isEnabled()) {
+                turnController.disable();
+                turnController.reset();
+            }
             driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed());
             targetAngle = imu.getAngle();
 
@@ -99,13 +105,12 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
     @Override
     public void pidWrite(double output) {
         synchronized (this) {
-            rotateToAngleRate = output;
             SmartDashboard.putNumber("PIDVal", output);
 
             if(isReversed) {
-                driveTrain.tankDrive(rotateToAngleRate + Constants.Drive.FULL_BACKWARDS_SPEED, Constants.Drive.FULL_BACKWARDS_SPEED - rotateToAngleRate);
+                driveTrain.tankDrive(output + Constants.Drive.FULL_BACKWARDS_SPEED, Constants.Drive.FULL_BACKWARDS_SPEED - rotateToAngleRate);
             }else{
-                driveTrain.tankDrive(rotateToAngleRate + Constants.Drive.FULL_FORWARDS_SPEED, Constants.Drive.FULL_FORWARDS_SPEED - rotateToAngleRate);
+                driveTrain.tankDrive(output + Constants.Drive.FULL_FORWARDS_SPEED, Constants.Drive.FULL_FORWARDS_SPEED - rotateToAngleRate);
             }
         }
     }
