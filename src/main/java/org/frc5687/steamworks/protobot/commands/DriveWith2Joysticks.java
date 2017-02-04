@@ -22,9 +22,9 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
         requires(driveTrain);
     }
     public static PIDController turnController;
-    private static final double kP = 0.3;
-    private static final double kI = 0.05;
-    private static final double kD = 0.1;
+    private static final double kP = SmartDashboard.getNumber("DB/Slider 0", 0);
+    private static final double kI = SmartDashboard.getNumber("DB/Slider 1", 0);
+    private static final double kD = SmartDashboard.getNumber("DB/Slider 2", 0);
     private static final double kF = 0.0;
     private static final double kToleranceDegrees = 2.0f;
     private static double targetAngle = 0;
@@ -73,6 +73,11 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
             targetAngle = imu.getAngle();
 
         }
+        turnController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0),SmartDashboard.getNumber("DB/Slider 1", 0),SmartDashboard.getNumber("DB/Slider 3", 0));
+        SmartDashboard.putNumber("PID/proportional",turnController.getP());
+        SmartDashboard.putNumber("PID/integral", turnController.getI());
+        SmartDashboard.putNumber("PID/derivative", turnController.getD();
+
     }
 
     /*
