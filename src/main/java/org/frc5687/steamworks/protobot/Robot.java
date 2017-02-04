@@ -68,7 +68,7 @@ public class Robot extends IterativeRobot {
             imu = new AHRS(SPI.Port.kMXP);
 
             // Report to both the logs and the dashboard.  We may not want to keep this permanently, but it's helpful for our initial testing.
-            DriverStation.reportError(String.format("Connected to navX MXP with FirmwareVersion %1$s", imu.getFirmwareVersion()), false);
+            DriverStation.reportError("Connected to navX MXP with FirmwareVersion" + imu.getFirmwareVersion(), false);
             SmartDashboard.putString("FirmwareVersion", imu.getFirmwareVersion());
         } catch (Exception ex) {
             // If there are any errors, null out the imu reference and report the error both to the logs and the dashboard.
@@ -144,6 +144,7 @@ public class Robot extends IterativeRobot {
             SmartDashboard.putString("FirmwareVersion",      "navX not connected");
             return;
         }
+        SmartDashboard.putString("FirmwareVersion",  imu.getFirmwareVersion()  );
 
         // Display 6-axis Processed Angle Data
         SmartDashboard.putBoolean(  "IMU/Connected",        imu.isConnected());

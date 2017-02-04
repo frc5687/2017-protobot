@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.imu;
@@ -26,7 +27,7 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
     private static final double kD = 0.1;
     private static final double kF = 0.0;
     private static final double kToleranceDegrees = 2.0f;
-    private static final double targetAngle = 0;
+    private static double targetAngle = 0;
     private double rotateToAngleRate = 0;
     private boolean isReversed;
 
@@ -61,8 +62,10 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
             isReversed = true;
             turnController.enable();
         } else {
+            
             turnController.disable();
             driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed());
+            targetAngle = imu.getAngle();
 
         }
     }
@@ -97,6 +100,8 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
     public void pidWrite(double output) {
         synchronized (this) {
             rotateToAngleRate = output;
+            SmartDashboard.putNumber("PIDVal", output);
+
             if(isReversed) {
                 driveTrain.tankDrive(rotateToAngleRate + Constants.Drive.FULL_BACKWARDS_SPEED, Constants.Drive.FULL_BACKWARDS_SPEED - rotateToAngleRate);
             }else{
