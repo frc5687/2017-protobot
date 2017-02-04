@@ -44,7 +44,6 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
         turnController.setAbsoluteTolerance(kToleranceDegrees);
         turnController.setContinuous(true);
         turnController.setSetpoint(targetAngle);
-        turnController = new PIDController(kP, kI, kD, kF, imu, this);
     }
 
     /*
@@ -108,9 +107,9 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
             SmartDashboard.putNumber("PIDVal", output);
 
             if(isReversed) {
-                driveTrain.tankDrive(output + Constants.Drive.FULL_BACKWARDS_SPEED, Constants.Drive.FULL_BACKWARDS_SPEED - rotateToAngleRate);
+                driveTrain.tankDrive(output + Constants.Drive.FULL_BACKWARDS_SPEED, Constants.Drive.FULL_BACKWARDS_SPEED - output);
             }else{
-                driveTrain.tankDrive(output + Constants.Drive.FULL_FORWARDS_SPEED, Constants.Drive.FULL_FORWARDS_SPEED - rotateToAngleRate);
+                driveTrain.tankDrive(output + Constants.Drive.FULL_FORWARDS_SPEED, Constants.Drive.FULL_FORWARDS_SPEED - output);
             }
         }
     }
