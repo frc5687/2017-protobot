@@ -13,8 +13,8 @@ public class Constants {
     }
 
     public class Drive {
-        public static final boolean LEFT_MOTOR_FRONT_INVERTED = false;
-        public static final boolean LEFT_MOTOR_REAR_INVERTED = false;
+        public static final boolean LEFT_MOTOR_FRONT_INVERTED = true;
+        public static final boolean LEFT_MOTOR_REAR_INVERTED = true;
         public static final boolean LEFT_MOTOR_TOP_INVERTED = false;
 
         public static final boolean RIGHT_MOTOR_FRONT_INVERTED = true;
