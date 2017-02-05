@@ -16,10 +16,14 @@ public class RobotMap {
      * Drive Train ports
      */
     public static class Drive {
-        public static final int LEFT_MOTOR_FRONT = 0;
-        public static final int LEFT_MOTOR_REAR = 1;
-        public static final int RIGHT_MOTOR_FRONT = 2;
-        public static final int RIGHT_MOTOR_REAR = 3;
+
+        public static final int RIGHT_MOTOR_FRONT = 0;
+        public static final int RIGHT_MOTOR_REAR = 1;
+        public static final int RIGHT_MOTOR_TOP = 2;
+
+        public static final int LEFT_MOTOR_FRONT = 3;
+        public static final int LEFT_MOTOR_REAR = 4;
+        public static final int LEFT_MOTOR_TOP = 5;
 
         public static final int PDP_LEFT_MOTOR_FRONT = 14;
         public static final int PDP_LEFT_MOTOR_REAR = 15;
@@ -38,7 +42,7 @@ public class RobotMap {
      * Gear Handler ports
      */
     public static class GearHandler {
-        public static final int GEAR_MOTOR = 4;
+        public static final int GEAR_MOTOR = 6;
         public static final int MAX_EXTENSION_HALL = 2; //TODO Change to ports on robot
         public static final int MIN_EXTENSION_HALL = 1;
         public static final int GEAR_POTENTIOMETER = 3;
@@ -56,6 +60,6 @@ public class RobotMap {
      * Climber ports
      */
     public static class Climber {
-        public static final int CLIMBER_MOTOR = 5;
+        public static final int CLIMBER_MOTOR = 7;
     }
 }
