@@ -37,6 +37,8 @@ public class OI {
     private JoystickButton gearInButton;
     private JoystickButton gearOutButton;
 
+    private JoystickButton gearEjectButton;
+
     private JoystickButton expandPistonButton;
     private JoystickButton retractPistonButton;
 
@@ -50,6 +52,8 @@ public class OI {
         // Joystick Buttons
         gearInButton = new JoystickButton(joystick, GEAR_IN);
         gearOutButton = new JoystickButton(joystick, GEAR_OUT);
+
+        gearEjectButton = new JoystickButton(gamepad, Gamepad.Buttons.RIGHT_BUMPER.getNumber());
 
         expandPistonButton = new JoystickButton(joystick, EXPAND_PISTON);
         retractPistonButton = new JoystickButton(joystick, RETRACT_PISTON);
@@ -66,6 +70,7 @@ public class OI {
 
         gearInButton.whenPressed(new CloseGearHandler());
         gearOutButton.whenPressed(new OpenGearHandler());
+        gearEjectButton.whenPressed(new OpenGearHandler());
     }
 
     private double transformStickToSpeed(Gamepad.Axes stick) {
