@@ -1,8 +1,6 @@
 package org.frc5687.steamworks.protobot.commands;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
@@ -13,7 +11,7 @@ import static org.frc5687.steamworks.protobot.Robot.oi;
 /**
  * Created by Ben Bernard on 1/13/2017.
  */
-public class DriveWith2Joysticks extends Command implements PIDOutput {
+public class DriveWith2Joysticks extends Command implements PIDOutput, PIDSource {
 
     /*
      * Constructor
@@ -43,7 +41,7 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
         turnController.setOutputRange(-0.1, 0.1);
         turnController.setAbsoluteTolerance(kToleranceDegrees);
         turnController.setContinuous(true);
-        turnController.setSetpoint(targetAngle);
+        turnController.setSetpoint(0);
     }
 
     /*
@@ -71,7 +69,6 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
             }
             driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed());
             targetAngle = imu.getAngle();
-            turnController.setSetpoint(targetAngle);
 
         }
         turnController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0),SmartDashboard.getNumber("DB/Slider 1", 0),SmartDashboard.getNumber("DB/Slider 3", 0));
@@ -119,5 +116,19 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
                 driveTrain.tankDrive(output + Constants.Drive.FULL_FORWARDS_SPEED, Constants.Drive.FULL_FORWARDS_SPEED - output);
             }
         }
+    }
+
+    @Override
+    public PIDSourceType getPIDSourceType() {
+        return null;
+    }
+
+    @Override
+    public void setPIDSourceType(PIDSourceType pidSource) {
+    }
+
+    @Override
+    public double pidGet() {
+        return imu.getAngle() - targetAngle - 180;
     }
 }
