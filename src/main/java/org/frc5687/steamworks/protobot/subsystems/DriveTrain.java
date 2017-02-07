@@ -11,11 +11,13 @@ import org.frc5687.steamworks.protobot.commands.DriveWith2Joysticks;
  * Created by Ben Bernard on 1/13/2017.
  */
 public class DriveTrain extends Subsystem {
-    private RobotDrive drive;
+
     private VictorSP leftFrontMotor;
     private VictorSP leftRearMotor;
+    private VictorSP leftTopMotor;
     private VictorSP rightFrontMotor;
     private VictorSP rightRearMotor;
+    private VictorSP rightTopMotor;
     private Encoder rightEncoder;
     private Encoder leftEncoder;
     private AnalogInput irSensor;
@@ -23,15 +25,18 @@ public class DriveTrain extends Subsystem {
     public DriveTrain(){
         leftFrontMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_FRONT);
         leftRearMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_REAR);
+        leftTopMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_TOP);
         rightFrontMotor = new VictorSP(RobotMap.Drive.RIGHT_MOTOR_FRONT);
         rightRearMotor = new VictorSP(RobotMap.Drive.RIGHT_MOTOR_REAR);
+        rightTopMotor = new VictorSP(RobotMap.Drive.RIGHT_MOTOR_TOP);
 
         leftFrontMotor.setInverted(Constants.Drive.LEFT_MOTOR_FRONT_INVERTED);
         leftRearMotor.setInverted(Constants.Drive.LEFT_MOTOR_REAR_INVERTED);
+        leftTopMotor.setInverted(Constants.Drive.LEFT_MOTOR_TOP_INVERTED);
         rightFrontMotor.setInverted(Constants.Drive.RIGHT_MOTOR_FRONT_INVERTED);
         rightRearMotor.setInverted(Constants.Drive.RIGHT_MOTOR_REAR_INVERTED);
+        rightTopMotor.setInverted(Constants.Drive.RIGHT_MOTOR_TOP_INVERTED);
 
-        drive = new RobotDrive(leftFrontMotor, leftRearMotor, rightFrontMotor, rightRearMotor);
         rightEncoder = initializeEncoder(RobotMap.Drive.RIGHT_ENCODER_CHANNEL_A, RobotMap.Drive.RIGHT_ENCODER_CHANNEL_B, Constants.Encoders.RightDrive.REVERSED, Constants.Encoders.RightDrive.INCHES_PER_PULSE);
         leftEncoder = initializeEncoder(RobotMap.Drive.LEFT_ENCODER_CHANNEL_A, RobotMap.Drive.LEFT_ENCODER_CHANNEL_B, Constants.Encoders.LeftDrive.REVERSED, Constants.Encoders.LeftDrive.INCHES_PER_PULSE);
 
@@ -122,14 +127,23 @@ public class DriveTrain extends Subsystem {
             rightSpeed = Math.min(rightSpeed, rightFrontMotor.get() + Constants.Limits.ACCELERATION_CAP);
             rightSpeed = Math.max(rightSpeed, rightFrontMotor.get() - Constants.Limits.ACCELERATION_CAP);
         }
-        drive.tankDrive(leftSpeed, rightSpeed, false);
+        setLeftSpeed(leftSpeed);
+        setRightSpeed(rightSpeed);
+    }
+
+    public void setLeftSpeed(double speed) {
+        leftFrontMotor.setSpeed(speed);
+        leftRearMotor.setSpeed(speed);
+        leftTopMotor.setSpeed(speed);
+    }
+
+    public void setRightSpeed(double speed) {
+        rightFrontMotor.setSpeed(speed);
+        rightRearMotor.setSpeed(speed);
+        rightTopMotor.setSpeed(speed);
     }
 
     public void tankDrive(double speed) { tankDrive(speed, speed); }
-
-    public void setSafeMode(boolean enabled) {
-        drive.setSafetyEnabled(enabled);
-    }
 
     public void updateDashboard() {
         SmartDashboard.putNumber("drive/Right distance", getRightDistance());
@@ -146,6 +160,9 @@ public class DriveTrain extends Subsystem {
 
         SmartDashboard.putNumber("drive/Right RPS" , getRightRPS());
         SmartDashboard.putNumber("drive/Left RPS" , getLeftRPS());
+
+        SmartDashboard.putBoolean("drive/Right inverted", rightFrontMotor.getInverted());
+        SmartDashboard.putBoolean("drive/Left inverted", leftFrontMotor.getInverted());
 
         SmartDashboard.putNumber("irValue", irSensor.getValue());
     }
