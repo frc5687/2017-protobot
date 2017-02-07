@@ -47,6 +47,7 @@ public class MoveGearHandler extends Command implements PIDOutput {
     protected void end() {
         gearHandler.stop();
         controller.disable();
+        SmartDashboard.putBoolean("PID Enabled", controller.isEnabled());
         SmartDashboard.putBoolean("Moving", false);
     }
 
