@@ -76,7 +76,7 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
         turnController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0),SmartDashboard.getNumber("DB/Slider 1", 0),SmartDashboard.getNumber("DB/Slider 3", 0));
         SmartDashboard.putNumber("PID/proportional",turnController.getP());
         SmartDashboard.putNumber("PID/integral", turnController.getI());
-        SmartDashboard.putNumber("PID/derivative", turnController.getD();
+        SmartDashboard.putNumber("PID/derivative", turnController.getD());
 
     }
 
