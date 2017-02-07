@@ -71,12 +71,14 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
             }
             driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed());
             targetAngle = imu.getAngle();
+            turnController.setSetpoint(targetAngle);
 
         }
         turnController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0),SmartDashboard.getNumber("DB/Slider 1", 0),SmartDashboard.getNumber("DB/Slider 3", 0));
         SmartDashboard.putNumber("PID/proportional",turnController.getP());
         SmartDashboard.putNumber("PID/integral", turnController.getI());
         SmartDashboard.putNumber("PID/derivative", turnController.getD());
+        SmartDashboard.putNumber("PID/setpoint", turnController.getSetpoint());
 
     }
 
@@ -104,12 +106,12 @@ public class DriveWith2Joysticks extends Command implements PIDOutput {
      * @see edu.wpi.first.wpilibj.command.Command#interrupted()
      */
     protected void interrupted() {
-
     }
+
     @Override
     public void pidWrite(double output) {
         synchronized (this) {
-            SmartDashboard.putNumber("PIDVal", output);
+            SmartDashboard.putNumber("PID/output", output);
 
             if(isReversed) {
                 driveTrain.tankDrive(output + Constants.Drive.FULL_BACKWARDS_SPEED, Constants.Drive.FULL_BACKWARDS_SPEED - output);
