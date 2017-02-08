@@ -175,4 +175,8 @@ public class DriveTrain extends Subsystem implements PIDSource {
         return distanceSensor;
     }
 
+    public double getDistanceToWall(){
+        return distanceSensor.getValue();
+    }
+
 }

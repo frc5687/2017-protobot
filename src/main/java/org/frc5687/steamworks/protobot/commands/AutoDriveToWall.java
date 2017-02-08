@@ -11,42 +11,31 @@ import org.frc5687.steamworks.protobot.Constants.Drive.PID.PIDDriveToWall;
 /**
  * Command to autonomously drive the robot a specified distance, in feet
  */
-public class AutoDriveToWall extends Command implements PIDOutput {
+public class AutoDriveToWall extends Command {
 
-    private PIDController controller;
 
     public AutoDriveToWall() {
+    requires(driveTrain);
     }
 
     @Override
     protected void initialize() {
-        controller = new PIDController(PIDDriveToWall.kP, PIDDriveToWall.kI, PIDDriveToWall.kD, driveTrain.getDistanceSensor(), this);
-        controller.setInputRange(PIDDriveToWall.MIN_INPUT, PIDDriveToWall.MAX_INPUT);
-        controller.setOutputRange(Constants.Drive.AUTONOMOUS_BACKWARDS_SPEED, Constants.Drive.AUTONOMOUS_FORWARDS_SPEED);
-        controller.setAbsoluteTolerance(PIDDriveToWall.TOLERANCE);
-        controller.setSetpoint(PIDDriveToWall.TARGET);
-        controller.enable();
+
     }
 
     @Override
     protected void execute() {
+    driveTrain.tankDrive(Constants.Drive.AUTONOMOUS_FORWARDS_SPEED,Constants.Drive.AUTONOMOUS_FORWARDS_SPEED);
     }
 
     @Override
     protected boolean isFinished() {
-        return controller.onTarget();
+        return (driveTrain.getDistanceToWall() < Constants.Drive.DISTANCE_TO_WALL);
+        // if IR sensoris used instead of ultrasonic make
     }
 
     @Override
     protected void end() {
-        driveTrain.stop();
-        controller.disable();
-    }
 
-    @Override
-    public void pidWrite(double output) {
-        synchronized (this) {
-            driveTrain.tankDrive(output, output);
-        }
     }
 }
