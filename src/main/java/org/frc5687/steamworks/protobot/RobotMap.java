@@ -55,6 +55,10 @@ public class RobotMap {
         public static final int PISTON_EXTENDER = 1;
         public static final int PISTON_RETRACTOR = 0;
     }
+    public static class Lights {
+        public static final int RINGLIGHT = 5;//todo put actual port in here
+
+    }
 
     /**
      * Climber ports
