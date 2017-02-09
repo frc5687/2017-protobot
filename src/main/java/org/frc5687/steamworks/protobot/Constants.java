@@ -10,8 +10,8 @@ public class Constants {
         public static final double closeSpeed = -.05;
 
         public class PID {
-            public static final double MIN_INPUT = .16; // home
-            public static final double MAX_INPUT = .36; // open
+            public static final double MIN_INPUT = .78; // home
+            public static final double MAX_INPUT = .98; // open
 
             public class Move {
                 public static final double kP = 1.5;
