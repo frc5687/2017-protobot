@@ -56,6 +56,11 @@ public class RobotMap {
         public static final int PISTON_RETRACTOR = 0;
     }
 
+    public static class Shifter {
+        public static final int PISTON_EXTENDER = 1;
+        public static final int PISTON_RETRACTOR = 0;
+    }
+
     /**
      * Climber ports
      */

@@ -1,5 +1,7 @@
 package org.frc5687.steamworks.protobot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 /**
  * Created by Admin on 1/16/2017.
  */
@@ -24,7 +26,6 @@ public class Constants {
         public static final double FULL_FORWARDS_SPEED = -1;
         public static final double FULL_BACKWARDS_SPEED = 1;
     }
-
 
     public class Deadbands {
         /**
