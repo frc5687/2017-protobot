@@ -1,7 +1,7 @@
 package org.frc5687.steamworks.protobot;
 
 /**
- * Created by Admin on 1/16/2017.
+ * Created by Caleb on 1/16/2017.
  */
 public class Constants {
 
@@ -23,6 +23,9 @@ public class Constants {
 
         public static final double FULL_FORWARDS_SPEED = -1;
         public static final double FULL_BACKWARDS_SPEED = 1;
+        public static final double SHIMMY_SPEED = -0.2;
+        public static final long SHIMMY_TIME = 100;
+
     }
 
 
