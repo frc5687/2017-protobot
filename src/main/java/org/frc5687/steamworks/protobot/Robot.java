@@ -2,10 +2,7 @@ package org.frc5687.steamworks.protobot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import org.frc5687.steamworks.protobot.subsystems.DriveTrain;
-import org.frc5687.steamworks.protobot.subsystems.GearHandler;
-import org.frc5687.steamworks.protobot.subsystems.Pneumatics;
-import org.frc5687.steamworks.protobot.subsystems.Climber;
+import org.frc5687.steamworks.protobot.subsystems.*;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.cscore.UsbCamera;
 
@@ -38,6 +35,8 @@ public class Robot extends IterativeRobot {
      * Represents the climbing mechanism
      */
     public static Climber climber;
+
+    public static Lights lights;
 
     public static Robot robot;
 
