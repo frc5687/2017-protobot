@@ -42,15 +42,15 @@ public class PDP extends PowerDistributionPanel {
     }
 
     public double getLeftFrontAmps() {
-        return getCurrent(RobotMap.Drive.PDP_RIGHT_MOTOR_FRONT);
+        return getCurrent(RobotMap.Drive.PDP_LEFT_MOTOR_FRONT);
     }
 
     public double getLeftTopAmps() {
-        return getCurrent(RobotMap.Drive.PDP_RIGHT_MOTOR_TOP);
+        return getCurrent(RobotMap.Drive.PDP_LEFT_MOTOR_TOP);
     }
 
     public double getLeftRearAmps() {
-        return getCurrent(RobotMap.Drive.PDP_RIGHT_MOTOR_REAR);
+        return getCurrent(RobotMap.Drive.PDP_LEFT_MOTOR_REAR);
     }
 
 }
