@@ -11,10 +11,11 @@ import static org.frc5687.steamworks.protobot.Robot.shifter;
  * Command for expanding piston of double solenoid
  */
 public class Shift extends Command{
-    DoubleSolenoid.Value _gear = DoubleSolenoid.Value.kOff;
+
+    DoubleSolenoid.Value gear = DoubleSolenoid.Value.kOff;
 
     public Shift(DoubleSolenoid.Value gear) {
-        _gear = gear;
+        this.gear = gear;
         requires(shifter);
     }
 
@@ -34,7 +35,7 @@ public class Shift extends Command{
     @Override
     protected void execute() {
         DriverStation.reportError("Starting shift command ", false);
-        shifter.shift(_gear);
+        shifter.shift(gear);
     }
 
     /**
@@ -44,7 +45,7 @@ public class Shift extends Command{
      */
     @Override
     protected boolean isFinished() {
-        return shifter.getGear() == _gear;
+        return shifter.getGear() == gear;
     }
 
     /**
