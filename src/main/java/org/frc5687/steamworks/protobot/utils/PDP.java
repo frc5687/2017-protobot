@@ -17,4 +17,38 @@ public class PDP extends PowerDistributionPanel {
         return getCurrent(RobotMap.GearHandler.PDP_GEAR_MOTOR);
     }
 
+
+
+    public double getMeanDrivetrainAmps() {
+        return (getRightFrontAmps() + getRightTopAmps() + getRightRearAmps() + getLeftFrontAmps() + getLeftTopAmps() + getLeftRearAmps()) / 6;
+    }
+
+    /**
+     * Methods for getting current from individual drivetrain cims
+     */
+
+    public double getRightFrontAmps() {
+        return getCurrent(RobotMap.Drive.PDP_RIGHT_MOTOR_FRONT);
+    }
+
+    public double getRightTopAmps() {
+        return getCurrent(RobotMap.Drive.PDP_RIGHT_MOTOR_TOP);
+    }
+
+    public double getRightRearAmps() {
+        return getCurrent(RobotMap.Drive.PDP_RIGHT_MOTOR_REAR);
+    }
+
+    public double getLeftFrontAmps() {
+        return getCurrent(RobotMap.Drive.PDP_RIGHT_MOTOR_FRONT);
+    }
+
+    public double getLeftTopAmps() {
+        return getCurrent(RobotMap.Drive.PDP_RIGHT_MOTOR_TOP);
+    }
+
+    public double getLeftRearAmps() {
+        return getCurrent(RobotMap.Drive.PDP_RIGHT_MOTOR_REAR);
+    }
+
 }
