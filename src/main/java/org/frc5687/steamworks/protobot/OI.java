@@ -65,8 +65,8 @@ public class OI {
         ascendClimber = new JoystickButton(gamepad, Gamepad.Buttons.Y.getNumber());
         descendClimber = new JoystickButton(gamepad, Gamepad.Buttons.X.getNumber());
 
-        shiftLow = new JoystickButton(gamepad, Gamepad.Buttons.B.getNumber());
-        shiftHigh = new JoystickButton(gamepad, Gamepad.Buttons.A.getNumber());
+        shiftLow = new JoystickButton(gamepad, Gamepad.Buttons.LEFT_BUMPER.getNumber());
+        shiftHigh = new JoystickButton(gamepad, Gamepad.Buttons.RIGHT_BUMPER.getNumber());
 
         // Pneumatics Commands
         expandPistonButton.whenPressed(new ExpandPiston());
