@@ -57,7 +57,7 @@ public class Constants {
             public static final boolean REVERSED = true; //TODO change to new robot specifications
             public static final int SAMPLES_TO_AVERAGE = 20;
             public static final int PULSES_PER_ROTATION = 1440;
-            public static final double WHEEL_DIAMETER = 4;
+            public static final double WHEEL_DIAMETER = 6;
             public static final double INCHES_PER_ROTATION = Math.PI * WHEEL_DIAMETER;
             public static final double SCALAR_RATIO = 8;
             public static final double INCHES_PER_PULSE = INCHES_PER_ROTATION * SCALAR_RATIO / PULSES_PER_ROTATION;
@@ -84,11 +84,10 @@ public class Constants {
         public class Defaults {
             public static final boolean REVERSED = true; //TODO change to new robot specifications
             public static final int SAMPLES_TO_AVERAGE = 20;
-            public static final int PULSES_PER_ROTATION = 1440;
-            public static final double WHEEL_DIAMETER = 6;
+            public static final int PULSES_PER_ROTATION = 1000;
+            public static final double WHEEL_DIAMETER = 4;
             public static final double INCHES_PER_ROTATION = Math.PI * WHEEL_DIAMETER;
-            public static final double SCALAR_RATIO = 8;
-            public static final double INCHES_PER_PULSE = INCHES_PER_ROTATION * SCALAR_RATIO / PULSES_PER_ROTATION;
+            public static final double INCHES_PER_PULSE = INCHES_PER_ROTATION  / PULSES_PER_ROTATION;
             public static final double MAX_PERIOD = 5;
         }
 
