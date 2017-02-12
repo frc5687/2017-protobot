@@ -1,13 +1,11 @@
 package org.frc5687.steamworks.protobot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.frc5687.steamworks.protobot.commands.*;
 import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
-import org.frc5687.steamworks.protobot.commands.ExpandPiston;
-import org.frc5687.steamworks.protobot.commands.RetractPiston;
-import org.frc5687.steamworks.protobot.commands.OpenGearHandler;
-import org.frc5687.steamworks.protobot.commands.CloseGearHandler;
 
 /**
  * Created by Ben Bernard on 1/12/2017.
@@ -28,11 +26,18 @@ public class OI {
     public static final int GEAR_IN = 5;  // Green button
     public static final int GEAR_OUT = 6; // Yellow
 
+
     /**
      * Pneumatic buttons
      */
     public static final int EXPAND_PISTON = 2;
     public static final int RETRACT_PISTON = 1;
+
+    /**
+     * Shifter buttons
+     */
+    public static final int LOW_GEAR = 2;
+    public static final int HIGH_GEAR = 1;
 
     private JoystickButton gearInButton;
     private JoystickButton gearOutButton;
@@ -42,6 +47,9 @@ public class OI {
 
     private JoystickButton ascendClimber;
     private JoystickButton descendClimber;
+
+    private JoystickButton shiftLow;
+    private JoystickButton shiftHigh;
 
     public OI() {
         gamepad = new Gamepad(0);
@@ -55,11 +63,17 @@ public class OI {
         retractPistonButton = new JoystickButton(joystick, RETRACT_PISTON);
 
         ascendClimber = new JoystickButton(gamepad, Gamepad.Buttons.Y.getNumber());
-        descendClimber = new JoystickButton(gamepad, Gamepad.Buttons.A.getNumber());
+        descendClimber = new JoystickButton(gamepad, Gamepad.Buttons.X.getNumber());
+
+        shiftLow = new JoystickButton(gamepad, Gamepad.Buttons.LEFT_BUMPER.getNumber());
+        shiftHigh = new JoystickButton(gamepad, Gamepad.Buttons.RIGHT_BUMPER.getNumber());
 
         // Pneumatics Commands
         expandPistonButton.whenPressed(new ExpandPiston());
         retractPistonButton.whenPressed(new RetractPiston());
+
+        shiftHigh.whenPressed(new Shift(DoubleSolenoid.Value.kForward));
+        shiftLow.whenPressed(new Shift(DoubleSolenoid.Value.kReverse));
 
         gearInButton = new JoystickButton(joystick, CLOSE_GEAR);
         gearOutButton = new JoystickButton(joystick,OPEN_GEAR);
