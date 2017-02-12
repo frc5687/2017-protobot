@@ -91,4 +91,9 @@ public class Constants {
         public static final double triggerThreshhold = 0.5; //TODO find actual when pressed value
     }
 
+    public class Shifter {
+        public static final long STOP_MOTOR_TIME = 200; //TODO find correct values
+        public static final long SHIFT_TIME = 500; //TODO find correct values
+    }
+
 }

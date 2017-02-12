@@ -4,7 +4,9 @@ package org.frc5687.steamworks.protobot.commands;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
+import org.frc5687.steamworks.protobot.Constants;
 
+import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.shifter;
 
 /**
@@ -12,57 +14,65 @@ import static org.frc5687.steamworks.protobot.Robot.shifter;
  */
 public class Shift extends Command{
 
-    DoubleSolenoid.Value gear = DoubleSolenoid.Value.kOff;
+    private DoubleSolenoid.Value gear = DoubleSolenoid.Value.kOff;
+    private double initialLeftSpeed, initialRightSpeed;
+    private long endTime;
+    private State state;
+
+    public static enum State {
+        STOP_MOTOR,
+        WAIT_FOR_MOTOR,
+        SHIFT,
+        WAIT_FOR_SHIFT,
+        START_MOTOR,
+        DONE;
+    }
 
     public Shift(DoubleSolenoid.Value gear) {
-        this.gear = gear;
+        requires(driveTrain);
         requires(shifter);
+        this.gear = gear;
     }
 
-    /**
-     * Sets up the command
-     * Called just before this Command runs the first time
-     */
     @Override
     protected void initialize() {
-
+        state = State.STOP_MOTOR;
     }
 
-    /**
-     * Executes the command
-     * Called repeatedly when this Command is scheduled to run
-     */
     @Override
     protected void execute() {
-        DriverStation.reportError("Starting shift command ", false);
-        shifter.shift(gear);
+        switch(state) {
+            case STOP_MOTOR:
+                initialLeftSpeed = driveTrain.getLeftSpeed();
+                initialRightSpeed = driveTrain.getRightSpeed();
+                driveTrain.tankDrive(0,0,true);
+                endTime = System.currentTimeMillis() + Constants.Shifter.STOP_MOTOR_TIME;
+                state = State.WAIT_FOR_MOTOR;
+                break;
+            case WAIT_FOR_MOTOR:
+                if(System.currentTimeMillis() >= endTime) state = State.SHIFT;
+                break;
+            case SHIFT:
+                shifter.shift(gear);
+                endTime = System.currentTimeMillis() + Constants.Shifter.SHIFT_TIME;
+                state = State.WAIT_FOR_SHIFT;
+            case WAIT_FOR_SHIFT:
+                if(System.currentTimeMillis() >= endTime) state = State.STOP_MOTOR;
+                break;
+            case START_MOTOR:
+                driveTrain.tankDrive(initialLeftSpeed, initialRightSpeed, true);
+                state = State.DONE;
+                break;
+        }
     }
 
-    /**
-     * Check if this command is finished running
-     * Make this return true when this Command no longer needs to run execute()
-     * @return true if Command is stopped, false otherwise
-     */
     @Override
     protected boolean isFinished() {
-        return shifter.getGear() == gear;
+        return state == State.DONE;
     }
 
-    /**
-     * Command execution clean-up
-     * Called once after isFinished returns true
-     */
-    @Override
-    protected void end() {
-
-    }
-
-    /**
-     * Handler for when command is interrupted
-     * Called when another command which requires one or more of the same
-     */
     @Override
     protected void interrupted() {
-
     }
+
 }
