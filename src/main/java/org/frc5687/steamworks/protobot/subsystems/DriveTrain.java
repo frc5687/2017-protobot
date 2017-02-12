@@ -31,8 +31,8 @@ public class DriveTrain extends Subsystem {
         rightRearMotor = new VictorSP(RobotMap.Drive.RIGHT_MOTOR_REAR);
         rightTopMotor = new VictorSP(RobotMap.Drive.RIGHT_MOTOR_TOP);
 
-        rightEncoder = initializeEncoder(RobotMap.Drive.RIGHT_ENCODER_CHANNEL_A, RobotMap.Drive.RIGHT_ENCODER_CHANNEL_B, Constants.Encoders.RightDrive.REVERSED, Constants.Encoders.RightDrive.INCHES_PER_PULSE);
-        leftEncoder = initializeEncoder(RobotMap.Drive.LEFT_ENCODER_CHANNEL_A, RobotMap.Drive.LEFT_ENCODER_CHANNEL_B, Constants.Encoders.LeftDrive.REVERSED, Constants.Encoders.LeftDrive.INCHES_PER_PULSE);
+        rightEncoder = initializeEncoder(RobotMap.Drive.RIGHT_ENCODER_CHANNEL_A, RobotMap.Drive.RIGHT_ENCODER_CHANNEL_B, Constants.ProtoEncoders.RightDrive.REVERSED, Constants.ProtoEncoders.RightDrive.INCHES_PER_PULSE);
+        leftEncoder = initializeEncoder(RobotMap.Drive.LEFT_ENCODER_CHANNEL_A, RobotMap.Drive.LEFT_ENCODER_CHANNEL_B, Constants.ProtoEncoders.LeftDrive.REVERSED, Constants.ProtoEncoders.LeftDrive.INCHES_PER_PULSE);
 
         irSensor = new AnalogInput(RobotMap.Drive.IR_DRIVE_SENSOR);
     }
@@ -64,7 +64,7 @@ public class DriveTrain extends Subsystem {
     }
 
     public double getLeftRPS() {
-        return getLeftRate() / (Constants.Encoders.Defaults.PULSES_PER_ROTATION * Constants.Encoders.Defaults.INCHES_PER_PULSE);
+        return getLeftRate() / (Constants.ProtoEncoders.Defaults.PULSES_PER_ROTATION * Constants.ProtoEncoders.Defaults.INCHES_PER_PULSE);
     }
 
     public double getRightDistance() {
@@ -82,15 +82,15 @@ public class DriveTrain extends Subsystem {
     }
 
     public double getRightRPS() {
-        return getRightRate() / (Constants.Encoders.Defaults.PULSES_PER_ROTATION * Constants.Encoders.Defaults.INCHES_PER_PULSE);
+        return getRightRate() / (Constants.ProtoEncoders.Defaults.PULSES_PER_ROTATION * Constants.ProtoEncoders.Defaults.INCHES_PER_PULSE);
     }
 
 
     private Encoder initializeEncoder(int channelA, int channelB, boolean reversed, double distancePerPulse) {
         Encoder encoder = new Encoder(channelA, channelB, reversed, Encoder.EncodingType.k4X);
         encoder.setDistancePerPulse(distancePerPulse);
-        encoder.setMaxPeriod(Constants.Encoders.Defaults.MAX_PERIOD);
-        encoder.setSamplesToAverage(Constants.Encoders.Defaults.SAMPLES_TO_AVERAGE);
+        encoder.setMaxPeriod(Constants.ProtoEncoders.Defaults.MAX_PERIOD);
+        encoder.setSamplesToAverage(Constants.ProtoEncoders.Defaults.SAMPLES_TO_AVERAGE);
         encoder.reset();
         return encoder;
     }

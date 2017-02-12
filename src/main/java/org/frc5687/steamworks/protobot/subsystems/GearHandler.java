@@ -2,7 +2,6 @@ package org.frc5687.steamworks.protobot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -49,7 +48,7 @@ public class GearHandler extends Subsystem {
     }
 
     public boolean isAtMaxPot() {
-        return Constants.Encoders.Potentiometer.potentiometerMaxLimit > limitPotentiometer.get();
+        return Constants.ProtoEncoders.Potentiometer.potentiometerMaxLimit > limitPotentiometer.get();
     }
     public double potentiometerValue(){
         return limitPotentiometer.get();

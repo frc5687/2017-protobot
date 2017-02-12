@@ -14,7 +14,7 @@ public class OI {
     private Gamepad gamepad;
     private Joystick joystick;
 
-    boolean isReversed = Constants.Encoders.Defaults.REVERSED;
+    boolean isReversed = Constants.ProtoEncoders.Defaults.REVERSED;
     public static final int OPEN_GEAR = 1;  // Green button
     public static final int CLOSE_GEAR = 2; // Yellow
 

@@ -1,7 +1,5 @@
 package org.frc5687.steamworks.protobot;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-
 /**
  * Created by Admin on 1/16/2017.
  */
@@ -53,7 +51,7 @@ public class Constants {
         public static final double SENSITIVITY_FACTOR = .2;
     }
 
-    public class Encoders {
+    public class ProtoEncoders {
 
         public class Defaults {
             public static final boolean REVERSED = true; //TODO change to new robot specifications
@@ -68,7 +66,7 @@ public class Constants {
 
         public class RightDrive {
             public static final boolean REVERSED = Defaults.REVERSED;
-            public static final double INCHES_PER_PULSE = Encoders.Defaults.INCHES_PER_PULSE;
+            public static final double INCHES_PER_PULSE = ProtoEncoders.Defaults.INCHES_PER_PULSE;
         }
 
         public class LeftDrive {
@@ -81,7 +79,29 @@ public class Constants {
         }
 
     }
+    public class TonyEncoders {
 
+        public class Defaults {
+            public static final boolean REVERSED = true; //TODO change to new robot specifications
+            public static final int SAMPLES_TO_AVERAGE = 20;
+            public static final int PULSES_PER_ROTATION = 1440;
+            public static final double WHEEL_DIAMETER = 6;
+            public static final double INCHES_PER_ROTATION = Math.PI * WHEEL_DIAMETER;
+            public static final double SCALAR_RATIO = 8;
+            public static final double INCHES_PER_PULSE = INCHES_PER_ROTATION * SCALAR_RATIO / PULSES_PER_ROTATION;
+            public static final double MAX_PERIOD = 5;
+        }
+
+        public class RightDrive {
+            public static final boolean REVERSED = Defaults.REVERSED;
+            public static final double INCHES_PER_PULSE = ProtoEncoders.Defaults.INCHES_PER_PULSE;
+        }
+
+        public class LeftDrive {
+            public static final boolean REVERSED = Defaults.REVERSED;
+            public static final double INCHES_PER_PULSE = Defaults.INCHES_PER_PULSE;
+        }
+    }
     public class Climber {
         public static final double ASCEND_SPEED = .8;
         public static final double DESCEND_SPEED = -0.1;
