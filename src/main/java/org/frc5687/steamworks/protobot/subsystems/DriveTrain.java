@@ -26,16 +26,10 @@ public class DriveTrain extends Subsystem {
         leftFrontMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_FRONT);
         leftRearMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_REAR);
         leftTopMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_TOP);
+
         rightFrontMotor = new VictorSP(RobotMap.Drive.RIGHT_MOTOR_FRONT);
         rightRearMotor = new VictorSP(RobotMap.Drive.RIGHT_MOTOR_REAR);
         rightTopMotor = new VictorSP(RobotMap.Drive.RIGHT_MOTOR_TOP);
-
-        leftFrontMotor.setInverted(Constants.Drive.LEFT_MOTOR_FRONT_INVERTED);
-        leftRearMotor.setInverted(Constants.Drive.LEFT_MOTOR_REAR_INVERTED);
-        leftTopMotor.setInverted(Constants.Drive.LEFT_MOTOR_TOP_INVERTED);
-        rightFrontMotor.setInverted(Constants.Drive.RIGHT_MOTOR_FRONT_INVERTED);
-        rightRearMotor.setInverted(Constants.Drive.RIGHT_MOTOR_REAR_INVERTED);
-        rightTopMotor.setInverted(Constants.Drive.RIGHT_MOTOR_TOP_INVERTED);
 
         rightEncoder = initializeEncoder(RobotMap.Drive.RIGHT_ENCODER_CHANNEL_A, RobotMap.Drive.RIGHT_ENCODER_CHANNEL_B, Constants.Encoders.RightDrive.REVERSED, Constants.Encoders.RightDrive.INCHES_PER_PULSE);
         leftEncoder = initializeEncoder(RobotMap.Drive.LEFT_ENCODER_CHANNEL_A, RobotMap.Drive.LEFT_ENCODER_CHANNEL_B, Constants.Encoders.LeftDrive.REVERSED, Constants.Encoders.LeftDrive.INCHES_PER_PULSE);
@@ -66,7 +60,7 @@ public class DriveTrain extends Subsystem {
     }
 
     public double getLeftSpeed() {
-        return leftFrontMotor.getSpeed();
+        return leftFrontMotor.getSpeed() * (Constants.Drive.LEFT_MOTORS_INVERTED ? -1 : 1);
     }
 
     public double getLeftRPS() {
@@ -84,7 +78,7 @@ public class DriveTrain extends Subsystem {
     }
 
     public double getRightSpeed() {
-        return rightFrontMotor.getSpeed();
+        return rightFrontMotor.getSpeed() * (Constants.Drive.RIGHT_MOTORS_INVERTED ? -1 : 1);
     }
 
     public double getRightRPS() {
@@ -132,12 +126,14 @@ public class DriveTrain extends Subsystem {
     }
 
     public void setLeftSpeed(double speed) {
+        speed = speed * (Constants.Drive.LEFT_MOTORS_INVERTED ? -1 : 1);
         leftFrontMotor.setSpeed(speed);
         leftRearMotor.setSpeed(speed);
         leftTopMotor.setSpeed(speed);
     }
 
     public void setRightSpeed(double speed) {
+        speed = speed * (Constants.Drive.RIGHT_MOTORS_INVERTED ? -1 : 1);
         rightFrontMotor.setSpeed(speed);
         rightRearMotor.setSpeed(speed);
         rightTopMotor.setSpeed(speed);
