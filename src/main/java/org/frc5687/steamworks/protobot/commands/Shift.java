@@ -4,64 +4,86 @@ package org.frc5687.steamworks.protobot.commands;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.frc5687.steamworks.protobot.Constants;
 
+
+import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.shifter;
 
 /**
  * Command for expanding piston of double solenoid
  */
-public class Shift extends Command{
-    DoubleSolenoid.Value _gear = DoubleSolenoid.Value.kOff;
+public class Shift extends CommandGroup {
+
+    private DoubleSolenoid.Value gear = DoubleSolenoid.Value.kOff;
+    private double leftSpeed, rightSpeed;
 
     public Shift(DoubleSolenoid.Value gear) {
-        _gear = gear;
-        requires(shifter);
+        this.gear = gear;
+        addSequential(new StopMotor());
+        addSequential(new ShiftGear(gear));
     }
 
-    /**
-     * Sets up the command
-     * Called just before this Command runs the first time
-     */
     @Override
     protected void initialize() {
-
+        leftSpeed = driveTrain.getLeftSpeed();
+        rightSpeed = driveTrain.getRightSpeed();
     }
 
-    /**
-     * Executes the command
-     * Called repeatedly when this Command is scheduled to run
-     */
-    @Override
-    protected void execute() {
-        DriverStation.reportError("Starting shift command ", false);
-        shifter.shift(_gear);
-    }
-
-    /**
-     * Check if this command is finished running
-     * Make this return true when this Command no longer needs to run execute()
-     * @return true if Command is stopped, false otherwise
-     */
-    @Override
-    protected boolean isFinished() {
-        return shifter.getGear() == _gear;
-    }
-
-    /**
-     * Command execution clean-up
-     * Called once after isFinished returns true
-     */
     @Override
     protected void end() {
+        driveTrain.tankDrive(leftSpeed, rightSpeed);
+    }
+
+    public class StopMotor extends Command {
+
+        private long endTime;
+
+        public StopMotor() {
+            requires(driveTrain);
+        }
+
+        @Override
+        protected void initialize() {
+            endTime = System.currentTimeMillis() + Constants.Shifter.STOP_MOTOR_TIME;
+        }
+
+        @Override
+        protected void execute() {
+            driveTrain.tankDrive(0, 0);
+        }
+
+        @Override
+        protected void end() {
+        }
+
+        @Override
+        protected boolean isFinished() {
+            return System.currentTimeMillis() >= endTime;
+        }
 
     }
 
-    /**
-     * Handler for when command is interrupted
-     * Called when another command which requires one or more of the same
-     */
-    @Override
-    protected void interrupted() {
+    public class ShiftGear extends Command {
+
+        private DoubleSolenoid.Value gear;
+
+        public ShiftGear(DoubleSolenoid.Value gear) {
+            this.gear = gear;
+            requires(shifter);
+        }
+
+        @Override
+        protected void execute() {
+            shifter.shift(gear);
+        }
+
+        @Override
+        protected boolean isFinished() {
+            return shifter.getGear() == gear;
+        }
 
     }
+
 }
