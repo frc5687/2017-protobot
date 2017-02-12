@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.cscore.UsbCamera;
+import org.frc5687.steamworks.protobot.utils.PDP;
 
 /**
  * Created by Ben Bernard on 1/12/2017.
@@ -40,6 +41,8 @@ public class Robot extends IterativeRobot {
 
     public static Robot robot;
 
+    public static PDP pdp;
+
     public Robot() {
     }
 
@@ -57,6 +60,7 @@ public class Robot extends IterativeRobot {
         shifter = new Shifter();
         climber = new Climber();
 
+        pdp = new PDP();
         oi = new OI(); // must be initialized after subsystems
 
         UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
