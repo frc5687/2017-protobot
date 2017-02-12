@@ -57,8 +57,8 @@ public class RobotMap {
     }
 
     public static class Shifter {
-        public static final int PISTON_EXTENDER = 1;
-        public static final int PISTON_RETRACTOR = 0;
+        public static final int PISTON_EXTENDER = 3;
+        public static final int PISTON_RETRACTOR = 2;
     }
 
     /**
