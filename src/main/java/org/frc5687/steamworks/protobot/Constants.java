@@ -21,6 +21,8 @@ public class Constants {
 
         public static final double FULL_FORWARDS_SPEED = -1;
         public static final double FULL_BACKWARDS_SPEED = 1;
+        public static final double ENCODER_TEST_SPEED = 0.2;//todo replace with values that suite the test as this is just a guess
+        public static final int ENCODDER_TEST_TIME = 100;
     }
 
     public class Deadbands {
@@ -58,11 +60,10 @@ public class Constants {
         public class Defaults {
             public static final boolean REVERSED = true; //TODO change to new robot specifications
             public static final int SAMPLES_TO_AVERAGE = 20;
-            public static final int PULSES_PER_ROTATION = 1440;
-            public static final double WHEEL_DIAMETER = 6;
+            public static final int PULSES_PER_ROTATION = 1000;
+            public static final double WHEEL_DIAMETER = 4;
             public static final double INCHES_PER_ROTATION = Math.PI * WHEEL_DIAMETER;
-            public static final double SCALAR_RATIO = 8;
-            public static final double INCHES_PER_PULSE = INCHES_PER_ROTATION * SCALAR_RATIO / PULSES_PER_ROTATION;
+            public static final double INCHES_PER_PULSE = INCHES_PER_ROTATION  / PULSES_PER_ROTATION;
             public static final double MAX_PERIOD = 5;
         }
 
@@ -74,10 +75,14 @@ public class Constants {
         public class LeftDrive {
             public static final boolean REVERSED = Defaults.REVERSED;
             public static final double INCHES_PER_PULSE = Defaults.INCHES_PER_PULSE;
+
         }
 
         public class Potentiometer{
             public static final double potentiometerMaxLimit = 0.5;
+        }
+        public class Threshholds{
+            public static final double encodeThreshold = 100;
         }
 
     }

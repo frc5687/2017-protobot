@@ -24,6 +24,7 @@ public class DriveTrain extends Subsystem {
 
     public DriveTrain(){
         leftFrontMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_FRONT);
+        leftFrontMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_FRONT);
         leftRearMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_REAR);
         leftTopMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_TOP);
 
@@ -162,4 +163,6 @@ public class DriveTrain extends Subsystem {
 
         SmartDashboard.putNumber("irValue", irSensor.getValue());
     }
+
+
 }
