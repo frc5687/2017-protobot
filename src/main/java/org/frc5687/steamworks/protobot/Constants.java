@@ -1,5 +1,7 @@
 package org.frc5687.steamworks.protobot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * Created by Admin on 1/16/2017.
  */
@@ -21,8 +23,14 @@ public class Constants {
         public static final boolean RIGHT_MOTOR_REAR_INVERTED = true;
         public static final boolean RIGHT_MOTOR_TOP_INVERTED = true;
 
-        public static final double FULL_FORWARDS_SPEED = -0.9;
-        public static final double FULL_BACKWARDS_SPEED = 0.9;
+        public static final double FULL_FORWARDS_SPEED = -0.2;
+        public static final double FULL_BACKWARDS_SPEED = 0.2;
+
+        public static final double kP = 0.05;
+        public static final double kI = 0;
+        public static final double kD = 0;
+        public static final double kToleranceDegrees = 2;
+        public static final double MAX_SPEED_DIFFERENCE = 0.02;
     }
 
 

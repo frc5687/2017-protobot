@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
+import org.frc5687.steamworks.protobot.Constants.Drive;
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.imu;
 import static org.frc5687.steamworks.protobot.Robot.oi;
@@ -20,11 +21,7 @@ public class DriveWith2Joysticks extends Command implements PIDOutput, PIDSource
         requires(driveTrain);
     }
     public static PIDController turnController;
-    private static final double kP = SmartDashboard.getNumber("DB/Slider 0", 0);
-    private static final double kI = SmartDashboard.getNumber("DB/Slider 1", 0);
-    private static final double kD = SmartDashboard.getNumber("DB/Slider 2", 0);
-    private static final double kF = 0.0;
-    private static final double kToleranceDegrees = 2.0f;
+
     private static double targetAngle = 0;
     private boolean isReversed;
 
@@ -36,10 +33,10 @@ public class DriveWith2Joysticks extends Command implements PIDOutput, PIDSource
      */
     protected void initialize() {
         driveTrain.resetDriveEncoders();
-        turnController = new PIDController(kP, kI, kD, kF, imu, this);
+        turnController = new PIDController(Drive.kP, Drive.kI, Drive.kD, imu, this);
         turnController.setInputRange(-180.0f,  180.0f);
-        turnController.setOutputRange(-0.1, 0.1);
-        turnController.setAbsoluteTolerance(kToleranceDegrees);
+        turnController.setOutputRange(-Drive.MAX_SPEED_DIFFERENCE, Drive.MAX_SPEED_DIFFERENCE);
+        turnController.setAbsoluteTolerance(Drive.kToleranceDegrees);
         turnController.setContinuous(true);
         turnController.setSetpoint(0);
     }
@@ -52,15 +49,13 @@ public class DriveWith2Joysticks extends Command implements PIDOutput, PIDSource
     protected void execute() {
         if (oi.isLeftTriggerPressed()) {
             isReversed = false;
-            if(!turnController.isEnabled()) {
+            if(!turnController.isEnabled())
                 turnController.enable();
-            }
 
         } else if (oi.isRightTriggerPressed()){
             isReversed = true;
-            if(!turnController.isEnabled()){
+            if(!turnController.isEnabled())
                 turnController.enable();
-            }
         } else {
 
             if(turnController.isEnabled()) {
@@ -71,7 +66,6 @@ public class DriveWith2Joysticks extends Command implements PIDOutput, PIDSource
             targetAngle = imu.getAngle();
 
         }
-        turnController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0),SmartDashboard.getNumber("DB/Slider 1", 0),SmartDashboard.getNumber("DB/Slider 3", 0));
         SmartDashboard.putNumber("PID/proportional",turnController.getP());
         SmartDashboard.putNumber("PID/integral", turnController.getI());
         SmartDashboard.putNumber("PID/derivative", turnController.getD());
