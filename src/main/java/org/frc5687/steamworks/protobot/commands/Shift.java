@@ -4,7 +4,6 @@ package org.frc5687.steamworks.protobot.commands;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
@@ -21,23 +20,12 @@ public class Shift extends Command{
     private State state;
 
     public static enum State {
-        STOP_MOTOR("stopping motor"),
-        WAIT_FOR_MOTOR("waiting for motor to stop"),
-        SHIFT("shift"),
-        WAIT_FOR_SHIFT("waiting for shifter"),
-        START_MOTOR("starting motor"),
-        DONE("done");
-
-        private String message;
-
-        State(String message) {
-            this.message = message;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
+        STOP_MOTOR,
+        WAIT_FOR_MOTOR,
+        SHIFT,
+        WAIT_FOR_SHIFT,
+        START_MOTOR,
+        DONE;
     }
 
     public Shift(DoubleSolenoid.Value gear) {
@@ -53,7 +41,6 @@ public class Shift extends Command{
 
     @Override
     protected void execute() {
-        SmartDashboard.putString("Shifter State", state.getMessage());
         switch(state) {
             case STOP_MOTOR:
                 initialLeftSpeed = driveTrain.getLeftSpeed();
