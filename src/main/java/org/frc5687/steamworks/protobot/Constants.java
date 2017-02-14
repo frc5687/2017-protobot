@@ -25,7 +25,7 @@ public class Constants {
 
         public class PID {
 
-            public class PIDDrive {
+            public class AutoDrive {
                 public static final double kP = 1;
                 public static final double kI = 1;
                 public static final double kD = 1;
@@ -34,14 +34,13 @@ public class Constants {
                 public static final double MAX_INPUT = 180;
             }
 
-            public class PIDDriveToWall {
+            public class AutoTurn {
                 public static final double kP = 1;
                 public static final double kI = 1;
                 public static final double kD = 1;
                 public static final double TOLERANCE = 0.1;
-                public static final double MIN_INPUT = 108;
-                public static final double MAX_INPUT = 10000;
-                public static final double TARGET = 152;
+                public static final double MIN_INPUT = -180;
+                public static final double MAX_INPUT = 180;
             }
 
         }

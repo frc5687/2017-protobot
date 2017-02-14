@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
-import org.frc5687.steamworks.protobot.Constants.Drive.PID.PIDDrive;
+import org.frc5687.steamworks.protobot.Constants.Drive.PID;
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 
 /**
@@ -22,10 +22,10 @@ public class AutoDrive extends Command implements PIDOutput {
 
     @Override
     protected void initialize() {
-        controller = new PIDController(PIDDrive.kP, PIDDrive.kI, PIDDrive.kD, driveTrain, this);
-        controller.setInputRange(PIDDrive.MIN_INPUT, PIDDrive.MAX_INPUT);
+        controller = new PIDController(PID.AutoDrive.kP, PID.AutoDrive.kI, PID.AutoDrive.kD, driveTrain, this);
+        controller.setInputRange(PID.AutoDrive.MIN_INPUT, PID.AutoDrive.MAX_INPUT);
         controller.setOutputRange(Constants.Drive.AUTONOMOUS_BACKWARDS_SPEED, Constants.Drive.AUTONOMOUS_FORWARDS_SPEED);
-        controller.setAbsoluteTolerance(PIDDrive.TOLERANCE);
+        controller.setAbsoluteTolerance(PID.AutoDrive.TOLERANCE);
         controller.setSetpoint(target);
         controller.enable();
     }
