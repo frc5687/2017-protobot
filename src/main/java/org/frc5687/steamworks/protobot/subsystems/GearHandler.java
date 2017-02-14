@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.RunGearHandlerManually;
+import static org.frc5687.steamworks.protobot.Robot.pdp;
 
 /**
  * Created by Ben Bernard on 1/16/2017.
@@ -66,5 +67,6 @@ public class GearHandler extends Subsystem {
         SmartDashboard.putBoolean("MinHall", isAtMinHall());
         SmartDashboard.putBoolean("MaxPotentiometer", isAtMaxPot());
         SmartDashboard.putNumber("PotentiometerValue", potentiometerValue());
+        SmartDashboard.putNumber("Gear Handler Amperage", pdp.getGearHandlerAmps());
     }
 }

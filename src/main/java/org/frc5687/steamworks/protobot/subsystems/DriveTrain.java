@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.DriveWith2Joysticks;
+import static org.frc5687.steamworks.protobot.Robot.pdp;
 
 /**
  * Created by Ben Bernard on 1/13/2017.
@@ -159,6 +160,14 @@ public class DriveTrain extends Subsystem {
 
         SmartDashboard.putBoolean("drive/Right inverted", rightFrontMotor.getInverted());
         SmartDashboard.putBoolean("drive/Left inverted", leftFrontMotor.getInverted());
+
+        SmartDashboard.putNumber("drive/Right Front Current", pdp.getRightFrontAmps());
+        SmartDashboard.putNumber("drive/Right Top Current", pdp.getRightTopAmps());
+        SmartDashboard.putNumber("drive/Right Rear Current", pdp.getRightRearAmps());
+        SmartDashboard.putNumber("drive/Left Front Current", pdp.getLeftFrontAmps());
+        SmartDashboard.putNumber("drive/Left Top Current", pdp.getLeftTopAmps());
+        SmartDashboard.putNumber("drive/Left Rear Current", pdp.getLeftRearAmps());
+        SmartDashboard.putNumber("drive/Average Current", pdp.getMeanDrivetrainAmps());
 
         SmartDashboard.putNumber("irValue", irSensor.getValue());
     }

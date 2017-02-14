@@ -25,10 +25,13 @@ public class RobotMap {
         public static final int LEFT_MOTOR_REAR = 4;
         public static final int LEFT_MOTOR_TOP = 5;
 
-        public static final int PDP_LEFT_MOTOR_FRONT = 14;
-        public static final int PDP_LEFT_MOTOR_REAR = 15;
-        public static final int PDP_RIGHT_MOTOR_FRONT = 12;
-        public static final int PDP_RIGHT_MOTOR_REAR = 13;
+        public static final int PDP_RIGHT_MOTOR_FRONT = 15;
+        public static final int PDP_RIGHT_MOTOR_TOP = 13;
+        public static final int PDP_RIGHT_MOTOR_REAR = 14;
+
+        public static final int PDP_LEFT_MOTOR_FRONT = 2;
+        public static final int PDP_LEFT_MOTOR_TOP = 3;
+        public static final int PDP_LEFT_MOTOR_REAR = 1;
 
         // Encoder channel ports as of 03/02, left reversed with right
         public static final int LEFT_ENCODER_CHANNEL_A = 6;
@@ -46,6 +49,7 @@ public class RobotMap {
         public static final int MAX_EXTENSION_HALL = 2; //TODO Change to ports on robot
         public static final int MIN_EXTENSION_HALL = 1;
         public static final int GEAR_POTENTIOMETER = 3;
+        public static final int PDP_GEAR_MOTOR = 12;
      }
 
     /**
@@ -66,5 +70,6 @@ public class RobotMap {
      */
     public static class Climber {
         public static final int CLIMBER_MOTOR = 7;
+        public static final int PDP_CLIMBER_MOTOR = 0;
     }
 }
