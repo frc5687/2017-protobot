@@ -27,7 +27,7 @@ wpi {
 dependencies {
     compile wpilib()
     compile talonSrx()
-    compile fileTree(dir: 'lib', include: '**/*.jar')
+    compile fileTree(dir: 'libs', include: '**/*.jar')
 }
 
 def robotManifest = {
