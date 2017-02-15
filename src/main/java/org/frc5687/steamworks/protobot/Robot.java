@@ -1,11 +1,15 @@
 package org.frc5687.steamworks.protobot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.cscore.UsbCamera;
 import org.frc5687.steamworks.protobot.utils.PDP;
+import com.kauailabs.navx.frc.AHRS;
 
 /**
  * Created by Ben Bernard on 1/12/2017.
@@ -43,6 +47,8 @@ public class Robot extends IterativeRobot {
 
     public static PDP pdp;
 
+    public static AHRS imu;
+
     public Robot() {
     }
 
@@ -61,6 +67,19 @@ public class Robot extends IterativeRobot {
         climber = new Climber();
 
         pdp = new PDP();
+
+        try {
+            // Try to connect to the navX imu.
+            imu = new AHRS(SPI.Port.kMXP);
+            // Report firmware version to SmartDashboard
+            SmartDashboard.putString("FirmwareVersion", imu.getFirmwareVersion());
+        } catch (Exception ex) {
+            // If there are any errors, null out the imu reference and report the error both to the logs and the dashboard.
+            SmartDashboard.putString("FirmwareVersion", "navX not connected");
+            DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+            imu = null;
+        }
+
         oi = new OI(); // must be initialized after subsystems
 
         UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
