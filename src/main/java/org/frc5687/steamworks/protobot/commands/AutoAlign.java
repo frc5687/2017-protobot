@@ -3,7 +3,7 @@ package org.frc5687.steamworks.protobot.commands;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
-import org.frc5687.steamworks.protobot.Constants.Drive.PID.Align;
+import org.frc5687.steamworks.protobot.Constants.Auto.Align;
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.imu;
 
@@ -39,6 +39,12 @@ public class AutoAlign extends Command implements PIDOutput {
     @Override
     protected boolean isFinished() {
         return System.currentTimeMillis() >= endTime;
+    }
+
+    @Override
+    protected void end() {
+        controller.disable();
+        driveTrain.stop();
     }
 
     @Override

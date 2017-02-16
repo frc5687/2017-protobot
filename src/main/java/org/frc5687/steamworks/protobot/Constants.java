@@ -22,22 +22,6 @@ public class Constants {
         public static final double FULL_FORWARDS_SPEED = -1;
         public static final double FULL_BACKWARDS_SPEED = 1;
 
-        public class PID {
-
-            public class Align {
-                public static final double kP = 0;
-                public static final double kI = 0;
-                public static final double kD = 0;
-                public static final double TOLERANCE = 0;
-                public static final double MAX_OUTPUT = 0;
-                /*
-                 *time the angle must be on target for to be considered steady
-                 */
-                public static final double STEADY_TIME = 200;
-            }
-
-        }
-
     }
 
     public class Deadbands {
@@ -108,4 +92,28 @@ public class Constants {
         public static final double triggerThreshhold = 0.5; //TODO find actual when pressed value
     }
 
+    public class Auto {
+
+        public class Align {
+            public static final double kP = 0;
+            public static final double kI = 0;
+            public static final double kD = 0;
+            public static final double TOLERANCE = 0;
+            public static final double MAX_OUTPUT = 0;
+            /*
+             *time the angle must be on target for to be considered steady
+             */
+            public static final double STEADY_TIME = 200;
+        }
+
+        public class Drive {
+            public static final double kP = 0;
+            public static final double kI = 0;
+            public static final double kD = 0;
+            public static final double TOLERANCE = 0;
+            public static final double MAX_OUTPUT = 0;
+            public static final double SPEED = 0.2;
+        }
+
+    }
 }
