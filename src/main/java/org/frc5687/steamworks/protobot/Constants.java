@@ -1,30 +1,26 @@
 package org.frc5687.steamworks.protobot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 /**
  * Created by Admin on 1/16/2017.
  */
 public class Constants {
-
     public class GearHandler {
-        public static final double openSpeed = 1;
-        public static final double closeSpeed = -.05;
-        public static final double clampSpeed = -.1;
-
+        public static final double openSpeed = -.5;
+        public static final double closeSpeed = .1;
+        public static final double clampSpeed = .1;
+        public static final long OPEN_TIME = 250;
     }
 
     public class Drive {
-        public static final boolean LEFT_MOTOR_FRONT_INVERTED = false;
-        public static final boolean LEFT_MOTOR_REAR_INVERTED = false;
-        public static final boolean LEFT_MOTOR_TOP_INVERTED = false;
+        public static final boolean LEFT_MOTORS_INVERTED = true;
 
-        public static final boolean RIGHT_MOTOR_FRONT_INVERTED = true;
-        public static final boolean RIGHT_MOTOR_REAR_INVERTED = true;
-        public static final boolean RIGHT_MOTOR_TOP_INVERTED = true;
+        public static final boolean RIGHT_MOTORS_INVERTED = false;
 
         public static final double FULL_FORWARDS_SPEED = -1;
         public static final double FULL_BACKWARDS_SPEED = 1;
     }
-
 
     public class Deadbands {
         /**
@@ -94,4 +90,8 @@ public class Constants {
         public static final double triggerThreshhold = 0.5; //TODO find actual when pressed value
     }
 
+    public class Misc {
+        public static final double minProtobotIndicator = 1000;
+        public static final double maxProtobotIndicator = 2000;
+    }
 }

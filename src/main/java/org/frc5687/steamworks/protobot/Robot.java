@@ -2,9 +2,11 @@ package org.frc5687.steamworks.protobot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.cscore.UsbCamera;
+import org.frc5687.steamworks.protobot.utils.PDP;
 
 /**
  * Created by Ben Bernard on 1/12/2017.
@@ -31,6 +33,8 @@ public class Robot extends IterativeRobot {
      */
     public static Pneumatics pneumatics;
 
+    public static Shifter shifter;
+
     /**
      * Represents the climbing mechanism
      */
@@ -41,6 +45,8 @@ public class Robot extends IterativeRobot {
     public static LEDStrip ledStrip;
 
     public static Robot robot;
+
+    public static PDP pdp;
 
     public Robot() {
     }
@@ -56,10 +62,12 @@ public class Robot extends IterativeRobot {
         driveTrain = new DriveTrain();
         gearHandler = new GearHandler();
         pneumatics = new Pneumatics();
+        shifter = new Shifter();
         climber = new Climber();
         lights = new Lights();
         ledStrip = new LEDStrip();
 
+        pdp = new PDP();
         oi = new OI(); // must be initialized after subsystems
 
         UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
@@ -121,6 +129,8 @@ public class Robot extends IterativeRobot {
         driveTrain.updateDashboard();
         gearHandler.updateDashboard();
         driveTrain.updateDashboard();
+        shifter.updateDashboard();
+        SmartDashboard.putNumber("Indicator", pdp.getIndicator());
     }
 
 }
