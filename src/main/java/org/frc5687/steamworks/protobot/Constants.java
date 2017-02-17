@@ -14,6 +14,8 @@ public class Constants {
         public static final double closeSpeed = .1;
         public static final double clampSpeed = .1;
         public static final long OPEN_TIME = 250;
+        public static final double TONY_MAX_POT_LIMIT = 0.5;
+        public static final double PROTOBOT_MAX_POT_LIMIT = 0.5;
     }
 
     public class Drive {
@@ -78,10 +80,6 @@ public class Constants {
             public static final double INCHES_PER_PULSE = Defaults.INCHES_PER_PULSE;
         }
 
-        public class Potentiometer{
-            public static final double potentiometerMaxLimit = 0.5;
-        }
-
     }
 
     public class Climber {
@@ -98,19 +96,19 @@ public class Constants {
         public static final double maxProtobotIndicator = 2000;
     }
 
-    public double pickConstant(double tonyValue, double protobotValue) {
+    public static double pickConstant(double tonyValue, double protobotValue) {
         return isTony ? tonyValue : protobotValue;
     }
 
-    public int pickConstant(int tonyValue, int protobotValue) {
+    public static int pickConstant(int tonyValue, int protobotValue) {
         return isTony ? tonyValue : protobotValue;
     }
 
-    public boolean pickConstant(boolean tonyValue, boolean protobotValue) {
+    public static boolean pickConstant(boolean tonyValue, boolean protobotValue) {
         return isTony ? tonyValue : protobotValue;
     }
 
-    public long pickConstant(long tonyValue, long protobotValue) {
+    public static long pickConstant(long tonyValue, long protobotValue) {
         return isTony ? tonyValue : protobotValue;
     }
 
