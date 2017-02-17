@@ -38,6 +38,8 @@ public class Robot extends IterativeRobot {
 
     public static Lights lights;
 
+    public static LEDStrip ledStrip;
+
     public static Robot robot;
 
     public Robot() {
@@ -55,6 +57,8 @@ public class Robot extends IterativeRobot {
         gearHandler = new GearHandler();
         pneumatics = new Pneumatics();
         climber = new Climber();
+        lights = new Lights();
+        ledStrip = new LEDStrip();
 
         oi = new OI(); // must be initialized after subsystems
 
