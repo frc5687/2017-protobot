@@ -83,7 +83,7 @@ public class RobotMap {
     }
 
     public static class Misc {
-        public static final int INDICATOR = 3;
+        public static final int INDICATOR = 0;
     }
 
     public static class Pincers {
