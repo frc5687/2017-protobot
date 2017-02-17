@@ -32,11 +32,11 @@ public class Pincers extends Subsystem {
         pincerMotor.set(speed);
     }
 
-    public void extendPiston(){
+    public void open(){
         piston.set(DoubleSolenoid.Value.kForward);
     }
 
-    public void retractPiston(){
+    public void close(){
         piston.set(DoubleSolenoid.Value.kReverse);
     }
 
