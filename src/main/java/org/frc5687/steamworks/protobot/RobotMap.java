@@ -83,12 +83,12 @@ public class RobotMap {
     }
 
     public static class Misc {
-        public static final int INDICATOR = 0;
+        public static final int INDICATOR = 3;
     }
 
     public static class Pincers {
         public static final int PINCER_MOTOR = 8;
-        public static final int POTENTIOMETER = 3;
+        public static final int POTENTIOMETER = 0;
         public static final int PISTON_RETRACTOR = 3;
         public static final int PISTON_EXTENDER = 3;
     }
