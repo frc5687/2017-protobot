@@ -68,6 +68,8 @@ public class Robot extends IterativeRobot {
         camera0.setResolution(640, 480);
         UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
         camera1.setResolution(640, 480);
+
+        Constants.isTony = pdp.isTony();
     }
 
     @Override

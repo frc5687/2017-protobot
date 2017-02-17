@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
  * Created by Admin on 1/16/2017.
  */
 public class Constants {
+
+    public static boolean isTony;
+
     public class GearHandler {
         public static final double openSpeed = -.5;
         public static final double closeSpeed = .1;
@@ -94,4 +97,9 @@ public class Constants {
         public static final double minProtobotIndicator = 1000;
         public static final double maxProtobotIndicator = 2000;
     }
+
+    public double pickConstant(double tonyValue, double protobotValue) {
+        return isTony ? tonyValue : protobotValue;
+    }
+
 }
