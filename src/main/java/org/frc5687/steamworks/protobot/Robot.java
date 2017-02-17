@@ -40,6 +40,10 @@ public class Robot extends IterativeRobot {
      */
     public static Climber climber;
 
+    public static Lights lights;
+
+    public static LEDStrip ledStrip;
+
     public static Robot robot;
 
     public static PDP pdp;
@@ -60,6 +64,8 @@ public class Robot extends IterativeRobot {
         pneumatics = new Pneumatics();
         shifter = new Shifter();
         climber = new Climber();
+        lights = new Lights();
+        ledStrip = new LEDStrip();
 
         pdp = new PDP();
         oi = new OI(); // must be initialized after subsystems
@@ -72,16 +78,19 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void disabledInit() {
+        ledStrip.setStripColor(LEDColors.DISABLED);
         super.disabledInit();
     }
 
     @Override
     public void autonomousInit() {
+        ledStrip.setStripColor(LEDColors.AUTONOMOUS);
         super.autonomousInit();
     }
 
     @Override
     public void teleopInit() {
+        ledStrip.setStripColor(LEDColors.TELEOP);
         super.teleopInit();
     }
 
