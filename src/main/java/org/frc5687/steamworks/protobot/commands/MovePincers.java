@@ -25,8 +25,8 @@ public class MovePincers extends Command implements PIDOutput {
 
     protected void initialize() {
         controller = new PIDController(Constants.Pincers.PID.kP, Constants.Pincers.PID.kI, Constants.Pincers.PID.kD, pincers.getPotentiometer(), this);
-        controller.setInputRange(Constants.Pincers.potentiometerLowered, Constants.Pincers.potentiometerLifted);
-        controller.setOutputRange(speed, -speed);
+        controller.setInputRange(Constants.Pincers.potentiometerLifted, Constants.Pincers.potentiometerLowered);
+        controller.setOutputRange(Constants.Pincers.lowerSpeed, Constants.Pincers.raiseSpeed);
         controller.setAbsoluteTolerance(Constants.Pincers.PID.TOLERANCE);
         controller.setSetpoint(setpoint);
         controller.enable();

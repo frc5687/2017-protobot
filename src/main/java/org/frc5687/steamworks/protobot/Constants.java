@@ -97,7 +97,7 @@ public class Constants {
         public static final double lowerSpeed = -0.5;
         public class PID {
             public static final double kP = 1.5;
-            public static final double kI = 0;
+            public static final double kI = 0.1;
             public static final double kD = 0;
             public static final double TOLERANCE = 0.002;
         }

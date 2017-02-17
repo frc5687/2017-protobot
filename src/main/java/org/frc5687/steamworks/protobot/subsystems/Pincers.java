@@ -14,6 +14,7 @@ import org.frc5687.steamworks.protobot.commands.RaisePincers;
  */
 
 public class Pincers extends Subsystem {
+
     private VictorSP pincerMotor;
     private DoubleSolenoid piston;
     private AnalogPotentiometer potentiometer;
