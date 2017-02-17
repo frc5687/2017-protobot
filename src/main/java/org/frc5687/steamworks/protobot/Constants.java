@@ -102,4 +102,16 @@ public class Constants {
         return isTony ? tonyValue : protobotValue;
     }
 
+    public int pickConstant(int tonyValue, int protobotValue) {
+        return isTony ? tonyValue : protobotValue;
+    }
+
+    public boolean pickConstant(boolean tonyValue, boolean protobotValue) {
+        return isTony ? tonyValue : protobotValue;
+    }
+
+    public long pickConstant(long tonyValue, long protobotValue) {
+        return isTony ? tonyValue : protobotValue;
+    }
+
 }
