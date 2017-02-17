@@ -72,4 +72,8 @@ public class RobotMap {
         public static final int CLIMBER_MOTOR = 7;
         public static final int PDP_CLIMBER_MOTOR = 0;
     }
+
+    public static class Misc {
+        public static final int INDICATOR = 0;
+    }
 }

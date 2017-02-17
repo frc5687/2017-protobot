@@ -63,10 +63,10 @@ public class GearHandler extends Subsystem {
     }
 
     public void updateDashboard() {
-        SmartDashboard.putBoolean("MaxHall", isAtMaxHall());
-        SmartDashboard.putBoolean("MinHall", isAtMinHall());
-        SmartDashboard.putBoolean("MaxPotentiometer", isAtMaxPot());
-        SmartDashboard.putNumber("PotentiometerValue", potentiometerValue());
-        SmartDashboard.putNumber("Gear Handler Amperage", pdp.getGearHandlerAmps());
+        SmartDashboard.putBoolean("Mandibles/MaxHall", isAtMaxHall());
+        SmartDashboard.putBoolean("Mandibles/MinHall", isAtMinHall());
+        SmartDashboard.putBoolean("Mandibles/MaxPotentiometer", isAtMaxPot());
+        SmartDashboard.putNumber("Mandibles/PotentiometerValue", potentiometerValue());
+        SmartDashboard.putNumber("Mandibles/MotorAmperage", pdp.getGearHandlerAmps());
     }
 }

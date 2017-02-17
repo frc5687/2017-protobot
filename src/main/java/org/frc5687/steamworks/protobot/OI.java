@@ -15,16 +15,10 @@ public class OI {
     private Joystick joystick;
 
     boolean isReversed = Constants.Encoders.Defaults.REVERSED;
-    public static final int OPEN_GEAR = 1;  // Green button
-    public static final int CLOSE_GEAR = 2; // Yellow
+    public static final int OPEN_GEAR = 8;
+    public static final int CLOSE_GEAR = 7;
 
     public static final int REVERSE = Gamepad.Buttons.BACK.getNumber();
-
-    /**
-     * Gear buttons
-     */
-    public static final int GEAR_IN = 5;  // Green button
-    public static final int GEAR_OUT = 6; // Yellow
 
 
     /**
@@ -39,8 +33,8 @@ public class OI {
     public static final int LOW_GEAR = 2;
     public static final int HIGH_GEAR = 1;
 
-    private JoystickButton gearInButton;
-    private JoystickButton gearOutButton;
+    private JoystickButton closeGearButton;
+    private JoystickButton openGearButton;
 
     private JoystickButton expandPistonButton;
     private JoystickButton retractPistonButton;
@@ -56,9 +50,6 @@ public class OI {
         joystick = new Joystick(1);
 
         // Joystick Buttons
-        gearInButton = new JoystickButton(joystick, GEAR_IN);
-        gearOutButton = new JoystickButton(joystick, GEAR_OUT);
-
         expandPistonButton = new JoystickButton(joystick, EXPAND_PISTON);
         retractPistonButton = new JoystickButton(joystick, RETRACT_PISTON);
 
@@ -75,11 +66,11 @@ public class OI {
         shiftHigh.whenPressed(new Shift(DoubleSolenoid.Value.kForward));
         shiftLow.whenPressed(new Shift(DoubleSolenoid.Value.kReverse));
 
-        gearInButton = new JoystickButton(joystick, CLOSE_GEAR);
-        gearOutButton = new JoystickButton(joystick,OPEN_GEAR);
+        closeGearButton = new JoystickButton(gamepad, CLOSE_GEAR);
+        openGearButton = new JoystickButton(gamepad, OPEN_GEAR);
 
-        gearInButton.whenPressed(new CloseGearHandler());
-        gearOutButton.whenPressed(new OpenGearHandler());
+        closeGearButton.whenPressed(new CloseGearHandler());
+        openGearButton.whenPressed(new OpenGearHandler());
     }
 
     private double transformStickToSpeed(Gamepad.Axes stick) {
@@ -105,11 +96,11 @@ public class OI {
     }
 
     public boolean isGearInPressed() {
-        return gearInButton.get();
+        return closeGearButton.get();
     }
 
     public boolean isGearOutPressed() {
-        return gearOutButton.get();
+        return openGearButton.get();
     }
 
     public boolean isAscendClimberPressed() {

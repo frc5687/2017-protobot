@@ -2,6 +2,7 @@ package org.frc5687.steamworks.protobot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.cscore.UsbCamera;
@@ -120,6 +121,7 @@ public class Robot extends IterativeRobot {
         gearHandler.updateDashboard();
         driveTrain.updateDashboard();
         shifter.updateDashboard();
+        SmartDashboard.putNumber("Indicator", pdp.getIndicator());
     }
 
 }
