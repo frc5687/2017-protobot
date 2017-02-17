@@ -90,6 +90,10 @@ public class Constants {
         public static final double triggerThreshhold = 0.5; //TODO find actual when pressed value
     }
 
+    public class Pincers {
+        public static final double potentiometerLifted = .006;
+        public static final double potentiometerLowered = .281;
+    }
     public class Misc {
         public static final double minProtobotIndicator = 1000;
         public static final double maxProtobotIndicator = 2000;
