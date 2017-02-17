@@ -70,16 +70,19 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void disabledInit() {
+        ledStrip.setStripColor(LEDColors.DISABLED);
         super.disabledInit();
     }
 
     @Override
     public void autonomousInit() {
+        ledStrip.setStripColor(LEDColors.AUTONOMOUS);
         super.autonomousInit();
     }
 
     @Override
     public void teleopInit() {
+        ledStrip.setStripColor(LEDColors.TELEOP);
         super.teleopInit();
     }
 
