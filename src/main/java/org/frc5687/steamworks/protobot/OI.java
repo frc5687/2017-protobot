@@ -15,8 +15,14 @@ public class OI {
     private Joystick joystick;
 
     boolean isReversed = Constants.Encoders.Defaults.REVERSED;
+
+
     public static final int OPEN_GEAR = 8;
     public static final int CLOSE_GEAR = 7;
+
+    public static final int RAISE_PINCERS = 4;
+    public static final int LOWER_PINCERS = 3;
+
 
     public static final int REVERSE = Gamepad.Buttons.BACK.getNumber();
 
@@ -45,6 +51,9 @@ public class OI {
     private JoystickButton shiftLow;
     private JoystickButton shiftHigh;
 
+    private JoystickButton raisePincers;
+    private JoystickButton lowerPincers;
+
     public OI() {
         gamepad = new Gamepad(0);
         joystick = new Joystick(1);
@@ -59,6 +68,9 @@ public class OI {
         shiftLow = new JoystickButton(gamepad, Gamepad.Buttons.LEFT_BUMPER.getNumber());
         shiftHigh = new JoystickButton(gamepad, Gamepad.Buttons.RIGHT_BUMPER.getNumber());
 
+        raisePincers = new JoystickButton(joystick, RAISE_PINCERS);
+        lowerPincers = new JoystickButton(joystick, LOWER_PINCERS);
+
         // Pneumatics Commands
         expandPistonButton.whenPressed(new ExpandPiston());
         retractPistonButton.whenPressed(new RetractPiston());
@@ -71,6 +83,9 @@ public class OI {
 
         closeGearButton.whenPressed(new CloseGearHandler());
         openGearButton.whenPressed(new OpenGearHandler());
+
+        raisePincers.whenPressed(new RaisePincers());
+        lowerPincers.whenPressed(new LowerPincers());
     }
 
     private double transformStickToSpeed(Gamepad.Axes stick) {

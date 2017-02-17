@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
+import org.frc5687.steamworks.protobot.commands.RaisePincers;
 
 /**
  * Created by Caleb on 2/14/2017.
@@ -23,7 +24,7 @@ public class Pincers extends Subsystem {
     }
     @Override
     protected void initDefaultCommand() {
-
+        setDefaultCommand(new RaisePincers());
     }
 
 

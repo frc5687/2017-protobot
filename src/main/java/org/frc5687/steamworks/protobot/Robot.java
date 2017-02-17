@@ -48,6 +48,8 @@ public class Robot extends IterativeRobot {
 
     public static PDP pdp;
 
+    public static Pincers pincers;
+
     public Robot() {
     }
 
@@ -66,8 +68,9 @@ public class Robot extends IterativeRobot {
         climber = new Climber();
         lights = new Lights();
         ledStrip = new LEDStrip();
+        pincers = new Pincers();
 
-        pdp = new PDP();
+        pdp = new PDP(); // must be initialized after other subsystems
         oi = new OI(); // must be initialized after subsystems
 
         UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
