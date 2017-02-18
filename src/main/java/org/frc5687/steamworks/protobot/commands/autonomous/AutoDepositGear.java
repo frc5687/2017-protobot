@@ -29,7 +29,7 @@ public class AutoDepositGear extends CommandGroup {
         }
         */
         addSequential(new OpenGearHandler());
-        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.RETREAT_DISTANCE, -Constants.Auto.Drive.SPEED));
+        addSequential(new AutoDrive(-Constants.Auto.AnglesAndDistances.RETREAT_DISTANCE, -Constants.Auto.Drive.SPEED));
     }
 
 }

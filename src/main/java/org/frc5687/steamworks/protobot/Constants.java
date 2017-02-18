@@ -82,7 +82,7 @@ public class Constants {
     }
 
     public class Climber {
-        public static final double ASCEND_SPEED = .8;
+        public static final double ASCEND_SPEED = 1;
         public static final double DESCEND_SPEED = -0.1;
     }
 
