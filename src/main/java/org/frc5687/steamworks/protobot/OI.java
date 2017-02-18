@@ -23,8 +23,8 @@ public class OI {
     public static final int RAISE_PINCERS = 4;
     public static final int LOWER_PINCERS = 3;
 
-    public static final int OPEN_PINCERS = 1;
-    public static final int CLOSE_PINCERS = 2;
+    public static final int OPEN_PINCERS = 5;
+    public static final int CLOSE_PINCERS = 6;
 
     public static final int REVERSE = Gamepad.Buttons.BACK.getNumber();
 

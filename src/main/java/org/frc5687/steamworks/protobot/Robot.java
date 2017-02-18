@@ -110,11 +110,13 @@ public class Robot extends IterativeRobot {
     @Override
     public void disabledPeriodic() {
         super.disabledPeriodic();
+        updateDashboard();
     }
 
     @Override
     public void autonomousPeriodic() {
         super.autonomousPeriodic();
+        updateDashboard();
     }
 
     @Override
@@ -133,6 +135,7 @@ public class Robot extends IterativeRobot {
         gearHandler.updateDashboard();
         driveTrain.updateDashboard();
         shifter.updateDashboard();
+        pincers.updateDashboard();
         SmartDashboard.putNumber("Indicator", pdp.getIndicator());
     }
 
