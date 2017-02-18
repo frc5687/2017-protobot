@@ -1,9 +1,17 @@
 package org.frc5687.steamworks.protobot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.*;
+import org.frc5687.steamworks.protobot.commands.autonomous.AutoAlign;
+import org.frc5687.steamworks.protobot.commands.autonomous.AutoCrossBaseline;
+import org.frc5687.steamworks.protobot.commands.autonomous.AutoDepositGear;
+import org.frc5687.steamworks.protobot.commands.autonomous.AutoDrive;
 import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
 
@@ -51,6 +59,8 @@ public class OI {
     private JoystickButton shiftLow;
     private JoystickButton shiftHigh;
 
+    public SendableChooser<Command> autonomousChooser;
+
     public OI() {
         gamepad = new Gamepad(0);
         joystick = new Joystick(1);
@@ -80,6 +90,14 @@ public class OI {
 
         gearInButton.whenPressed(new CloseGearHandler());
         gearOutButton.whenPressed(new OpenGearHandler());
+
+        // sendable chooser
+        autonomousChooser = new SendableChooser<>();
+        autonomousChooser.addDefault("Cross Baseline", new AutoCrossBaseline());
+        autonomousChooser.addObject("Deposit Gear", new AutoDepositGear());
+        autonomousChooser.addObject("Auto Drive", new AutoDrive(SmartDashboard.getNumber("DB/Slider 0", 0)));
+        autonomousChooser.addObject("Auto Align", new AutoAlign(SmartDashboard.getNumber("DB/Slider 0", 0)));
+        SmartDashboard.putData("Autonomous Routine", autonomousChooser);
     }
 
     private double transformStickToSpeed(Gamepad.Axes stick) {
@@ -118,6 +136,10 @@ public class OI {
 
     public boolean isDescendClimberPressed() {
         return descendClimber.get();
+    }
+
+    public Command getAutonomous() {
+        return autonomousChooser.getSelected();
     }
 
 }

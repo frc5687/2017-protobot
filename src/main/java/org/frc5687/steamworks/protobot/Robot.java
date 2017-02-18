@@ -3,6 +3,7 @@ package org.frc5687.steamworks.protobot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.subsystems.*;
@@ -48,6 +49,8 @@ public class Robot extends IterativeRobot {
     public static PDP pdp;
 
     public static AHRS imu;
+
+    Command autoCommand;
 
     public Robot() {
     }
@@ -95,12 +98,16 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        super.autonomousInit();
+        autoCommand = oi.getAutonomous();
+        if (autoCommand != null) {
+            autoCommand.start();
+        }
     }
 
     @Override
     public void teleopInit() {
         super.teleopInit();
+        if(autoCommand != null) autoCommand.cancel();
     }
 
     @Override

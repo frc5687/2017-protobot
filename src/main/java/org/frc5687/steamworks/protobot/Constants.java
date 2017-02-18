@@ -94,6 +94,8 @@ public class Constants {
 
     public class Auto {
 
+        public static final double CROSS_BASELINE_DISTANCE = 100;
+
         public class Align {
             public static final double kP = 0;
             public static final double kI = 0;
