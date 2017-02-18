@@ -100,6 +100,7 @@ public class Constants {
             public static final double DEPOSIT_GEAR_INITIAL_DISTANCE = 100;
             public static final double DEPOSIT_GEAR_TURN = 45;
             public static final double DEPOSIT_GEAR_FINAL_DISTANCE = 100;
+            public static final double DEPOSIT_GEAR_CENTER_DISTANCE = 88;
         }
 
         public class Align {

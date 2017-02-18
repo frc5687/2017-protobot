@@ -10,25 +10,23 @@ import org.frc5687.steamworks.protobot.commands.OpenGearHandler;
 public class AutoDepositGear extends CommandGroup {
 
     public static enum Position {
-        LEFT(1),
-        CENTER(0),
-        RIGHT(-1);
-
-        int turn;
-
-        Position(int turn) {
-            this.turn = turn;
-        }
-
-        public int getTurn() {
-            return turn;
-        }
+        LEFT,
+        CENTER,
+        RIGHT;
     }
 
-    public AutoDepositGear() {
-        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_INITIAL_DISTANCE));
-        addSequential(new AutoAlign(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_TURN));
-        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FINAL_DISTANCE));
+    public AutoDepositGear(Position position) {
+        if (position == Position.CENTER) {
+            addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_CENTER_DISTANCE));
+        } else {
+            addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_INITIAL_DISTANCE));
+            if (position == Position.LEFT) {
+                addSequential(new AutoAlign(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_TURN));
+            } else if (position == Position.RIGHT) {
+                addSequential(new AutoAlign(-Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_TURN));
+            }
+            addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FINAL_DISTANCE));
+        }
         addSequential(new OpenGearHandler());
     }
 

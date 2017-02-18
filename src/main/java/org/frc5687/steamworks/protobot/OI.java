@@ -94,7 +94,9 @@ public class OI {
         // sendable chooser
         autonomousChooser = new SendableChooser<>();
         autonomousChooser.addDefault("Cross Baseline", new AutoCrossBaseline());
-        autonomousChooser.addObject("Deposit Gear", new AutoDepositGear());
+        autonomousChooser.addObject("Deposit Gear From Center", new AutoDepositGear(AutoDepositGear.Position.CENTER));
+        autonomousChooser.addObject("Deposit Gear From Left", new AutoDepositGear(AutoDepositGear.Position.LEFT));
+        autonomousChooser.addObject("Deposit Gear From Right", new AutoDepositGear(AutoDepositGear.Position.RIGHT));
         autonomousChooser.addObject("Auto Drive", new AutoDrive(SmartDashboard.getNumber("DB/Slider 0", 0)));
         autonomousChooser.addObject("Auto Align", new AutoAlign(SmartDashboard.getNumber("DB/Slider 0", 0)));
         SmartDashboard.putData("Autonomous Routine", autonomousChooser);
