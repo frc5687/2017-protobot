@@ -4,16 +4,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.utils.LEDController;
+import org.frc5687.steamworks.protobot.utils.LEDSwitch;
 
 /**
  * Subsystem to control lights for vision tracking and shooter aid
  * @author wil
  */
 public class Lights extends Subsystem {
-    private LEDController ringLight;
+    private LEDSwitch ringLight;
 
     public Lights() {
-        ringLight = new LEDController(RobotMap.Lights.RINGLIGHT);
+        ringLight = new LEDSwitch(RobotMap.Lights.RINGLIGHT);
     }
 
     @Override
@@ -31,11 +32,6 @@ public class Lights extends Subsystem {
 
     public void turnRingLightOff() { ringLight.set(false); }
 
-
-
-    public void setRingLightColor(int value){
-        ringLight.set(value);
-    }
 
     public void updateDashboard() {
         SmartDashboard.putBoolean("lights/ringlight", ringLight.get());
