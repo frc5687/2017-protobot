@@ -117,15 +117,15 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        super.autonomousInit();
         ledStrip.setStripColor(LEDColors.AUTONOMOUS);
         autoCommand = (Command)autoChooser.getSelected(); // new AutoDepositGear(AutoDepositGear.Position.CENTER);
-        autoCommand.start();
+        if (autoCommand!=null) {
+            autoCommand.start();
+        }
     }
 
     @Override
     public void teleopInit() {
-        super.teleopInit();
         if (autoCommand != null) autoCommand.cancel();
         ledStrip.setStripColor(LEDColors.TELEOP);
     }
@@ -148,7 +148,7 @@ public class Robot extends IterativeRobot {
 
         @Override
     public void autonomousPeriodic() {
-        super.autonomousPeriodic();
+        Scheduler.getInstance().run();
         updateDashboard();
     }
 
