@@ -14,20 +14,21 @@ public class AutoAlign extends Command implements PIDOutput {
 
     private PIDController controller;
     private double endTime;
+    private double angle;
 
     public AutoAlign(double angle) {
         requires(driveTrain);
+        this.angle = angle;
+    }
 
+    @Override
+    protected void initialize() {
         controller = new PIDController(Align.kP, Align.kI, Align.kD, imu, this);
         controller.setInputRange(-180, 180);
         controller.setOutputRange(-Align.MAX_OUTPUT, Align.MAX_OUTPUT);
         controller.setAbsoluteTolerance(Align.TOLERANCE);
         controller.setContinuous();
         controller.setSetpoint(angle);
-    }
-
-    @Override
-    protected void initialize() {
         controller.enable();
     }
 
