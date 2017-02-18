@@ -8,7 +8,7 @@ import org.frc5687.steamworks.protobot.Constants;
 public class AutoCrossBaseline extends AutoDrive {
 
     public AutoCrossBaseline() {
-        super(Constants.Auto.AnglesAndDistances.CROSS_BASELINE_DISTANCE);
+        super(Constants.Auto.AnglesAndDistances.CROSS_BASELINE_DISTANCE, Constants.Auto.Drive.SPEED);
     }
 
 }

@@ -18,8 +18,10 @@ public class AutoDrive extends Command implements PIDOutput {
     double finalDistance;
     private PIDController controller;
     private double distance;
+    private double speed;
 
-    public AutoDrive(double distance) {
+    public AutoDrive(double distance, double speed) {
+        this.speed = speed;
         this.distance = distance;
     }
 
@@ -50,10 +52,10 @@ public class AutoDrive extends Command implements PIDOutput {
     @Override
     public void pidWrite(double output) {
         synchronized (this) {
-            DriverStation.reportError("Auto Drive; Speed = " + Drive.SPEED + ", PID Output = " + output, false);
+            DriverStation.reportError("Auto Drive; Speed = " + speed + ", PID Output = " + output, false);
 //            driveTrain.tankDrive(Drive.SPEED - output, Drive.SPEED + output); // positive output is counterclockwise
 //            driveTrain.setLeftSpeed(Drive.SPEED);
-            driveTrain.tankDrive(Drive.SPEED);
+            driveTrain.tankDrive(speed);
         }
     }
 

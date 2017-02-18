@@ -9,7 +9,7 @@ import org.frc5687.steamworks.protobot.Constants;
 public class AutoCrossField extends AutoDrive {
 
     public AutoCrossField() {
-        super(Constants.Auto.AnglesAndDistances.CROSS_FIELD_DISTANCE);
+        super(Constants.Auto.AnglesAndDistances.CROSS_FIELD_DISTANCE, Constants.Auto.Drive.SPEED);
     }
 
 }
