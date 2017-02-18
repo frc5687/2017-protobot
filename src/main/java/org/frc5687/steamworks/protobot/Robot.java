@@ -5,7 +5,10 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.frc5687.steamworks.protobot.commands.DisableRingLight;
+import org.frc5687.steamworks.protobot.commands.autonomous.AutoCrossBaseline;
 import org.frc5687.steamworks.protobot.commands.autonomous.AutoDepositGear;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -17,7 +20,6 @@ import com.kauailabs.navx.frc.AHRS;
  * Created by Ben Bernard on 1/12/2017.
  */
 public class Robot extends IterativeRobot {
-
     /**
      * Represents the operator interface / controls
      */
@@ -58,6 +60,7 @@ public class Robot extends IterativeRobot {
     public static AHRS imu;
 
     private Command autoCommand;
+    private SendableChooser autoChooser;
 
     public Robot() {
     }
@@ -98,27 +101,33 @@ public class Robot extends IterativeRobot {
         camera0.setResolution(640, 480);
         UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
         camera1.setResolution(640, 480);
+
+        autoChooser = new SendableChooser();
+        autoChooser.addDefault("Do Nothing", new DisableRingLight());
+        autoChooser.addObject("Auto Cross Baseline", new AutoCrossBaseline());
+        autoChooser.addObject("Auto Place Gear Center", new AutoDepositGear(AutoDepositGear.Position.CENTER));
+        SmartDashboard.putData("Autonomous mode chooser", autoChooser);
     }
 
     @Override
     public void disabledInit() {
-        ledStrip.setStripColor(LEDColors.DISABLED);
         super.disabledInit();
+        ledStrip.setStripColor(LEDColors.DISABLED);
     }
 
     @Override
     public void autonomousInit() {
-        autoCommand = new AutoDepositGear(AutoDepositGear.Position.CENTER);
-        autoCommand.start();
-        ledStrip.setStripColor(LEDColors.AUTONOMOUS);
         super.autonomousInit();
+        ledStrip.setStripColor(LEDColors.AUTONOMOUS);
+        autoCommand = (Command)autoChooser.getSelected(); // new AutoDepositGear(AutoDepositGear.Position.CENTER);
+        autoCommand.start();
     }
 
     @Override
     public void teleopInit() {
+        super.teleopInit();
         if (autoCommand != null) autoCommand.cancel();
         ledStrip.setStripColor(LEDColors.TELEOP);
-        super.teleopInit();
     }
 
     @Override
