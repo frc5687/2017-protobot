@@ -40,7 +40,7 @@ public class AutoDrive extends Command implements PIDOutput {
     @Override
     protected void end() {
         controller.disable();
-        driveTrain.stop();
+        driveTrain.tankDrive(0,0);
     }
 
     @Override
