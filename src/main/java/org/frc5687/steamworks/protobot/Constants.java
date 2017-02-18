@@ -133,11 +133,11 @@ public class Constants {
         }
 
         public class Drive {
-            public static final double kP = 0;
+            public static final double kP = -0.1;
             public static final double kI = 0;
-            public static final double kD = 0;
+            public static final double kD = -0.05;
             public static final double TOLERANCE = 0;
-            public static final double MAX_OUTPUT = 0;
+            public static final double MAX_OUTPUT = 0.1;
             public static final double SPEED = -0.6;
         }
 

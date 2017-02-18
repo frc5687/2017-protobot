@@ -52,10 +52,10 @@ public class AutoDrive extends Command implements PIDOutput {
     @Override
     public void pidWrite(double output) {
         synchronized (this) {
-            DriverStation.reportError("Auto Drive; Speed = " + speed + ", PID Output = " + output, false);
-//            driveTrain.tankDrive(Drive.SPEED - output, Drive.SPEED + output); // positive output is counterclockwise
+//            DriverStation.reportError("Auto Drive; Speed = " + speed + ", PID Output = " + output, false);
+            driveTrain.tankDrive(Drive.SPEED + output, Drive.SPEED - output); // positive output is clockwise
 //            driveTrain.setLeftSpeed(Drive.SPEED);
-            driveTrain.tankDrive(speed);
+//            driveTrain.tankDrive(speed);
         }
     }
 
