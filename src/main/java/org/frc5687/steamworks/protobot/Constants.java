@@ -106,5 +106,41 @@ public class Constants {
         public static final double maxProtobotIndicator = 2000;
     }
 
+    public class Auto {
+
+        public static final double MIN_IMU_ANGLE = 0;
+        public static final double MAX_IMU_ANGLE = 360;
+
+        public class AnglesAndDistances {
+            public static final double CROSS_BASELINE_DISTANCE = 100;
+            public static final double CROSS_FIELD_DISTANCE = 0;
+            public static final double DEPOSIT_GEAR_INITIAL_DISTANCE = 0;
+            public static final double DEPOSIT_GEAR_TURN = 0;
+            public static final double DEPOSIT_GEAR_FINAL_DISTANCE = 0;
+            public static final double DEPOSIT_GEAR_CENTER_DISTANCE = 88;
+        }
+
+        public class Align {
+            public static final double kP = 0;
+            public static final double kI = 0;
+            public static final double kD = 0;
+            public static final double TOLERANCE = 0;
+            public static final double MAX_OUTPUT = 0;
+            /*
+             *time the angle must be on target for to be considered steady
+             */
+            public static final double STEADY_TIME = 200;
+        }
+
+        public class Drive {
+            public static final double kP = 0;
+            public static final double kI = 0;
+            public static final double kD = 0;
+            public static final double TOLERANCE = 0;
+            public static final double MAX_OUTPUT = 0;
+            public static final double SPEED = -0.6;
+        }
+
+    }
 
 }

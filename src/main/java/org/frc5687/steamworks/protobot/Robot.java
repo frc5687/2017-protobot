@@ -1,18 +1,25 @@
 package org.frc5687.steamworks.protobot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.frc5687.steamworks.protobot.commands.DisableRingLight;
+import org.frc5687.steamworks.protobot.commands.autonomous.AutoCrossBaseline;
+import org.frc5687.steamworks.protobot.commands.autonomous.AutoDepositGear;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.cscore.UsbCamera;
 import org.frc5687.steamworks.protobot.utils.PDP;
+import com.kauailabs.navx.frc.AHRS;
 
 /**
  * Created by Ben Bernard on 1/12/2017.
  */
 public class Robot extends IterativeRobot {
-
     /**
      * Represents the operator interface / controls
      */
@@ -50,6 +57,11 @@ public class Robot extends IterativeRobot {
 
     public static Pincers pincers;
 
+    public static AHRS imu;
+
+    private Command autoCommand;
+    private SendableChooser autoChooser;
+
     public Robot() {
     }
 
@@ -73,28 +85,49 @@ public class Robot extends IterativeRobot {
         pdp = new PDP(); // must be initialized after other subsystems
         oi = new OI(); // must be initialized after subsystems
 
+        try {
+            // Try to connect to the navX imu.
+            imu = new AHRS(SPI.Port.kMXP);
+            // Report firmware version to SmartDashboard
+            SmartDashboard.putString("FirmwareVersion", imu.getFirmwareVersion());
+        } catch (Exception ex) {
+            // If there are any errors, null out the imu reference and report the error both to the logs and the dashboard.
+            SmartDashboard.putString("FirmwareVersion", "navX not connected");
+            DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+            imu = null;
+        }
+
         UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
         camera0.setResolution(640, 480);
         UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
         camera1.setResolution(640, 480);
+
+        autoChooser = new SendableChooser();
+        autoChooser.addObject("Do Nothing", new DisableRingLight());
+        autoChooser.addDefault("Auto Cross Baseline", new AutoCrossBaseline());
+        autoChooser.addObject("Auto Place Gear Center", new AutoDepositGear(AutoDepositGear.Position.CENTER));
+        SmartDashboard.putData("Autonomous mode chooser", autoChooser);
     }
 
     @Override
     public void disabledInit() {
-        ledStrip.setStripColor(LEDColors.DISABLED);
         super.disabledInit();
+        ledStrip.setStripColor(LEDColors.DISABLED);
     }
 
     @Override
     public void autonomousInit() {
         ledStrip.setStripColor(LEDColors.AUTONOMOUS);
-        super.autonomousInit();
+        autoCommand = (Command)autoChooser.getSelected(); // new AutoDepositGear(AutoDepositGear.Position.CENTER);
+        if (autoCommand!=null) {
+            autoCommand.start();
+        }
     }
 
     @Override
     public void teleopInit() {
+        if (autoCommand != null) autoCommand.cancel();
         ledStrip.setStripColor(LEDColors.TELEOP);
-        super.teleopInit();
     }
 
     @Override
@@ -115,7 +148,7 @@ public class Robot extends IterativeRobot {
 
         @Override
     public void autonomousPeriodic() {
-        super.autonomousPeriodic();
+        Scheduler.getInstance().run();
         updateDashboard();
     }
 
@@ -139,6 +172,7 @@ public class Robot extends IterativeRobot {
         ledStrip.updateDashboard();
         lights.updateDashboard();
         SmartDashboard.putNumber("Indicator", pdp.getIndicator());
+        SmartDashboard.putNumber("Yaw", imu.getAngle());
     }
 
 }
