@@ -104,8 +104,8 @@ public class Robot extends IterativeRobot {
 
         autoChooser = new SendableChooser();
         autoChooser.addObject("Do Nothing", new DisableRingLight());
-        autoChooser.addDefault("Auto Cross Baseline", new AutoCrossBaseline());
-        autoChooser.addObject("Auto Place Gear Center", new AutoDepositGear(AutoDepositGear.Position.CENTER));
+        autoChooser.addObject("Auto Cross Baseline", new AutoCrossBaseline());
+        autoChooser.addDefault("Auto Place Gear Center", new AutoDepositGear(AutoDepositGear.Position.CENTER));
         SmartDashboard.putData("Autonomous mode chooser", autoChooser);
     }
 

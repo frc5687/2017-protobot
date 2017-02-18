@@ -1,5 +1,6 @@
 package org.frc5687.steamworks.protobot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.subsystems.GearHandler;
@@ -20,6 +21,7 @@ public class OpenGearHandler extends Command {
     }
 
     protected void initialize(){
+        DriverStation.reportError("Ejecting gear", false);
         endTime = new Date().getTime() + Constants.GearHandler.OPEN_TIME;
     }
 
