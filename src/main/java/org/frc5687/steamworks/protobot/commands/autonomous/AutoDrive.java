@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
+import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.Constants.Auto.Drive;
 
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
@@ -26,7 +27,7 @@ public class AutoDrive extends Command implements PIDOutput {
     protected void initialize() {
         this.finalDistance = distance + driveTrain.getRightDistance();
         controller = new PIDController(Drive.kP, Drive.kI, Drive.kD, imu, this);
-        controller.setInputRange(-180, 180);
+        controller.setInputRange(Constants.Auto.MAX_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
         controller.setOutputRange(-Drive.MAX_OUTPUT, Drive.MAX_OUTPUT);
         controller.setAbsoluteTolerance(Drive.TOLERANCE);
         controller.setContinuous();
@@ -49,7 +50,10 @@ public class AutoDrive extends Command implements PIDOutput {
     @Override
     public void pidWrite(double output) {
         synchronized (this) {
-            driveTrain.tankDrive(Drive.SPEED - output, Drive.SPEED + output); // positive output is counterclockwise
+            DriverStation.reportError("Auto Drive; Speed = " + Drive.SPEED + ", PID Output = " + output, false);
+//            driveTrain.tankDrive(Drive.SPEED - output, Drive.SPEED + output); // positive output is counterclockwise
+//            driveTrain.setLeftSpeed(Drive.SPEED);
+            driveTrain.tankDrive(Drive.SPEED);
         }
     }
 

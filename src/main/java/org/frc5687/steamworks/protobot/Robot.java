@@ -172,6 +172,7 @@ public class Robot extends IterativeRobot {
         ledStrip.updateDashboard();
         lights.updateDashboard();
         SmartDashboard.putNumber("Indicator", pdp.getIndicator());
+        SmartDashboard.putNumber("Yaw", imu.getAngle());
     }
 
 }
