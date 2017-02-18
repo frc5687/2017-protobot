@@ -17,14 +17,20 @@ public class OI {
     boolean isReversed = Constants.Encoders.Defaults.REVERSED;
 
 
-    public static final int OPEN_GEAR = 8;
-    public static final int CLOSE_GEAR = 7;
+    public static final int GP_OPEN_GEAR = 8;
+    public static final int GP_CLOSE_GEAR = 7;
+
+    public static final int JS_OPEN_GEAR = 8;
+    public static final int JS_CLOSE_GEAR = 7;
 
     public static final int RAISE_PINCERS = 4;
     public static final int LOWER_PINCERS = 3;
 
     public static final int OPEN_PINCERS = 5;
     public static final int CLOSE_PINCERS = 6;
+
+    public static final int RINGLIGHT_ON = 11;
+    public static final int RINGLIGHT_OFF = 12;
 
     public static final int REVERSE = Gamepad.Buttons.BACK.getNumber();
 
@@ -41,8 +47,11 @@ public class OI {
     public static final int LOW_GEAR = 2;
     public static final int HIGH_GEAR = 1;
 
-    private JoystickButton closeGearButton;
-    private JoystickButton openGearButton;
+    private JoystickButton gpCloseGearButton;
+    private JoystickButton gpOpenGearButton;
+
+    private JoystickButton jsCloseGearButton;
+    private JoystickButton jsOpenGearButton;
 
     private JoystickButton expandPistonButton;
     private JoystickButton retractPistonButton;
@@ -58,6 +67,10 @@ public class OI {
 
     private JoystickButton openPincers;
     private JoystickButton closePincers;
+
+    private JoystickButton ringLightOn;
+    private JoystickButton ringLightOff;
+
 
     public OI() {
         gamepad = new Gamepad(0);
@@ -86,17 +99,29 @@ public class OI {
         shiftHigh.whenPressed(new Shift(DoubleSolenoid.Value.kForward));
         shiftLow.whenPressed(new Shift(DoubleSolenoid.Value.kReverse));
 
-        closeGearButton = new JoystickButton(gamepad, CLOSE_GEAR);
-        openGearButton = new JoystickButton(gamepad, OPEN_GEAR);
+        gpCloseGearButton = new JoystickButton(gamepad, GP_CLOSE_GEAR);
+        gpOpenGearButton = new JoystickButton(gamepad, GP_OPEN_GEAR);
 
-        closeGearButton.whenPressed(new CloseGearHandler());
-        openGearButton.whenPressed(new OpenGearHandler());
+        gpCloseGearButton.whenPressed(new CloseGearHandler());
+        gpOpenGearButton.whenPressed(new OpenGearHandler());
+
+        jsCloseGearButton = new JoystickButton(joystick, JS_CLOSE_GEAR);
+        jsOpenGearButton = new JoystickButton(joystick, JS_OPEN_GEAR);
+
+        jsCloseGearButton.whenPressed(new CloseGearHandler());
+        jsOpenGearButton.whenPressed(new OpenGearHandler());
 
         raisePincers.whenPressed(new RaisePincers());
         lowerPincers.whenPressed(new LowerPincers());
 
         openPincers.whenPressed(new OpenPincers());
         closePincers.whenPressed(new ClosePincers());
+
+        ringLightOn = new JoystickButton(joystick, RINGLIGHT_ON);
+        ringLightOff = new JoystickButton(joystick, RINGLIGHT_OFF);
+
+        ringLightOn.whenPressed(new EnableRingLight());
+        ringLightOff.whenPressed(new DisableRingLight());
 
     }
 
@@ -123,11 +148,11 @@ public class OI {
     }
 
     public boolean isGearInPressed() {
-        return closeGearButton.get();
+        return gpCloseGearButton.get();
     }
 
     public boolean isGearOutPressed() {
-        return openGearButton.get();
+        return gpOpenGearButton.get();
     }
 
     public boolean isAscendClimberPressed() {
