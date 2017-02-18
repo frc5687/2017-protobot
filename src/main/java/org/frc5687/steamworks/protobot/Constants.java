@@ -94,7 +94,13 @@ public class Constants {
 
     public class Auto {
 
-        public static final double CROSS_BASELINE_DISTANCE = 100;
+        public class AnglesAndDistances {
+            public static final double CROSS_BASELINE_DISTANCE = 100;
+            public static final double CROSS_FIELD_DISTANCE = 1000;
+            public static final double DEPOSIT_GEAR_INITIAL_DISTANCE = 100;
+            public static final double DEPOSIT_GEAR_TURN = 45;
+            public static final double DEPOSIT_GEAR_FINAL_DISTANCE = 100;
+        }
 
         public class Align {
             public static final double kP = 0;
