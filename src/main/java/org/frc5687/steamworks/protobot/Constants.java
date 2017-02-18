@@ -114,6 +114,7 @@ public class Constants {
         public class AnglesAndDistances {
             public static final double CROSS_BASELINE_DISTANCE = 100;
             public static final double CROSS_FIELD_DISTANCE = 0;
+            public static final double RETREAT_DISTANCE = 18;
             public static final double DEPOSIT_GEAR_INITIAL_DISTANCE = 0;
             public static final double DEPOSIT_GEAR_TURN = 0;
             public static final double DEPOSIT_GEAR_FINAL_DISTANCE = 0;

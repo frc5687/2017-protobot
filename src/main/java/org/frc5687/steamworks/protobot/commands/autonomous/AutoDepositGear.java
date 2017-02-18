@@ -16,9 +16,9 @@ public class AutoDepositGear extends CommandGroup {
     }
 
     public AutoDepositGear(Position position) {
-        if (position == Position.CENTER) {
+//        if (position == Position.CENTER) {
             addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_CENTER_DISTANCE, Constants.Auto.Drive.SPEED));
-        } else {
+/*        } else {
             addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_INITIAL_DISTANCE, Constants.Auto.Drive.SPEED));
             if (position == Position.LEFT) {
                 addSequential(new AutoAlign(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_TURN));
@@ -27,7 +27,9 @@ public class AutoDepositGear extends CommandGroup {
             }
             addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FINAL_DISTANCE, Constants.Auto.Drive.SPEED));
         }
+        */
         addSequential(new OpenGearHandler());
+        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.RETREAT_DISTANCE, -Constants.Auto.Drive.SPEED));
     }
 
 }

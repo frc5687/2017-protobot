@@ -40,7 +40,10 @@ public class AutoDrive extends Command implements PIDOutput {
 
     @Override
     protected boolean isFinished() {
-        return driveTrain.getRightDistance() > finalDistance;
+
+        return distance >=0
+                ? driveTrain.getRightDistance() > finalDistance
+                : driveTrain.getRightDistance() < finalDistance;
     }
 
     @Override
