@@ -94,6 +94,7 @@ public class RobotMap {
     }
 
     public static class AutoChooser {
-        public static int ROTOR;
+        public final static int ROTOR = 4; //4 on rio is 1 on NAVX
     }
+
 }
