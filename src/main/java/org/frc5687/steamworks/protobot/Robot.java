@@ -8,12 +8,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.DisableRingLight;
-import org.frc5687.steamworks.protobot.commands.autonomous.AutoAlign;
+import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
 import org.frc5687.steamworks.protobot.commands.autonomous.AutoCrossBaseline;
 import org.frc5687.steamworks.protobot.commands.autonomous.AutoDepositGear;
 import org.frc5687.steamworks.protobot.subsystems.*;
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.cscore.UsbCamera;
 import org.frc5687.steamworks.protobot.utils.PDP;
 import com.kauailabs.navx.frc.AHRS;
 

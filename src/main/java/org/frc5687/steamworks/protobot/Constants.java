@@ -87,6 +87,8 @@ public class Constants {
     public class Climber {
         public static final double ASCEND_SPEED = 1;
         public static final double DESCEND_SPEED = -0.1;
+        public static final double FUNNEL_RELEASE_SPEED = 1;
+        public static final long FUNNEL_RELEASE_TIME = 167;
     }
 
     public class OI{

@@ -1,4 +1,4 @@
-package org.frc5687.steamworks.protobot.commands.autonomous;
+package org.frc5687.steamworks.protobot.commands.actions;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
