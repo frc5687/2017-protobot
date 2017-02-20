@@ -1,15 +1,15 @@
 package org.frc5687.steamworks.protobot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.commands.OpenGearHandler;
 import org.frc5687.steamworks.protobot.commands.Shift;
+import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
 
 /**
  * Created by Baxter on 2/17/2017.
  */
-public class AutoDepositGear extends CommandGroup {
+public class AutoDepositGear extends SteamworksBaseCommandGroup {
 
     public static enum Position {
         LEFT,
@@ -18,6 +18,7 @@ public class AutoDepositGear extends CommandGroup {
     }
 
     public AutoDepositGear(Position position) {
+        super();
 //        if (position == Position.CENTER) {
         addSequential(new Shift(DoubleSolenoid.Value.kReverse));
         addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_CENTER_DISTANCE, Constants.Auto.Drive.SPEED));
