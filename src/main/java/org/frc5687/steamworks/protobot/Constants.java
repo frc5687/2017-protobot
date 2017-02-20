@@ -6,12 +6,14 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
  * Created by Admin on 1/16/2017.
  */
 public class Constants {
-
     public class GearHandler {
-        public static final double openSpeed = 1;
-        public static final double closeSpeed = -.05;
-        public static final double clampSpeed = -.1;
-
+        public static final double openSpeed = -.5;
+        public static final double closeSpeed = .1;
+        public static final double clampSpeed = .1;
+        public static final long OPEN_TIME = 250;
+        public static final double wiggleSpeed = 0.1; //TODO callibrate better speed and time
+        public static final double wiggleTime = 60;
+        public static final double wiggleTotalTime = 250;
     }
 
     public class Drive {
@@ -83,8 +85,10 @@ public class Constants {
     }
 
     public class Climber {
-        public static final double ASCEND_SPEED = .8;
+        public static final double ASCEND_SPEED = 1;
         public static final double DESCEND_SPEED = -0.1;
+        public static final double FUNNEL_RELEASE_SPEED = 1;
+        public static final long FUNNEL_RELEASE_TIME = 167;
     }
 
     public class OI{
@@ -94,6 +98,60 @@ public class Constants {
     public class Shifter {
         public static final long STOP_MOTOR_TIME = 200; //TODO find correct values
         public static final long SHIFT_TIME = 500; //TODO find correct values
+    }
+
+    public class Pincers {
+        public static final double potentiometerLifted = .006;
+        public static final double potentiometerLowered = .270;
+        public static final double maxSpeed = 0.25;
+        public class PID {
+            public static final double kP = 1.5;
+            public static final double kI = 0.1;
+            public static final double kD = 0;
+            public static final double TOLERANCE = 0.002;
+        }
+    }
+    public class Misc {
+        public static final double minProtobotIndicator = 1000;
+        public static final double maxProtobotIndicator = 2000;
+    }
+
+    public class Auto {
+
+        public static final double MIN_IMU_ANGLE = 0;
+        public static final double MAX_IMU_ANGLE = 360;
+
+        public class AnglesAndDistances {
+            public static final double CROSS_BASELINE_DISTANCE = 100;
+            public static final double CROSS_FIELD_DISTANCE = 0;
+            public static final double RETREAT_DISTANCE = 18;
+            public static final double DEPOSIT_GEAR_INITIAL_DISTANCE = 0;
+            public static final double DEPOSIT_GEAR_TURN = 0;
+            public static final double DEPOSIT_GEAR_FINAL_DISTANCE = 0;
+            public static final double DEPOSIT_GEAR_CENTER_DISTANCE = 98;
+        }
+
+        public class Align {
+            public static final double kP = 0;
+            public static final double kI = 0;
+            public static final double kD = 0;
+            public static final double TOLERANCE = 0;
+            public static final double MAX_OUTPUT = 0;
+            /*
+             *time the angle must be on target for to be considered steady
+             */
+            public static final double STEADY_TIME = 200;
+        }
+
+        public class Drive {
+            public static final double kP = -0.1;
+            public static final double kI = 0;
+            public static final double kD = -0.05;
+            public static final double TOLERANCE = 0;
+            public static final double MAX_OUTPUT = 0.1;
+            public static final double SPEED = -0.7;
+        }
+
     }
 
 }

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.RunGearHandlerManually;
+import static org.frc5687.steamworks.protobot.Robot.pdp;
 
 /**
  * Created by Ben Bernard on 1/16/2017.
@@ -27,6 +28,10 @@ public class GearHandler extends Subsystem {
         limitPotentiometer = new AnalogPotentiometer(RobotMap.GearHandler.GEAR_POTENTIOMETER); 
         SmartDashboard.putBoolean("MaxHall", false);
         SmartDashboard.putBoolean("MinHall", false);
+    }
+
+    public void setSpeed(double speed) {
+        gearMotor.set(speed);
     }
 
     public void open() {
@@ -62,9 +67,10 @@ public class GearHandler extends Subsystem {
     }
 
     public void updateDashboard() {
-        SmartDashboard.putBoolean("MaxHall", isAtMaxHall());
-        SmartDashboard.putBoolean("MinHall", isAtMinHall());
-        SmartDashboard.putBoolean("MaxPotentiometer", isAtMaxPot());
-        SmartDashboard.putNumber("PotentiometerValue", potentiometerValue());
+        SmartDashboard.putBoolean("Mandibles/MaxHall", isAtMaxHall());
+        SmartDashboard.putBoolean("Mandibles/MinHall", isAtMinHall());
+        SmartDashboard.putBoolean("Mandibles/MaxPotentiometer", isAtMaxPot());
+        SmartDashboard.putNumber("Mandibles/PotentiometerValue", potentiometerValue());
+        SmartDashboard.putNumber("Mandibles/MotorAmperage", pdp.getGearHandlerAmps());
     }
 }

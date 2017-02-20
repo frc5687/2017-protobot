@@ -15,16 +15,24 @@ public class OI {
     private Joystick joystick;
 
     boolean isReversed = Constants.Encoders.Defaults.REVERSED;
-    public static final int OPEN_GEAR = 1;  // Green button
-    public static final int CLOSE_GEAR = 2; // Yellow
+
+
+    public static final int GP_OPEN_GEAR = 8;
+    public static final int GP_CLOSE_GEAR = 7;
+
+    public static final int JS_OPEN_GEAR = 8;
+    public static final int JS_CLOSE_GEAR = 7;
+
+    public static final int RAISE_PINCERS = 4;
+    public static final int LOWER_PINCERS = 3;
+
+    public static final int OPEN_PINCERS = 5;
+    public static final int CLOSE_PINCERS = 6;
+
+    public static final int RINGLIGHT_ON = 11;
+    public static final int RINGLIGHT_OFF = 12;
 
     public static final int REVERSE = Gamepad.Buttons.BACK.getNumber();
-
-    /**
-     * Gear buttons
-     */
-    public static final int GEAR_IN = 5;  // Green button
-    public static final int GEAR_OUT = 6; // Yellow
 
 
     /**
@@ -39,8 +47,11 @@ public class OI {
     public static final int LOW_GEAR = 2;
     public static final int HIGH_GEAR = 1;
 
-    private JoystickButton gearInButton;
-    private JoystickButton gearOutButton;
+    private JoystickButton gpCloseGearButton;
+    private JoystickButton gpOpenGearButton;
+
+    private JoystickButton jsCloseGearButton;
+    private JoystickButton jsOpenGearButton;
 
     private JoystickButton expandPistonButton;
     private JoystickButton retractPistonButton;
@@ -51,14 +62,21 @@ public class OI {
     private JoystickButton shiftLow;
     private JoystickButton shiftHigh;
 
+    private JoystickButton raisePincers;
+    private JoystickButton lowerPincers;
+
+    private JoystickButton openPincers;
+    private JoystickButton closePincers;
+
+    private JoystickButton ringLightOn;
+    private JoystickButton ringLightOff;
+
+
     public OI() {
         gamepad = new Gamepad(0);
         joystick = new Joystick(1);
 
         // Joystick Buttons
-        gearInButton = new JoystickButton(joystick, GEAR_IN);
-        gearOutButton = new JoystickButton(joystick, GEAR_OUT);
-
         expandPistonButton = new JoystickButton(joystick, EXPAND_PISTON);
         retractPistonButton = new JoystickButton(joystick, RETRACT_PISTON);
 
@@ -68,6 +86,12 @@ public class OI {
         shiftLow = new JoystickButton(gamepad, Gamepad.Buttons.LEFT_BUMPER.getNumber());
         shiftHigh = new JoystickButton(gamepad, Gamepad.Buttons.RIGHT_BUMPER.getNumber());
 
+        raisePincers = new JoystickButton(joystick, RAISE_PINCERS);
+        lowerPincers = new JoystickButton(joystick, LOWER_PINCERS);
+
+        openPincers = new JoystickButton(joystick, OPEN_PINCERS);
+        closePincers = new JoystickButton(joystick, CLOSE_PINCERS);
+
         // Pneumatics Commands
         expandPistonButton.whenPressed(new ExpandPiston());
         retractPistonButton.whenPressed(new RetractPiston());
@@ -75,11 +99,30 @@ public class OI {
         shiftHigh.whenPressed(new Shift(DoubleSolenoid.Value.kForward));
         shiftLow.whenPressed(new Shift(DoubleSolenoid.Value.kReverse));
 
-        gearInButton = new JoystickButton(joystick, CLOSE_GEAR);
-        gearOutButton = new JoystickButton(joystick,OPEN_GEAR);
+        gpCloseGearButton = new JoystickButton(gamepad, GP_CLOSE_GEAR);
+        gpOpenGearButton = new JoystickButton(gamepad, GP_OPEN_GEAR);
 
-        gearInButton.whenPressed(new CloseGearHandler());
-        gearOutButton.whenPressed(new OpenGearHandler());
+        gpCloseGearButton.whenPressed(new CloseGearHandler());
+        gpOpenGearButton.whenPressed(new OpenGearHandler());
+
+        jsCloseGearButton = new JoystickButton(joystick, JS_CLOSE_GEAR);
+        jsOpenGearButton = new JoystickButton(joystick, JS_OPEN_GEAR);
+
+        jsCloseGearButton.whenPressed(new CloseGearHandler());
+        jsOpenGearButton.whenPressed(new OpenGearHandler());
+
+        raisePincers.whenPressed(new RaisePincers());
+        lowerPincers.whenPressed(new LowerPincers());
+
+        openPincers.whenPressed(new OpenPincers());
+        closePincers.whenPressed(new ClosePincers());
+
+        ringLightOn = new JoystickButton(joystick, RINGLIGHT_ON);
+        ringLightOff = new JoystickButton(joystick, RINGLIGHT_OFF);
+
+        ringLightOn.whenPressed(new EnableRingLight());
+        ringLightOff.whenPressed(new DisableRingLight());
+
     }
 
     private double transformStickToSpeed(Gamepad.Axes stick) {
@@ -105,11 +148,11 @@ public class OI {
     }
 
     public boolean isGearInPressed() {
-        return gearInButton.get();
+        return gpCloseGearButton.get();
     }
 
     public boolean isGearOutPressed() {
-        return gearOutButton.get();
+        return gpOpenGearButton.get();
     }
 
     public boolean isAscendClimberPressed() {
