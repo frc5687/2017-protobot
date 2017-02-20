@@ -1,58 +1,83 @@
 package org.frc5687.steamworks.protobot.commands.autonomous;
 
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
-import org.frc5687.steamworks.protobot.Constants;
-import org.frc5687.steamworks.protobot.Constants.Auto.Align;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.imu;
 
 /**
- * Created by Baxter on 2/15/2017.
+ * Created by Ben on 2/6/2016.
  */
-public class AutoAlign extends Command implements PIDOutput {
+public class AutoAlign extends Command implements PIDOutput{
+    public static PIDController turnController;
+    private static final double kP = 0.3;
+    private static final double kI = 0.05;
+    private static final double kD = 0.1;
+    private static final double kF = 0.1;//Q: What is this for?
+    private static final double rotationDeadband = 0.01;
+    private static final double kToleranceDegrees = 2.0f;
+    private double rotateToAngleRate = 0; //Q: how does the PIDcontroller object know to use this variable?
+    private double targetAngle = 0;
+    private double currentAngle = 0;
 
-    private PIDController controller;
-    private double endTime;
-    private double angle;
 
-    public AutoAlign(double angle) {
+    public AutoAlign(double targetAngle) {
         requires(driveTrain);
-        this.angle = angle;
+        this.targetAngle = targetAngle;
     }
 
-    @Override
-    protected void initialize() {
-        controller = new PIDController(Align.kP, Align.kI, Align.kD, imu, this);
-        controller.setInputRange(Constants.Auto.MAX_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
-        controller.setOutputRange(-Align.MAX_OUTPUT, Align.MAX_OUTPUT);
-        controller.setAbsoluteTolerance(Align.TOLERANCE);
-        controller.setContinuous();
-        controller.setSetpoint(angle);
-        controller.enable();
+    protected void initialize(){
+        DriverStation.reportError("Starting autoalign", false);
+        SmartDashboard.putNumber("AutoAlign/Target Angle", targetAngle);
+        // imu.setPIDSourceType(PIDSourceType.kRate);
+        turnController = new PIDController(kP, kI, kD, kF, imu, this);
+        turnController.setInputRange(-180.0f,  180.0f);
+        turnController.setOutputRange(-0.4, 0.4
+        );
+        turnController.setAbsoluteTolerance(kToleranceDegrees);
+        turnController.setContinuous(true);
+        turnController.setSetpoint(targetAngle);
+        turnController.enable();
     }
 
-    @Override
-    protected void execute() {
-        if(!controller.onTarget()) endTime = System.currentTimeMillis() + Align.STEADY_TIME;
+    protected void execute(){
+        synchronized (this) {
+            // Base turning on the rotateToAngleRate...
+            //turnController.enable();
+            SmartDashboard.putNumber("AutoAlign/Rotating Rate", rotateToAngleRate);
+            DriverStation.reportError("AutoAlign/Rotating Rate " + rotateToAngleRate, false);
+            currentAngle = imu.getYaw();
+            SmartDashboard.putNumber("AutoAlign/CurrentAngle", currentAngle);
+        }
     }
 
-    @Override
     protected boolean isFinished() {
-        return System.currentTimeMillis() >= endTime;
+        // Stop rotating when the PID speed drops below our deadband.
+        boolean done = Math.abs(targetAngle-currentAngle) < kToleranceDegrees;
+        if (done) {
+            SmartDashboard.putNumber("AutoAlign/Done at", rotateToAngleRate);
+            DriverStation.reportError("Ending autoalign", false);
+        }
+        return done;
     }
 
-    @Override
     protected void end() {
-        controller.disable();
-        driveTrain.tankDrive(0,0);
+        turnController.disable();
+    }
+
+    protected void interrupted() {
+        end();
     }
 
     @Override
     public void pidWrite(double output) {
         synchronized (this) {
-            driveTrain.tankDrive(-output, output); // positive output is counterclockwise
+            SmartDashboard.putNumber("AutoAlign/PID Output", output);
+            DriverStation.reportError("AutoAlign/PID Output " + output, false);
+            rotateToAngleRate = output;
+            driveTrain.tankDrive(rotateToAngleRate, -1 * rotateToAngleRate, true);
         }
     }
+
 }

@@ -21,6 +21,7 @@ public class AutoDrive extends Command implements PIDOutput {
     private double speed;
 
     public AutoDrive(double distance, double speed) {
+        requires(driveTrain);
         this.speed = speed;
         this.distance = distance;
     }

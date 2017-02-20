@@ -61,8 +61,8 @@ public class RobotMap {
     }
     public static class Lights {
         public static final int RED_STRIP = 10; // Note that this is an MXP port (0)
-        public static final int GREEN_STRIP = 13;
-        public static final int BLUE_STRIP = 11;
+        public static final int GREEN_STRIP = 11;
+        public static final int BLUE_STRIP = 13;
 
         public static final int RINGLIGHT = 18; // These are DIO ports, not PWM ports. DIO ports are not consecutive!
 

@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.DisableRingLight;
+import org.frc5687.steamworks.protobot.commands.autonomous.AutoAlign;
 import org.frc5687.steamworks.protobot.commands.autonomous.AutoCrossBaseline;
 import org.frc5687.steamworks.protobot.commands.autonomous.AutoDepositGear;
 import org.frc5687.steamworks.protobot.subsystems.*;
@@ -97,21 +98,30 @@ public class Robot extends IterativeRobot {
             imu = null;
         }
 
-        UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
-        camera0.setResolution(640, 480);
-        UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
-        camera1.setResolution(640, 480);
-
+        /*
+        try {
+            UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
+            camera0.setResolution(640, 480);
+        } catch (Exception e) {
+            DriverStation.reportError(e.getMessage(), true);
+        }
+        try {
+            UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
+            camera1.setResolution(640, 480);
+        } catch (Exception e) {
+            DriverStation.reportError(e.getMessage(), true);
+        }
+*/
         autoChooser = new SendableChooser();
         autoChooser.addObject("Do Nothing", new DisableRingLight());
         autoChooser.addObject("Auto Cross Baseline", new AutoCrossBaseline());
         autoChooser.addDefault("Auto Place Gear Center", new AutoDepositGear(AutoDepositGear.Position.CENTER));
-        SmartDashboard.putData("Autonomous mode chooser", autoChooser);
+        autoChooser.addObject("Auto Align 60", new AutoAlign(60));
+        SmartDashboard.putData("Auto Selector", autoChooser);
     }
 
     @Override
     public void disabledInit() {
-        super.disabledInit();
         ledStrip.setStripColor(LEDColors.DISABLED);
     }
 
@@ -132,17 +142,16 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void testInit() {
-        super.testInit();
+
     }
 
     @Override
     public void robotPeriodic() {
-        super.robotPeriodic();
+
     }
 
     @Override
     public void disabledPeriodic() {
-        super.disabledPeriodic();
         updateDashboard();
     }
 
@@ -160,7 +169,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void testPeriodic() {
-        super.testPeriodic();
+
     }
 
     public void updateDashboard(){
@@ -169,8 +178,8 @@ public class Robot extends IterativeRobot {
         driveTrain.updateDashboard();
         shifter.updateDashboard();
         pincers.updateDashboard();
-        ledStrip.updateDashboard();
         lights.updateDashboard();
+        ledStrip.updateDashboard();
         SmartDashboard.putNumber("Indicator", pdp.getIndicator());
         SmartDashboard.putNumber("Yaw", imu.getAngle());
     }
