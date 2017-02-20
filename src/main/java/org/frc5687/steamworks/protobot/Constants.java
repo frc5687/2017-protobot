@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
  * Created by Admin on 1/16/2017.
  */
 public class Constants {
+
     public class GearHandler {
         public static final double openSpeed = -.5;
         public static final double closeSpeed = .1;
@@ -96,13 +97,15 @@ public class Constants {
     }
 
     public class Shifter {
-        public static final long STOP_MOTOR_TIME = 200; //TODO find correct values
-        public static final long SHIFT_TIME = 500; //TODO find correct values
+        public static final long STOP_MOTOR_TIME = 120; //TODO find correct values
+        public static final long SHIFT_TIME = 120; //TODO find correct values
     }
 
     public class Pincers {
-        public static final double potentiometerLifted = .006;
-        public static final double potentiometerLowered = .270;
+        public static final double potentiometerLiftedTony = .006;
+        public static final double potentiometerLiftedRhody = 0.030;
+        public static final double potentiometerLoweredTony = .270;
+        public static final double potentiometerLoweredRhody = 0.093;
         public static final double maxSpeed = 0.25;
         public class PID {
             public static final double kP = 1.5;
