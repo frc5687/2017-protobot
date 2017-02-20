@@ -1,5 +1,6 @@
 package org.frc5687.steamworks.protobot.subsystems;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -49,8 +50,12 @@ public class LEDStrip extends Subsystem {
     }
 
     public void updateDashboard() {
-        SmartDashboard.putNumber("ledstrip/red", redStrip.getRaw());
-        SmartDashboard.putNumber("ledstrip/green", greenStrip.getRaw());
-        SmartDashboard.putNumber("ledstrip/blue", blueStrip.getRaw());
+        try {
+            SmartDashboard.putNumber("ledstrip/red", redStrip.getRaw());
+            SmartDashboard.putNumber("ledstrip/green", greenStrip.getRaw());
+            SmartDashboard.putNumber("ledstrip/blue", blueStrip.getRaw());
+        } catch (Exception e) {
+            DriverStation.reportError(e.getMessage(), true);
+        }
     }
 }

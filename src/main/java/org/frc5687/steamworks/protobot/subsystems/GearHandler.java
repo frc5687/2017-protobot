@@ -30,6 +30,10 @@ public class GearHandler extends Subsystem {
         SmartDashboard.putBoolean("MinHall", false);
     }
 
+    public void setSpeed(double speed) {
+        gearMotor.set(speed);
+    }
+
     public void open() {
         gearMotor.set(Constants.GearHandler.openSpeed);
     }
