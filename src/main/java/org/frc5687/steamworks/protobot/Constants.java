@@ -148,27 +148,27 @@ public class Constants {
         }
 
         public class PositionRotor {
-            public static final int zeroTarget = 0;
-            public static final int oneTarget = 0;
-            public static final int twoTarget = 0;
-            public static final int threeTarget = 0;
-            public static final int fourTarget = 0;
-            public static final int fiveTarget = 0;
-            public static final int tolerance = 0;
+            public static final double zeroTarget = 0;
+            public static final double oneTarget = 0;
+            public static final double twoTarget = 0;
+            public static final double threeTarget = 0;
+            public static final double fourTarget = 0;
+            public static final double fiveTarget = 0;
+            public static final double tolerance = 0;
         }
 
         public class GearRotor {
-            public static final int zeroTarget = 0;
-            public static final int oneTarget = 0;
-            public static final int twoTarget = 0;
-            public static final int threeTarget = 0;
-            public static final int tolerance = 0;
+            public static final double zeroTarget = 0;
+            public static final double oneTarget = 0;
+            public static final double twoTarget = 0;
+            public static final double threeTarget = 0;
+            public static final double tolerance = 0.1;
         }
 
         public class HopperRotor {
-            public static final int zeroTarget = 0;
-            public static final int oneTarget = 0;
-            public static final int tolerance = 0;
+            public static final double zeroTarget = 0;
+            public static final double oneTarget = 0;
+            public static final double tolerance = 0;
         }
 
     }

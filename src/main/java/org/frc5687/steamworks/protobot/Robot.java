@@ -12,6 +12,7 @@ import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
 import org.frc5687.steamworks.protobot.commands.autonomous.AutoCrossBaseline;
 import org.frc5687.steamworks.protobot.commands.autonomous.AutoDepositGear;
 import org.frc5687.steamworks.protobot.subsystems.*;
+import org.frc5687.steamworks.protobot.utils.AutoRotorChooser;
 import org.frc5687.steamworks.protobot.utils.PDP;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -58,6 +59,8 @@ public class Robot extends IterativeRobot {
 
     public static AHRS imu;
 
+    public static AutoRotorChooser autoRotorChooser;
+
     private Command autoCommand;
     private SendableChooser autoChooser;
 
@@ -80,6 +83,8 @@ public class Robot extends IterativeRobot {
         lights = new Lights();
         ledStrip = new LEDStrip();
         pincers = new Pincers();
+        autoRotorChooser = new AutoRotorChooser();
+
 
         pdp = new PDP(); // must be initialized after other subsystems
         oi = new OI(); // must be initialized after subsystems
@@ -178,8 +183,11 @@ public class Robot extends IterativeRobot {
         pincers.updateDashboard();
         lights.updateDashboard();
         ledStrip.updateDashboard();
+        autoRotorChooser.updateDashboard();
+
         SmartDashboard.putNumber("Indicator", pdp.getIndicator());
         SmartDashboard.putNumber("Yaw", imu.getAngle());
+
     }
 
 }

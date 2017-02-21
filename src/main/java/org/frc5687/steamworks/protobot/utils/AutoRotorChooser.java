@@ -8,12 +8,12 @@ import org.frc5687.steamworks.protobot.RobotMap;
 /**
  * Created by Caleb on 2/20/2017.
  */
-public class AutoChooser {
+public class AutoRotorChooser {
     private AnalogPotentiometer positionRotor;
     private AnalogPotentiometer gearRotor;
     private AnalogPotentiometer hopperRotor;
 
-    public AutoChooser() {
+    public AutoRotorChooser() {
         positionRotor = new AnalogPotentiometer(RobotMap.AutoChooser.POSITION_ROTOR);
         gearRotor = new AnalogPotentiometer(RobotMap.AutoChooser.POSITION_ROTOR);
     }
