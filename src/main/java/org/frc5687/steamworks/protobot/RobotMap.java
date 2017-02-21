@@ -70,8 +70,8 @@ public class RobotMap {
     }
 
     public static class Shifter {
-        public static final int PISTON_EXTENDER = 5;
-        public static final int PISTON_RETRACTOR = 4;
+        public static final int PISTON_EXTENDER = 7;
+        public static final int PISTON_RETRACTOR = 6;
     }
 
     /**
@@ -79,6 +79,7 @@ public class RobotMap {
      */
     public static class Climber {
         public static final int CLIMBER_MOTOR = 7;
+        public static final int CLIMBER_MOTOR_TWO = 9;
         public static final int PDP_CLIMBER_MOTOR = 12;
     }
 
@@ -89,7 +90,7 @@ public class RobotMap {
     public static class Pincers {
         public static final int PINCER_MOTOR = 8;
         public static final int POTENTIOMETER = 0;
-        public static final int PISTON_RETRACTOR = 2;
-        public static final int PISTON_EXTENDER = 3;
+        public static final int PISTON_RETRACTOR = 4;
+        public static final int PISTON_EXTENDER = 5;
     }
 }
