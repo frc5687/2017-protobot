@@ -147,14 +147,22 @@ public class Constants {
             public static final double SPEED = -0.7;
         }
 
-        public class Rotor {
+        public class PositionRotor {
             public static final int zeroTarget = 0;
             public static final int oneTarget = 0;
             public static final int twoTarget = 0;
             public static final int threeTarget = 0;
             public static final int fourTarget = 0;
             public static final int fiveTarget = 0;
-            public static final int threshhold = 0;
+            public static final int tolerance = 0;
+        }
+
+        public class GearRotor {
+            public static final int zeroTarget = 0;
+            public static final int oneTarget = 0;
+            public static final int twoTarget = 0;
+            public static final int threeTarget = 0;
+            public static final int tolerance = 0;
         }
 
     }

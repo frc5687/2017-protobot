@@ -1,6 +1,5 @@
 package org.frc5687.steamworks.protobot.utils;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
@@ -10,38 +9,57 @@ import org.frc5687.steamworks.protobot.RobotMap;
  * Created by Caleb on 2/20/2017.
  */
 public class AutoChooser {
-    private AnalogPotentiometer rotor;
+    private AnalogPotentiometer positionRotor;
+    private AnalogPotentiometer gearRotor;
 
     public AutoChooser() {
-        rotor = new AnalogPotentiometer(RobotMap.AutoChooser.ROTOR);
+        positionRotor = new AnalogPotentiometer(RobotMap.AutoChooser.POSITIONROTOR);
+        gearRotor = new AnalogPotentiometer(RobotMap.AutoChooser.POSITIONROTOR);
     }
 
-    public boolean isAtZero(){
-        return (rotor.get() <= Constants.Auto.Rotor.zeroTarget + Constants.Auto.Rotor.threshhold || rotor.get() >= Constants.Auto.Rotor.zeroTarget-Constants.Auto.Rotor.threshhold);
+    public boolean positionIsAtZero(){
+        return (positionRotor.get() <= Constants.Auto.PositionRotor.zeroTarget + Constants.Auto.PositionRotor.tolerance || positionRotor.get() >= Constants.Auto.PositionRotor.zeroTarget- Constants.Auto.PositionRotor.tolerance);
+    }
+
+    public boolean gearIsAtZero(){
+        return (gearRotor.get() <= Constants.Auto.GearRotor.zeroTarget + Constants.Auto.GearRotor.tolerance || gearRotor.get() >= Constants.Auto.GearRotor.zeroTarget- Constants.Auto.GearRotor.tolerance);
+    }
+
+
+    public boolean gearIsAtOne(){
+        return (gearRotor.get() <= Constants.Auto.GearRotor.oneTarget + Constants.Auto.GearRotor.tolerance || gearRotor.get() >= Constants.Auto.GearRotor.oneTarget- Constants.Auto.GearRotor.tolerance);
+    }
+
+    public boolean gearIsAtTwo() {
+        return (gearRotor.get() <= Constants.Auto.GearRotor.twoTarget + Constants.Auto.GearRotor.tolerance || gearRotor.get() >= Constants.Auto.GearRotor.twoTarget - Constants.Auto.GearRotor.tolerance);
+    }
+
+    public boolean gearIsAtThree() {
+        return (gearRotor.get() <= Constants.Auto.GearRotor.threeTarget + Constants.Auto.GearRotor.tolerance || gearRotor.get() >= Constants.Auto.GearRotor.threeTarget - Constants.Auto.GearRotor.tolerance);
     }
 
     public boolean isAtOne(){
-        return (rotor.get() <= Constants.Auto.Rotor.oneTarget + Constants.Auto.Rotor.threshhold || rotor.get() >= Constants.Auto.Rotor.oneTarget-Constants.Auto.Rotor.threshhold);
+        return(positionRotor.get() <= Constants.Auto.PositionRotor.oneTarget + Constants.Auto.PositionRotor.tolerance || positionRotor.get() >= Constants.Auto.PositionRotor.oneTarget- Constants.Auto.PositionRotor.tolerance);
     }
 
     public boolean isAtTwo(){
-        return (rotor.get() <= Constants.Auto.Rotor.twoTarget + Constants.Auto.Rotor.threshhold || rotor.get() >= Constants.Auto.Rotor.twoTarget-Constants.Auto.Rotor.threshhold);
+        return (positionRotor.get() <= Constants.Auto.PositionRotor.twoTarget + Constants.Auto.PositionRotor.tolerance || positionRotor.get() >= Constants.Auto.PositionRotor.twoTarget- Constants.Auto.PositionRotor.tolerance);
     }
 
     public boolean isAtThree(){
-        return (rotor.get() <= Constants.Auto.Rotor.threeTarget + Constants.Auto.Rotor.threshhold || rotor.get() >= Constants.Auto.Rotor.threeTarget-Constants.Auto.Rotor.threshhold);
+        return (positionRotor.get() <= Constants.Auto.PositionRotor.threeTarget + Constants.Auto.PositionRotor.tolerance || positionRotor.get() >= Constants.Auto.PositionRotor.threeTarget- Constants.Auto.PositionRotor.tolerance);
     }
 
     public boolean isAtFour(){
-        return (rotor.get() <= Constants.Auto.Rotor.fourTarget + Constants.Auto.Rotor.threshhold || rotor.get() >= Constants.Auto.Rotor.fourTarget-Constants.Auto.Rotor.threshhold);
+        return (positionRotor.get() <= Constants.Auto.PositionRotor.fourTarget + Constants.Auto.PositionRotor.tolerance || positionRotor.get() >= Constants.Auto.PositionRotor.fourTarget- Constants.Auto.PositionRotor.tolerance);
     }
 
     public boolean isAtFive(){
-        return (rotor.get() <= Constants.Auto.Rotor.fiveTarget + Constants.Auto.Rotor.threshhold || rotor.get() >= Constants.Auto.Rotor.fiveTarget-Constants.Auto.Rotor.threshhold);
+        return (positionRotor.get() <= Constants.Auto.PositionRotor.fiveTarget + Constants.Auto.PositionRotor.tolerance || positionRotor.get() >= Constants.Auto.PositionRotor.fiveTarget- Constants.Auto.PositionRotor.tolerance);
     }
 
 
     public void updateDashboard(){
-        SmartDashboard.putNumber("SwitchValue", rotor.get());
+        SmartDashboard.putNumber("SwitchValue", positionRotor.get());
     }
 }
