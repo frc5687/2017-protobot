@@ -62,7 +62,7 @@ public class Shift extends Command{
                 state = State.WAIT_FOR_SHIFT;
             case WAIT_FOR_SHIFT:
                 DriverStation.reportError("Shift state WAIT_FOR_SHIFT", false);
-                if(System.currentTimeMillis() >= endTime) state = State.STOP_MOTOR;
+                if(System.currentTimeMillis() >= endTime) state = State.START_MOTOR;
                 break;
             case START_MOTOR:
                 DriverStation.reportError("Shift state START_MOTOR", false);
