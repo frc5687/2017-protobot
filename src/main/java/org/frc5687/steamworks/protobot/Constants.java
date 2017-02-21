@@ -165,6 +165,12 @@ public class Constants {
             public static final int tolerance = 0;
         }
 
+        public class HopperRotor {
+            public static final int zeroTarget = 0;
+            public static final int oneTarget = 0;
+            public static final int tolerance = 0;
+        }
+
     }
 
 }
