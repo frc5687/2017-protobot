@@ -40,7 +40,7 @@ public class Pincers extends Subsystem implements PIDOutput {
     protected void createController() {
         if (controller!=null) { return; }
         controller = new PIDController(Constants.Pincers.PID.kP, Constants.Pincers.PID.kI, Constants.Pincers.PID.kD, pincers.getPotentiometer(), this);
-        controller.setInputRange(0, 0.3);
+        controller.setInputRange(Constants.Pincers.PID.MIN_INPUT, Constants.Pincers.PID.MAX_INPUT);
         controller.setOutputRange(-Constants.Pincers.maxSpeed, Constants.Pincers.maxSpeed);
         controller.setAbsoluteTolerance(Constants.Pincers.PID.TOLERANCE);
     }
