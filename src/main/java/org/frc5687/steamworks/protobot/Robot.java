@@ -116,6 +116,8 @@ public class Robot extends IterativeRobot {
         autoChooser.addDefault("Auto Place Gear Center", new AutoDepositGear(AutoDepositGear.Position.CENTER));
         autoChooser.addObject("Auto Align 60", new AutoAlign(60));
         SmartDashboard.putData("Auto Selector", autoChooser);
+
+        Constants.isTony = pdp.isTony();
     }
 
     @Override
@@ -178,7 +180,7 @@ public class Robot extends IterativeRobot {
         pincers.updateDashboard();
         lights.updateDashboard();
         ledStrip.updateDashboard();
-        SmartDashboard.putNumber("Indicator", pdp.getIndicator());
+        SmartDashboard.putBoolean("IsTony", Constants.isTony);
         SmartDashboard.putNumber("Yaw", imu.getAngle());
     }
 

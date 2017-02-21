@@ -7,11 +7,16 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
  */
 public class Constants {
 
+    public static boolean isTony = true;
+
+
     public class GearHandler {
         public static final double openSpeed = -.5;
         public static final double closeSpeed = .1;
         public static final double clampSpeed = .1;
         public static final long OPEN_TIME = 250;
+        public static final double TONY_MAX_POT_LIMIT = 0.5;
+        public static final double PROTOBOT_MAX_POT_LIMIT = 0.5;
         public static final double wiggleSpeed = 0.1; //TODO callibrate better speed and time
         public static final double wiggleTime = 60;
         public static final double wiggleTotalTime = 250;
@@ -79,10 +84,6 @@ public class Constants {
             public static final double INCHES_PER_PULSE = Defaults.INCHES_PER_PULSE;
         }
 
-        public class Potentiometer{
-            public static final double potentiometerMaxLimit = 0.5;
-        }
-
     }
 
     public class Climber {
@@ -103,9 +104,9 @@ public class Constants {
 
     public class Pincers {
         public static final double potentiometerLiftedTony = .006;
-        public static final double potentiometerLiftedRhody = 0.030;
+        public static final double potentiometerLiftedRhody = 0.020;
         public static final double potentiometerLoweredTony = .270;
-        public static final double potentiometerLoweredRhody = 0.093;
+        public static final double potentiometerLoweredRhody = 0.038;
         public static final double maxSpeed = 0.25;
         public class PID {
             public static final double kP = 1.5;
@@ -155,6 +156,23 @@ public class Constants {
             public static final double SPEED = -0.7;
         }
 
+    }
+
+
+    public static double pickConstant(double tonyValue, double protobotValue) {
+        return isTony ? tonyValue : protobotValue;
+    }
+
+    public static int pickConstant(int tonyValue, int protobotValue) {
+        return isTony ? tonyValue : protobotValue;
+    }
+
+    public static boolean pickConstant(boolean tonyValue, boolean protobotValue) {
+        return isTony ? tonyValue : protobotValue;
+    }
+
+    public static long pickConstant(long tonyValue, long protobotValue) {
+        return isTony ? tonyValue : protobotValue;
     }
 
 }
