@@ -92,6 +92,25 @@ public class AutoChooser {
         return -1;
     }
 
+    public int gearRotorValue(){
+        if (gearIsAtZero()){
+            return 0;
+        }
+
+        if(gearIsAtOne()){
+            return 1;
+        }
+
+        if(gearIsAtTwo()){
+            return 2;
+        }
+
+        if(gearIsAtThree()){
+            return 3;
+        }
+        return -1;
+    }
+
 
 
     public void updateDashboard(){
@@ -99,6 +118,9 @@ public class AutoChooser {
         SmartDashboard.putNumber("GearValue", gearRotor.get());
         SmartDashboard.putNumber("HopperValue", hopperRotor.get());
         SmartDashboard.putNumber("PositionRotorPosition", positionRotorValue());
+        SmartDashboard.putNumber("GearRotorPosition", gearRotorValue());
+        SmartDashboard.putBoolean("HopperRotorPosition", autoHopper());
+
 
     }
 }
