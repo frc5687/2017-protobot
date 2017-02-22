@@ -21,14 +21,13 @@ public class Pincers extends Subsystem implements PIDOutput {
     private VictorSP pincerMotor;
     private DoubleSolenoid piston;
     private AnalogPotentiometer potentiometer;
-    private double rest = Constants.pickConstant(Constants.Pincers.potentiometerLiftedTony, Constants.Pincers.potentiometerLiftedRhody);
+    private double rest;
 
     public Pincers(){
         pincerMotor = new VictorSP(RobotMap.Pincers.PINCER_MOTOR);
         potentiometer = new AnalogPotentiometer(RobotMap.Pincers.POTENTIOMETER);
         piston = new DoubleSolenoid(RobotMap.Pincers.PISTON_EXTENDER, RobotMap.Pincers.PISTON_RETRACTOR);
-
-
+        rest = Constants.pickConstant(Constants.Pincers.potentiometerLiftedTony, Constants.Pincers.potentiometerLiftedRhody);
     }
 
 
@@ -50,17 +49,19 @@ public class Pincers extends Subsystem implements PIDOutput {
     }
 
     public void raise() {
-        rest = Constants.pickConstant(Constants.Pincers.potentiometerLiftedTony, Constants.Pincers.potentiometerLiftedRhody);
+        double setPoint = Constants.pickConstant(Constants.Pincers.potentiometerLiftedTony, Constants.Pincers.potentiometerLiftedRhody);
         createController();
-        controller.setSetpoint(rest);
+        controller.setSetpoint(setPoint);
         controller.enable();
+        DriverStation.reportError("Setting setpoint to " + setPoint + " in Pincers.raise()", false);
     }
 
     public void lower() {
-        rest = Constants.pickConstant(Constants.Pincers.potentiometerLoweredTony, Constants.Pincers.potentiometerLoweredRhody);
+        double setPoint = Constants.pickConstant(Constants.Pincers.potentiometerLoweredTony, Constants.Pincers.potentiometerLoweredRhody);
         createController();
-        controller.setSetpoint(rest);
+        controller.setSetpoint(setPoint);
         controller.enable();
+        DriverStation.reportError("Setting setpoint to " + setPoint + " in Pincers.lower()", false);
     }
 
     public void open(){
@@ -70,7 +71,8 @@ public class Pincers extends Subsystem implements PIDOutput {
     public void rest(){
         createController();
         controller.setSetpoint(rest);
-        controller.enable();
+//        controller.enable();
+        DriverStation.reportError("Setting setpoint to " + rest + " in Pincers.rest()", false);
     }
 
     public void close(){

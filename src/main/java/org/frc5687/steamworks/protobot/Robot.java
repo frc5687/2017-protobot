@@ -72,6 +72,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
         robot = this;
 
+
         driveTrain = new DriveTrain();
         gearHandler = new GearHandler();
         pneumatics = new Pneumatics();
@@ -83,6 +84,9 @@ public class Robot extends IterativeRobot {
 
         pdp = new PDP(); // must be initialized after other subsystems
         oi = new OI(); // must be initialized after subsystems
+
+        Constants.isTony = pdp.isTony(); // must be set before subsystems
+
 
         try {
             // Try to connect to the navX imu.
@@ -116,8 +120,6 @@ public class Robot extends IterativeRobot {
         autoChooser.addDefault("Auto Place Gear Center", new AutoDepositGear(AutoDepositGear.Position.CENTER));
         autoChooser.addObject("Auto Align 60", new AutoAlign(60));
         SmartDashboard.putData("Auto Selector", autoChooser);
-
-        Constants.isTony = pdp.isTony();
     }
 
     @Override

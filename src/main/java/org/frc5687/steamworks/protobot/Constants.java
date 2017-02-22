@@ -105,9 +105,9 @@ public class Constants {
     public class Pincers {
 
         public static final double potentiometerLiftedTony = .006;
-        public static final double potentiometerLiftedRhody = 0.020;
+        public static final double potentiometerLiftedRhody = 0.18;
         public static final double potentiometerLoweredTony = .270;
-        public static final double potentiometerLoweredRhody = 0.038;
+        public static final double potentiometerLoweredRhody = 0.63;
         public static final double maxSpeed = 0.25;
         public class PID {
             public static final double MIN_INPUT = 0;
