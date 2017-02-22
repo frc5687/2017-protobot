@@ -13,54 +13,59 @@ public class AutoRotorChooser {
     private AnalogPotentiometer gearRotor;
     private AnalogPotentiometer hopperRotor;
 
+    public boolean checkWithinTarget(double target,double tolerance, AnalogPotentiometer knob){
+        return (knob.get() >= target - tolerance && knob.get()<= target + tolerance);
+    }
+
     public AutoRotorChooser() {
         positionRotor = new AnalogPotentiometer(RobotMap.AutoChooser.POSITION_ROTOR);
-        gearRotor = new AnalogPotentiometer(RobotMap.AutoChooser.POSITION_ROTOR);
+        gearRotor = new AnalogPotentiometer(RobotMap.AutoChooser.GEAR_ROTOR);
+        hopperRotor = new AnalogPotentiometer(RobotMap.AutoChooser.HOPPER_ROTOR);
     }
 
     public boolean positionIsAtZero(){
-        return (positionRotor.get() <= Constants.Auto.PositionRotor.zeroTarget + Constants.Auto.PositionRotor.tolerance && positionRotor.get() >= Constants.Auto.PositionRotor.zeroTarget- Constants.Auto.PositionRotor.tolerance);
+        return checkWithinTarget(Constants.Auto.PositionRotor.zeroTarget, Constants.Auto.PositionRotor.tolerance, positionRotor);
+
     }
 
     public boolean gearIsAtZero(){
-        return (gearRotor.get() <= Constants.Auto.GearRotor.zeroTarget + Constants.Auto.GearRotor.tolerance && gearRotor.get() >= Constants.Auto.GearRotor.zeroTarget- Constants.Auto.GearRotor.tolerance);
+        return checkWithinTarget(Constants.Auto.GearRotor.zeroTarget, Constants.Auto.GearRotor.tolerance, gearRotor);
     }
 
 
     public boolean gearIsAtOne(){
-        return (gearRotor.get() <= Constants.Auto.GearRotor.oneTarget + Constants.Auto.GearRotor.tolerance && gearRotor.get() >= Constants.Auto.GearRotor.oneTarget- Constants.Auto.GearRotor.tolerance);
+        return checkWithinTarget(Constants.Auto.GearRotor.oneTarget, Constants.Auto.GearRotor.tolerance, gearRotor);
     }
 
     public boolean gearIsAtTwo() {
-        return (gearRotor.get() <= Constants.Auto.GearRotor.twoTarget + Constants.Auto.GearRotor.tolerance && gearRotor.get() >= Constants.Auto.GearRotor.twoTarget - Constants.Auto.GearRotor.tolerance);
+        return checkWithinTarget(Constants.Auto.GearRotor.twoTarget, Constants.Auto.GearRotor.tolerance, gearRotor);
     }
 
     public boolean gearIsAtThree() {
-        return (gearRotor.get() <= Constants.Auto.GearRotor.threeTarget + Constants.Auto.GearRotor.tolerance && gearRotor.get() >= Constants.Auto.GearRotor.threeTarget - Constants.Auto.GearRotor.tolerance);
+        return checkWithinTarget(Constants.Auto.GearRotor.threeTarget, Constants.Auto.GearRotor.tolerance, gearRotor);
     }
 
     public boolean positionIsAtOne(){
-        return(positionRotor.get() <= Constants.Auto.PositionRotor.oneTarget + Constants.Auto.PositionRotor.tolerance && positionRotor.get() >= Constants.Auto.PositionRotor.oneTarget- Constants.Auto.PositionRotor.tolerance);
+        return checkWithinTarget(Constants.Auto.PositionRotor.oneTarget, Constants.Auto.PositionRotor.tolerance, positionRotor);
     }
 
     public boolean positionIsAtTwo(){
-        return (positionRotor.get() <= Constants.Auto.PositionRotor.twoTarget + Constants.Auto.PositionRotor.tolerance && positionRotor.get() >= Constants.Auto.PositionRotor.twoTarget- Constants.Auto.PositionRotor.tolerance);
+        return checkWithinTarget(Constants.Auto.PositionRotor.twoTarget, Constants.Auto.PositionRotor.tolerance, positionRotor);
     }
 
     public boolean positionIsAtThree(){
-        return (positionRotor.get() <= Constants.Auto.PositionRotor.threeTarget + Constants.Auto.PositionRotor.tolerance && positionRotor.get() >= Constants.Auto.PositionRotor.threeTarget- Constants.Auto.PositionRotor.tolerance);
+        return checkWithinTarget(Constants.Auto.PositionRotor.threeTarget, Constants.Auto.PositionRotor.tolerance, positionRotor);
     }
 
     public boolean positionIsAtFour(){
-        return (positionRotor.get() <= Constants.Auto.PositionRotor.fourTarget + Constants.Auto.PositionRotor.tolerance && positionRotor.get() >= Constants.Auto.PositionRotor.fourTarget- Constants.Auto.PositionRotor.tolerance);
+        return checkWithinTarget(Constants.Auto.PositionRotor.fourTarget, Constants.Auto.PositionRotor.tolerance, positionRotor);
     }
 
     public boolean positionIsAtFive(){
-        return (positionRotor.get() <= Constants.Auto.PositionRotor.fiveTarget + Constants.Auto.PositionRotor.tolerance && positionRotor.get() >= Constants.Auto.PositionRotor.fiveTarget- Constants.Auto.PositionRotor.tolerance);
-    }
+        return checkWithinTarget(Constants.Auto.PositionRotor.fiveTarget, Constants.Auto.PositionRotor.tolerance, positionRotor);    }
 
     public boolean autoHopper(){
-        return (hopperRotor.get() <= Constants.Auto.HopperRotor.zeroTarget + Constants.Auto.HopperRotor.tolerance && hopperRotor.get() >= Constants.Auto.HopperRotor.zeroTarget - Constants.Auto.HopperRotor.tolerance );
+        return checkWithinTarget(Constants.Auto.HopperRotor.oneTarget, Constants.Auto.HopperRotor.tolerance, gearRotor);
     }
 
     public int positionRotorValue(){
