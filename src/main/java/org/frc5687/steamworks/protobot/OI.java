@@ -60,7 +60,6 @@ public class OI {
     private JoystickButton retractPistonButton;
 
     private JoystickButton ascendClimber;
-    private JoystickButton descendClimber;
 
     private JoystickButton shiftLow;
     private JoystickButton shiftHigh;
@@ -85,7 +84,7 @@ public class OI {
         retractPistonButton = new JoystickButton(joystick, RETRACT_PISTON);
 
         ascendClimber = new JoystickButton(gamepad, Gamepad.Buttons.Y.getNumber());
-        descendClimber = new JoystickButton(gamepad, Gamepad.Buttons.X.getNumber());
+        ledStripRandomized = new JoystickButton(gamepad, Gamepad.Buttons.X.getNumber());
 
         shiftLow = new JoystickButton(gamepad, Gamepad.Buttons.LEFT_BUMPER.getNumber());
         shiftHigh = new JoystickButton(gamepad, Gamepad.Buttons.RIGHT_BUMPER.getNumber());
@@ -164,10 +163,6 @@ public class OI {
 
     public boolean isAscendClimberPressed() {
         return ascendClimber.get();
-    }
-
-    public boolean isDescendClimberPressed() {
-        return descendClimber.get();
     }
 
     public double getPincerSpeed() {
