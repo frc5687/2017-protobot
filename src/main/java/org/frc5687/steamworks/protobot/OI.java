@@ -32,6 +32,8 @@ public class OI {
     public static final int RINGLIGHT_ON = 11;
     public static final int RINGLIGHT_OFF = 12;
 
+    public static final int RANDOM_COLOR = 13;
+
     public static final int REVERSE = Gamepad.Buttons.BACK.getNumber();
 
 
@@ -46,6 +48,7 @@ public class OI {
      */
     public static final int LOW_GEAR = 2;
     public static final int HIGH_GEAR = 1;
+
 
     private JoystickButton gpCloseGearButton;
     private JoystickButton gpOpenGearButton;
@@ -71,6 +74,7 @@ public class OI {
     private JoystickButton ringLightOn;
     private JoystickButton ringLightOff;
 
+    private JoystickButton ledStripRandomized;
 
     public OI() {
         gamepad = new Gamepad(0);
@@ -117,11 +121,14 @@ public class OI {
         openPincers.whenPressed(new OpenPincers());
         closePincers.whenPressed(new ClosePincers());
 
+        ledStripRandomized.whenPressed(new RandomizeLight());
+
         ringLightOn = new JoystickButton(joystick, RINGLIGHT_ON);
         ringLightOff = new JoystickButton(joystick, RINGLIGHT_OFF);
 
         ringLightOn.whenPressed(new EnableRingLight());
         ringLightOff.whenPressed(new DisableRingLight());
+
 
     }
 
