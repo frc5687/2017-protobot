@@ -175,7 +175,6 @@ public class Robot extends IterativeRobot {
     public void updateDashboard(){
         driveTrain.updateDashboard();
         gearHandler.updateDashboard();
-        driveTrain.updateDashboard();
         shifter.updateDashboard();
         pincers.updateDashboard();
         lights.updateDashboard();
