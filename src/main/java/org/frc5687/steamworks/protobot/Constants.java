@@ -156,6 +156,30 @@ public class Constants {
             public static final double SPEED = -0.7;
         }
 
+        public class PositionRotor {
+            public static final double zeroTarget = 0;
+            public static final double oneTarget = 0;
+            public static final double twoTarget = 0;
+            public static final double threeTarget = 0;
+            public static final double fourTarget = 0;
+            public static final double fiveTarget = 0;
+            public static final double tolerance = 0;
+        }
+
+        public class GearRotor {
+            public static final double zeroTarget = 0;
+            public static final double oneTarget = 0;
+            public static final double twoTarget = 0;
+            public static final double threeTarget = 0;
+            public static final double tolerance = 0.1;
+        }
+
+        public class HopperRotor {
+            public static final double zeroTarget = 0;
+            public static final double oneTarget = 0;
+            public static final double tolerance = 0;
+        }
+
     }
 
 

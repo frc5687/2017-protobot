@@ -170,4 +170,8 @@ public class OI {
         return descendClimber.get();
     }
 
+    public double getPincerSpeed() {
+        double result = -joystick.getAxis(Joystick.AxisType.kY);
+        return Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
+    }
 }

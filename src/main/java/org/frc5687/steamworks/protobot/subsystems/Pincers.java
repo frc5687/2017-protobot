@@ -7,6 +7,7 @@ import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.LowerPincers;
 import org.frc5687.steamworks.protobot.commands.RestPincers;
+import org.frc5687.steamworks.protobot.commands.RunPincersManually;
 
 import static org.frc5687.steamworks.protobot.Robot.pincers;
 
@@ -34,7 +35,7 @@ public class Pincers extends Subsystem implements PIDOutput {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new RestPincers());
+        setDefaultCommand(new RunPincersManually());
     }
 
     protected void createController() {
