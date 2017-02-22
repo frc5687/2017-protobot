@@ -169,6 +169,6 @@ public class DriveTrain extends Subsystem {
         SmartDashboard.putNumber("drive/Left Rear Current", pdp.getLeftRearAmps());
         SmartDashboard.putNumber("drive/Average Current", pdp.getMeanDrivetrainAmps());
 
-        SmartDashboard.putNumber("irValue", irSensor.getValue());
+        SmartDashboard.putNumber("drive/IR Sensor", irSensor.getValue());
     }
 }

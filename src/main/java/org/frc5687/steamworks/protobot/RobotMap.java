@@ -38,7 +38,7 @@ public class RobotMap {
         public static final int LEFT_ENCODER_CHANNEL_B = 7;
         public static final int RIGHT_ENCODER_CHANNEL_A = 8;
         public static final int RIGHT_ENCODER_CHANNEL_B = 9;
-        public static final int IR_DRIVE_SENSOR = 1;
+        public static final int IR_DRIVE_SENSOR = 3;
     }
 
     /**
@@ -48,8 +48,9 @@ public class RobotMap {
         public static final int GEAR_MOTOR = 6;
         public static final int MAX_EXTENSION_HALL = 2; //TODO Change to ports on robot
         public static final int MIN_EXTENSION_HALL = 1;
-        public static final int GEAR_POTENTIOMETER = 3;
+        public static final int GEAR_POTENTIOMETER = 1;
         public static final int PDP_GEAR_MOTOR = 2;
+        public static final int GEAR_IR = 2;
      }
 
     /**
@@ -70,33 +71,34 @@ public class RobotMap {
         }
 
     public static class Shifter {
-        public static final int PISTON_EXTENDER = 5;
-        public static final int PISTON_RETRACTOR = 4;
+        public static final int PISTON_EXTENDER = 7;
+        public static final int PISTON_RETRACTOR = 6;
     }
 
     /**
      * Climber ports
      */
     public static class Climber {
-        public static final int CLIMBER_MOTOR = 7;
+        public static final int CLIMBER_MOTOR_FORE = 7;
+        public static final int CLIMBER_MOTOR_AFT = 9;
         public static final int PDP_CLIMBER_MOTOR = 12;
     }
 
     public static class Misc {
-        public static final int INDICATOR = 2;
+        public static final int INDICATOR = 0;
     }
 
     public static class Pincers {
         public static final int PINCER_MOTOR = 8;
         public static final int POTENTIOMETER = 0;
-        public static final int PISTON_RETRACTOR = 2;
-        public static final int PISTON_EXTENDER = 3;
+        public static final int PISTON_RETRACTOR = 4;
+        public static final int PISTON_EXTENDER = 5;
     }
 
     public static class AutoChooser {
-        public final static int POSITION_ROTOR = 4; //4 on rio is 1 on NAVX
-        public final static int GEAR_ROTOR = 5;
-        public final static int HOPPER_ROTOR =  6;
+        public final static int POSITION_SWITCH = 4; //4 on rio is 1 on NAVX
+        public final static int GEAR_SWITCH = 5;
+        public final static int HOPPER_SWITCH =  6;
     }
 
 }

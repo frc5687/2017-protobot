@@ -11,8 +11,9 @@ import org.frc5687.steamworks.protobot.commands.DisableRingLight;
 import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
 import org.frc5687.steamworks.protobot.commands.autonomous.AutoCrossBaseline;
 import org.frc5687.steamworks.protobot.commands.autonomous.AutoDepositGear;
+import org.frc5687.steamworks.protobot.commands.autonomous.FlashLights;
 import org.frc5687.steamworks.protobot.subsystems.*;
-import org.frc5687.steamworks.protobot.utils.AutoRotorChooser;
+import org.frc5687.steamworks.protobot.utils.AutoChooser;
 import org.frc5687.steamworks.protobot.utils.PDP;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -59,7 +60,7 @@ public class Robot extends IterativeRobot {
 
     public static AHRS imu;
 
-    public static AutoRotorChooser autoRotorChooser;
+    public static AutoChooser autoRotorChooser;
 
     private Command autoCommand;
     private SendableChooser autoChooser;
@@ -83,7 +84,7 @@ public class Robot extends IterativeRobot {
         lights = new Lights();
         ledStrip = new LEDStrip();
         pincers = new Pincers();
-        autoRotorChooser = new AutoRotorChooser();
+        autoRotorChooser = new AutoChooser();
 
 
         pdp = new PDP(); // must be initialized after other subsystems
@@ -115,12 +116,7 @@ public class Robot extends IterativeRobot {
             DriverStation.reportError(e.getMessage(), true);
         }
 */
-        autoChooser = new SendableChooser();
-        autoChooser.addObject("Do Nothing", new DisableRingLight());
-        autoChooser.addObject("Auto Cross Baseline", new AutoCrossBaseline());
-        autoChooser.addDefault("Auto Place Gear Center", new AutoDepositGear(AutoDepositGear.Position.CENTER));
-        autoChooser.addObject("Auto Align 60", new AutoAlign(60));
-        SmartDashboard.putData("Auto Selector", autoChooser);
+        Constants.isTony = pdp.isTony();
     }
 
     @Override
@@ -130,8 +126,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        ledStrip.setStripColor(LEDColors.AUTONOMOUS);
-        autoCommand = (Command)autoChooser.getSelected(); // new AutoDepositGear(AutoDepositGear.Position.CENTER);
+        autoCommand = new FlashLights();
         if (autoCommand!=null) {
             autoCommand.start();
         }
@@ -178,14 +173,13 @@ public class Robot extends IterativeRobot {
     public void updateDashboard(){
         driveTrain.updateDashboard();
         gearHandler.updateDashboard();
-        driveTrain.updateDashboard();
         shifter.updateDashboard();
         pincers.updateDashboard();
         lights.updateDashboard();
         ledStrip.updateDashboard();
+        SmartDashboard.putBoolean("IsTony", Constants.isTony);
         autoRotorChooser.updateDashboard();
 
-        SmartDashboard.putNumber("Indicator", pdp.getIndicator());
         SmartDashboard.putNumber("Yaw", imu.getAngle());
 
     }

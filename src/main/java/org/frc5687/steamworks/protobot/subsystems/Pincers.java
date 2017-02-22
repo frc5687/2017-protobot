@@ -7,6 +7,7 @@ import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.LowerPincers;
 import org.frc5687.steamworks.protobot.commands.RestPincers;
+import org.frc5687.steamworks.protobot.commands.RunPincersManually;
 
 import static org.frc5687.steamworks.protobot.Robot.pincers;
 
@@ -21,7 +22,7 @@ public class Pincers extends Subsystem implements PIDOutput {
     private VictorSP pincerMotor;
     private DoubleSolenoid piston;
     private AnalogPotentiometer potentiometer;
-    private double rest = Constants.Pincers.potentiometerLifted;
+    private double rest = Constants.pickConstant(Constants.Pincers.potentiometerLiftedTony, Constants.Pincers.potentiometerLiftedRhody);
 
     public Pincers(){
         pincerMotor = new VictorSP(RobotMap.Pincers.PINCER_MOTOR);
@@ -34,7 +35,7 @@ public class Pincers extends Subsystem implements PIDOutput {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new RestPincers());
+        setDefaultCommand(new RunPincersManually());
     }
 
     protected void createController() {
@@ -50,16 +51,16 @@ public class Pincers extends Subsystem implements PIDOutput {
     }
 
     public void raise() {
-        rest = Constants.Pincers.potentiometerLifted;
+        rest = Constants.pickConstant(Constants.Pincers.potentiometerLiftedTony, Constants.Pincers.potentiometerLiftedRhody);
         createController();
-        controller.setSetpoint(Constants.Pincers.potentiometerLifted);
+        controller.setSetpoint(rest);
         controller.enable();
     }
 
     public void lower() {
-        rest = Constants.Pincers.potentiometerLowered;
+        rest = Constants.pickConstant(Constants.Pincers.potentiometerLoweredTony, Constants.Pincers.potentiometerLoweredRhody);
         createController();
-        controller.setSetpoint(Constants.Pincers.potentiometerLowered);
+        controller.setSetpoint(rest);
         controller.enable();
     }
 
@@ -82,7 +83,7 @@ public class Pincers extends Subsystem implements PIDOutput {
     }
 
     public boolean isLifted(){
-        return potentiometer.get() == Constants.Pincers.potentiometerLifted;
+        return potentiometer.get() == Constants.pickConstant(Constants.Pincers.potentiometerLiftedTony, Constants.Pincers.potentiometerLiftedRhody);
     }
 
     public boolean isOpen() {
@@ -92,7 +93,9 @@ public class Pincers extends Subsystem implements PIDOutput {
     public boolean isClosed() {return piston.get() == DoubleSolenoid.Value.kForward;}
 
 
-    public boolean isLowered(){return potentiometer.get() == Constants.Pincers.potentiometerLowered;}
+    public boolean isLowered(){
+        return potentiometer.get() == Constants.pickConstant(Constants.Pincers.potentiometerLoweredTony, Constants.Pincers.potentiometerLoweredRhody);
+    }
 
     public AnalogPotentiometer getPotentiometer(){
         return potentiometer;

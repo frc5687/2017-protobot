@@ -6,11 +6,17 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
  * Created by Admin on 1/16/2017.
  */
 public class Constants {
+
+    public static boolean isTony = true;
+
+
     public class GearHandler {
         public static final double openSpeed = -.5;
         public static final double closeSpeed = .1;
         public static final double clampSpeed = .1;
         public static final long OPEN_TIME = 250;
+        public static final double TONY_MAX_POT_LIMIT = 0.5;
+        public static final double PROTOBOT_MAX_POT_LIMIT = 0.5;
         public static final double wiggleSpeed = 0.1; //TODO callibrate better speed and time
         public static final double wiggleTime = 60;
         public static final double wiggleTotalTime = 250;
@@ -78,15 +84,11 @@ public class Constants {
             public static final double INCHES_PER_PULSE = Defaults.INCHES_PER_PULSE;
         }
 
-        public class Potentiometer{
-            public static final double potentiometerMaxLimit = 0.5;
-        }
-
     }
 
     public class Climber {
+        public static final boolean MOTOR_INVERTED = true;
         public static final double ASCEND_SPEED = 1;
-        public static final double DESCEND_SPEED = -0.1;
         public static final double FUNNEL_RELEASE_SPEED = 1;
         public static final long FUNNEL_RELEASE_TIME = 167;
     }
@@ -95,9 +97,16 @@ public class Constants {
         public static final double triggerThreshhold = 0.5; //TODO find actual when pressed value
     }
 
+    public class Shifter {
+        public static final long STOP_MOTOR_TIME = 120; //TODO find correct values
+        public static final long SHIFT_TIME = 120; //TODO find correct values
+    }
+
     public class Pincers {
-        public static final double potentiometerLifted = .006;
-        public static final double potentiometerLowered = .270;
+        public static final double potentiometerLiftedTony = .006;
+        public static final double potentiometerLiftedRhody = 0.020;
+        public static final double potentiometerLoweredTony = .270;
+        public static final double potentiometerLoweredRhody = 0.038;
         public static final double maxSpeed = 0.25;
         public class PID {
             public static final double kP = 1.5;
@@ -171,6 +180,23 @@ public class Constants {
             public static final double tolerance = 0;
         }
 
+    }
+
+
+    public static double pickConstant(double tonyValue, double protobotValue) {
+        return isTony ? tonyValue : protobotValue;
+    }
+
+    public static int pickConstant(int tonyValue, int protobotValue) {
+        return isTony ? tonyValue : protobotValue;
+    }
+
+    public static boolean pickConstant(boolean tonyValue, boolean protobotValue) {
+        return isTony ? tonyValue : protobotValue;
+    }
+
+    public static long pickConstant(long tonyValue, long protobotValue) {
+        return isTony ? tonyValue : protobotValue;
     }
 
 }
