@@ -87,8 +87,8 @@ public class Constants {
     }
 
     public class Climber {
+        public static final boolean MOTOR_INVERTED = true;
         public static final double ASCEND_SPEED = 1;
-        public static final double DESCEND_SPEED = -0.1;
         public static final double FUNNEL_RELEASE_SPEED = 1;
         public static final long FUNNEL_RELEASE_TIME = 167;
     }
@@ -157,6 +157,30 @@ public class Constants {
             public static final double TOLERANCE = 0;
             public static final double MAX_OUTPUT = 0.1;
             public static final double SPEED = -0.7;
+        }
+
+        public class PositionRotor {
+            public static final double zeroTarget = 0;
+            public static final double oneTarget = 0;
+            public static final double twoTarget = 0;
+            public static final double threeTarget = 0;
+            public static final double fourTarget = 0;
+            public static final double fiveTarget = 0;
+            public static final double tolerance = 0;
+        }
+
+        public class GearRotor {
+            public static final double zeroTarget = 0;
+            public static final double oneTarget = 0;
+            public static final double twoTarget = 0;
+            public static final double threeTarget = 0;
+            public static final double tolerance = 0.1;
+        }
+
+        public class HopperRotor {
+            public static final double zeroTarget = 0;
+            public static final double oneTarget = 0;
+            public static final double tolerance = 0;
         }
 
     }
