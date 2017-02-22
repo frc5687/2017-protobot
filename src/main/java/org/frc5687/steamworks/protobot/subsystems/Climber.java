@@ -11,10 +11,12 @@ import org.frc5687.steamworks.protobot.commands.RunClimberManually;
  */
 public class Climber extends Subsystem {
 
-    private VictorSP climberMotor;
+    private VictorSP climberMotorFore;
+    private VictorSP climberMotorAft;
 
     public Climber() {
-        climberMotor = new VictorSP(RobotMap.Climber.CLIMBER_MOTOR);
+        climberMotorFore = new VictorSP(RobotMap.Climber.CLIMBER_MOTOR_FORE);
+        climberMotorAft = new VictorSP(RobotMap.Climber.CLIMBER_MOTOR_AFT);
     }
 
     public void initDefaultCommand() {
@@ -22,15 +24,15 @@ public class Climber extends Subsystem {
     }
 
     public void setSpeed(double speed) {
-        climberMotor.set(speed);
+        if (Constants.Climber.MOTOR_INVERTED) {
+            speed = -speed;
+        }
+        climberMotorFore.set(speed);
+        climberMotorAft.set(speed);
     }
 
     public void ascend() {
         setSpeed(Constants.Climber.ASCEND_SPEED);
-    }
-
-    public void descend() {
-        setSpeed(Constants.Climber.DESCEND_SPEED);
     }
 
     public void stop() {

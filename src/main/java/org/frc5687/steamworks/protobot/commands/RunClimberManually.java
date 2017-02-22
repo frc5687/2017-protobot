@@ -21,7 +21,6 @@ public class RunClimberManually extends Command{
 
     protected void execute() {
         if (oi.isAscendClimberPressed()) { climber.ascend(); }
-        else if (oi.isDescendClimberPressed()) { climber.descend(); }
         else { climber.stop(); }
     }
 
