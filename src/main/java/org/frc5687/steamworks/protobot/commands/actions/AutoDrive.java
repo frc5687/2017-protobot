@@ -52,8 +52,6 @@ public class AutoDrive extends Command implements PIDOutput {
     protected void end() {
         controller.disable();
         driveTrain.tankDrive(0,0);
-        DriverStation.reportError("Left Encoder Ticks: " + driveTrain.getLeftTicks() + "; Right Encoder Ticks: " + driveTrain.getRightTicks(), false);
-        DriverStation.reportError("Left Encoder Distance: " + driveTrain.getLeftDistance() + "; Right Encoder Distance: " + driveTrain.getRightDistance(), false);
     }
 
     @Override
