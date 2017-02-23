@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.DisableRingLight;
 import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
+import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
 import org.frc5687.steamworks.protobot.commands.autonomous.AutoCrossBaseline;
 import org.frc5687.steamworks.protobot.commands.autonomous.AutoDepositGear;
 import org.frc5687.steamworks.protobot.commands.autonomous.FlashLights;
@@ -125,7 +126,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        autoCommand = new FlashLights();
+        autoCommand = new AutoDrive(36, -0.2);
         if (autoCommand!=null) {
             autoCommand.start();
         }

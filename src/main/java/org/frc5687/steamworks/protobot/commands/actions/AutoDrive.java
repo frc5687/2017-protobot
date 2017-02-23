@@ -28,7 +28,7 @@ public class AutoDrive extends Command implements PIDOutput {
 
     @Override
     protected void initialize() {
-        this.finalDistance = distance + driveTrain.getRightDistance();
+        this.finalDistance = distance + driveTrain.getDistance();
         controller = new PIDController(Drive.kP, Drive.kI, Drive.kD, imu, this);
         controller.setInputRange(Constants.Auto.MAX_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
         controller.setOutputRange(-Drive.MAX_OUTPUT, Drive.MAX_OUTPUT);
@@ -43,8 +43,8 @@ public class AutoDrive extends Command implements PIDOutput {
     protected boolean isFinished() {
 
         return distance >=0
-                ? driveTrain.getRightDistance() > finalDistance
-                : driveTrain.getRightDistance() < finalDistance;
+                ? driveTrain.getDistance() > finalDistance
+                : driveTrain.getDistance() < finalDistance;
     }
 
     @Override
