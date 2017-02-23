@@ -103,11 +103,10 @@ public class Constants {
     }
 
     public class Pincers {
-
         public static final double potentiometerLiftedTony = .006;
-        public static final double potentiometerLiftedRhody = 0.18;
+        public static final double potentiometerLiftedRhody = 0.386;
         public static final double potentiometerLoweredTony = .270;
-        public static final double potentiometerLoweredRhody = 0.63;
+        public static final double potentiometerLoweredRhody = 0.64;
         public static final double maxSpeed = 0.25;
         public class PID {
             public static final double MIN_INPUT = 0;
@@ -136,6 +135,12 @@ public class Constants {
             public static final double DEPOSIT_GEAR_TURN = 0;
             public static final double DEPOSIT_GEAR_FINAL_DISTANCE = 0;
             public static final double DEPOSIT_GEAR_CENTER_DISTANCE = 98;
+            public class Rhody {
+                public static final double TARGET_IR_READING = 700;
+            }
+            public class Tony {
+                public static final double TARGET_IR_READING = 700;
+            }
         }
 
         public class Align {
