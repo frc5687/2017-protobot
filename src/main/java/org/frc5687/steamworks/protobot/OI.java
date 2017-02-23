@@ -92,10 +92,6 @@ public class OI {
         openPincers = new JoystickButton(joystick, OPEN_PINCERS);
         closePincers = new JoystickButton(joystick, CLOSE_PINCERS);
 
-        // Pneumatics Commands
-        expandPistonButton.whenPressed(new ExpandPiston());
-        retractPistonButton.whenPressed(new RetractPiston());
-
         shiftHigh.whenPressed(new Shift(DoubleSolenoid.Value.kForward));
         shiftLow.whenPressed(new Shift(DoubleSolenoid.Value.kReverse));
 

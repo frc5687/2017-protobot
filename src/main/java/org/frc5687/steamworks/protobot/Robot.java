@@ -36,10 +36,6 @@ public class Robot extends IterativeRobot {
      */
     public static GearHandler gearHandler;
 
-    /**
-     * Represents the pneumatics
-     */
-    public static Pneumatics pneumatics;
 
     public static Shifter shifter;
 
@@ -78,7 +74,6 @@ public class Robot extends IterativeRobot {
 
         driveTrain = new DriveTrain();
         gearHandler = new GearHandler();
-        pneumatics = new Pneumatics();
         shifter = new Shifter();
         climber = new Climber();
         lights = new Lights();
