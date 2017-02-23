@@ -33,7 +33,6 @@ public class RobotMap {
         public static final int PDP_LEFT_MOTOR_TOP = 1;
         public static final int PDP_LEFT_MOTOR_REAR = 0;
 
-        // Encoder channel ports as of 03/02, left reversed with right
         public static final int LEFT_ENCODER_CHANNEL_A = 6;
         public static final int LEFT_ENCODER_CHANNEL_B = 7;
         public static final int RIGHT_ENCODER_CHANNEL_A = 8;
