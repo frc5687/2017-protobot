@@ -126,7 +126,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        autoCommand = new AutoDrive(36, -0.2);
+        autoCommand = new AutoDrive(36, -0.1);
         if (autoCommand!=null) {
             autoCommand.start();
         }

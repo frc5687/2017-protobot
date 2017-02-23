@@ -28,6 +28,7 @@ public class AutoDrive extends Command implements PIDOutput {
 
     @Override
     protected void initialize() {
+        driveTrain.resetDriveEncoders();
         this.finalDistance = distance + driveTrain.getDistance();
         controller = new PIDController(Drive.kP, Drive.kI, Drive.kD, imu, this);
         controller.setInputRange(Constants.Auto.MAX_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
@@ -51,6 +52,8 @@ public class AutoDrive extends Command implements PIDOutput {
     protected void end() {
         controller.disable();
         driveTrain.tankDrive(0,0);
+        DriverStation.reportError("Left Encoder Ticks: " + driveTrain.getLeftTicks() + "; Right Encoder Ticks: " + driveTrain.getRightTicks(), false);
+        DriverStation.reportError("Left Encoder Distance: " + driveTrain.getLeftDistance() + "; Right Encoder Distance: " + driveTrain.getRightDistance(), false);
     }
 
     @Override
