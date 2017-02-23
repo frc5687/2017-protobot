@@ -13,8 +13,9 @@ public class Constants {
     public class GearHandler {
         public static final double openSpeed = -.5;
         public static final double closeSpeed = .1;
-        public static final double clampSpeed = .1;
+        public static final double clampSpeed = .025;
         public static final long OPEN_TIME = 250;
+        public static final long CLOSE_TIME = 250;
         public static final double TONY_MAX_POT_LIMIT = 0.5;
         public static final double PROTOBOT_MAX_POT_LIMIT = 0.5;
         public static final double wiggleSpeed = 0.1; //TODO callibrate better speed and time
