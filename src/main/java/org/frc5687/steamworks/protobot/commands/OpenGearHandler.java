@@ -30,7 +30,7 @@ public class OpenGearHandler extends Command {
     }
 
     protected boolean isFinished(){
-        return gearHandler.isAtMaxHall() || new Date().getTime() > endTime;
+        return new Date().getTime() > endTime;
     }
 
     protected void end() {

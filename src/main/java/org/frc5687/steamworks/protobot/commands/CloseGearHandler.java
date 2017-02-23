@@ -40,7 +40,7 @@ public class CloseGearHandler extends Command {
     }
 
     protected boolean isFinished(){
-        return gearHandler.isAtMinHall();
+        return false;
     }
 
     protected void end() {

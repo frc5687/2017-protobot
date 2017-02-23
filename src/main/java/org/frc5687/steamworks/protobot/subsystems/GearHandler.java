@@ -17,14 +17,10 @@ import static org.frc5687.steamworks.protobot.Robot.pdp;
 public class GearHandler extends Subsystem {
 
     private VictorSP gearMotor;
-    private DigitalInput minExtensionSensor;
-    private DigitalInput maxExtensionSensor;
     private AnalogPotentiometer limitPotentiometer;
 
     public GearHandler() {
         gearMotor = new VictorSP(RobotMap.GearHandler.GEAR_MOTOR);
-        minExtensionSensor = new DigitalInput(RobotMap.GearHandler.MIN_EXTENSION_HALL);
-        maxExtensionSensor = new DigitalInput(RobotMap.GearHandler.MAX_EXTENSION_HALL);
         limitPotentiometer = new AnalogPotentiometer(RobotMap.GearHandler.GEAR_POTENTIOMETER); 
         SmartDashboard.putBoolean("MaxHall", false);
         SmartDashboard.putBoolean("MinHall", false);
@@ -50,20 +46,9 @@ public class GearHandler extends Subsystem {
         gearMotor.set(0);
     }
 
-    public boolean isAtMaxHall() {
-        return !maxExtensionSensor.get();
-    }
-
-    public boolean isAtMinHall() {return !minExtensionSensor.get();
-    }
-
-    public boolean isAtMaxPot() {
-        return Constants.pickConstant(Constants.GearHandler.TONY_MAX_POT_LIMIT, Constants.GearHandler.PROTOBOT_MAX_POT_LIMIT) > limitPotentiometer.get();
-    }
     public double potentiometerValue(){
         return limitPotentiometer.get();
     }
-
 
     @Override
     protected void initDefaultCommand() {
@@ -71,9 +56,7 @@ public class GearHandler extends Subsystem {
     }
 
     public void updateDashboard() {
-        SmartDashboard.putBoolean("Mandibles/MaxHall", isAtMaxHall());
-        SmartDashboard.putBoolean("Mandibles/MinHall", isAtMinHall());
-        SmartDashboard.putBoolean("Mandibles/MaxPotentiometer", isAtMaxPot());
+        SmartDashboard.putNumber("Mandibles/MotorSpeed", gearMotor.getSpeed());
         SmartDashboard.putNumber("Mandibles/PotentiometerValue", potentiometerValue());
         SmartDashboard.putNumber("Mandibles/MotorAmperage", pdp.getGearHandlerAmps());
     }
