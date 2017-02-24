@@ -24,6 +24,7 @@ public class Constants {
     }
 
     public class GearHandler {
+
         public static final double OPEN_SPEED = -.5;
         public static final double CLOSE_SPEED = .1;
         public static final double CLAMP_SPEED = .1;
@@ -34,24 +35,30 @@ public class Constants {
         public static final double WIGGLE_SPEED = 0.2;
         public static final long WIGGLE_OUT_TIME = 30;
         public static final long WIGGLE_IN_TIME = 70;
+
     }
 
     public class Drive {
+
         public static final boolean LEFT_MOTORS_INVERTED = true;
         public static final boolean RIGHT_MOTORS_INVERTED = false;
 
         public static final double FULL_FORWARDS_SPEED = -1;
         public static final double FULL_BACKWARDS_SPEED = 1;
+
     }
 
     public class Deadbands {
+
         /**
          * Deadband threshold for drive joysticks
          */
         public static final double DRIVE_STICK = 0.15;
+
     }
 
     public class Limits {
+
         /***
          * Minimum time (in milliseconds) it should take to go from 0 to 1 (stop to full)
          */
@@ -62,9 +69,11 @@ public class Constants {
          * Maximum accelerations per cycle
          */
         public static final double ACCELERATION_CAP = TIME_OF_ACCEL / CYCLES_PER_SECOND * 100;
+
     }
 
     public class Calibration {
+
         /***
          * Controls the sensitivity algorithm.
          * 0 results in a linear control-to-speed relationship, while 1 results in cubed.
@@ -72,11 +81,13 @@ public class Constants {
          * NEVER SET ABOVE 1 OR BELOW 0
          */
         public static final double SENSITIVITY_FACTOR = .2;
+
     }
 
     public class Encoders {
 
         public class Defaults {
+
             public static final boolean REVERSED = true; //TODO change to new robot specifications
             public static final int SAMPLES_TO_AVERAGE = 20;
             public static final int PULSES_PER_ROTATION = 1440;
@@ -85,37 +96,49 @@ public class Constants {
             public static final double SCALAR_RATIO = 8;
             public static final double INCHES_PER_PULSE = INCHES_PER_ROTATION * SCALAR_RATIO / PULSES_PER_ROTATION;
             public static final double MAX_PERIOD = 5;
+
         }
 
         public class RightDrive {
+
             public static final boolean REVERSED = Defaults.REVERSED;
             public static final double INCHES_PER_PULSE = Encoders.Defaults.INCHES_PER_PULSE;
+
         }
 
         public class LeftDrive {
+
             public static final boolean REVERSED = Defaults.REVERSED;
             public static final double INCHES_PER_PULSE = Defaults.INCHES_PER_PULSE;
+
         }
 
     }
 
     public class Climber {
+
         public static final boolean MOTOR_INVERTED = true;
         public static final double ASCEND_SPEED = 1;
         public static final double FUNNEL_RELEASE_SPEED = 1;
         public static final long FUNNEL_RELEASE_TIME = 167;
+
     }
 
     public class OI {
+
         public static final double TRIGGER_THRESHHOLD = 0.5; //TODO find actual when pressed value
+
     }
 
     public class Shifter {
+
         public static final long STOP_MOTOR_TIME = 120; //TODO find correct values
         public static final long SHIFT_TIME = 120; //TODO find correct values
+
     }
 
     public class Pincers {
+
         public static final double POTENTIOMETER_LIFTED_TONY = .006;
         public static final double POTENTIOMETER_LIFTED_RHODY = 0.386;
         public static final double POTENTIOMETER_LOWERED_TONY = .270;
@@ -123,13 +146,16 @@ public class Constants {
         public static final double MAX_SPEED = 0.25;
 
         public class PID {
+
             public static final double MIN_INPUT = 0;
             public static final double MAX_INPUT = 0.5;
             public static final double kP = 1.5;
             public static final double kI = 0.1;
             public static final double kD = 0;
             public static final double TOLERANCE = 0.002;
+
         }
+
     }
 
     public class Auto {
@@ -138,6 +164,7 @@ public class Constants {
         public static final double MAX_IMU_ANGLE = 360;
 
         public class AnglesAndDistances {
+
             public static final double CROSS_BASELINE_DISTANCE = 100;
             public static final double CROSS_FIELD_DISTANCE = 0;
             public static final double RETREAT_DISTANCE = 18;
@@ -153,9 +180,11 @@ public class Constants {
             public class Tony {
                 public static final double TARGET_IR_READING = 700;
             }
+
         }
 
         public class Align {
+
             public static final double kP = 0;
             public static final double kI = 0;
             public static final double kD = 0;
@@ -165,18 +194,22 @@ public class Constants {
              *time the angle must be on target for to be considered steady
              */
             public static final double STEADY_TIME = 200;
+
         }
 
         public class Drive {
+
             public static final double kP = -0.1;
             public static final double kI = 0;
             public static final double kD = -0.05;
             public static final double TOLERANCE = 0;
             public static final double MAX_OUTPUT = 0.1;
             public static final double SPEED = -0.7;
+
         }
 
         public class PositionRotor {
+
             public static final double ZERO_TARGET = 0;
             public static final double ONE_TARGET = 0;
             public static final double TWO_TARGET = 0;
@@ -184,20 +217,25 @@ public class Constants {
             public static final double FOUR_TARGET = 0;
             public static final double FIVE_TARGET = 0;
             public static final double TOLERANCE = 0;
+
         }
 
         public class GearRotor {
+
             public static final double ZERO_TARGET = 0;
             public static final double ONE_TARGET = 0;
             public static final double TWO_TARGET = 0;
             public static final double THREE_TARGET = 0;
             public static final double TOLERANCE = 0.1;
+
         }
 
         public class HopperRotor {
+
             public static final double ZERO_TARGET = 0;
             public static final double ONE_TARGET = 0;
             public static final double TOLERANCE = 0;
+
         }
 
     }
