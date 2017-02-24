@@ -17,7 +17,7 @@ public class RaisePincers extends Command {
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return pincers.onTarget();
     }
 
 }

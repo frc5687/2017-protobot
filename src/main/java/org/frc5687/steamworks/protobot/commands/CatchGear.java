@@ -20,7 +20,7 @@ public class CatchGear extends CommandGroup {
 
         @Override
         protected boolean isFinished() {
-            return oi.isCatchGearPressed();
+            return !oi.isCatchGearPressed() || pincers.hasGear();
         }
 
     }

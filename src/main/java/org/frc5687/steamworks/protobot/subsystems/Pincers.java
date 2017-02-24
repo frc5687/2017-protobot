@@ -92,6 +92,9 @@ public class Pincers extends Subsystem implements PIDOutput {
         return piston.get() == DoubleSolenoid.Value.kForward;
     }
 
+    public boolean onTarget() {
+        return controller.onTarget();
+    }
 
     public boolean isLowered() {
         return potentiometer.get() == Constants.pickConstant(Constants.Pincers.POTENTIOMETER_LOWERED_TONY, Constants.Pincers.POTENTIOMETER_LOWERED_RHODY);
@@ -102,8 +105,9 @@ public class Pincers extends Subsystem implements PIDOutput {
     }
 
     public void updateDashboard() {
-        SmartDashboard.putNumber("Pincer/PotentiometerValue", potentiometer.get());
-        SmartDashboard.putNumber("Pincer/SetPoint", controller == null ? 0 : controller.getSetpoint());
+        SmartDashboard.putNumber("Pincers/PotentiometerValue", potentiometer.get());
+        SmartDashboard.putNumber("Pincers/IR Value", ir.getValue());
+        SmartDashboard.putNumber("Pincers/SetPoint", controller == null ? 0 : controller.getSetpoint());
     }
 
     @Override
@@ -112,7 +116,7 @@ public class Pincers extends Subsystem implements PIDOutput {
     }
 
     public boolean hasGear() {
-        return ir.getValue() < 0;
+        return ir.getValue() <= Constants.Pincers.IR_THRESHOLD;
     }
 
 }
