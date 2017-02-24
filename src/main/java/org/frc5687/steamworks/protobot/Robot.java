@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.autonomous.FlashLights;
 import org.frc5687.steamworks.protobot.subsystems.*;
@@ -19,7 +18,7 @@ import com.kauailabs.navx.frc.AHRS;
 public class Robot extends IterativeRobot {
 
     public static DriveTrain driveTrain;
-    public static GearHandler gearHandler;
+    public static Mandibles mandibles;
     public static Shifter shifter;
     public static Climber climber;
     public static Lights lights;
@@ -48,7 +47,7 @@ public class Robot extends IterativeRobot {
         robot = this;
 
         driveTrain = new DriveTrain();
-        gearHandler = new GearHandler();
+        mandibles = new Mandibles();
         shifter = new Shifter();
         climber = new Climber();
         lights = new Lights();
@@ -127,7 +126,7 @@ public class Robot extends IterativeRobot {
 
     public void updateDashboard() {
         driveTrain.updateDashboard();
-        gearHandler.updateDashboard();
+        mandibles.updateDashboard();
         shifter.updateDashboard();
         pincers.updateDashboard();
         lights.updateDashboard();

@@ -5,14 +5,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
 import java.util.Date;
 
-import static org.frc5687.steamworks.protobot.Robot.gearHandler;
+import static org.frc5687.steamworks.protobot.Robot.mandibles;
 
-public class OpenGearHandler extends Command {
+public class OpenMandibles extends Command {
 
     private long endTime;
 
-    public  OpenGearHandler() {
-        requires(gearHandler);
+    public OpenMandibles() {
+        requires(mandibles);
     }
 
     protected void initialize(){
@@ -21,7 +21,7 @@ public class OpenGearHandler extends Command {
     }
 
     protected void execute() {
-        gearHandler.open();
+        mandibles.open();
     }
 
     protected boolean isFinished(){
@@ -29,7 +29,7 @@ public class OpenGearHandler extends Command {
     }
 
     protected void end() {
-        gearHandler.stop();
+        mandibles.stop();
     }
 
     protected void interrupted() {

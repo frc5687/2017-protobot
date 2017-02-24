@@ -3,10 +3,10 @@ package org.frc5687.steamworks.protobot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
 
-import static org.frc5687.steamworks.protobot.Robot.gearHandler;
+import static org.frc5687.steamworks.protobot.Robot.mandibles;
 import static org.frc5687.steamworks.protobot.Robot.oi;
 
-public class CloseGearHandler extends Command {
+public class CloseMandibles extends Command {
 
     public enum State {
         CLOSE,
@@ -19,8 +19,8 @@ public class CloseGearHandler extends Command {
     private long endTime;
     private long switchTime;
 
-    public  CloseGearHandler() {
-        requires(gearHandler);
+    public CloseMandibles() {
+        requires(mandibles);
     }
 
     protected void initialize(){
@@ -30,18 +30,18 @@ public class CloseGearHandler extends Command {
     protected void execute() {
         switch (state) {
             case CLOSE:
-                gearHandler.close();
+                mandibles.close();
                 if(System.currentTimeMillis() >= endTime) state = State.CLAMP;
                 return;
             case CLAMP:
-                gearHandler.clamp();
+                mandibles.clamp();
                 if(oi.isGearWigglePressed()) {
                     state = State.WIGGLE_OUT;
                     switchTime = System.currentTimeMillis() + Constants.GearHandler.WIGGLE_OUT_TIME;
                 }
                 return;
             case WIGGLE_OUT:
-                gearHandler.wiggleOut();
+                mandibles.wiggleOut();
                 if (!oi.isGearWigglePressed()) state = State.CLAMP;
                 else if (System.currentTimeMillis() > switchTime) {
                     switchTime = System.currentTimeMillis() + Constants.GearHandler.WIGGLE_OUT_TIME;
@@ -49,7 +49,7 @@ public class CloseGearHandler extends Command {
                 }
                 return;
             case WIGGLE_IN:
-                gearHandler.wiggleIn();
+                mandibles.wiggleIn();
                 if (!oi.isGearWigglePressed()) state = State.CLAMP;
                 else if (System.currentTimeMillis() > switchTime) {
                     switchTime = System.currentTimeMillis() + Constants.GearHandler.WIGGLE_IN_TIME;
@@ -57,7 +57,7 @@ public class CloseGearHandler extends Command {
                 }
                 return;
         }
-        gearHandler.close();
+        mandibles.close();
     }
 
     protected boolean isFinished(){
@@ -65,7 +65,7 @@ public class CloseGearHandler extends Command {
     }
 
     protected void end() {
-        gearHandler.stop();
+        mandibles.stop();
     }
 
     protected void interrupted() {

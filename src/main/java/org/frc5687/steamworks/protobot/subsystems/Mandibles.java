@@ -6,18 +6,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
-import org.frc5687.steamworks.protobot.commands.RunGearHandlerManually;
+import org.frc5687.steamworks.protobot.commands.RunMandiblesManually;
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 
 /**
  * Created by Ben Bernard on 1/16/2017.
  */
-public class GearHandler extends Subsystem {
+public class Mandibles extends Subsystem {
 
     private VictorSP gearMotor;
     private AnalogPotentiometer limitPotentiometer;
 
-    public GearHandler() {
+    public Mandibles() {
         gearMotor = new VictorSP(RobotMap.GearHandler.GEAR_MOTOR);
         limitPotentiometer = new AnalogPotentiometer(RobotMap.GearHandler.GEAR_POTENTIOMETER); 
         SmartDashboard.putBoolean("MaxHall", false);
@@ -58,7 +58,7 @@ public class GearHandler extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new RunGearHandlerManually());
+        setDefaultCommand(new RunMandiblesManually());
     }
 
     public void updateDashboard() {

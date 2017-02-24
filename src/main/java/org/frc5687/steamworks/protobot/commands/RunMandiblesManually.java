@@ -1,13 +1,13 @@
 package org.frc5687.steamworks.protobot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import static org.frc5687.steamworks.protobot.Robot.gearHandler;
+import static org.frc5687.steamworks.protobot.Robot.mandibles;
 import static org.frc5687.steamworks.protobot.Robot.oi;
 
-public class RunGearHandlerManually extends Command {
+public class RunMandiblesManually extends Command {
 
-    public RunGearHandlerManually() {
-        requires(gearHandler);
+    public RunMandiblesManually() {
+        requires(mandibles);
     }
 
     @Override
@@ -17,11 +17,11 @@ public class RunGearHandlerManually extends Command {
 
     protected void execute() {
         if (oi.isGearInPressed()) {
-            gearHandler.close();
+            mandibles.close();
         } else if (oi.isGearOutPressed()) {
-            gearHandler.open();
+            mandibles.open();
         } else {
-            gearHandler.stop();
+            mandibles.stop();
         }
     }
 

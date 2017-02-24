@@ -85,16 +85,16 @@ public class OI {
         gpCloseGearButton = new JoystickButton(gamepad, GP_CLOSE_GEAR);
         gpOpenGearButton = new JoystickButton(gamepad, GP_OPEN_GEAR);
 
-        gpCloseGearButton.whenPressed(new CloseGearHandler());
-        gpOpenGearButton.whenPressed(new OpenGearHandler());
+        gpCloseGearButton.whenPressed(new CloseMandibles());
+        gpOpenGearButton.whenPressed(new OpenMandibles());
 
         jsCloseGearButton = new JoystickButton(joystick, JS_CLOSE_GEAR);
         jsOpenGearButton = new JoystickButton(joystick, JS_OPEN_GEAR);
 
         gearWiggle = new JoystickButton(gamepad, Gamepad.Buttons.A.getNumber());
 
-        jsCloseGearButton.whenPressed(new CloseGearHandler());
-        jsOpenGearButton.whenPressed(new OpenGearHandler());
+        jsCloseGearButton.whenPressed(new CloseMandibles());
+        jsOpenGearButton.whenPressed(new OpenMandibles());
 
         raisePincers.whenPressed(new RaisePincers());
         lowerPincers.whenPressed(new LowerPincers());
