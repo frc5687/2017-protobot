@@ -13,14 +13,14 @@ import static org.frc5687.steamworks.protobot.Robot.pdp;
  */
 public class DriveTrain extends Subsystem {
 
-    private VictorSP leftFrontMotor;
-    private VictorSP leftRearMotor;
-    private VictorSP leftTopMotor;
-    private VictorSP rightFrontMotor;
-    private VictorSP rightRearMotor;
-    private VictorSP rightTopMotor;
-    private Encoder rightEncoder;
-    private Encoder leftEncoder;
+    public VictorSP leftFrontMotor;
+    public VictorSP leftRearMotor;
+    public VictorSP leftTopMotor;
+    public VictorSP rightFrontMotor;
+    public VictorSP rightRearMotor;
+    public VictorSP rightTopMotor;
+    public Encoder rightEncoder;
+    public Encoder leftEncoder;
     private AnalogInput irSensor;
 
     public DriveTrain(){
