@@ -33,7 +33,6 @@ public class RobotMap {
         public static final int PDP_LEFT_MOTOR_TOP = 1;
         public static final int PDP_LEFT_MOTOR_REAR = 0;
 
-        // Encoder channel ports as of 03/02, left reversed with right
         public static final int LEFT_ENCODER_CHANNEL_A = 6;
         public static final int LEFT_ENCODER_CHANNEL_B = 7;
         public static final int RIGHT_ENCODER_CHANNEL_A = 8;
@@ -46,29 +45,18 @@ public class RobotMap {
      */
     public static class GearHandler {
         public static final int GEAR_MOTOR = 6;
-        public static final int MAX_EXTENSION_HALL = 2; //TODO Change to ports on robot
-        public static final int MIN_EXTENSION_HALL = 1;
         public static final int GEAR_POTENTIOMETER = 1;
         public static final int PDP_GEAR_MOTOR = 2;
         public static final int GEAR_IR = 2;
      }
 
-    /**
-     * Pneumatics ports
-     */
-    public static class Pneumatics {
-        public static final int PISTON_EXTENDER = 1;
-        public static final int PISTON_RETRACTOR = 0;
+    public static class Lights {
+        public static final int RED_STRIP = 10; // Note that this is an MXP port (0)
+        public static final int GREEN_STRIP = 11;
+        public static final int BLUE_STRIP = 13;
+
+        public static final int RINGLIGHT = 18; // These are DIO ports, not PWM ports. DIO ports are not consecutive!
     }
-        public static class Lights {
-            public static final int RED_STRIP = 10; // Note that this is an MXP port (0)
-            public static final int GREEN_STRIP = 11;
-            public static final int BLUE_STRIP = 13;
-
-            public static final int RINGLIGHT = 18; // These are DIO ports, not PWM ports. DIO ports are not consecutive!
-
-
-        }
 
     public static class Shifter {
         public static final int PISTON_EXTENDER = 7;
