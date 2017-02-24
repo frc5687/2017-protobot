@@ -71,6 +71,8 @@ public class OI {
     private JoystickButton ringLightOn;
     private JoystickButton ringLightOff;
 
+    private JoystickButton gearWiggle;
+
 
     public OI() {
         gamepad = new Gamepad(0);
@@ -103,6 +105,8 @@ public class OI {
 
         jsCloseGearButton = new JoystickButton(joystick, JS_CLOSE_GEAR);
         jsOpenGearButton = new JoystickButton(joystick, JS_OPEN_GEAR);
+
+        gearWiggle = new JoystickButton(gamepad, Gamepad.Buttons.A.getNumber());
 
         jsCloseGearButton.whenPressed(new CloseGearHandler());
         jsOpenGearButton.whenPressed(new OpenGearHandler());
@@ -157,6 +161,10 @@ public class OI {
 
     public boolean isDescendClimberPressed() {
         return descendClimber.get();
+    }
+
+    public boolean isGearWigglePressed() {
+        return gearWiggle.get();
     }
 
     public double getPincerSpeed() {

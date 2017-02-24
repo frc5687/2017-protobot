@@ -42,6 +42,14 @@ public class GearHandler extends Subsystem {
         gearMotor.set(Constants.GearHandler.clampSpeed);
     }
 
+    public void wiggleOut() {
+        gearMotor.set(Constants.GearHandler.wiggleSpeed);
+    }
+
+    public void wiggleIn() {
+        gearMotor.set(-Constants.GearHandler.wiggleSpeed);
+    }
+
     public void stop() {
         gearMotor.set(0);
     }
