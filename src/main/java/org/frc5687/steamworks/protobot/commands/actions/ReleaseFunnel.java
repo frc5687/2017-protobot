@@ -2,6 +2,7 @@ package org.frc5687.steamworks.protobot.commands.actions;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
+
 import static org.frc5687.steamworks.protobot.Robot.climber;
 
 public class ReleaseFunnel extends Command {
@@ -13,17 +14,17 @@ public class ReleaseFunnel extends Command {
     }
 
     @Override
-    protected void initialize(){
+    protected void initialize() {
         endTime = System.currentTimeMillis() + Constants.Climber.FUNNEL_RELEASE_TIME;
     }
 
     @Override
-    protected void execute(){
+    protected void execute() {
         climber.setSpeed(Constants.Climber.FUNNEL_RELEASE_SPEED);
     }
 
     @Override
-    protected boolean isFinished(){
+    protected boolean isFinished() {
         return System.currentTimeMillis() > endTime;
     }
 

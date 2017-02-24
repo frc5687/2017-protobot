@@ -8,41 +8,27 @@ import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
 
 /**
- * Handles communication with the driver station
+ * The operator interface class handles communication with the driver station
  */
 public class OI {
 
-    private Gamepad gamepad;
-    private Joystick joystick;
-
     public static final int GP_OPEN_GEAR = 8;
     public static final int GP_CLOSE_GEAR = 7;
-
-    public static final int JS_OPEN_GEAR = 8;
-    public static final int JS_CLOSE_GEAR = 7;
-
+    public static final int OC_OPEN_GEAR = 8;
+    public static final int OC_CLOSE_GEAR = 7;
     public static final int RAISE_PINCERS = 4;
     public static final int LOWER_PINCERS = 3;
-
     public static final int OPEN_PINCERS = 5;
     public static final int CLOSE_PINCERS = 6;
-
     public static final int RINGLIGHT_ON = 11;
     public static final int RINGLIGHT_OFF = 12;
-
-    public static final int REVERSE = Gamepad.Buttons.BACK.getNumber();
-
-    /**
-     * Pneumatic buttons
-     */
-    public static final int EXPAND_PISTON = 2;
-    public static final int RETRACT_PISTON = 1;
-
-    private JoystickButton gpCloseGearButton;
+    private Gamepad gamepad;
+    private Joystick operatorConsole;
     private JoystickButton gpOpenGearButton;
+    private JoystickButton gpCloseGearButton;
 
-    private JoystickButton jsCloseGearButton;
-    private JoystickButton jsOpenGearButton;
+    private JoystickButton ocOpenGearButton;
+    private JoystickButton ocCloseGearButton;
 
     private JoystickButton ascendClimber;
     private JoystickButton descendClimber;
@@ -63,9 +49,11 @@ public class OI {
 
     public OI() {
         gamepad = new Gamepad(0);
-        joystick = new Joystick(1);
+        operatorConsole = new Joystick(1);
 
-        // Joystick Buttons
+        /*
+         * X Box Gamepad Buttons
+         */
 
         ascendClimber = new JoystickButton(gamepad, Gamepad.Buttons.Y.getNumber());
         descendClimber = new JoystickButton(gamepad, Gamepad.Buttons.X.getNumber());
@@ -73,37 +61,45 @@ public class OI {
         shiftLow = new JoystickButton(gamepad, Gamepad.Buttons.LEFT_BUMPER.getNumber());
         shiftHigh = new JoystickButton(gamepad, Gamepad.Buttons.RIGHT_BUMPER.getNumber());
 
-        raisePincers = new JoystickButton(joystick, RAISE_PINCERS);
-        lowerPincers = new JoystickButton(joystick, LOWER_PINCERS);
+        gpOpenGearButton = new JoystickButton(gamepad, GP_OPEN_GEAR);
+        gpCloseGearButton = new JoystickButton(gamepad, GP_CLOSE_GEAR);
 
-        openPincers = new JoystickButton(joystick, OPEN_PINCERS);
-        closePincers = new JoystickButton(joystick, CLOSE_PINCERS);
+        gearWiggle = new JoystickButton(gamepad, Gamepad.Buttons.A.getNumber());
+
+        /*
+         * Operator Console Buttons
+         */
+
+        raisePincers = new JoystickButton(operatorConsole, RAISE_PINCERS);
+        lowerPincers = new JoystickButton(operatorConsole, LOWER_PINCERS);
+
+        openPincers = new JoystickButton(operatorConsole, OPEN_PINCERS);
+        closePincers = new JoystickButton(operatorConsole, CLOSE_PINCERS);
+
+        ringLightOn = new JoystickButton(operatorConsole, RINGLIGHT_ON);
+        ringLightOff = new JoystickButton(operatorConsole, RINGLIGHT_OFF);
+
+        ocCloseGearButton = new JoystickButton(operatorConsole, OC_CLOSE_GEAR);
+        ocOpenGearButton = new JoystickButton(operatorConsole, OC_OPEN_GEAR);
+
+        /*
+         * Button Functions
+         */
 
         shiftHigh.whenPressed(new Shift(DoubleSolenoid.Value.kForward));
         shiftLow.whenPressed(new Shift(DoubleSolenoid.Value.kReverse));
 
-        gpCloseGearButton = new JoystickButton(gamepad, GP_CLOSE_GEAR);
-        gpOpenGearButton = new JoystickButton(gamepad, GP_OPEN_GEAR);
-
         gpCloseGearButton.whenPressed(new CloseMandibles());
         gpOpenGearButton.whenPressed(new OpenMandibles());
 
-        jsCloseGearButton = new JoystickButton(joystick, JS_CLOSE_GEAR);
-        jsOpenGearButton = new JoystickButton(joystick, JS_OPEN_GEAR);
-
-        gearWiggle = new JoystickButton(gamepad, Gamepad.Buttons.A.getNumber());
-
-        jsCloseGearButton.whenPressed(new CloseMandibles());
-        jsOpenGearButton.whenPressed(new OpenMandibles());
+        ocCloseGearButton.whenPressed(new CloseMandibles());
+        ocOpenGearButton.whenPressed(new OpenMandibles());
 
         raisePincers.whenPressed(new RaisePincers());
         lowerPincers.whenPressed(new LowerPincers());
 
         openPincers.whenPressed(new OpenPincers());
         closePincers.whenPressed(new ClosePincers());
-
-        ringLightOn = new JoystickButton(joystick, RINGLIGHT_ON);
-        ringLightOff = new JoystickButton(joystick, RINGLIGHT_OFF);
 
         ringLightOn.whenPressed(new EnableRingLight());
         ringLightOff.whenPressed(new DisableRingLight());
@@ -154,7 +150,8 @@ public class OI {
     }
 
     public double getPincerSpeed() {
-        double result = -joystick.getAxis(Joystick.AxisType.kY);
+        double result = -operatorConsole.getAxis(Joystick.AxisType.kY);
         return Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
     }
+
 }

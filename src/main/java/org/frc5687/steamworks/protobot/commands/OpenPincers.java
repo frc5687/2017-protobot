@@ -1,9 +1,10 @@
 package org.frc5687.steamworks.protobot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 import static org.frc5687.steamworks.protobot.Robot.pincers;
 
-public class OpenPincers extends Command{
+public class OpenPincers extends Command {
 
     public OpenPincers() {
         requires(pincers);
@@ -25,6 +26,6 @@ public class OpenPincers extends Command{
 
     @Override
     protected void interrupted() {
-
     }
+
 }

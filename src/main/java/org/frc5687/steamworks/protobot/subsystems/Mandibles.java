@@ -7,11 +7,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.RunMandiblesManually;
+
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 
-/**
- * Created by Ben Bernard on 1/16/2017.
- */
 public class Mandibles extends Subsystem {
 
     private VictorSP gearMotor;
@@ -19,9 +17,14 @@ public class Mandibles extends Subsystem {
 
     public Mandibles() {
         gearMotor = new VictorSP(RobotMap.GearHandler.GEAR_MOTOR);
-        limitPotentiometer = new AnalogPotentiometer(RobotMap.GearHandler.GEAR_POTENTIOMETER); 
+        limitPotentiometer = new AnalogPotentiometer(RobotMap.GearHandler.GEAR_POTENTIOMETER);
         SmartDashboard.putBoolean("MaxHall", false);
         SmartDashboard.putBoolean("MinHall", false);
+    }
+
+    @Override
+    protected void initDefaultCommand() {
+        setDefaultCommand(new RunMandiblesManually());
     }
 
     public void setSpeed(double speed) {
@@ -52,13 +55,8 @@ public class Mandibles extends Subsystem {
         gearMotor.set(0);
     }
 
-    public double potentiometerValue(){
+    public double potentiometerValue() {
         return limitPotentiometer.get();
-    }
-
-    @Override
-    protected void initDefaultCommand() {
-        setDefaultCommand(new RunMandiblesManually());
     }
 
     public void updateDashboard() {

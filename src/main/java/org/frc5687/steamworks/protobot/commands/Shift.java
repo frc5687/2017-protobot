@@ -1,6 +1,5 @@
 package org.frc5687.steamworks.protobot.commands;
 
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,21 +8,12 @@ import org.frc5687.steamworks.protobot.Constants;
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.shifter;
 
-public class Shift extends Command{
+public class Shift extends Command {
 
     private DoubleSolenoid.Value gear = DoubleSolenoid.Value.kOff;
     private double initialLeftSpeed, initialRightSpeed;
     private long endTime;
     private State state = State.STOP_MOTOR;
-
-    public enum State {
-        STOP_MOTOR,
-        WAIT_FOR_MOTOR,
-        SHIFT,
-        WAIT_FOR_SHIFT,
-        START_MOTOR,
-        DONE;
-    }
 
     public Shift(DoubleSolenoid.Value gear) {
         requires(driveTrain);
@@ -39,18 +29,18 @@ public class Shift extends Command{
 
     @Override
     protected void execute() {
-        switch(state) {
+        switch (state) {
             case STOP_MOTOR:
                 DriverStation.reportError("Shift state STOP_MOTOR", false);
                 initialLeftSpeed = driveTrain.getLeftSpeed();
                 initialRightSpeed = driveTrain.getRightSpeed();
-                driveTrain.tankDrive(0,0,true);
+                driveTrain.tankDrive(0, 0, true);
                 endTime = System.currentTimeMillis() + Constants.Shifter.STOP_MOTOR_TIME;
                 state = State.WAIT_FOR_MOTOR;
                 break;
             case WAIT_FOR_MOTOR:
                 DriverStation.reportError("Shift state WAIT_FOR_MOTOR", false);
-                if(System.currentTimeMillis() >= endTime) state = State.SHIFT;
+                if (System.currentTimeMillis() >= endTime) state = State.SHIFT;
                 break;
             case SHIFT:
                 DriverStation.reportError("Shift state SHIFT", false);
@@ -59,7 +49,7 @@ public class Shift extends Command{
                 state = State.WAIT_FOR_SHIFT;
             case WAIT_FOR_SHIFT:
                 DriverStation.reportError("Shift state WAIT_FOR_SHIFT", false);
-                if(System.currentTimeMillis() >= endTime) state = State.START_MOTOR;
+                if (System.currentTimeMillis() >= endTime) state = State.START_MOTOR;
                 break;
             case START_MOTOR:
                 DriverStation.reportError("Shift state START_MOTOR", false);
@@ -76,6 +66,15 @@ public class Shift extends Command{
 
     @Override
     protected void interrupted() {
+    }
+
+    public enum State {
+        STOP_MOTOR,
+        WAIT_FOR_MOTOR,
+        SHIFT,
+        WAIT_FOR_SHIFT,
+        START_MOTOR,
+        DONE;
     }
 
 }

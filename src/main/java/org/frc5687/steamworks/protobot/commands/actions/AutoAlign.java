@@ -1,23 +1,23 @@
 package org.frc5687.steamworks.protobot.commands.actions;
 
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.imu;
 
-/**
- * Created by Ben on 2/6/2016.
- */
-public class AutoAlign extends Command implements PIDOutput{
+public class AutoAlign extends Command implements PIDOutput {
 
-    public static PIDController turnController;
     private static final double kP = 0.3;
     private static final double kI = 0.05;
     private static final double kD = 0.1;
     private static final double kF = 0.1;//Q: What is this for?
     private static final double rotationDeadband = 0.01;
     private static final double kToleranceDegrees = 2.0f;
+    public static PIDController turnController;
     private double rotateToAngleRate = 0; //Q: how does the PIDcontroller object know to use this variable?
     private double targetAngle = 0;
     private double currentAngle = 0;
@@ -29,12 +29,12 @@ public class AutoAlign extends Command implements PIDOutput{
     }
 
     @Override
-    protected void initialize(){
+    protected void initialize() {
         DriverStation.reportError("Starting autoalign", false);
         SmartDashboard.putNumber("AutoAlign/Target Angle", targetAngle);
         // imu.setPIDSourceType(PIDSourceType.kRate);
         turnController = new PIDController(kP, kI, kD, kF, imu, this);
-        turnController.setInputRange(-180.0f,  180.0f);
+        turnController.setInputRange(-180.0f, 180.0f);
         turnController.setOutputRange(-0.4, 0.4
         );
         turnController.setAbsoluteTolerance(kToleranceDegrees);
@@ -44,7 +44,7 @@ public class AutoAlign extends Command implements PIDOutput{
     }
 
     @Override
-    protected void execute(){
+    protected void execute() {
         synchronized (this) {
             // Base turning on the rotateToAngleRate...
             //turnController.enable();
@@ -58,7 +58,7 @@ public class AutoAlign extends Command implements PIDOutput{
     @Override
     protected boolean isFinished() {
         // Stop rotating when the PID speed drops below our deadband.
-        boolean done = Math.abs(targetAngle-currentAngle) < kToleranceDegrees;
+        boolean done = Math.abs(targetAngle - currentAngle) < kToleranceDegrees;
         if (done) {
             SmartDashboard.putNumber("AutoAlign/Done at", rotateToAngleRate);
             DriverStation.reportError("Ending autoalign", false);

@@ -1,6 +1,7 @@
 package org.frc5687.steamworks.protobot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 import static org.frc5687.steamworks.protobot.Robot.pincers;
 
 public class RaisePincers extends Command {
@@ -9,6 +10,7 @@ public class RaisePincers extends Command {
         requires(pincers);
     }
 
+    @Override
     protected void initialize() {
         pincers.raise();
     }

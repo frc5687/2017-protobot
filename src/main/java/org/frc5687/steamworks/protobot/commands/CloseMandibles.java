@@ -8,34 +8,29 @@ import static org.frc5687.steamworks.protobot.Robot.oi;
 
 public class CloseMandibles extends Command {
 
-    public enum State {
-        CLOSE,
-        CLAMP,
-        WIGGLE_OUT,
-        WIGGLE_IN;
-    }
-
     private State state;
     private long endTime;
     private long switchTime;
-
     public CloseMandibles() {
         requires(mandibles);
     }
 
-    protected void initialize(){
+    @Override
+    protected void initialize() {
         state = State.CLOSE;
         endTime = System.currentTimeMillis() + Constants.GearHandler.CLOSE_TIME;
     }
+
+    @Override
     protected void execute() {
         switch (state) {
             case CLOSE:
                 mandibles.close();
-                if(System.currentTimeMillis() >= endTime) state = State.CLAMP;
+                if (System.currentTimeMillis() >= endTime) state = State.CLAMP;
                 return;
             case CLAMP:
                 mandibles.clamp();
-                if(oi.isGearWigglePressed()) {
+                if (oi.isGearWigglePressed()) {
                     state = State.WIGGLE_OUT;
                     switchTime = System.currentTimeMillis() + Constants.GearHandler.WIGGLE_OUT_TIME;
                 }
@@ -60,16 +55,26 @@ public class CloseMandibles extends Command {
         mandibles.close();
     }
 
-    protected boolean isFinished(){
+    @Override
+    protected boolean isFinished() {
         return false;
     }
 
+    @Override
     protected void end() {
         mandibles.stop();
     }
 
+    @Override
     protected void interrupted() {
         end();
+    }
+
+    public enum State {
+        CLOSE,
+        CLAMP,
+        WIGGLE_OUT,
+        WIGGLE_IN;
     }
 
 }

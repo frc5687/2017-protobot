@@ -1,13 +1,27 @@
 package org.frc5687.steamworks.protobot;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-
 /**
  * This class includes all of the constant values used by the code
  */
 public class Constants {
 
     public static boolean isTony = true;
+
+    public static double pickConstant(double tonyValue, double protobotValue) {
+        return isTony ? tonyValue : protobotValue;
+    }
+
+    public static int pickConstant(int tonyValue, int protobotValue) {
+        return isTony ? tonyValue : protobotValue;
+    }
+
+    public static boolean pickConstant(boolean tonyValue, boolean protobotValue) {
+        return isTony ? tonyValue : protobotValue;
+    }
+
+    public static long pickConstant(long tonyValue, long protobotValue) {
+        return isTony ? tonyValue : protobotValue;
+    }
 
     public class GearHandler {
         public static final double OPEN_SPEED = -.5;
@@ -186,23 +200,6 @@ public class Constants {
             public static final double TOLERANCE = 0;
         }
 
-    }
-
-
-    public static double pickConstant(double tonyValue, double protobotValue) {
-        return isTony ? tonyValue : protobotValue;
-    }
-
-    public static int pickConstant(int tonyValue, int protobotValue) {
-        return isTony ? tonyValue : protobotValue;
-    }
-
-    public static boolean pickConstant(boolean tonyValue, boolean protobotValue) {
-        return isTony ? tonyValue : protobotValue;
-    }
-
-    public static long pickConstant(long tonyValue, long protobotValue) {
-        return isTony ? tonyValue : protobotValue;
     }
 
 }

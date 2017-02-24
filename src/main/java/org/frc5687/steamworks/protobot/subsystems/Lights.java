@@ -30,10 +30,12 @@ public class Lights extends Subsystem {
         ringLight.set(true);
     }
 
-    public void turnRingLightOff() { ringLight.set(false); }
-
+    public void turnRingLightOff() {
+        ringLight.set(false);
+    }
 
     public void updateDashboard() {
         SmartDashboard.putBoolean("lights/ringlight", ringLight.get());
     }
+
 }

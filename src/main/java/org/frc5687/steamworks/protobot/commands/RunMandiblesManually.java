@@ -1,6 +1,7 @@
 package org.frc5687.steamworks.protobot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 import static org.frc5687.steamworks.protobot.Robot.mandibles;
 import static org.frc5687.steamworks.protobot.Robot.oi;
 
@@ -15,6 +16,7 @@ public class RunMandiblesManually extends Command {
         super.initialize();
     }
 
+    @Override
     protected void execute() {
         if (oi.isGearInPressed()) {
             mandibles.close();
@@ -29,4 +31,5 @@ public class RunMandiblesManually extends Command {
     protected boolean isFinished() {
         return false;
     }
+
 }

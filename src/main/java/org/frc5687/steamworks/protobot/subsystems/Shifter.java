@@ -53,7 +53,7 @@ public class Shifter extends Subsystem {
     }
 
     public void updateDashboard() {
-        SmartDashboard.putString("shifter/Gear", shifterSolenoid.get() == DoubleSolenoid.Value.kForward ? "High" : (shifterSolenoid.get() == DoubleSolenoid.Value.kReverse ? "Low" : "Unknown") );
+        SmartDashboard.putString("shifter/Gear", shifterSolenoid.get() == DoubleSolenoid.Value.kForward ? "High" : (shifterSolenoid.get() == DoubleSolenoid.Value.kReverse ? "Low" : "Unknown"));
     }
 
 }

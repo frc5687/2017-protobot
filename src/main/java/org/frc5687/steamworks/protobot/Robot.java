@@ -1,5 +1,6 @@
 package org.frc5687.steamworks.protobot;
 
+import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SPI;
@@ -10,11 +11,7 @@ import org.frc5687.steamworks.protobot.commands.autonomous.FlashLights;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import org.frc5687.steamworks.protobot.utils.AutoChooser;
 import org.frc5687.steamworks.protobot.utils.PDP;
-import com.kauailabs.navx.frc.AHRS;
 
-/**
- * Represents the robot
- */
 public class Robot extends IterativeRobot {
 
     public static DriveTrain driveTrain;

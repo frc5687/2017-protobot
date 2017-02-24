@@ -4,7 +4,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.RobotMap;
-import org.frc5687.steamworks.protobot.utils.*;
+import org.frc5687.steamworks.protobot.utils.Color;
+import org.frc5687.steamworks.protobot.utils.LEDController;
 
 /**
  * Subsystem to control lights for vision tracking and shooter aid
@@ -25,9 +26,7 @@ public class LEDStrip extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        // setDefaultCommand(new PulseLEDStrip(Color.BLACK, Color.ORANGE, 700));
     }
-
 
     public void setStripColor(int red, int green, int blue) {
         redStrip.setRaw(red);
@@ -52,4 +51,5 @@ public class LEDStrip extends Subsystem {
             DriverStation.reportError(e.getMessage(), true);
         }
     }
+
 }
