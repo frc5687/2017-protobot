@@ -1,12 +1,10 @@
 package org.frc5687.steamworks.protobot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.frc5687.steamworks.protobot.Robot;
-import org.frc5687.steamworks.protobot.subsystems.Lights;
+
+import static org.frc5687.steamworks.protobot.Robot.lights;
 
 public class EnableRingLight extends Command {
-
-    private Lights lights = Robot.lights;
 
     public EnableRingLight() {
         requires(lights);
