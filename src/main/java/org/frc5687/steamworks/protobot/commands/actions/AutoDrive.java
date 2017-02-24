@@ -10,12 +10,9 @@ import org.frc5687.steamworks.protobot.Constants.Auto.Drive;
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.imu;
 
-/**
- * Created by Baxter on 2/15/2017.
- */
 public class AutoDrive extends Command implements PIDOutput {
 
-    double finalDistance;
+    private double finalDistance;
     private PIDController controller;
     private double distance;
     private double speed;
@@ -43,7 +40,7 @@ public class AutoDrive extends Command implements PIDOutput {
     @Override
     protected boolean isFinished() {
 
-        return distance >=0
+        return distance >= 0
                 ? driveTrain.getDistance() > finalDistance
                 : driveTrain.getDistance() < finalDistance;
     }
@@ -51,7 +48,7 @@ public class AutoDrive extends Command implements PIDOutput {
     @Override
     protected void end() {
         controller.disable();
-        driveTrain.tankDrive(0,0);
+        driveTrain.tankDrive(0, 0);
     }
 
     @Override

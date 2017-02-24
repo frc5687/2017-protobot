@@ -3,41 +3,43 @@ package org.frc5687.steamworks.protobot.commands;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
-import org.frc5687.steamworks.protobot.subsystems.GearHandler;
 
 import java.util.Date;
 
-import static org.frc5687.steamworks.protobot.Robot.gearHandler;
+import static org.frc5687.steamworks.protobot.Robot.mandibles;
 
-/**
- * Created by Caleb on 1/21/2017.
- */
-public class OpenGearHandler extends Command {
+public class OpenMandibles extends Command {
 
     private long endTime;
 
-    public  OpenGearHandler() {
-        requires(gearHandler);
+    public OpenMandibles() {
+        requires(mandibles);
     }
 
-    protected void initialize(){
+    @Override
+    protected void initialize() {
         DriverStation.reportError("Ejecting gear", false);
         endTime = new Date().getTime() + Constants.GearHandler.OPEN_TIME;
     }
 
+    @Override
     protected void execute() {
-        gearHandler.open();
+        mandibles.open();
     }
 
-    protected boolean isFinished(){
+    @Override
+    protected boolean isFinished() {
         return new Date().getTime() > endTime;
     }
 
+    @Override
     protected void end() {
-        gearHandler.stop();
+        mandibles.stop();
     }
 
+    @Override
     protected void interrupted() {
         end();
     }
+
 }

@@ -24,48 +24,48 @@ public class AutoChooser {
     }
 
     public boolean positionIsAtZero(){
-        return checkWithinTarget(Constants.Auto.PositionRotor.zeroTarget, Constants.Auto.PositionRotor.tolerance, positionSwitch);
+        return checkWithinTarget(Constants.Auto.PositionRotor.ZERO_TARGET, Constants.Auto.PositionRotor.TOLERANCE, positionSwitch);
 
     }
 
     public boolean gearIsAtZero(){
-        return checkWithinTarget(Constants.Auto.GearRotor.zeroTarget, Constants.Auto.GearRotor.tolerance, gearSwitch);
+        return checkWithinTarget(Constants.Auto.GearRotor.ZERO_TARGET, Constants.Auto.GearRotor.TOLERANCE, gearSwitch);
     }
 
 
     public boolean gearIsAtOne(){
-        return checkWithinTarget(Constants.Auto.GearRotor.oneTarget, Constants.Auto.GearRotor.tolerance, gearSwitch);
+        return checkWithinTarget(Constants.Auto.GearRotor.ONE_TARGET, Constants.Auto.GearRotor.TOLERANCE, gearSwitch);
     }
 
     public boolean gearIsAtTwo() {
-        return checkWithinTarget(Constants.Auto.GearRotor.twoTarget, Constants.Auto.GearRotor.tolerance, gearSwitch);
+        return checkWithinTarget(Constants.Auto.GearRotor.TWO_TARGET, Constants.Auto.GearRotor.TOLERANCE, gearSwitch);
     }
 
     public boolean gearIsAtThree() {
-        return checkWithinTarget(Constants.Auto.GearRotor.threeTarget, Constants.Auto.GearRotor.tolerance, gearSwitch);
+        return checkWithinTarget(Constants.Auto.GearRotor.THREE_TARGET, Constants.Auto.GearRotor.TOLERANCE, gearSwitch);
     }
 
     public boolean positionIsAtOne(){
-        return checkWithinTarget(Constants.Auto.PositionRotor.oneTarget, Constants.Auto.PositionRotor.tolerance, positionSwitch);
+        return checkWithinTarget(Constants.Auto.PositionRotor.ONE_TARGET, Constants.Auto.PositionRotor.TOLERANCE, positionSwitch);
     }
 
     public boolean positionIsAtTwo(){
-        return checkWithinTarget(Constants.Auto.PositionRotor.twoTarget, Constants.Auto.PositionRotor.tolerance, positionSwitch);
+        return checkWithinTarget(Constants.Auto.PositionRotor.TWO_TARGET, Constants.Auto.PositionRotor.TOLERANCE, positionSwitch);
     }
 
     public boolean positionIsAtThree(){
-        return checkWithinTarget(Constants.Auto.PositionRotor.threeTarget, Constants.Auto.PositionRotor.tolerance, positionSwitch);
+        return checkWithinTarget(Constants.Auto.PositionRotor.THREE_TARGET, Constants.Auto.PositionRotor.TOLERANCE, positionSwitch);
     }
 
     public boolean positionIsAtFour(){
-        return checkWithinTarget(Constants.Auto.PositionRotor.fourTarget, Constants.Auto.PositionRotor.tolerance, positionSwitch);
+        return checkWithinTarget(Constants.Auto.PositionRotor.FOUR_TARGET, Constants.Auto.PositionRotor.TOLERANCE, positionSwitch);
     }
 
     public boolean positionIsAtFive(){
-        return checkWithinTarget(Constants.Auto.PositionRotor.fiveTarget, Constants.Auto.PositionRotor.tolerance, positionSwitch);    }
+        return checkWithinTarget(Constants.Auto.PositionRotor.FIVE_TARGET, Constants.Auto.PositionRotor.TOLERANCE, positionSwitch);    }
 
     public boolean autoHopper(){
-        return checkWithinTarget(Constants.Auto.HopperRotor.oneTarget, Constants.Auto.HopperRotor.tolerance, gearSwitch);
+        return checkWithinTarget(Constants.Auto.HopperRotor.ONE_TARGET, Constants.Auto.HopperRotor.TOLERANCE, gearSwitch);
     }
 
     public int positionRotorValue(){

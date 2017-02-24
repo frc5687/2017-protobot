@@ -49,10 +49,10 @@ import org.frc5687.steamworks.protobot.Constants;
         }
 
         /**
-         * Checks if a value is within tolerance of another value
+         * Checks if a value is within TOLERANCE of another value
          * @param value the value to check
          * @param target the target or desired value
-         * @param tolerance the acceptable tolerance around the target
-         * @return true if the value is within tolerance of the target value
+         * @param TOLERANCE the acceptable TOLERANCE around the target
+         * @return true if the value is within TOLERANCE of the target value
          */
     }
