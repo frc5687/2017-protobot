@@ -160,8 +160,8 @@ public class Constants {
 
     public class Auto {
 
-        public static final double MIN_IMU_ANGLE = 0;
-        public static final double MAX_IMU_ANGLE = 360;
+        public static final double MIN_IMU_ANGLE = -180;
+        public static final double MAX_IMU_ANGLE = 180;
 
         public class AnglesAndDistances {
 
