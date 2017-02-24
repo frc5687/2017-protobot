@@ -6,9 +6,6 @@ import org.frc5687.steamworks.protobot.Constants;
 import static org.frc5687.steamworks.protobot.Robot.gearHandler;
 import static org.frc5687.steamworks.protobot.Robot.oi;
 
-/**
- * Created by Caleb on 1/21/2017.
- */
 public class CloseGearHandler extends Command {
 
     public enum State {
@@ -40,14 +37,14 @@ public class CloseGearHandler extends Command {
                 gearHandler.clamp();
                 if(oi.isGearWigglePressed()) {
                     state = State.WIGGLE_OUT;
-                    switchTime = System.currentTimeMillis() + Constants.GearHandler.wiggleOutTime;
+                    switchTime = System.currentTimeMillis() + Constants.GearHandler.WIGGLE_OUT_TIME;
                 }
                 return;
             case WIGGLE_OUT:
                 gearHandler.wiggleOut();
                 if (!oi.isGearWigglePressed()) state = State.CLAMP;
                 else if (System.currentTimeMillis() > switchTime) {
-                    switchTime = System.currentTimeMillis() + Constants.GearHandler.wiggleOutTime;
+                    switchTime = System.currentTimeMillis() + Constants.GearHandler.WIGGLE_OUT_TIME;
                     state = State.WIGGLE_IN;
                 }
                 return;
@@ -55,7 +52,7 @@ public class CloseGearHandler extends Command {
                 gearHandler.wiggleIn();
                 if (!oi.isGearWigglePressed()) state = State.CLAMP;
                 else if (System.currentTimeMillis() > switchTime) {
-                    switchTime = System.currentTimeMillis() + Constants.GearHandler.wiggleInTime;
+                    switchTime = System.currentTimeMillis() + Constants.GearHandler.WIGGLE_IN_TIME;
                     state = State.WIGGLE_OUT;
                 }
                 return;
@@ -74,4 +71,5 @@ public class CloseGearHandler extends Command {
     protected void interrupted() {
         end();
     }
+
 }

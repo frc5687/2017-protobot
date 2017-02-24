@@ -1,16 +1,12 @@
 package org.frc5687.steamworks.protobot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import static org.frc5687.steamworks.protobot.Robot.climber;
 import static org.frc5687.steamworks.protobot.Robot.oi;
 
-/**
- * Created by Baxter on 1/28/2017.
- */
-public class RunClimberManually extends Command{
+public class RunClimberManually extends Command {
 
-    public  RunClimberManually() {
+    public RunClimberManually() {
         requires(climber);
     }
 
@@ -20,8 +16,8 @@ public class RunClimberManually extends Command{
     }
 
     protected void execute() {
-        if (oi.isAscendClimberPressed()) { climber.ascend(); }
-        else { climber.stop(); }
+        if (oi.isAscendClimberPressed()) climber.ascend();
+        else climber.stop();
     }
 
     @Override

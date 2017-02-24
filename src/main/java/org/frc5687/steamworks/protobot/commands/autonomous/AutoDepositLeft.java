@@ -18,7 +18,6 @@ public class AutoDepositLeft extends SteamworksBaseCommandGroup {
         addSequential(new AutoDrive(48, Constants.Auto.Drive.SPEED));
         addSequential(new OpenGearHandler());
         addSequential(new AutoDrive(-Constants.Auto.AnglesAndDistances.RETREAT_DISTANCE, -Constants.Auto.Drive.SPEED));
-
     }
 
 }

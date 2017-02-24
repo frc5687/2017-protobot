@@ -10,9 +10,6 @@ import org.frc5687.steamworks.protobot.Constants.Auto.Drive;
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.imu;
 
-/**
- * Created by Baxter on 2/15/2017.
- */
 public class AutoDrive extends Command implements PIDOutput {
 
     double finalDistance;

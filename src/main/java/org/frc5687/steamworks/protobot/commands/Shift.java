@@ -9,9 +9,6 @@ import org.frc5687.steamworks.protobot.Constants;
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.shifter;
 
-/**
- * Command for expanding piston of double solenoid
- */
 public class Shift extends Command{
 
     private DoubleSolenoid.Value gear = DoubleSolenoid.Value.kOff;
@@ -19,7 +16,7 @@ public class Shift extends Command{
     private long endTime;
     private State state = State.STOP_MOTOR;
 
-    public static enum State {
+    public enum State {
         STOP_MOTOR,
         WAIT_FOR_MOTOR,
         SHIFT,

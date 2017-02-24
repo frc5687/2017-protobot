@@ -3,30 +3,27 @@ package org.frc5687.steamworks.protobot;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 /**
- * Created by Admin on 1/16/2017.
+ * This class includes all of the constant values used by the code
  */
 public class Constants {
 
     public static boolean isTony = true;
 
-
     public class GearHandler {
-        public static final double openSpeed = -.5;
-        public static final double closeSpeed = .1;
-        public static final double clampSpeed = .1;
+        public static final double OPEN_SPEED = -.5;
+        public static final double CLOSE_SPEED = .1;
+        public static final double CLAMP_SPEED = .1;
         public static final long OPEN_TIME = 250;
         public static final long CLOSE_TIME = 250;
         public static final double TONY_MAX_POT_LIMIT = 0.5;
         public static final double PROTOBOT_MAX_POT_LIMIT = 0.5;
-        public static final double wiggleSpeed = 0.2; //TODO callibrate better speed and time
-        public static final long wiggleOutTime = 30;
-        public static final long wiggleInTime = 70;
-        public static final double wiggleTotalTime = 250;
+        public static final double WIGGLE_SPEED = 0.2;
+        public static final long WIGGLE_OUT_TIME = 30;
+        public static final long WIGGLE_IN_TIME = 70;
     }
 
     public class Drive {
         public static final boolean LEFT_MOTORS_INVERTED = true;
-
         public static final boolean RIGHT_MOTORS_INVERTED = false;
 
         public static final double FULL_FORWARDS_SPEED = -1;
@@ -95,8 +92,8 @@ public class Constants {
         public static final long FUNNEL_RELEASE_TIME = 167;
     }
 
-    public class OI{
-        public static final double triggerThreshhold = 0.5; //TODO find actual when pressed value
+    public class OI {
+        public static final double TRIGGER_THRESHHOLD = 0.5; //TODO find actual when pressed value
     }
 
     public class Shifter {
@@ -105,11 +102,12 @@ public class Constants {
     }
 
     public class Pincers {
-        public static final double potentiometerLiftedTony = .006;
-        public static final double potentiometerLiftedRhody = 0.386;
-        public static final double potentiometerLoweredTony = .270;
-        public static final double potentiometerLoweredRhody = 0.64;
-        public static final double maxSpeed = 0.25;
+        public static final double POTENTIOMETER_LIFTED_TONY = .006;
+        public static final double POTENTIOMETER_LIFTED_RHODY = 0.386;
+        public static final double POTENTIOMETER_LOWERED_TONY = .270;
+        public static final double POTENTIOMETER_LOWERED_RHODY = 0.64;
+        public static final double MAX_SPEED = 0.25;
+
         public class PID {
             public static final double MIN_INPUT = 0;
             public static final double MAX_INPUT = 0.5;
@@ -118,10 +116,6 @@ public class Constants {
             public static final double kD = 0;
             public static final double TOLERANCE = 0.002;
         }
-    }
-    public class Misc {
-        public static final double minProtobotIndicator = 1000;
-        public static final double maxProtobotIndicator = 2000;
     }
 
     public class Auto {
@@ -137,9 +131,11 @@ public class Constants {
             public static final double DEPOSIT_GEAR_TURN = 0;
             public static final double DEPOSIT_GEAR_FINAL_DISTANCE = 0;
             public static final double DEPOSIT_GEAR_CENTER_DISTANCE = 98;
+
             public class Rhody {
                 public static final double TARGET_IR_READING = 700;
             }
+
             public class Tony {
                 public static final double TARGET_IR_READING = 700;
             }
@@ -167,27 +163,27 @@ public class Constants {
         }
 
         public class PositionRotor {
-            public static final double zeroTarget = 0;
-            public static final double oneTarget = 0;
-            public static final double twoTarget = 0;
-            public static final double threeTarget = 0;
-            public static final double fourTarget = 0;
-            public static final double fiveTarget = 0;
-            public static final double tolerance = 0;
+            public static final double ZERO_TARGET = 0;
+            public static final double ONE_TARGET = 0;
+            public static final double TWO_TARGET = 0;
+            public static final double THREE_TARGET = 0;
+            public static final double FOUR_TARGET = 0;
+            public static final double FIVE_TARGET = 0;
+            public static final double TOLERANCE = 0;
         }
 
         public class GearRotor {
-            public static final double zeroTarget = 0;
-            public static final double oneTarget = 0;
-            public static final double twoTarget = 0;
-            public static final double threeTarget = 0;
-            public static final double tolerance = 0.1;
+            public static final double ZERO_TARGET = 0;
+            public static final double ONE_TARGET = 0;
+            public static final double TWO_TARGET = 0;
+            public static final double THREE_TARGET = 0;
+            public static final double TOLERANCE = 0.1;
         }
 
         public class HopperRotor {
-            public static final double zeroTarget = 0;
-            public static final double oneTarget = 0;
-            public static final double tolerance = 0;
+            public static final double ZERO_TARGET = 0;
+            public static final double ONE_TARGET = 0;
+            public static final double TOLERANCE = 0;
         }
 
     }

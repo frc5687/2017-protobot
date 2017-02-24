@@ -2,26 +2,20 @@ package org.frc5687.steamworks.protobot.subsystems;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
-
-/**
- * Created by Ben Bernard on 2/16/2017.
- */
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.RobotMap;
-
 import org.frc5687.steamworks.protobot.utils.*;
-
 
 /**
  * Subsystem to control lights for vision tracking and shooter aid
+ *
  * @author wil
  */
 public class LEDStrip extends Subsystem {
+
     private LEDController redStrip;
     private LEDController greenStrip;
     private LEDController blueStrip;
-
 
     public LEDStrip() {
         redStrip = new LEDController(RobotMap.Lights.RED_STRIP);

@@ -4,10 +4,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Robot;
 import org.frc5687.steamworks.protobot.subsystems.Lights;
 
-/**
- * Created by Ben Bernard on 2/16/2017.
- */
 public class EnableRingLight extends Command {
+
     Lights lights = Robot.lights;
 
     public EnableRingLight() {

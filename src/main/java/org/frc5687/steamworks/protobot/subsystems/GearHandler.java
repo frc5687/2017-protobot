@@ -1,8 +1,6 @@
 package org.frc5687.steamworks.protobot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -31,23 +29,23 @@ public class GearHandler extends Subsystem {
     }
 
     public void open() {
-        gearMotor.set(Constants.GearHandler.openSpeed);
+        gearMotor.set(Constants.GearHandler.OPEN_SPEED);
     }
 
     public void close() {
-        gearMotor.set(Constants.GearHandler.closeSpeed);
+        gearMotor.set(Constants.GearHandler.CLOSE_SPEED);
     }
 
     public void clamp() {
-        gearMotor.set(Constants.GearHandler.clampSpeed);
+        gearMotor.set(Constants.GearHandler.CLAMP_SPEED);
     }
 
     public void wiggleOut() {
-        gearMotor.set(Constants.GearHandler.wiggleSpeed);
+        gearMotor.set(Constants.GearHandler.WIGGLE_SPEED);
     }
 
     public void wiggleIn() {
-        gearMotor.set(-Constants.GearHandler.wiggleSpeed);
+        gearMotor.set(-Constants.GearHandler.WIGGLE_SPEED);
     }
 
     public void stop() {

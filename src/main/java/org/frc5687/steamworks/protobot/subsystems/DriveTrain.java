@@ -86,7 +86,6 @@ public class DriveTrain extends Subsystem {
         return getRightRate() / (Constants.Encoders.Defaults.PULSES_PER_ROTATION * Constants.Encoders.Defaults.INCHES_PER_PULSE);
     }
 
-
     private Encoder initializeEncoder(int channelA, int channelB, boolean reversed, double distancePerPulse) {
         Encoder encoder = new Encoder(channelA, channelB, reversed, Encoder.EncodingType.k4X);
         encoder.setDistancePerPulse(distancePerPulse);

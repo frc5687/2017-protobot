@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
 import org.frc5687.steamworks.protobot.commands.autonomous.FlashLights;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import org.frc5687.steamworks.protobot.utils.AutoChooser;
@@ -15,48 +14,26 @@ import org.frc5687.steamworks.protobot.utils.PDP;
 import com.kauailabs.navx.frc.AHRS;
 
 /**
- * Created by Ben Bernard on 1/12/2017.
+ * Represents the robot
  */
 public class Robot extends IterativeRobot {
-    /**
-     * Represents the operator interface / controls
-     */
-    public static OI oi;
 
-    /**
-     * Represents the robot's drivetrain
-     */
     public static DriveTrain driveTrain;
-
-    /**
-     * Represents the robot's gear handler
-     */
     public static GearHandler gearHandler;
-
-
     public static Shifter shifter;
-
-    /**
-     * Represents the climbing mechanism
-     */
     public static Climber climber;
-
     public static Lights lights;
-
     public static LEDStrip ledStrip;
-
     public static Robot robot;
-
-    public static PDP pdp;
-
     public static Pincers pincers;
 
     public static AHRS imu;
+    public static PDP pdp;
+    public static OI oi;
 
     public static AutoChooser autoRotorChooser;
 
     private Command autoCommand;
-    private SendableChooser autoChooser;
 
     public Robot() {
     }
@@ -66,9 +43,9 @@ public class Robot extends IterativeRobot {
         super.startCompetition();
     }
 
+    @Override
     public void robotInit() {
         robot = this;
-
 
         driveTrain = new DriveTrain();
         gearHandler = new GearHandler();
@@ -79,12 +56,10 @@ public class Robot extends IterativeRobot {
         pincers = new Pincers();
         autoRotorChooser = new AutoChooser();
 
-
         pdp = new PDP(); // must be initialized after other subsystems
         oi = new OI(); // must be initialized after subsystems
 
         Constants.isTony = pdp.isTony(); // must be set before subsystems
-
 
         try {
             // Try to connect to the navX imu.
@@ -98,21 +73,6 @@ public class Robot extends IterativeRobot {
             imu = null;
         }
 
-        /*
-        try {
-            UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
-            camera0.setResolution(640, 480);
-        } catch (Exception e) {
-            DriverStation.reportError(e.getMessage(), true);
-        }
-        try {
-            UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
-            camera1.setResolution(640, 480);
-        } catch (Exception e) {
-            DriverStation.reportError(e.getMessage(), true);
-        }
-*/
-        Constants.isTony = pdp.isTony();
     }
 
     @Override
@@ -123,7 +83,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousInit() {
         autoCommand = new FlashLights();
-        if (autoCommand!=null) {
+        if (autoCommand != null) {
             autoCommand.start();
         }
     }
@@ -149,7 +109,7 @@ public class Robot extends IterativeRobot {
         updateDashboard();
     }
 
-        @Override
+    @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         updateDashboard();
@@ -163,21 +123,19 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void testPeriodic() {
-
     }
 
-    public void updateDashboard(){
+    public void updateDashboard() {
         driveTrain.updateDashboard();
         gearHandler.updateDashboard();
         shifter.updateDashboard();
         pincers.updateDashboard();
         lights.updateDashboard();
         ledStrip.updateDashboard();
-        SmartDashboard.putBoolean("IsTony", Constants.isTony);
         autoRotorChooser.updateDashboard();
 
+        SmartDashboard.putBoolean("IsTony", Constants.isTony);
         SmartDashboard.putNumber("Yaw", imu.getAngle());
-
     }
 
 }

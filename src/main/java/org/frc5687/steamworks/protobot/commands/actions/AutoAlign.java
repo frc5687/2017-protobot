@@ -10,6 +10,7 @@ import static org.frc5687.steamworks.protobot.Robot.imu;
  * Created by Ben on 2/6/2016.
  */
 public class AutoAlign extends Command implements PIDOutput{
+
     public static PIDController turnController;
     private static final double kP = 0.3;
     private static final double kI = 0.05;
@@ -27,6 +28,7 @@ public class AutoAlign extends Command implements PIDOutput{
         this.targetAngle = targetAngle;
     }
 
+    @Override
     protected void initialize(){
         DriverStation.reportError("Starting autoalign", false);
         SmartDashboard.putNumber("AutoAlign/Target Angle", targetAngle);
@@ -41,6 +43,7 @@ public class AutoAlign extends Command implements PIDOutput{
         turnController.enable();
     }
 
+    @Override
     protected void execute(){
         synchronized (this) {
             // Base turning on the rotateToAngleRate...
@@ -52,6 +55,7 @@ public class AutoAlign extends Command implements PIDOutput{
         }
     }
 
+    @Override
     protected boolean isFinished() {
         // Stop rotating when the PID speed drops below our deadband.
         boolean done = Math.abs(targetAngle-currentAngle) < kToleranceDegrees;
@@ -62,10 +66,12 @@ public class AutoAlign extends Command implements PIDOutput{
         return done;
     }
 
+    @Override
     protected void end() {
         turnController.disable();
     }
 
+    @Override
     protected void interrupted() {
         end();
     }

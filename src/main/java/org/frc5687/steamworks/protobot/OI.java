@@ -8,14 +8,12 @@ import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
 
 /**
- * Created by Ben Bernard on 1/12/2017.
+ * Handles communication with the driver station
  */
 public class OI {
+
     private Gamepad gamepad;
     private Joystick joystick;
-
-    boolean isReversed = Constants.Encoders.Defaults.REVERSED;
-
 
     public static final int GP_OPEN_GEAR = 8;
     public static final int GP_CLOSE_GEAR = 7;
@@ -34,27 +32,17 @@ public class OI {
 
     public static final int REVERSE = Gamepad.Buttons.BACK.getNumber();
 
-
     /**
      * Pneumatic buttons
      */
     public static final int EXPAND_PISTON = 2;
     public static final int RETRACT_PISTON = 1;
 
-    /**
-     * Shifter buttons
-     */
-    public static final int LOW_GEAR = 2;
-    public static final int HIGH_GEAR = 1;
-
     private JoystickButton gpCloseGearButton;
     private JoystickButton gpOpenGearButton;
 
     private JoystickButton jsCloseGearButton;
     private JoystickButton jsOpenGearButton;
-
-    private JoystickButton expandPistonButton;
-    private JoystickButton retractPistonButton;
 
     private JoystickButton ascendClimber;
     private JoystickButton descendClimber;
@@ -73,14 +61,11 @@ public class OI {
 
     private JoystickButton gearWiggle;
 
-
     public OI() {
         gamepad = new Gamepad(0);
         joystick = new Joystick(1);
 
         // Joystick Buttons
-        expandPistonButton = new JoystickButton(joystick, EXPAND_PISTON);
-        retractPistonButton = new JoystickButton(joystick, RETRACT_PISTON);
 
         ascendClimber = new JoystickButton(gamepad, Gamepad.Buttons.Y.getNumber());
         descendClimber = new JoystickButton(gamepad, Gamepad.Buttons.X.getNumber());
@@ -131,20 +116,21 @@ public class OI {
         result = Helpers.applySensitivityTransform(result);
         return result;
     }
-    public double getLeftSpeed(){
-        return transformStickToSpeed(Gamepad.Axes.LEFT_Y);
 
+    public double getLeftSpeed() {
+        return transformStickToSpeed(Gamepad.Axes.LEFT_Y);
     }
-    public double getRightSpeed(){
+
+    public double getRightSpeed() {
         return transformStickToSpeed(Gamepad.Axes.RIGHT_Y);
     }
 
-    public boolean isLeftTriggerPressed(){
-        return(gamepad.getRawAxis(Gamepad.Axes.LEFT_TRIGGER) > Constants.OI.triggerThreshhold);
+    public boolean isLeftTriggerPressed() {
+        return (gamepad.getRawAxis(Gamepad.Axes.LEFT_TRIGGER) > Constants.OI.TRIGGER_THRESHHOLD);
     }
 
-    public boolean isRightTriggerPressed(){
-        return(gamepad.getRawAxis(Gamepad.Axes.RIGHT_TRIGGER) > Constants.OI.triggerThreshhold);
+    public boolean isRightTriggerPressed() {
+        return (gamepad.getRawAxis(Gamepad.Axes.RIGHT_TRIGGER) > Constants.OI.TRIGGER_THRESHHOLD);
     }
 
     public boolean isGearInPressed() {

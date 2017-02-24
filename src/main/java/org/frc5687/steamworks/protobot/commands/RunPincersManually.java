@@ -5,11 +5,8 @@ import org.frc5687.steamworks.protobot.OI;
 
 import static org.frc5687.steamworks.protobot.Robot.pincers;
 import static org.frc5687.steamworks.protobot.Robot.oi;
-/**
- * Created by Ben Bernard on 2/21/2017.
- */
-public class RunPincersManually extends Command {
 
+public class RunPincersManually extends Command {
 
     public RunPincersManually() {
         requires(pincers);
@@ -33,4 +30,5 @@ public class RunPincersManually extends Command {
     protected void end() {
         pincers.setPincerSpeed(0);
     }
+
 }

@@ -1,17 +1,12 @@
 package org.frc5687.steamworks.protobot.commands;
 
-        import edu.wpi.first.wpilibj.DriverStation;
-        import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Command;
+import static org.frc5687.steamworks.protobot.Robot.gearHandler;
+import static org.frc5687.steamworks.protobot.Robot.oi;
 
-        import static org.frc5687.steamworks.protobot.Robot.gearHandler;
-        import static org.frc5687.steamworks.protobot.Robot.oi;
-
-/**
- * Created by Ben Bernard on 1/16/2017.
- */
 public class RunGearHandlerManually extends Command {
 
-    public  RunGearHandlerManually() {
+    public RunGearHandlerManually() {
         requires(gearHandler);
     }
 
@@ -21,9 +16,13 @@ public class RunGearHandlerManually extends Command {
     }
 
     protected void execute() {
-        if (oi.isGearInPressed()) { gearHandler.close(); }
-        else if (oi.isGearOutPressed()) { gearHandler.open(); }
-        else { gearHandler.stop(); }
+        if (oi.isGearInPressed()) {
+            gearHandler.close();
+        } else if (oi.isGearOutPressed()) {
+            gearHandler.open();
+        } else {
+            gearHandler.stop();
+        }
     }
 
     @Override
