@@ -6,7 +6,7 @@ import org.frc5687.steamworks.protobot.subsystems.Lights;
 
 public class DisableRingLight extends Command {
 
-    Lights lights = Robot.lights;
+    private Lights lights = Robot.lights;
 
     public DisableRingLight() {
         requires(lights);

@@ -11,6 +11,7 @@ public class CloseMandibles extends Command {
     private State state;
     private long endTime;
     private long switchTime;
+
     public CloseMandibles() {
         requires(mandibles);
     }

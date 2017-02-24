@@ -12,7 +12,7 @@ import static org.frc5687.steamworks.protobot.Robot.imu;
 
 public class AutoDrive extends Command implements PIDOutput {
 
-    double finalDistance;
+    private double finalDistance;
     private PIDController controller;
     private double distance;
     private double speed;

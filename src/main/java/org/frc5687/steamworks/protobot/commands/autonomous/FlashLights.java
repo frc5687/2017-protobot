@@ -7,8 +7,8 @@ import static org.frc5687.steamworks.protobot.Robot.ledStrip;
 
 public class FlashLights extends Command {
 
-    int state = 0;
-    long endTime;
+    private int state = 0;
+    private long endTime;
 
     public FlashLights() {
         requires(ledStrip);

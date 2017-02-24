@@ -14,16 +14,22 @@ public class OI {
 
     public static final int GP_OPEN_GEAR = 8;
     public static final int GP_CLOSE_GEAR = 7;
+
     public static final int OC_OPEN_GEAR = 8;
     public static final int OC_CLOSE_GEAR = 7;
+
     public static final int RAISE_PINCERS = 4;
     public static final int LOWER_PINCERS = 3;
+
     public static final int OPEN_PINCERS = 5;
     public static final int CLOSE_PINCERS = 6;
+
     public static final int RINGLIGHT_ON = 11;
     public static final int RINGLIGHT_OFF = 12;
+
     private Gamepad gamepad;
     private Joystick operatorConsole;
+
     private JoystickButton gpOpenGearButton;
     private JoystickButton gpCloseGearButton;
 
