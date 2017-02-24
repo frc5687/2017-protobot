@@ -81,6 +81,7 @@ public class RobotMap {
         public static final int POTENTIOMETER = 0;
         public static final int PISTON_RETRACTOR = 4;
         public static final int PISTON_EXTENDER = 5;
+        public static final int IR = 2;
 
     }
 

@@ -24,6 +24,8 @@ public class OI {
     public static final int OPEN_PINCERS = 5;
     public static final int CLOSE_PINCERS = 6;
 
+    public static final int CATCH_GEAR = 10;
+
     public static final int RINGLIGHT_ON = 11;
     public static final int RINGLIGHT_OFF = 12;
 
@@ -35,6 +37,8 @@ public class OI {
 
     private JoystickButton ocOpenGearButton;
     private JoystickButton ocCloseGearButton;
+
+    private JoystickButton catchGearButton;
 
     private JoystickButton ascendClimber;
     private JoystickButton descendClimber;
@@ -88,6 +92,8 @@ public class OI {
         ocCloseGearButton = new JoystickButton(operatorConsole, OC_CLOSE_GEAR);
         ocOpenGearButton = new JoystickButton(operatorConsole, OC_OPEN_GEAR);
 
+        catchGearButton = new JoystickButton(operatorConsole, CATCH_GEAR);
+
         /*
          * Button Functions
          */
@@ -106,6 +112,8 @@ public class OI {
 
         openPincers.whenPressed(new OpenPincers());
         closePincers.whenPressed(new ClosePincers());
+
+        catchGearButton.whenPressed(new CatchGear());
 
         ringLightOn.whenPressed(new EnableRingLight());
         ringLightOff.whenPressed(new DisableRingLight());
@@ -153,6 +161,10 @@ public class OI {
 
     public boolean isGearWigglePressed() {
         return gearWiggle.get();
+    }
+
+    public boolean isCatchGearPressed() {
+        return catchGearButton.get();
     }
 
     public double getPincerSpeed() {

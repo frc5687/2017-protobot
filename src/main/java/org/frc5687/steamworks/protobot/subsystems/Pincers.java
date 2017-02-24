@@ -15,11 +15,13 @@ public class Pincers extends Subsystem implements PIDOutput {
     private VictorSP pincerMotor;
     private DoubleSolenoid piston;
     private AnalogPotentiometer potentiometer;
+    private AnalogInput ir;
     private double rest;
 
     public Pincers() {
         pincerMotor = new VictorSP(RobotMap.Pincers.PINCER_MOTOR);
         potentiometer = new AnalogPotentiometer(RobotMap.Pincers.POTENTIOMETER);
+        ir = new AnalogInput(RobotMap.Pincers.IR);
         piston = new DoubleSolenoid(RobotMap.Pincers.PISTON_EXTENDER, RobotMap.Pincers.PISTON_RETRACTOR);
         rest = Constants.pickConstant(Constants.Pincers.POTENTIOMETER_LIFTED_TONY, Constants.Pincers.POTENTIOMETER_LIFTED_RHODY);
     }
@@ -107,6 +109,10 @@ public class Pincers extends Subsystem implements PIDOutput {
     @Override
     public void pidWrite(double v) {
         setPincerSpeed(v);
+    }
+
+    public boolean hasGear() {
+        return ir.getValue() < 0;
     }
 
 }
