@@ -18,20 +18,25 @@ public class AutoAlign extends Command implements PIDOutput {
     private PIDController controller;
     private double endTime;
     private double angle;
+    private double speed;
 
-    public AutoAlign(double angle) {
+    public AutoAlign(double angle, double speed) {
         requires(driveTrain);
         this.angle = angle;
+        this.speed = speed;
     }
 
     @Override
     protected void initialize() {
         controller = new PIDController(Align.kP, Align.kI, Align.kD, imu, this);
+//        controller.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
         controller.setInputRange(Constants.Auto.MIN_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
-        controller.setOutputRange(-Align.MAX_OUTPUT, Align.MAX_OUTPUT);
+        controller.setOutputRange(-speed, speed);
         controller.setAbsoluteTolerance(Align.TOLERANCE);
+//        controller.setAbsoluteTolerance(SmartDashboard.getNumber("DB/Slider 3", 10));
         controller.setContinuous();
         controller.setSetpoint(angle);
+        imu.reset();
         controller.enable();
         DriverStation.reportError("AutoAlign initialized", false);
     }

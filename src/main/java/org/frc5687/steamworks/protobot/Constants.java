@@ -185,15 +185,15 @@ public class Constants {
 
         public class Align {
 
-            public static final double kP = 0;
+            public static final double kP = 0.05;
             public static final double kI = 0;
-            public static final double kD = 0;
-            public static final double TOLERANCE = 0;
+            public static final double kD = 0.02;
+            public static final double TOLERANCE = 0.1;
             public static final double MAX_OUTPUT = 0;
             /*
              *time the angle must be on target for to be considered steady
              */
-            public static final double STEADY_TIME = 200;
+            public static final double STEADY_TIME = 100;
 
         }
 
