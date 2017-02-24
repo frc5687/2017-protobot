@@ -18,8 +18,9 @@ public class Constants {
         public static final long CLOSE_TIME = 250;
         public static final double TONY_MAX_POT_LIMIT = 0.5;
         public static final double PROTOBOT_MAX_POT_LIMIT = 0.5;
-        public static final double wiggleSpeed = 0.1; //TODO callibrate better speed and time
-        public static final double wiggleTime = 60;
+        public static final double wiggleSpeed = 0.2; //TODO callibrate better speed and time
+        public static final long wiggleOutTime = 30;
+        public static final long wiggleInTime = 70;
         public static final double wiggleTotalTime = 250;
     }
 
