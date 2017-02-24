@@ -146,6 +146,25 @@ public class DriveTrain extends Subsystem {
         tankDrive(speed, speed);
     }
 
+    public void testFrontRightMotor(double runSpeed){
+
+    }
+    public void testFrontLeftMotor(double runSpeed){
+
+    }
+    public void testTopRightMotor(double runSpeed){
+
+    }
+    public void testTopLeftMotor(double runSpeed){
+
+    }
+    public void testRearRightMotor(double runSpeed){
+
+    }
+    public void testRearLeftMotor(double runSpeed){
+
+    }
+
     public void updateDashboard() {
         SmartDashboard.putNumber("drive/Right distance", getRightDistance());
         SmartDashboard.putNumber("drive/Left distance", getLeftDistance());
