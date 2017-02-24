@@ -91,6 +91,11 @@ public class DriveTrain extends Subsystem {
         return rightFrontMotor.getSpeed() * (Constants.Drive.RIGHT_MOTORS_INVERTED ? -1 : 1);
     }
 
+    public void resetEncoders(){
+        leftEncoder.reset();
+        rightEncoder.reset();
+    }
+
     public void setRightSpeed(double speed) {
         speed = speed * (Constants.Drive.RIGHT_MOTORS_INVERTED ? -1 : 1);
         rightFrontMotor.setSpeed(speed);
@@ -146,23 +151,23 @@ public class DriveTrain extends Subsystem {
         tankDrive(speed, speed);
     }
 
-    public void testFrontRightMotor(double runSpeed){
-
+    public void runFrontRightMotor(double runSpeed){
+        rightFrontMotor.set(runSpeed);
     }
-    public void testFrontLeftMotor(double runSpeed){
-
+    public void runFrontLeftMotor(double runSpeed){
+        leftFrontMotor.set(runSpeed);
     }
-    public void testTopRightMotor(double runSpeed){
-
+    public void runTopRightMotor(double runSpeed){
+        rightTopMotor.set(runSpeed);
     }
-    public void testTopLeftMotor(double runSpeed){
-
+    public void runTopLeftMotor(double runSpeed){
+        leftTopMotor.set(runSpeed);
     }
-    public void testRearRightMotor(double runSpeed){
-
+    public void runRearRightMotor(double runSpeed){
+        rightRearMotor.set(runSpeed);
     }
-    public void testRearLeftMotor(double runSpeed){
-
+    public void runRearLeftMotor(double runSpeed){
+        leftRearMotor.set(runSpeed);
     }
 
     public void updateDashboard() {

@@ -29,13 +29,7 @@ public class TestDriveCIM extends Command {
 
     private double _maxAmps = 0;
 
-    public TestDriveCIM(String description, VictorSP victor, Encoder encoder,  int pdpPort, double runSpeed, int runMillis, double targetAmps, int targetTicks) {
-        _description = description;
-
-        _victor = victor;
-        _encoder = encoder;
-        _pdpPort = pdpPort;
-
+    public TestDriveCIM(double runSpeed, int runMillis, double targetAmps, int targetTicks) {
         _runSpeed = runSpeed;
         _runMillis = runMillis;
         _targetAmps = targetAmps;
