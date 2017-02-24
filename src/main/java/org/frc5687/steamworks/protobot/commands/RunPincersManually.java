@@ -1,15 +1,11 @@
 package org.frc5687.steamworks.protobot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.frc5687.steamworks.protobot.OI;
 
-import static org.frc5687.steamworks.protobot.Robot.pincers;
 import static org.frc5687.steamworks.protobot.Robot.oi;
-/**
- * Created by Ben Bernard on 2/21/2017.
- */
-public class RunPincersManually extends Command {
+import static org.frc5687.steamworks.protobot.Robot.pincers;
 
+public class RunPincersManually extends Command {
 
     public RunPincersManually() {
         requires(pincers);
@@ -30,7 +26,9 @@ public class RunPincersManually extends Command {
         return false;
     }
 
+    @Override
     protected void end() {
         pincers.setPincerSpeed(0);
     }
+
 }
