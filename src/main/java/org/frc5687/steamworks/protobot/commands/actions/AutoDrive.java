@@ -29,15 +29,16 @@ public class AutoDrive extends Command {
 
     @Override
     protected void initialize() {
+        driveTrain.resetDriveEncoders();
         distancePID = new PIDListener();
         distanceController = new PIDController(Drive.DistancePID.kP, Drive.DistancePID.kI, Drive.DistancePID.kD, driveTrain, distancePID);
 //        distanceController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
         distanceController.setAbsoluteTolerance(Drive.DistancePID.TOLERANCE);
         distanceController.setOutputRange(-speed, speed);
-        driveTrain.resetDriveEncoders();
         distanceController.setSetpoint(distance);
         distanceController.enable();
 
+        imu.reset();
         anglePID = new PIDListener();
         angleController = new PIDController(Drive.AnglePID.kP, Drive.AnglePID.kI, Drive.AnglePID.kD, imu, anglePID);
 //        angleController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
@@ -46,7 +47,6 @@ public class AutoDrive extends Command {
         DriverStation.reportError("Turn PID Max Output: " + speed, false);
         angleController.setOutputRange(-maxSpeed, maxSpeed);
         angleController.setContinuous();
-        imu.reset();
         angleController.setSetpoint(imu.getAngle());
         angleController.enable();
 
