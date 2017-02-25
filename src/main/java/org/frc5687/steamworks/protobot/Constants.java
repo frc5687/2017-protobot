@@ -207,7 +207,7 @@ public class Constants {
             public static final long STEADY_TIME = 200;
 
             public class IRPID {
-                public static final double kP = -0.05;
+                public static final double kP = -0.01;
                 public static final double kI = 0;
                 public static final double kD = 0;
                 public static final double TOLERANCE = 50;

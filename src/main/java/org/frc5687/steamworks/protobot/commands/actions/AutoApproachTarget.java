@@ -18,7 +18,7 @@ public class AutoApproachTarget extends Command {
     private PIDController angleController;
     private PIDListener distancePID;
     private PIDListener anglePID;
-    private double endTime;
+//    private double endTime;
 
     public AutoApproachTarget(double distance, double speed) {
         requires(driveTrain);
@@ -30,7 +30,7 @@ public class AutoApproachTarget extends Command {
     protected void initialize() {
         distancePID = new PIDListener();
         distanceController = new PIDController(Constants.Auto.Drive.IRPID.kP, Constants.Auto.Drive.IRPID.kI, Constants.Auto.Drive.IRPID.kD, driveTrain.getIrSensor(), distancePID);
-//        distanceController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
+        distanceController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
         distanceController.setAbsoluteTolerance(Constants.Auto.Drive.IRPID.TOLERANCE);
         distanceController.setOutputRange(-speed, speed);
         driveTrain.resetDriveEncoders();
@@ -39,7 +39,7 @@ public class AutoApproachTarget extends Command {
 
         anglePID = new PIDListener();
         angleController = new PIDController(Constants.Auto.Drive.AnglePID.kP, Constants.Auto.Drive.AnglePID.kI, Constants.Auto.Drive.AnglePID.kD, imu, anglePID);
-        angleController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
+//        angleController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
         angleController.setInputRange(Constants.Auto.MIN_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
         double maxSpeed = speed * Constants.Auto.Drive.AnglePID.MAX_DIFFERENCE;
         DriverStation.reportError("Turn PID Max Output: " + speed, false);
@@ -49,12 +49,12 @@ public class AutoApproachTarget extends Command {
         angleController.setSetpoint(imu.getAngle());
         angleController.enable();
 
-        DriverStation.reportError("Auto Drive", false);
+        DriverStation.reportError("Auto Approach Target", false);
     }
 
     @Override
     protected void execute() {
-        if(!distanceController.onTarget()) endTime = System.currentTimeMillis() + Constants.Auto.Drive.STEADY_TIME;
+//        if(!distanceController.onTarget()) endTime = System.currentTimeMillis() + Constants.Auto.Drive.STEADY_TIME;
         driveTrain.tankDrive(distancePID.get() + anglePID.get(), distancePID.get() - anglePID.get());
 
         SmartDashboard.putBoolean("AutoDrive/onTarget", distanceController.onTarget());
@@ -65,7 +65,8 @@ public class AutoApproachTarget extends Command {
 
     @Override
     protected boolean isFinished() {
-        return System.currentTimeMillis() >= endTime;
+//        return System.currentTimeMillis() >= endTime;
+        return driveTrain.getIrSensor().getValue() >= distance;
     }
 
     @Override
