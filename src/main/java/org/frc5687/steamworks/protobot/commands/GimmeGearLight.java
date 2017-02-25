@@ -1,5 +1,6 @@
 package org.frc5687.steamworks.protobot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.LEDColors;
 import org.frc5687.steamworks.protobot.utils.Color;
@@ -15,6 +16,7 @@ public class GimmeGearLight extends Command {
     Color previousColor;
 
     protected void initialize() {
+        DriverStation.reportError("Gimme gear! started", false);
         previousColor = ledStrip.getStripColor();
     }
 
@@ -24,11 +26,13 @@ public class GimmeGearLight extends Command {
     }
 
     protected boolean isFinished() {
-        return oi.isGimmeGearPressed();
+        return false;
+        // return oi.isGimmeGearPressed();
     }
 
     @Override
     protected void end() {
+        DriverStation.reportError("Gimme gear! done", false);
         ledStrip.setStripColor(previousColor);
     }
 }
