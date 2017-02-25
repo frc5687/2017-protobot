@@ -45,7 +45,7 @@ public class AutoApproachTarget extends Command {
         DriverStation.reportError("Turn PID Max Output: " + speed, false);
         angleController.setOutputRange(-maxSpeed, maxSpeed);
         angleController.setContinuous();
-        angleController.setSetpoint(imu.getAngle());
+        angleController.setSetpoint(imu.getYaw());
         angleController.enable();
 
         DriverStation.reportError("AutoApproach initialized", false);
@@ -57,7 +57,7 @@ public class AutoApproachTarget extends Command {
         driveTrain.tankDrive(distancePID.get() + anglePID.get(), distancePID.get() - anglePID.get());
 
         SmartDashboard.putBoolean("AutoDrive/onTarget", distanceController.onTarget());
-        SmartDashboard.putNumber("AutoDrive/imu", imu.getAngle());
+        SmartDashboard.putNumber("AutoDrive/imu", imu.getYaw());
         SmartDashboard.putNumber("AutoDrive/distance", driveTrain.pidGet());
         SmartDashboard.putNumber("AutoDrive/turnPID", anglePID.get());
     }

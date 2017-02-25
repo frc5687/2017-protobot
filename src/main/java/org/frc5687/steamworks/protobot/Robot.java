@@ -8,9 +8,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.RaisePincers;
+import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
 import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
 import org.frc5687.steamworks.protobot.commands.autonomous.AutoDepositCenterFromLeft;
 import org.frc5687.steamworks.protobot.commands.autonomous.AutoDepositGear;
+import org.frc5687.steamworks.protobot.commands.autonomous.AutoDepositRightFromFarRight;
 import org.frc5687.steamworks.protobot.commands.autonomous.FlashLights;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import org.frc5687.steamworks.protobot.utils.AutoChooser;
@@ -102,12 +104,13 @@ public class Robot extends IterativeRobot {
             case 5:
                 autoCommand = null;
                 break;
-
-
-
+            default:
+                autoCommand = new AutoAlign(-60, 0.5);
+                break;
         }
-
-        autoCommand = new AutoDepositGear();
+        // autoCommand = new AutoAlign(-60, 0.5);
+        // autoCommand = new AutoDepositRightFromFarRight();
+        autoCommand = new AutoDrive(36, .5);
         if (autoCommand != null) {
             autoCommand.start();
         }
@@ -161,7 +164,7 @@ public class Robot extends IterativeRobot {
         autoRotorChooser.updateDashboard();
 
         SmartDashboard.putBoolean("IsTony", Constants.isTony);
-        SmartDashboard.putNumber("Yaw", imu.getAngle());
+        SmartDashboard.putNumber("Yaw", imu.getYaw());
     }
 
 }
