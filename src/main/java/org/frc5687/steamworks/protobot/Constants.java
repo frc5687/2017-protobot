@@ -141,7 +141,7 @@ public class Constants {
     public class Pincers {
 
         public static final double POTENTIOMETER_LIFTED_TONY = .006;
-        public static final double POTENTIOMETER_LIFTED_RHODY = 0.396;
+        public static final double POTENTIOMETER_LIFTED_RHODY = 0.386;
         public static final double POTENTIOMETER_LOWERED_TONY = .270;
         public static final double POTENTIOMETER_LOWERED_RHODY = 0.64;
         public static final double MAX_SPEED = 0.5;
@@ -152,7 +152,7 @@ public class Constants {
             public static final double MIN_INPUT = 0;
             public static final double MAX_INPUT = 1;
             public static final double kP = 1.5;
-            public static final double kI = 0;
+            public static final double kI = 0.15;
             public static final double kD = 0;
             public static final double TOLERANCE = 0.02;
 
@@ -173,7 +173,7 @@ public class Constants {
             public static final double DEPOSIT_GEAR_INITIAL_DISTANCE = 0;
             public static final double DEPOSIT_GEAR_TURN = 0;
             public static final double DEPOSIT_GEAR_FINAL_DISTANCE = 0;
-            public static final double DEPOSIT_GEAR_CENTER_DISTANCE = 98;
+            public static final double DEPOSIT_GEAR_CENTER_DISTANCE = 83;
 
             public class Rhody {
                 public static final double TARGET_IR_READING = 700;
@@ -201,12 +201,19 @@ public class Constants {
 
         public class Drive {
 
-            public static final double SPEED = 0.5;
+            public static final double SPEED = 0.7;
 
             public static final long STEADY_TIME = 200;
 
-            public class DistancePID {
+            public class IRPID {
                 public static final double kP = -0.05;
+                public static final double kI = 0;
+                public static final double kD = 0;
+                public static final double TOLERANCE = 10;
+            }
+
+            public class DistancePID {
+                public static final double kP = 0.05;
                 public static final double kI = 0;
                 public static final double kD = 0;
                 public static final double TOLERANCE = 1;

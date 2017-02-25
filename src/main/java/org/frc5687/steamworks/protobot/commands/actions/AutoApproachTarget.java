@@ -6,12 +6,11 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
-import org.frc5687.steamworks.protobot.Constants.Auto.Drive;
 
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.imu;
 
-public class AutoDrive extends Command {
+public class AutoApproachTarget extends Command {
 
     private double distance;
     private double speed;
@@ -21,7 +20,7 @@ public class AutoDrive extends Command {
     private PIDListener anglePID;
     private double endTime;
 
-    public AutoDrive(double distance, double speed) {
+    public AutoApproachTarget(double distance, double speed) {
         requires(driveTrain);
         this.speed = speed;
         this.distance = distance;
@@ -30,19 +29,19 @@ public class AutoDrive extends Command {
     @Override
     protected void initialize() {
         distancePID = new PIDListener();
-        distanceController = new PIDController(Drive.DistancePID.kP, Drive.DistancePID.kI, Drive.DistancePID.kD, driveTrain, distancePID);
+        distanceController = new PIDController(Constants.Auto.Drive.IRPID.kP, Constants.Auto.Drive.IRPID.kI, Constants.Auto.Drive.IRPID.kD, driveTrain.getIrSensor(), distancePID);
 //        distanceController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
-        distanceController.setAbsoluteTolerance(Drive.DistancePID.TOLERANCE);
+        distanceController.setAbsoluteTolerance(Constants.Auto.Drive.IRPID.TOLERANCE);
         distanceController.setOutputRange(-speed, speed);
         driveTrain.resetDriveEncoders();
         distanceController.setSetpoint(distance);
         distanceController.enable();
 
         anglePID = new PIDListener();
-        angleController = new PIDController(Drive.AnglePID.kP, Drive.AnglePID.kI, Drive.AnglePID.kD, imu, anglePID);
+        angleController = new PIDController(Constants.Auto.Drive.AnglePID.kP, Constants.Auto.Drive.AnglePID.kI, Constants.Auto.Drive.AnglePID.kD, imu, anglePID);
         angleController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
         angleController.setInputRange(Constants.Auto.MIN_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
-        double maxSpeed = speed * Drive.AnglePID.MAX_DIFFERENCE;
+        double maxSpeed = speed * Constants.Auto.Drive.AnglePID.MAX_DIFFERENCE;
         DriverStation.reportError("Turn PID Max Output: " + speed, false);
         angleController.setOutputRange(-maxSpeed, maxSpeed);
         angleController.setContinuous();
@@ -55,7 +54,7 @@ public class AutoDrive extends Command {
 
     @Override
     protected void execute() {
-        if(!distanceController.onTarget()) endTime = System.currentTimeMillis() + Drive.STEADY_TIME;
+        if(!distanceController.onTarget()) endTime = System.currentTimeMillis() + Constants.Auto.Drive.STEADY_TIME;
         driveTrain.tankDrive(distancePID.get() + anglePID.get(), distancePID.get() - anglePID.get());
 
         SmartDashboard.putBoolean("AutoDrive/onTarget", distanceController.onTarget());

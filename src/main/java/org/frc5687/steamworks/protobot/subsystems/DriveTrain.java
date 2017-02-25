@@ -174,6 +174,10 @@ public class DriveTrain extends Subsystem implements PIDSource {
         SmartDashboard.putNumber("drive/IR Sensor", irSensor.getValue());
     }
 
+    public AnalogInput getIrSensor() {
+        return irSensor;
+    }
+
     @Override
     public double pidGet() {
         return getDistance();
