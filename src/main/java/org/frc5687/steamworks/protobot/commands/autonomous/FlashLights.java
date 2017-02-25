@@ -2,30 +2,28 @@ package org.frc5687.steamworks.protobot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.utils.Color;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import static org.frc5687.steamworks.protobot.Robot.ledStrip;
 
-/**
- * Created by Ben Bernard on 2/21/2017.
- */
 public class FlashLights extends Command {
-    int state = 0;
-    long endTime;
+
+    private int state = 0;
+    private long endTime;
 
     public FlashLights() {
         requires(ledStrip);
     }
 
+    @Override
     public void initialize() {
         state = 0;
-        endTime =  System.currentTimeMillis() + 1000;
+        endTime = System.currentTimeMillis() + 1000;
     }
 
-
+    @Override
     protected void execute() {
         if (System.currentTimeMillis() > endTime) {
-            endTime =  System.currentTimeMillis() + 1000;
+            endTime = System.currentTimeMillis() + 1000;
             state++;
         }
         switch (state) {
@@ -50,8 +48,9 @@ public class FlashLights extends Command {
         }
     }
 
-
+    @Override
     protected boolean isFinished() {
-        return state>6;
+        return state > 6;
     }
+
 }

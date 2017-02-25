@@ -1,32 +1,20 @@
 package org.frc5687.steamworks.protobot.utils;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static org.frc5687.steamworks.protobot.Robot.driveTrain;
-// import static org.frc5687.steamworks.protobot.Robot.imu;
-
-/**
- * Created by Ben Bernard on 6/18/2016.
- */
 public class PoseTracker {
+
     private static final int DEFAULT_PERIOD = 10;
     private static final int DEFAULT_HISTORY = 5;
-
+    int _nextwrite = 0;
     private boolean _async = false;
     private int _period = 10;
     private int _history = 5;
-    private int _bufferSize = (_history * 1000)/_period;
-
+    private int _bufferSize = (_history * 1000) / _period;
     private Timer _timer;
-
     private IPoseTrackable _trackable;
-
     private Pose[] _poses;
-
-    int _nextwrite = 0;
 
 
     public PoseTracker(IPoseTrackable trackable, boolean async, int period, int history) {
@@ -34,7 +22,7 @@ public class PoseTracker {
         _async = async;
         _period = period;
         _history = history;
-        _bufferSize = (_history * 1000)/_period;
+        _bufferSize = (_history * 1000) / _period;
         _poses = new Pose[_bufferSize];
 
         if (async) {
@@ -72,7 +60,7 @@ public class PoseTracker {
     }
 
     synchronized private void collect() {
-        if (_async || _trackable==null) {
+        if (_async || _trackable == null) {
             throw new RuntimeException("Asynchronous collect called on a PoseTracker instance with no trackable.");
         }
         Pose pose = _trackable.getPose();

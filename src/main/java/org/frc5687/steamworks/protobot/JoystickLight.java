@@ -3,12 +3,9 @@ package org.frc5687.steamworks.protobot;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
- * Created by Admin on 1/17/2017.
+ * Utility class to make it easier to set (and read) the state of a joystick light
  */
 public class JoystickLight {
-    /**
-     * Utility class to make it easier to set (and read) the state of a joystick light
-     */
 
     private final Joystick m_joystick;
     private final int m_outputNumber;
@@ -37,4 +34,5 @@ public class JoystickLight {
     public void set(boolean value) {
         m_joystick.setOutput(m_outputNumber, m_value = value);
     }
+
 }

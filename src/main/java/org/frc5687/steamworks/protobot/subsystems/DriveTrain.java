@@ -1,17 +1,15 @@
 package org.frc5687.steamworks.protobot.subsystems;
 
 import edu.wpi.first.wpilibj.*;
-import org.frc5687.steamworks.protobot.Constants;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.DriveWith2Joysticks;
+
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 
-/**
- * Created by Ben Bernard on 1/13/2017.
- */
-public class DriveTrain extends Subsystem {
+public class DriveTrain extends Subsystem implements PIDSource {
 
     private VictorSP leftFrontMotor;
     private VictorSP leftRearMotor;
@@ -23,7 +21,7 @@ public class DriveTrain extends Subsystem {
     private Encoder leftEncoder;
     private AnalogInput irSensor;
 
-    public DriveTrain(){
+    public DriveTrain() {
         leftFrontMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_FRONT);
         leftRearMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_REAR);
         leftTopMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_TOP);
@@ -64,6 +62,13 @@ public class DriveTrain extends Subsystem {
         return leftFrontMotor.getSpeed() * (Constants.Drive.LEFT_MOTORS_INVERTED ? -1 : 1);
     }
 
+    public void setLeftSpeed(double speed) {
+        speed = speed * (Constants.Drive.LEFT_MOTORS_INVERTED ? -1 : 1);
+        leftFrontMotor.setSpeed(speed);
+        leftRearMotor.setSpeed(speed);
+        leftTopMotor.setSpeed(speed);
+    }
+
     public double getLeftRPS() {
         return getLeftRate() / (Constants.Encoders.Defaults.PULSES_PER_ROTATION * Constants.Encoders.Defaults.INCHES_PER_PULSE);
     }
@@ -72,7 +77,9 @@ public class DriveTrain extends Subsystem {
         return rightEncoder.getDistance();
     }
 
-    public double getRightTicks() { return rightEncoder.get(); }
+    public double getRightTicks() {
+        return rightEncoder.get();
+    }
 
     public double getRightRate() {
         return rightEncoder.getRate();
@@ -82,10 +89,16 @@ public class DriveTrain extends Subsystem {
         return rightFrontMotor.getSpeed() * (Constants.Drive.RIGHT_MOTORS_INVERTED ? -1 : 1);
     }
 
+    public void setRightSpeed(double speed) {
+        speed = speed * (Constants.Drive.RIGHT_MOTORS_INVERTED ? -1 : 1);
+        rightFrontMotor.setSpeed(speed);
+        rightRearMotor.setSpeed(speed);
+        rightTopMotor.setSpeed(speed);
+    }
+
     public double getRightRPS() {
         return getRightRate() / (Constants.Encoders.Defaults.PULSES_PER_ROTATION * Constants.Encoders.Defaults.INCHES_PER_PULSE);
     }
-
 
     private Encoder initializeEncoder(int channelA, int channelB, boolean reversed, double distancePerPulse) {
         Encoder encoder = new Encoder(channelA, channelB, reversed, Encoder.EncodingType.k4X);
@@ -100,11 +113,12 @@ public class DriveTrain extends Subsystem {
      * @return average of leftDistance and rightDistance
      */
     public double getDistance() {
-        return (getLeftDistance()+getRightDistance())/2;
+        return (getLeftDistance() + getRightDistance()) / 2;
     }
 
     /**
      * Run drive motors at specified speeds
+     *
      * @param leftSpeed  desired speed for left motors
      * @param rightSpeed desired speed for right motors
      */
@@ -126,21 +140,9 @@ public class DriveTrain extends Subsystem {
         setRightSpeed(rightSpeed);
     }
 
-    public void setLeftSpeed(double speed) {
-        speed = speed * (Constants.Drive.LEFT_MOTORS_INVERTED ? -1 : 1);
-        leftFrontMotor.setSpeed(speed);
-        leftRearMotor.setSpeed(speed);
-        leftTopMotor.setSpeed(speed);
+    public void tankDrive(double speed) {
+        tankDrive(speed, speed);
     }
-
-    public void setRightSpeed(double speed) {
-        speed = speed * (Constants.Drive.RIGHT_MOTORS_INVERTED ? -1 : 1);
-        rightFrontMotor.setSpeed(speed);
-        rightRearMotor.setSpeed(speed);
-        rightTopMotor.setSpeed(speed);
-    }
-
-    public void tankDrive(double speed) { tankDrive(speed, speed); }
 
     public void updateDashboard() {
         SmartDashboard.putNumber("drive/Right distance", getRightDistance());
@@ -155,8 +157,8 @@ public class DriveTrain extends Subsystem {
         SmartDashboard.putNumber("drive/Right speed", getRightSpeed());
         SmartDashboard.putNumber("drive/Left speed", getLeftSpeed());
 
-        SmartDashboard.putNumber("drive/Right RPS" , getRightRPS());
-        SmartDashboard.putNumber("drive/Left RPS" , getLeftRPS());
+        SmartDashboard.putNumber("drive/Right RPS", getRightRPS());
+        SmartDashboard.putNumber("drive/Left RPS", getLeftRPS());
 
         SmartDashboard.putBoolean("drive/Right inverted", rightFrontMotor.getInverted());
         SmartDashboard.putBoolean("drive/Left inverted", leftFrontMotor.getInverted());
@@ -171,4 +173,19 @@ public class DriveTrain extends Subsystem {
 
         SmartDashboard.putNumber("drive/IR Sensor", irSensor.getValue());
     }
+
+    @Override
+    public double pidGet() {
+        return getDistance();
+    }
+
+    @Override
+    public PIDSourceType getPIDSourceType() {
+        return PIDSourceType.kDisplacement;
+    }
+
+    @Override
+    public void setPIDSourceType(PIDSourceType pidSource) {
+    }
+
 }
