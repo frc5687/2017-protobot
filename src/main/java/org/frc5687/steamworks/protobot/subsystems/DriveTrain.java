@@ -169,8 +169,6 @@ public class DriveTrain extends Subsystem {
     public void runRearLeftMotor(double runSpeed){
         leftRearMotor.set(runSpeed);
     }
-    public double getFrontRightAmperage(){
-    }
 
     public void updateDashboard() {
         SmartDashboard.putNumber("drive/Right distance", getRightDistance());
