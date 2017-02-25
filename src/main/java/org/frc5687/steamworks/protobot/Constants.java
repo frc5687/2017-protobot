@@ -174,6 +174,7 @@ public class Constants {
             public static final double DEPOSIT_GEAR_TURN = 0;
             public static final double DEPOSIT_GEAR_FINAL_DISTANCE = 0;
             public static final double DEPOSIT_GEAR_CENTER_DISTANCE = 83;
+            public static final double DEPOSIT_GEAR_CENTER_IR_DISTANCE = 950;
 
             public class Rhody {
                 public static final double TARGET_IR_READING = 700;
@@ -209,7 +210,7 @@ public class Constants {
                 public static final double kP = -0.05;
                 public static final double kI = 0;
                 public static final double kD = 0;
-                public static final double TOLERANCE = 10;
+                public static final double TOLERANCE = 50;
             }
 
             public class DistancePID {
