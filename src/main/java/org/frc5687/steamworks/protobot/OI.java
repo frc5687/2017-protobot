@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.frc5687.steamworks.protobot.commands.*;
+import org.frc5687.steamworks.protobot.commands.actions.GimmeGear;
 import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
 
@@ -28,6 +29,9 @@ public class OI {
 
     public static final int RINGLIGHT_ON = 11;
     public static final int RINGLIGHT_OFF = 12;
+
+    public static final int GIMME_LEFT = Gamepad.Buttons.LEFT_STICK.getNumber();
+    public static final int GIMME_RIGHT = Gamepad.Buttons.RIGHT_STICK.getNumber();
 
     private Gamepad gamepad;
     private Joystick operatorConsole;
@@ -56,6 +60,9 @@ public class OI {
     private JoystickButton ringLightOff;
 
     private JoystickButton gearWiggle;
+
+    private JoystickButton gimmeGearLeft;
+    private JoystickButton gimmeGearRight;
 
     public OI() {
         gamepad = new Gamepad(0);
@@ -118,6 +125,12 @@ public class OI {
         ringLightOn.whenPressed(new EnableRingLight());
         ringLightOff.whenPressed(new DisableRingLight());
 
+        gimmeGearLeft = new JoystickButton(gamepad, GIMME_LEFT);
+        gimmeGearRight = new JoystickButton(gamepad, GIMME_RIGHT);
+
+        gimmeGearLeft.whenPressed(new GimmeGear());
+        gimmeGearRight.whenPressed(new GimmeGear());
+
     }
 
     private double transformStickToSpeed(Gamepad.Axes stick) {
@@ -170,6 +183,10 @@ public class OI {
     public double getPincerSpeed() {
         double result = -operatorConsole.getAxis(Joystick.AxisType.kY);
         return Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
+    }
+
+    public boolean isGimmeGearPressed() {
+        return gimmeGearLeft.get() || gimmeGearRight.get();
     }
 
 }
