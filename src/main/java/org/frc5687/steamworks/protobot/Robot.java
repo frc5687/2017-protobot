@@ -7,7 +7,9 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.frc5687.steamworks.protobot.commands.RaisePincers;
 import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
+import org.frc5687.steamworks.protobot.commands.autonomous.AutoDepositCenterFromLeft;
 import org.frc5687.steamworks.protobot.commands.autonomous.AutoDepositGear;
 import org.frc5687.steamworks.protobot.commands.autonomous.FlashLights;
 import org.frc5687.steamworks.protobot.subsystems.*;
@@ -80,7 +82,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        autoCommand = new AutoDepositGear();
+        autoCommand = new AutoDepositCenterFromLeft();
         if (autoCommand != null) {
             autoCommand.start();
         }
@@ -89,6 +91,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopInit() {
         if (autoCommand != null) autoCommand.cancel();
+        new RaisePincers().start();
         ledStrip.setStripColor(LEDColors.TELEOP);
     }
 
