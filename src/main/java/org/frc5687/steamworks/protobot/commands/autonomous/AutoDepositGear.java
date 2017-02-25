@@ -8,18 +8,12 @@ import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
 
 public class AutoDepositGear extends SteamworksBaseCommandGroup {
 
-    public AutoDepositGear(Position position) {
+    public AutoDepositGear() {
         super();
         addSequential(new Shift(DoubleSolenoid.Value.kReverse));
         addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_CENTER_DISTANCE, Constants.Auto.Drive.SPEED));
         addSequential(new OpenMandibles());
         addSequential(new AutoDrive(-Constants.Auto.AnglesAndDistances.RETREAT_DISTANCE, -Constants.Auto.Drive.SPEED));
-    }
-
-    public enum Position {
-        LEFT,
-        CENTER,
-        RIGHT;
     }
 
 }
