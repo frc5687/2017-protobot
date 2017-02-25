@@ -7,6 +7,7 @@ import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.RunPincersManually;
 
+import static org.frc5687.steamworks.protobot.Robot.pdp;
 import static org.frc5687.steamworks.protobot.Robot.pincers;
 
 public class Pincers extends Subsystem implements PIDOutput {
@@ -102,6 +103,8 @@ public class Pincers extends Subsystem implements PIDOutput {
     public void updateDashboard() {
         SmartDashboard.putNumber("Pincer/PotentiometerValue", potentiometer.get());
         SmartDashboard.putNumber("Pincer/SetPoint", controller == null ? 0 : controller.getSetpoint());
+        SmartDashboard.putNumber("Pincer/Amperage", pdp.getPincersAmps());
+        SmartDashboard.putNumber("Pincer/Speed", pincerMotor.getSpeed());
     }
 
     @Override
