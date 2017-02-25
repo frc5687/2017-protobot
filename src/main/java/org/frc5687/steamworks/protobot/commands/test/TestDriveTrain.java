@@ -20,9 +20,9 @@ public class TestDriveTrain extends Command {
     private long _endMillis;
 
     private double _maxAmps = 0;
-//1.0, 1000, 2, 4000
+
     public TestDriveTrain(double runSpeed) {
-        _runSpeed = 1.0;
+        _runSpeed = runSpeed;
         _runMillis = 1000;
         _targetAmps = 2;
         _targetTicks = 4000;
@@ -30,6 +30,7 @@ public class TestDriveTrain extends Command {
 
     @Override
     protected void initialize() {
+        DriverStation.reportError("Starting drivetrain test", false);
         _state = State.FRONTRIGHT;
         _maxAmps = 0;
         _endMillis = System.currentTimeMillis() + _runMillis;

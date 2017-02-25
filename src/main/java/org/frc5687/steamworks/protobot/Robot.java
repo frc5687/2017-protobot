@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
 import org.frc5687.steamworks.protobot.commands.autonomous.FlashLights;
+import org.frc5687.steamworks.protobot.commands.test.FullSelfTest;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import org.frc5687.steamworks.protobot.utils.AutoChooser;
 import org.frc5687.steamworks.protobot.utils.PDP;
@@ -93,7 +94,9 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void testInit() {
-
+        DriverStation.reportError("Robot test init", false);
+        Command testCommand = new FullSelfTest();
+        testCommand.start();
     }
 
     @Override
@@ -120,6 +123,9 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void testPeriodic() {
+        DriverStation.reportError("Robot test periodic", false);
+        Scheduler.getInstance().run();
+        updateDashboard();
     }
 
     public void updateDashboard() {
