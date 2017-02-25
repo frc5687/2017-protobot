@@ -4,18 +4,22 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.Constants.Auto.Drive;
 
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.imu;
 
-public class AutoDrive extends Command implements PIDOutput {
+public class AutoDrive extends Command {
 
-    private double finalDistance;
-    private PIDController controller;
     private double distance;
     private double speed;
+    private PIDController distanceController;
+    private PIDController angleController;
+    private PIDListener distancePID;
+    private PIDListener anglePID;
+    private double endTime;
 
     public AutoDrive(double distance, double speed) {
         requires(driveTrain);
@@ -25,40 +29,67 @@ public class AutoDrive extends Command implements PIDOutput {
 
     @Override
     protected void initialize() {
+        distancePID = new PIDListener();
+        distanceController = new PIDController(Drive.DistancePID.kP, Drive.DistancePID.kI, Drive.DistancePID.kD, driveTrain, distancePID);
+//        distanceController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
+        distanceController.setAbsoluteTolerance(Drive.DistancePID.TOLERANCE);
+        distanceController.setOutputRange(-speed, speed);
         driveTrain.resetDriveEncoders();
-        this.finalDistance = distance + driveTrain.getDistance();
-        controller = new PIDController(Drive.kP, Drive.kI, Drive.kD, imu, this);
-        controller.setInputRange(Constants.Auto.MAX_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
-        controller.setOutputRange(-Drive.MAX_OUTPUT, Drive.MAX_OUTPUT);
-        controller.setAbsoluteTolerance(Drive.TOLERANCE);
-        controller.setContinuous();
-        controller.setSetpoint(imu.getAngle());
-        controller.enable();
+        distanceController.setSetpoint(distance);
+        distanceController.enable();
+
+        anglePID = new PIDListener();
+        angleController = new PIDController(Drive.AnglePID.kP, Drive.AnglePID.kI, Drive.AnglePID.kD, imu, anglePID);
+//        angleController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
+        angleController.setInputRange(Constants.Auto.MIN_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
+        double maxSpeed = speed * Drive.AnglePID.MAX_DIFFERENCE;
+        angleController.setOutputRange(-maxSpeed, maxSpeed);
+        angleController.setContinuous();
+        imu.reset();
+        angleController.setSetpoint(imu.getAngle());
+        angleController.enable();
+
         DriverStation.reportError("Auto Drive", false);
     }
 
     @Override
-    protected boolean isFinished() {
+    protected void execute() {
+        if(!distanceController.onTarget()) endTime = System.currentTimeMillis() + Drive.STEADY_TIME;
+        driveTrain.tankDrive(distancePID.get() + anglePID.get(), distancePID.get() - anglePID.get());
 
-        return distance >= 0
-                ? driveTrain.getDistance() > finalDistance
-                : driveTrain.getDistance() < finalDistance;
+        SmartDashboard.putBoolean("AutoDrive/onTarget", distanceController.onTarget());
+        SmartDashboard.putNumber("AutoDrive/imu", imu.getAngle());
+        SmartDashboard.putNumber("AutoDrive/distance", driveTrain.pidGet());
+        SmartDashboard.putNumber("AutoDrive/turnPID", anglePID.get());
+    }
+
+    @Override
+    protected boolean isFinished() {
+        return System.currentTimeMillis() >= endTime;
     }
 
     @Override
     protected void end() {
-        controller.disable();
+        DriverStation.reportError("Distance: " + driveTrain.getDistance(), false);
+        angleController.disable();
         driveTrain.tankDrive(0, 0);
     }
 
-    @Override
-    public void pidWrite(double output) {
-        synchronized (this) {
-//            DriverStation.reportError("Auto Drive; Speed = " + speed + ", PID Output = " + output, false);
-            //driveTrain.tankDrive(speed - output, speed + output); // positive output is clockwise
-//            driveTrain.setLeftSpeed(Drive.SPEED);
-            driveTrain.tankDrive(speed);
+    private class PIDListener implements PIDOutput {
+
+        private double value;
+
+        public double get() {
+            return value;
         }
+
+        @Override
+        public void pidWrite(double output) {
+            synchronized (this) {
+                value = output;
+            }
+        }
+
     }
 
 }

@@ -94,7 +94,8 @@ public class Constants {
             public static final double WHEEL_DIAMETER = 6;
             public static final double INCHES_PER_ROTATION = Math.PI * WHEEL_DIAMETER;
             public static final double SCALAR_RATIO = 8;
-            public static final double INCHES_PER_PULSE = INCHES_PER_ROTATION * SCALAR_RATIO / PULSES_PER_ROTATION;
+//            public static final double INCHES_PER_PULSE = INCHES_PER_ROTATION * SCALAR_RATIO / PULSES_PER_ROTATION;
+            public static final double INCHES_PER_PULSE = .0973;
             public static final double MAX_PERIOD = 5;
 
         }
@@ -140,19 +141,20 @@ public class Constants {
     public class Pincers {
 
         public static final double POTENTIOMETER_LIFTED_TONY = .006;
-        public static final double POTENTIOMETER_LIFTED_RHODY = 0.386;
+        public static final double POTENTIOMETER_LIFTED_RHODY = 0.396;
         public static final double POTENTIOMETER_LOWERED_TONY = .270;
         public static final double POTENTIOMETER_LOWERED_RHODY = 0.64;
-        public static final double MAX_SPEED = 0.25;
+        public static final double MAX_SPEED = 0.5;
+        public static final int IR_THRESHOLD = 2000;
 
         public class PID {
 
             public static final double MIN_INPUT = 0;
-            public static final double MAX_INPUT = 0.5;
+            public static final double MAX_INPUT = 1;
             public static final double kP = 1.5;
-            public static final double kI = 0.1;
+            public static final double kI = 0;
             public static final double kD = 0;
-            public static final double TOLERANCE = 0.002;
+            public static final double TOLERANCE = 0.02;
 
         }
 
@@ -160,8 +162,8 @@ public class Constants {
 
     public class Auto {
 
-        public static final double MIN_IMU_ANGLE = 0;
-        public static final double MAX_IMU_ANGLE = 360;
+        public static final double MIN_IMU_ANGLE = -180;
+        public static final double MAX_IMU_ANGLE = 180;
 
         public class AnglesAndDistances {
 
@@ -185,26 +187,37 @@ public class Constants {
 
         public class Align {
 
-            public static final double kP = 0;
+            public static final double kP = 0.05;
             public static final double kI = 0;
-            public static final double kD = 0;
-            public static final double TOLERANCE = 0;
+            public static final double kD = 0.02;
+            public static final double TOLERANCE = 0.1;
             public static final double MAX_OUTPUT = 0;
             /*
              *time the angle must be on target for to be considered steady
              */
-            public static final double STEADY_TIME = 200;
+            public static final double STEADY_TIME = 100;
 
         }
 
         public class Drive {
 
-            public static final double kP = -0.1;
-            public static final double kI = 0;
-            public static final double kD = -0.05;
-            public static final double TOLERANCE = 0;
-            public static final double MAX_OUTPUT = 0.1;
-            public static final double SPEED = -0.7;
+            public static final double SPEED = 0.5;
+
+            public static final long STEADY_TIME = 200;
+
+            public class DistancePID {
+                public static final double kP = -0.05;
+                public static final double kI = 0;
+                public static final double kD = 0;
+                public static final double TOLERANCE = 1;
+            }
+
+            public class AnglePID {
+                public static final double kP = 0.075;
+                public static final double kI = 0;
+                public static final double kD = -0.15;
+                public static final double MAX_DIFFERENCE = 0.1;
+            }
 
         }
 

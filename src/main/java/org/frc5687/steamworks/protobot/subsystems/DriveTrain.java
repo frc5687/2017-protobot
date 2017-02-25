@@ -1,8 +1,6 @@
 package org.frc5687.steamworks.protobot.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
@@ -11,7 +9,7 @@ import org.frc5687.steamworks.protobot.commands.DriveWith2Joysticks;
 
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 
-public class DriveTrain extends Subsystem {
+public class DriveTrain extends Subsystem implements PIDSource {
 
     public VictorSP leftFrontMotor;
     public VictorSP leftRearMotor;
@@ -198,6 +196,20 @@ public class DriveTrain extends Subsystem {
         SmartDashboard.putNumber("drive/Average Current", pdp.getMeanDrivetrainAmps());
 
         SmartDashboard.putNumber("drive/IR Sensor", irSensor.getValue());
+    }
+
+    @Override
+    public double pidGet() {
+        return getDistance();
+    }
+
+    @Override
+    public PIDSourceType getPIDSourceType() {
+        return PIDSourceType.kDisplacement;
+    }
+
+    @Override
+    public void setPIDSourceType(PIDSourceType pidSource) {
     }
 
 }
