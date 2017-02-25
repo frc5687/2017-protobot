@@ -73,7 +73,7 @@ public class AutoDrive extends Command {
     protected void end() {
         DriverStation.reportError("Distance: " + driveTrain.getDistance(), false);
         angleController.disable();
-        driveTrain.tankDrive(0, 0);
+        // driveTrain.tankDrive(0, 0);
     }
 
     private class PIDListener implements PIDOutput {
