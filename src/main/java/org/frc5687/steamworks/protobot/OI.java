@@ -110,8 +110,8 @@ public class OI {
         raisePincers.whenPressed(new RaisePincers());
         lowerPincers.whenPressed(new LowerPincers());
 
-        openPincers.whenPressed(new OpenPincers());
-        closePincers.whenPressed(new ClosePincers());
+        openPincers.whenPressed(new ClosePincers());
+        closePincers.whenPressed(new OpenPincers());
 
         catchGearButton.whenPressed(new CatchGear());
 

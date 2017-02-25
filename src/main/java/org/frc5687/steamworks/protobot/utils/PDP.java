@@ -28,6 +28,10 @@ public class PDP extends PowerDistributionPanel {
         return getCurrent(RobotMap.Climber.PDP_CLIMBER_MOTOR);
     }
 
+    public double getPincersAmps() {
+        return getCurrent(4);
+    }
+
     public double getMeanDrivetrainAmps() {
         return (getRightFrontAmps() + getRightTopAmps() + getRightRearAmps() + getLeftFrontAmps() + getLeftTopAmps() + getLeftRearAmps()) / 6;
     }
