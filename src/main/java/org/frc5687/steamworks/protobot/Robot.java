@@ -82,7 +82,32 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        autoCommand = new AutoDepositCenterFromLeft();
+        int position = autoRotorChooser.positionRotorValue();
+        switch (position) {
+            case 0:
+                autoCommand = null;
+                break;
+            case 1:
+                autoCommand = null;
+                break;
+            case 2:
+                autoCommand = new AutoDepositCenterFromLeft();
+                break;
+            case 3:
+                autoCommand = new AutoDepositGear();
+                break;
+            case 4:
+                autoCommand = null;
+                break;
+            case 5:
+                autoCommand = null;
+                break;
+
+
+
+        }
+
+        autoCommand = new AutoDepositGear();
         if (autoCommand != null) {
             autoCommand.start();
         }
