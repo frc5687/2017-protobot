@@ -1,8 +1,6 @@
 package org.frc5687.steamworks.protobot.commands.test;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Command;
 
 import static org.frc5687.steamworks.protobot.Robot.pdp;
@@ -10,36 +8,28 @@ import static org.frc5687.steamworks.protobot.Robot.pdp;
 /**
  * Created by Ben Bernard on 2/23/2017.
  */
-public class TestDriveCIM extends Command {
+public class TestDriveTrain extends Command {
     private static double kTOLERANCE = 0.1;
-
-    private VictorSP _victor;
-    private Encoder _encoder;
-    private int _pdpPort;
-
     private double _runSpeed;
     private int _runMillis;
     private double _targetAmps;
     private int _targetTicks;
 
-    private State _state = State.RUN;
+    private State _state = State.FRONTRIGHT;
     private long _endMillis;
 
-    private String _description;
-
     private double _maxAmps = 0;
-
-    public TestDriveCIM(double runSpeed, int runMillis, double targetAmps, int targetTicks) {
-        _runSpeed = runSpeed;
-        _runMillis = runMillis;
-        _targetAmps = targetAmps;
-        _targetTicks = targetTicks;
+//1.0, 1000, 2, 4000
+    public TestDriveTrain(double runSpeed) {
+        _runSpeed = 1.0;
+        _runMillis = 1000;
+        _targetAmps = 2;
+        _targetTicks = 4000;
     }
 
     @Override
     protected void initialize() {
-        _encoder.reset();
-        _state = State.RUN;
+        _state = State.FRONTRIGHT;
         _maxAmps = 0;
         _endMillis = System.currentTimeMillis() + _runMillis;
     }
@@ -48,14 +38,36 @@ public class TestDriveCIM extends Command {
     protected void execute() {
 
         switch (_state) {
-            case RUN:
-                _victor.set(_runSpeed);
-                _maxAmps = Math.max(_maxAmps, pdp.getCurrent(_pdpPort));
+            case FRONTRIGHT:
+                _maxAmps = Math.max(_maxAmps, pdp.getRightFrontAmps());
                 if (System.currentTimeMillis() > _endMillis) {
-                    _state = State.DONE;
+                    _state = State.FRONTLEFT;
+                    _endMillis =+ System.currentTimeMillis();
+                }
+                break;
+            case FRONTLEFT:
+                _maxAmps = Math.max(_maxAmps, pdp.getLeftFrontAmps());
+                if (System.currentTimeMillis() > _endMillis) {
+                    _state = State.TOPRIGHT;
+                    _endMillis =+ System.currentTimeMillis();
+                }
+                break;
+            case TOPRIGHT:
+                _maxAmps = Math.max(_maxAmps, pdp.getRightTopAmps());
+                if (System.currentTimeMillis() > _endMillis) {
+                    _state = State.TOPLEFT;
+                    _endMillis =+ System.currentTimeMillis();
+                }
+                break;
+            case TOPLEFT:
+                _maxAmps = Math.max(_maxAmps, pdp.getLeftTopAmps());
+                if (System.currentTimeMillis() > _endMillis) {
+                    _state = State.TOPLEFT;
+                    _endMillis =+ System.currentTimeMillis();
                 }
                 break;
         }
+
     }
 
     @Override
@@ -78,7 +90,12 @@ public class TestDriveCIM extends Command {
 
 
     private enum State {
-        RUN,
+        FRONTRIGHT,
+        FRONTLEFT,
+        TOPRIGHT,
+        TOPLEFT,
+        REARRIGHT,
+        REARLEFT,
         DONE;
     }
 

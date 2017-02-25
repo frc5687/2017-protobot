@@ -7,6 +7,6 @@ import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 
 public class FullSelfTest extends CommandGroup {
     public FullSelfTest() {
-        addSequential(new TestDriveCIM("port front motor", driveTrain.leftFrontMotor, driveTrain.leftEncoder,  RobotMap.Drive.PDP_LEFT_MOTOR_FRONT, 1.0, 1000, 2, 4000));
+        addSequential(new TestDriveTrain("port front motor", driveTrain.leftFrontMotor, driveTrain.leftEncoder,  RobotMap.Drive.PDP_LEFT_MOTOR_FRONT, 1.0, 1000, 2, 4000));
     }
 }
