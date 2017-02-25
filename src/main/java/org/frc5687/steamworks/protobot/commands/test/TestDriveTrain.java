@@ -59,7 +59,7 @@ public class TestDriveTrain extends Command {
                 }
                 _state = State.FRONTLEFT;
                 driveTrain.runFrontRightMotor(0);
-
+                _maxAmps = 0;
                 break;
             case FRONTLEFT:
                 driveTrain.runFrontLeftMotor(_runSpeed);
@@ -81,6 +81,7 @@ public class TestDriveTrain extends Command {
                 }
                 driveTrain.runTopLeftMotor(0);
                 _state = State.TOPRIGHT;
+                _maxAmps = 0;
 
                 break;
             case TOPRIGHT:
@@ -102,6 +103,7 @@ public class TestDriveTrain extends Command {
                 }
                 driveTrain.runTopRightMotor(0);
                 _state = State.TOPLEFT;
+                _maxAmps = 0;
                 break;
             case TOPLEFT:
                 driveTrain.runTopLeftMotor(_runSpeed);
@@ -122,6 +124,7 @@ public class TestDriveTrain extends Command {
                 }
                 driveTrain.runTopLeftMotor(0);
                 _state = State.REARLEFT;
+                _maxAmps = 0;
                 break;
 
 
@@ -142,6 +145,7 @@ public class TestDriveTrain extends Command {
                     pass = false;
                     DriverStation.reportError("Target ticks not reached on front right.  Expected " + _targetTicks + " but measured "+ driveTrain.getRightTicks() + ".", false);
                 }
+                _maxAmps = 0;
                 driveTrain.runTopLeftMotor(0);
                 _state = State.REARRIGHT;
                 break;
@@ -160,8 +164,9 @@ public class TestDriveTrain extends Command {
                 }
                 if (Math.abs((_targetTicks - driveTrain.getRightTicks()) / _targetTicks) > kTOLERANCE) {
                     pass = false;
-                    DriverStation.reportError("Target ticks not reached on front right.  Expected " + _targetTicks + " but measured "+ driveTrain.getRightTicks() + ".", false);
+                    DriverStation.reportError("Target ticks not reached on front right.  Expected " + _targetTicks + " but measured " + driveTrain.getRightTicks() + ".", false);
                 }
+                _maxAmps = 0;
                 break;
         }
 
