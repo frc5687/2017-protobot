@@ -141,10 +141,11 @@ public class Constants {
     public class Pincers {
 
         public static final double POTENTIOMETER_LIFTED_TONY = .006;
-        public static final double POTENTIOMETER_LIFTED_RHODY = 0.386;
+        public static final double POTENTIOMETER_LIFTED_RHODY = 0.396;
         public static final double POTENTIOMETER_LOWERED_TONY = .270;
         public static final double POTENTIOMETER_LOWERED_RHODY = 0.64;
-        public static final double MAX_SPEED = 0.25;
+        public static final double MAX_SPEED = 0.5;
+        public static final int IR_THRESHOLD = 2000;
 
         public class PID {
 
@@ -153,7 +154,7 @@ public class Constants {
             public static final double kP = 1.5;
             public static final double kI = 0;
             public static final double kD = 0;
-            public static final double TOLERANCE = 0.002;
+            public static final double TOLERANCE = 0.02;
 
         }
 

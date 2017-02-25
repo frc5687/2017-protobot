@@ -16,22 +16,24 @@ public class Pincers extends Subsystem implements PIDOutput {
     private VictorSP pincerMotor;
     private DoubleSolenoid piston;
     private AnalogPotentiometer potentiometer;
+    private AnalogInput ir;
     private double rest;
 
     public Pincers() {
         pincerMotor = new VictorSP(RobotMap.Pincers.PINCER_MOTOR);
         potentiometer = new AnalogPotentiometer(RobotMap.Pincers.POTENTIOMETER);
+        ir = new AnalogInput(RobotMap.Pincers.IR);
         piston = new DoubleSolenoid(RobotMap.Pincers.PISTON_EXTENDER, RobotMap.Pincers.PISTON_RETRACTOR);
         rest = Constants.pickConstant(Constants.Pincers.POTENTIOMETER_LIFTED_TONY, Constants.Pincers.POTENTIOMETER_LIFTED_RHODY);
     }
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new RunPincersManually());
     }
 
     protected void createController() {
         if (controller != null) {
+//            controller.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 0", 0));
             return;
         }
         controller = new PIDController(Constants.Pincers.PID.kP, Constants.Pincers.PID.kI, Constants.Pincers.PID.kD, pincers.getPotentiometer(), this);
@@ -61,7 +63,7 @@ public class Pincers extends Subsystem implements PIDOutput {
     }
 
     public void open() {
-        piston.set(DoubleSolenoid.Value.kForward);
+        piston.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void rest() {
@@ -72,7 +74,7 @@ public class Pincers extends Subsystem implements PIDOutput {
     }
 
     public void close() {
-        piston.set(DoubleSolenoid.Value.kReverse);
+        piston.set(DoubleSolenoid.Value.kForward);
     }
 
     public double getAngle() {
@@ -91,6 +93,9 @@ public class Pincers extends Subsystem implements PIDOutput {
         return piston.get() == DoubleSolenoid.Value.kForward;
     }
 
+    public boolean onTarget() {
+        return controller.onTarget();
+    }
 
     public boolean isLowered() {
         return potentiometer.get() == Constants.pickConstant(Constants.Pincers.POTENTIOMETER_LOWERED_TONY, Constants.Pincers.POTENTIOMETER_LOWERED_RHODY);
@@ -101,8 +106,11 @@ public class Pincers extends Subsystem implements PIDOutput {
     }
 
     public void updateDashboard() {
-        SmartDashboard.putNumber("Pincer/PotentiometerValue", potentiometer.get());
-        SmartDashboard.putNumber("Pincer/SetPoint", controller == null ? 0 : controller.getSetpoint());
+        SmartDashboard.putNumber("Pincers/PotentiometerValue", potentiometer.get());
+        SmartDashboard.putNumber("Pincers/IR Value", ir.getValue());
+        SmartDashboard.putNumber("Pincers/SetPoint", controller == null ? 0 : controller.getSetpoint());
+        SmartDashboard.putNumber("Pincers/Amperage", pdp.getPincersAmps());
+        SmartDashboard.putBoolean("Pincers/On Target", controller == null ? false : controller.onTarget());
         SmartDashboard.putNumber("Pincer/Amperage", pdp.getPincersAmps());
         SmartDashboard.putNumber("Pincer/Speed", pincerMotor.getSpeed());
     }
@@ -110,6 +118,10 @@ public class Pincers extends Subsystem implements PIDOutput {
     @Override
     public void pidWrite(double v) {
         setPincerSpeed(v);
+    }
+
+    public boolean hasGear() {
+        return ir.getValue() >= Constants.Pincers.IR_THRESHOLD;
     }
 
 }

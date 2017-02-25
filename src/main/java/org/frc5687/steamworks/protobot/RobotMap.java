@@ -82,6 +82,8 @@ public class RobotMap {
         public static final int PISTON_RETRACTOR = 4;
         public static final int PISTON_EXTENDER = 5;
         public static final int PDP_PINCERS_MOTOR = 4;
+        public static final int IR = 2;
+
     }
 
     public static class AutoChooser {
