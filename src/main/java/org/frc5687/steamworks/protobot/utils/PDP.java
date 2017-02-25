@@ -29,7 +29,7 @@ public class PDP extends PowerDistributionPanel {
     }
 
     public double getPincersAmps() {
-        return getCurrent(4);
+        return getCurrent(RobotMap.Pincers.PDP_PINCERS_MOTOR);
     }
 
     public double getMeanDrivetrainAmps() {
