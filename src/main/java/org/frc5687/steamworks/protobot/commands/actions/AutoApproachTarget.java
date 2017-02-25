@@ -45,11 +45,10 @@ public class AutoApproachTarget extends Command {
         DriverStation.reportError("Turn PID Max Output: " + speed, false);
         angleController.setOutputRange(-maxSpeed, maxSpeed);
         angleController.setContinuous();
-        imu.reset();
         angleController.setSetpoint(imu.getAngle());
         angleController.enable();
 
-        DriverStation.reportError("Auto Approach Target", false);
+        DriverStation.reportError("AutoApproach initialized", false);
     }
 
     @Override
@@ -71,7 +70,7 @@ public class AutoApproachTarget extends Command {
 
     @Override
     protected void end() {
-        DriverStation.reportError("Distance: " + driveTrain.getDistance(), false);
+        DriverStation.reportError("AutoApproach Finished (" + driveTrain.getDistance() + ")", false);
         angleController.disable();
         driveTrain.tankDrive(0, 0);
     }

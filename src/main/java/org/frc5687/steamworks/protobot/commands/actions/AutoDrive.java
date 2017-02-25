@@ -38,7 +38,6 @@ public class AutoDrive extends Command {
         distanceController.setSetpoint(distance);
         distanceController.enable();
 
-        imu.reset();
         anglePID = new PIDListener();
         angleController = new PIDController(Drive.AnglePID.kP, Drive.AnglePID.kI, Drive.AnglePID.kD, imu, anglePID);
 //        angleController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
@@ -50,7 +49,7 @@ public class AutoDrive extends Command {
         angleController.setSetpoint(imu.getAngle());
         angleController.enable();
 
-        DriverStation.reportError("Auto Drive", false);
+        DriverStation.reportError("Auto Drive initialized", false);
     }
 
     @Override
@@ -71,7 +70,7 @@ public class AutoDrive extends Command {
 
     @Override
     protected void end() {
-        DriverStation.reportError("Distance: " + driveTrain.getDistance(), false);
+        DriverStation.reportError("AutoDrive Finished (" + driveTrain.getDistance() + ")", false);
         angleController.disable();
         driveTrain.tankDrive(0, 0);
     }

@@ -36,7 +36,6 @@ public class AutoAlign extends Command implements PIDOutput {
 //        controller.setAbsoluteTolerance(SmartDashboard.getNumber("DB/Slider 3", 10));
         controller.setContinuous();
         controller.setSetpoint(angle);
-        imu.reset();
         controller.enable();
         DriverStation.reportError("AutoAlign initialized", false);
     }
@@ -55,7 +54,7 @@ public class AutoAlign extends Command implements PIDOutput {
 
     @Override
     protected void end() {
-        DriverStation.reportError("AutoAlign finished", false);
+        DriverStation.reportError("AutoAlign finished (" + imu.getYaw() + ")", false);
         controller.disable();
         driveTrain.tankDrive(0,0);
     }
