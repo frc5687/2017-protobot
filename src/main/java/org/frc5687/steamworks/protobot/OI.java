@@ -46,7 +46,6 @@ public class OI {
     private JoystickButton ocCloseGearButton;
 
     private JoystickButton catchGearButton;
-    private JoystickButton releaseGearButton;
 
     private JoystickButton ascendClimber;
     private JoystickButton descendClimber;
@@ -101,8 +100,7 @@ public class OI {
         ocCloseGearButton = new JoystickButton(operatorConsole, OC_CLOSE_GEAR);
         ocOpenGearButton = new JoystickButton(operatorConsole, OC_OPEN_GEAR);
 
-        catchGearButton = new JoystickButton(operatorConsole, 9);
-        releaseGearButton = new JoystickButton(operatorConsole, 10);
+        catchGearButton = new JoystickButton(operatorConsole, CATCH_GEAR);
 
         gearWiggle = new JoystickButton(operatorConsole, WIGGLE_MANDIBLES);
 
@@ -187,10 +185,6 @@ public class OI {
 
     public boolean isCatchGearPressed() {
         return catchGearButton.get();
-    }
-
-    public boolean isReleaseGearPressed() {
-        return releaseGearButton.get();
     }
 
     public double getPincerSpeed() {
