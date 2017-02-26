@@ -32,7 +32,7 @@ public class RotarySwitch {
     public int get() {
         double value = _pot.get();
         for (int i = 0; i < _positions; i++) {
-            if (Math.abs(value = _values[i])<_tolerance) {
+            if (Math.abs(value - _values[i])<_tolerance) {
                 return i;
             }
         }

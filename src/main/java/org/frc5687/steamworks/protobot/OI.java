@@ -3,6 +3,7 @@ package org.frc5687.steamworks.protobot;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.*;
 import org.frc5687.steamworks.protobot.commands.actions.GimmeGear;
 import org.frc5687.steamworks.protobot.utils.Gamepad;
@@ -134,18 +135,22 @@ public class OI {
     }
 
     private double transformStickToSpeed(Gamepad.Axes stick) {
-        double result = gamepad.getRawAxis(stick);
+        double result = gamepad.getRawAxis(stick) * -1;
         result = Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
         result = Helpers.applySensitivityTransform(result);
         return result;
     }
 
     public double getLeftSpeed() {
-        return transformStickToSpeed(Gamepad.Axes.LEFT_Y);
+        double result = transformStickToSpeed(Gamepad.Axes.LEFT_Y);
+        SmartDashboard.putNumber("OI/LeftSpeed", result);
+        return result;
     }
 
     public double getRightSpeed() {
-        return transformStickToSpeed(Gamepad.Axes.RIGHT_Y);
+        double result = transformStickToSpeed(Gamepad.Axes.RIGHT_Y);
+        SmartDashboard.putNumber("OI/RIghtSpeed", result);
+        return result;
     }
 
     public boolean isLeftTriggerPressed() {

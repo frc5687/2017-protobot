@@ -17,7 +17,7 @@ public class AutoDepositRightFromFarRight extends SteamworksBaseCommandGroup {
         addParallel(new CloseMandibles());
         addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FAR_INITIAL_DISTANCE, Constants.Auto.Drive.SPEED));
         addSequential(new AutoAlign(-Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FAR_ANGLE, Constants.Auto.Align.SPEED));
-        addSequential(new AutoApproachTarget(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_DISTANCE, Constants.Auto.Drive.SPEED));
+        addSequential(new AutoApproachTarget(Constants.Auto.Drive.SPEED));
         addSequential(new OpenMandibles());
         addSequential(new AutoDrive(-Constants.Auto.AnglesAndDistances.RETREAT_DISTANCE, Constants.Auto.Drive.SPEED));
     }

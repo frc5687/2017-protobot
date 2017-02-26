@@ -129,12 +129,12 @@ public class DriveTrain extends Subsystem implements PIDSource {
     public void tankDrive(double leftSpeed, double rightSpeed, boolean overrideCaps) {
         if (!overrideCaps) {
             // Limit change in leftSpeed to +/- ACCELERATION_CAP
-            leftSpeed = Math.min(leftSpeed, leftFrontMotor.get() + Constants.Limits.ACCELERATION_CAP);
-            leftSpeed = Math.max(leftSpeed, leftFrontMotor.get() - Constants.Limits.ACCELERATION_CAP);
+            leftSpeed = Math.min(leftSpeed, getLeftSpeed() + Constants.Limits.ACCELERATION_CAP);
+            leftSpeed = Math.max(leftSpeed, getLeftSpeed() - Constants.Limits.ACCELERATION_CAP);
 
             // Limit change in rightSpeed to +/- ACCELERATION_CAP
-            rightSpeed = Math.min(rightSpeed, rightFrontMotor.get() + Constants.Limits.ACCELERATION_CAP);
-            rightSpeed = Math.max(rightSpeed, rightFrontMotor.get() - Constants.Limits.ACCELERATION_CAP);
+            rightSpeed = Math.min(rightSpeed, getRightSpeed() + Constants.Limits.ACCELERATION_CAP);
+            rightSpeed = Math.max(rightSpeed, getRightSpeed() - Constants.Limits.ACCELERATION_CAP);
         }
         setLeftSpeed(leftSpeed);
         setRightSpeed(rightSpeed);
@@ -145,33 +145,33 @@ public class DriveTrain extends Subsystem implements PIDSource {
     }
 
     public void updateDashboard() {
-        SmartDashboard.putNumber("drive/Right distance", getRightDistance());
-        SmartDashboard.putNumber("drive/Left distance", getLeftDistance());
+        SmartDashboard.putNumber("DriveTrain/Distance/Right", getRightDistance());
+        SmartDashboard.putNumber("DriveTrain/Distance/Left", getLeftDistance());
 
-        SmartDashboard.putNumber("drive/Right ticks", getRightTicks());
-        SmartDashboard.putNumber("drive/Left ticks", getLeftTicks());
+        SmartDashboard.putNumber("DriveTrain/Ticks/Right", getRightTicks());
+        SmartDashboard.putNumber("DriveTrain/Ticks/Left", getLeftTicks());
 
-        SmartDashboard.putNumber("drive/Right rate", getRightRate());
-        SmartDashboard.putNumber("drive/Left rate", getLeftRate());
+        SmartDashboard.putNumber("DriveTrain/Rate/Right", getRightRate());
+        SmartDashboard.putNumber("DriveTrain/Rate/Left", getLeftRate());
 
-        SmartDashboard.putNumber("drive/Right speed", getRightSpeed());
-        SmartDashboard.putNumber("drive/Left speed", getLeftSpeed());
+        SmartDashboard.putNumber("DriveTrain/Speed/Right", getRightSpeed());
+        SmartDashboard.putNumber("DriveTrain/Speed/Left", getLeftSpeed());
 
-        SmartDashboard.putNumber("drive/Right RPS", getRightRPS());
-        SmartDashboard.putNumber("drive/Left RPS", getLeftRPS());
+        SmartDashboard.putNumber("DriveTrain/RPS/Right", getRightRPS());
+        SmartDashboard.putNumber("DriveTrain/RPS/Left", getLeftRPS());
 
-        SmartDashboard.putBoolean("drive/Right inverted", rightFrontMotor.getInverted());
-        SmartDashboard.putBoolean("drive/Left inverted", leftFrontMotor.getInverted());
+        SmartDashboard.putBoolean("DriveTrain/Inverted/Right", Constants.Drive.RIGHT_MOTORS_INVERTED);
+        SmartDashboard.putBoolean("DriveTrain/Inverted/Left", Constants.Drive.LEFT_MOTORS_INVERTED);
 
-        SmartDashboard.putNumber("drive/Right Front Current", pdp.getRightFrontAmps());
-        SmartDashboard.putNumber("drive/Right Top Current", pdp.getRightTopAmps());
-        SmartDashboard.putNumber("drive/Right Rear Current", pdp.getRightRearAmps());
-        SmartDashboard.putNumber("drive/Left Front Current", pdp.getLeftFrontAmps());
-        SmartDashboard.putNumber("drive/Left Top Current", pdp.getLeftTopAmps());
-        SmartDashboard.putNumber("drive/Left Rear Current", pdp.getLeftRearAmps());
-        SmartDashboard.putNumber("drive/Average Current", pdp.getMeanDrivetrainAmps());
+        SmartDashboard.putNumber("DriveTrain/Amps/Right/Front", pdp.getRightFrontAmps());
+        SmartDashboard.putNumber("DriveTrain/Amps/Right/Top", pdp.getRightTopAmps());
+        SmartDashboard.putNumber("DriveTrain/Amps/Right/Rear", pdp.getRightRearAmps());
+        SmartDashboard.putNumber("DriveTrain/Amps/Left/Front", pdp.getLeftFrontAmps());
+        SmartDashboard.putNumber("DriveTrain/Amps/Left/Top", pdp.getLeftTopAmps());
+        SmartDashboard.putNumber("DriveTrain/Amps/Left/Rear", pdp.getLeftRearAmps());
+        SmartDashboard.putNumber("DriveTrain/Amps/Average", pdp.getMeanDrivetrainAmps());
 
-        SmartDashboard.putNumber("drive/IR Sensor", irSensor.getValue());
+        SmartDashboard.putNumber("DriveTrain/IR Sensor", irSensor.getValue());
     }
 
     public AnalogInput getIrSensor() {

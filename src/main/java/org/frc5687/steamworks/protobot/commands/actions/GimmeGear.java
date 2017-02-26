@@ -7,6 +7,7 @@ import org.frc5687.steamworks.protobot.utils.Color;
 
 import static org.frc5687.steamworks.protobot.Robot.ledStrip;
 import static org.frc5687.steamworks.protobot.Robot.oi;
+import static org.frc5687.steamworks.protobot.Robot.mandibles;
 
 /**
  * Created by Ben Bernard on 2/23/2017.
@@ -26,7 +27,7 @@ public class GimmeGear extends Command {
     }
 
     protected boolean isFinished() {
-        return false;
+        return mandibles.gearPresent();
         // return oi.isGimmeGearPressed();
     }
 

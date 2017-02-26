@@ -35,16 +35,17 @@ public class Constants {
         public static final double WIGGLE_SPEED = 0.2;
         public static final long WIGGLE_OUT_TIME = 30;
         public static final long WIGGLE_IN_TIME = 70;
+        public static final long IR_GEAR_DETECTED = 1500;
 
     }
 
     public class Drive {
 
-        public static final boolean LEFT_MOTORS_INVERTED = true;
-        public static final boolean RIGHT_MOTORS_INVERTED = false;
+        public static final boolean LEFT_MOTORS_INVERTED = false;
+        public static final boolean RIGHT_MOTORS_INVERTED = true;
 
-        public static final double FULL_FORWARDS_SPEED = -1;
-        public static final double FULL_BACKWARDS_SPEED = 1;
+        public static final double FULL_FORWARDS_SPEED = 1;
+        public static final double FULL_BACKWARDS_SPEED = -1;
 
     }
 
@@ -170,7 +171,7 @@ public class Constants {
             public static final double CROSS_BASELINE_DISTANCE = 100;
             public static final double CROSS_FIELD_DISTANCE = 0;
             public static final double RETREAT_DISTANCE = 18;
-            public static final double DEPOSIT_GEAR_IR_DISTANCE = 950;
+            public static final double DEPOSIT_GEAR_IR_VOLTAGE = 1.176;
             public static final double DEPOSIT_GEAR_NEAR_INITIAL_DISTANCE = 24;
             public static final double DEPOSIT_GEAR_NEAR_ANGLE = 45;
             public static final double DEPOSIT_GEAR_NEAR_DIAGONAL_DISTANCE = 59;
@@ -203,14 +204,14 @@ public class Constants {
             public static final long STEADY_TIME = 200;
 
             public class IRPID {
-                public static final double kP = -0.01;
-                public static final double kI = 0;
-                public static final double kD = 0;
-                public static final double TOLERANCE = 50;
+                public static final double kP = 0.5;
+                public static final double kI = 0.01;
+                public static final double kD = 0.001;
+                public static final double TOLERANCE = .005;
             }
 
             public class DistancePID {
-                public static final double kP = -0.05;
+                public static final double kP = 0.05;
                 public static final double kI = 0;
                 public static final double kD = 0;
                 public static final double TOLERANCE = 1;
@@ -221,7 +222,7 @@ public class Constants {
                 public static final double kI = 0.01;
                 public static final double kD = 0.0;
 
-                public static final double MAX_DIFFERENCE = 0.1;
+                public static final double MAX_DIFFERENCE = 0.2;
             }
 
         }

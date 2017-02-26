@@ -31,6 +31,11 @@ public class AutoDrive extends Command {
     protected void initialize() {
         driveTrain.resetDriveEncoders();
         distancePID = new PIDListener();
+        SmartDashboard.putNumber("AutoDrive/kP", Drive.DistancePID.kP);
+        SmartDashboard.putNumber("AutoDrive/kI", Drive.DistancePID.kI);
+        SmartDashboard.putNumber("AutoDrive/kD", Drive.DistancePID.kD);
+        SmartDashboard.putNumber("AutoDrive/kT", Drive.DistancePID.TOLERANCE);
+
         distanceController = new PIDController(Drive.DistancePID.kP, Drive.DistancePID.kI, Drive.DistancePID.kD, driveTrain, distancePID);
 //        distanceController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
         distanceController.setAbsoluteTolerance(Drive.DistancePID.TOLERANCE);
@@ -43,7 +48,8 @@ public class AutoDrive extends Command {
 //        angleController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
         angleController.setInputRange(Constants.Auto.MIN_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
         double maxSpeed = speed * Drive.AnglePID.MAX_DIFFERENCE;
-        DriverStation.reportError("Turn PID Max Output: " + speed, false);
+        SmartDashboard.putNumber("AutoDrive/angleMaxSpeed", maxSpeed);
+        SmartDashboard.putNumber("AutoDrive/setPoint", imu.getYaw());
         angleController.setOutputRange(-maxSpeed, maxSpeed);
         angleController.setContinuous();
         angleController.setSetpoint(imu.getYaw());
@@ -54,8 +60,20 @@ public class AutoDrive extends Command {
 
     @Override
     protected void execute() {
+        double distanceFactor = 0;
+        double angleFactor = 0;
+        synchronized (distancePID) {
+            distanceFactor = distancePID.get();
+        }
+
+        synchronized (anglePID) {
+            angleFactor = anglePID.get();
+        }
+        SmartDashboard.putNumber("AutoDrive/distanceFactor", distanceFactor);
+        SmartDashboard.putNumber("AutoDrive/angleFactor", angleFactor);
+
         if(!distanceController.onTarget()) endTime = System.currentTimeMillis() + Drive.STEADY_TIME;
-        driveTrain.tankDrive(distancePID.get() + anglePID.get(), distancePID.get() - anglePID.get());
+        driveTrain.tankDrive(distanceFactor + angleFactor, distanceFactor - angleFactor, true);
 
         SmartDashboard.putBoolean("AutoDrive/onTarget", distanceController.onTarget());
         SmartDashboard.putNumber("AutoDrive/imu", imu.getYaw());
