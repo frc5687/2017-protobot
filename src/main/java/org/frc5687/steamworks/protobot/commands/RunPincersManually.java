@@ -17,8 +17,7 @@ public class RunPincersManually extends Command {
 
     @Override
     protected void execute() {
-        double speed = oi.getPincerSpeed() / 2;
-        pincers.setPincerSpeed(speed);
+        pincers.setPincerSpeed(oi.getPincerSpeed());
     }
 
     @Override

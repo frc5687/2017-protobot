@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.RunPincersManually;
+import org.frc5687.steamworks.protobot.utils.PIDListener;
 
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 import static org.frc5687.steamworks.protobot.Robot.pincers;
@@ -29,11 +30,11 @@ public class Pincers extends Subsystem implements PIDOutput {
 
     @Override
     protected void initDefaultCommand() {
+        setDefaultCommand(new RunPincersManually());
     }
 
     protected void createController() {
         if (controller != null) {
-//            controller.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 0", 0));
             return;
         }
         controller = new PIDController(Constants.Pincers.PID.kP, Constants.Pincers.PID.kI, Constants.Pincers.PID.kD, pincers.getPotentiometer(), this);
@@ -111,13 +112,12 @@ public class Pincers extends Subsystem implements PIDOutput {
         SmartDashboard.putNumber("Pincers/SetPoint", controller == null ? 0 : controller.getSetpoint());
         SmartDashboard.putNumber("Pincers/Amperage", pdp.getPincersAmps());
         SmartDashboard.putBoolean("Pincers/On Target", controller == null ? false : controller.onTarget());
-        SmartDashboard.putNumber("Pincer/Amperage", pdp.getPincersAmps());
-        SmartDashboard.putNumber("Pincer/Speed", pincerMotor.getSpeed());
+        SmartDashboard.putNumber("Pincers/Speed", pincerMotor.getSpeed());
     }
 
     @Override
     public void pidWrite(double v) {
-        setPincerSpeed(v);
+//        setPincerSpeed(v);
     }
 
     public boolean hasGear() {

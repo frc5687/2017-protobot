@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.LEDColors;
 import org.frc5687.steamworks.protobot.RobotMap;
+import org.frc5687.steamworks.protobot.commands.CloseMandibles;
 import org.frc5687.steamworks.protobot.commands.RunMandiblesManually;
 
 import static org.frc5687.steamworks.protobot.Robot.ledStrip;
@@ -28,7 +29,7 @@ public class Mandibles extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new RunMandiblesManually());
+        setDefaultCommand(new CloseMandibles());
     }
 
     public void setSpeed(double speed) {

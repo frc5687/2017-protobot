@@ -31,6 +31,8 @@ public class OI {
     public static final int RINGLIGHT_ON = 11;
     public static final int RINGLIGHT_OFF = 12;
 
+    public static final int WIGGLE_MANDIBLES = 9;
+
     public static final int GIMME_LEFT = Gamepad.Buttons.LEFT_STICK.getNumber();
     public static final int GIMME_RIGHT = Gamepad.Buttons.RIGHT_STICK.getNumber();
 
@@ -82,8 +84,6 @@ public class OI {
         gpOpenGearButton = new JoystickButton(gamepad, GP_OPEN_GEAR);
         gpCloseGearButton = new JoystickButton(gamepad, GP_CLOSE_GEAR);
 
-        gearWiggle = new JoystickButton(gamepad, Gamepad.Buttons.A.getNumber());
-
         /*
          * Operator Console Buttons
          */
@@ -102,6 +102,8 @@ public class OI {
 
         catchGearButton = new JoystickButton(operatorConsole, CATCH_GEAR);
 
+        gearWiggle = new JoystickButton(operatorConsole, WIGGLE_MANDIBLES);
+
         /*
          * Button Functions
          */
@@ -115,13 +117,13 @@ public class OI {
         ocCloseGearButton.whenPressed(new CloseMandibles());
         ocOpenGearButton.whenPressed(new OpenMandibles());
 
-        raisePincers.whenPressed(new RaisePincers());
-        lowerPincers.whenPressed(new LowerPincers());
+//        raisePincers.whenPressed(new RaisePincers());
+//        lowerPincers.whenPressed(new LowerPincers());
 
         openPincers.whenPressed(new ClosePincers());
         closePincers.whenPressed(new OpenPincers());
 
-        catchGearButton.whenPressed(new CatchGear());
+//        catchGearButton.whenPressed(new CatchGear());
 
         ringLightOn.whenPressed(new EnableRingLight());
         ringLightOff.whenPressed(new DisableRingLight());
@@ -187,7 +189,11 @@ public class OI {
 
     public double getPincerSpeed() {
         double result = -operatorConsole.getAxis(Joystick.AxisType.kY);
-        return Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
+        result = Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
+//        result /= 2;
+        result *= 0.5;
+        result -= 0.1;
+        return result;
     }
 
     public boolean isGimmeGearPressed() {
