@@ -187,6 +187,10 @@ public class OI {
         return catchGearButton.get();
     }
 
+    public boolean isOpenMandiblesPressed() {
+        return ocOpenGearButton.get() || gpOpenGearButton.get();
+    }
+
     public double getPincerSpeed() {
         double result = -operatorConsole.getAxis(Joystick.AxisType.kY);
         result = Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
