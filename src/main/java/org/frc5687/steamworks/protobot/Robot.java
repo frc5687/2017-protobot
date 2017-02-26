@@ -7,8 +7,10 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.frc5687.steamworks.protobot.commands.RaisePincers;
+import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
 import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
-import org.frc5687.steamworks.protobot.commands.autonomous.FlashLights;
+import org.frc5687.steamworks.protobot.commands.autonomous.*;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import org.frc5687.steamworks.protobot.utils.AutoChooser;
 import org.frc5687.steamworks.protobot.utils.PDP;
@@ -79,7 +81,33 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        autoCommand = new AutoDrive(60, 0.5);
+        imu.zeroYaw();
+        int position = autoRotorChooser.positionRotorValue();
+        switch (position) {
+            case 0:
+                autoCommand = null;
+                break;
+            case 1:
+                autoCommand = new AutoDepositLeft();
+                break;
+            case 2:
+                autoCommand = new AutoDrive(72, .5);
+                break;
+            case 3:
+                autoCommand = new AutoDepositGear();
+                break;
+            case 4:
+                autoCommand = new AutoAlign(-60, 0.5);
+                break;
+            case 5:
+                autoCommand = new AutoDepositRightFromFarRight();
+                break;
+            default:
+                autoCommand = null;
+                break;
+        }
+        // autoCommand = new AutoAlign(-60, 0.5);
+        // autoCommand = new AutoDepositRightFromFarRight();
         if (autoCommand != null) {
             autoCommand.start();
         }
@@ -88,6 +116,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopInit() {
         if (autoCommand != null) autoCommand.cancel();
+        new RaisePincers().start();
         ledStrip.setStripColor(LEDColors.TELEOP);
     }
 
@@ -132,7 +161,7 @@ public class Robot extends IterativeRobot {
         autoRotorChooser.updateDashboard();
 
         SmartDashboard.putBoolean("IsTony", Constants.isTony);
-        SmartDashboard.putNumber("Yaw", imu.getAngle());
+        SmartDashboard.putNumber("Yaw", imu.getYaw());
     }
 
 }

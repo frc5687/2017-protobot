@@ -3,7 +3,9 @@ package org.frc5687.steamworks.protobot;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.*;
+import org.frc5687.steamworks.protobot.commands.actions.GimmeGear;
 import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
 
@@ -28,6 +30,9 @@ public class OI {
 
     public static final int RINGLIGHT_ON = 11;
     public static final int RINGLIGHT_OFF = 12;
+
+    public static final int GIMME_LEFT = Gamepad.Buttons.LEFT_STICK.getNumber();
+    public static final int GIMME_RIGHT = Gamepad.Buttons.RIGHT_STICK.getNumber();
 
     private Gamepad gamepad;
     private Joystick operatorConsole;
@@ -56,6 +61,9 @@ public class OI {
     private JoystickButton ringLightOff;
 
     private JoystickButton gearWiggle;
+
+    private JoystickButton gimmeGearLeft;
+    private JoystickButton gimmeGearRight;
 
     public OI() {
         gamepad = new Gamepad(0);
@@ -118,21 +126,31 @@ public class OI {
         ringLightOn.whenPressed(new EnableRingLight());
         ringLightOff.whenPressed(new DisableRingLight());
 
+        gimmeGearLeft = new JoystickButton(gamepad, GIMME_LEFT);
+        gimmeGearRight = new JoystickButton(gamepad, GIMME_RIGHT);
+
+        gimmeGearLeft.whenPressed(new GimmeGear());
+        gimmeGearRight.whenPressed(new GimmeGear());
+
     }
 
     private double transformStickToSpeed(Gamepad.Axes stick) {
-        double result = gamepad.getRawAxis(stick);
+        double result = gamepad.getRawAxis(stick) * -1;
         result = Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
         result = Helpers.applySensitivityTransform(result);
         return result;
     }
 
     public double getLeftSpeed() {
-        return transformStickToSpeed(Gamepad.Axes.LEFT_Y);
+        double result = transformStickToSpeed(Gamepad.Axes.LEFT_Y);
+        SmartDashboard.putNumber("OI/LeftSpeed", result);
+        return result;
     }
 
     public double getRightSpeed() {
-        return transformStickToSpeed(Gamepad.Axes.RIGHT_Y);
+        double result = transformStickToSpeed(Gamepad.Axes.RIGHT_Y);
+        SmartDashboard.putNumber("OI/RIghtSpeed", result);
+        return result;
     }
 
     public boolean isLeftTriggerPressed() {
@@ -170,6 +188,10 @@ public class OI {
     public double getPincerSpeed() {
         double result = -operatorConsole.getAxis(Joystick.AxisType.kY);
         return Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
+    }
+
+    public boolean isGimmeGearPressed() {
+        return gimmeGearLeft.get() || gimmeGearRight.get();
     }
 
 }

@@ -35,12 +35,12 @@ public class RobotMap {
 
     }
 
-    public static class GearHandler {
+    public static class Mandibles {
 
-        public static final int GEAR_MOTOR = 6;
-        public static final int GEAR_POTENTIOMETER = 1;
-        public static final int PDP_GEAR_MOTOR = 2;
-        public static final int GEAR_IR = 2;
+        public static final int MANDIBLES_MOTOR = 6;
+        public static final int POTENTIOMETER = 1;
+        public static final int PDP_MANDIBLES_MOTOR = 10;
+        public static final int MANDIBLES_IR = 7;
 
     }
 
@@ -65,7 +65,8 @@ public class RobotMap {
 
         public static final int CLIMBER_MOTOR_FORE = 7;
         public static final int CLIMBER_MOTOR_AFT = 9;
-        public static final int PDP_CLIMBER_MOTOR = 12;
+        public static final int PDP_CLIMBER_MOTOR_A = 2;
+        public static final int PDP_CLIMBER_MOTOR_B = 12;
 
     }
 
