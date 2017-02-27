@@ -35,23 +35,23 @@ public class Mandibles extends Subsystem {
     }
 
     public void open() {
-        gearMotor.set(Constants.GearHandler.OPEN_SPEED);
+        gearMotor.set(Constants.Mandibles.OPEN_SPEED);
     }
 
     public void close() {
-        gearMotor.set(Constants.GearHandler.CLOSE_SPEED);
+        gearMotor.set(Constants.Mandibles.CLOSE_SPEED);
     }
 
     public void clamp() {
-        gearMotor.set(Constants.GearHandler.CLAMP_SPEED);
+        gearMotor.set(Constants.Mandibles.CLAMP_SPEED);
     }
 
     public void wiggleOut() {
-        gearMotor.set(Constants.GearHandler.WIGGLE_SPEED);
+        gearMotor.set(Constants.Mandibles.WIGGLE_SPEED);
     }
 
     public void wiggleIn() {
-        gearMotor.set(-Constants.GearHandler.WIGGLE_SPEED);
+        gearMotor.set(-Constants.Mandibles.WIGGLE_SPEED);
     }
 
     public void stop() {
@@ -59,7 +59,7 @@ public class Mandibles extends Subsystem {
     }
 
     public boolean gearPresent() {
-        return ir.getValue() > Constants.GearHandler.IR_GEAR_DETECTED;
+        return ir.getValue() > Constants.Mandibles.IR_GEAR_DETECTED;
     }
 
     public double potentiometerValue() {

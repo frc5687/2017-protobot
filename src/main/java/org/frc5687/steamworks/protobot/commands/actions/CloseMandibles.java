@@ -19,7 +19,7 @@ public class CloseMandibles extends Command {
     @Override
     protected void initialize() {
         state = State.CLOSE;
-        endTime = System.currentTimeMillis() + Constants.GearHandler.CLOSE_TIME;
+        endTime = System.currentTimeMillis() + Constants.Mandibles.CLOSE_TIME;
     }
 
     @Override
@@ -33,14 +33,14 @@ public class CloseMandibles extends Command {
                 mandibles.clamp();
                 if (oi.isGearWigglePressed()) {
                     state = State.WIGGLE_OUT;
-                    switchTime = System.currentTimeMillis() + Constants.GearHandler.WIGGLE_OUT_TIME;
+                    switchTime = System.currentTimeMillis() + Constants.Mandibles.WIGGLE_OUT_TIME;
                 }
                 return;
             case WIGGLE_OUT:
                 mandibles.wiggleOut();
                 if (!oi.isGearWigglePressed()) state = State.CLAMP;
                 else if (System.currentTimeMillis() > switchTime) {
-                    switchTime = System.currentTimeMillis() + Constants.GearHandler.WIGGLE_OUT_TIME;
+                    switchTime = System.currentTimeMillis() + Constants.Mandibles.WIGGLE_OUT_TIME;
                     state = State.WIGGLE_IN;
                 }
                 return;
@@ -48,7 +48,7 @@ public class CloseMandibles extends Command {
                 mandibles.wiggleIn();
                 if (!oi.isGearWigglePressed()) state = State.CLAMP;
                 else if (System.currentTimeMillis() > switchTime) {
-                    switchTime = System.currentTimeMillis() + Constants.GearHandler.WIGGLE_IN_TIME;
+                    switchTime = System.currentTimeMillis() + Constants.Mandibles.WIGGLE_IN_TIME;
                     state = State.WIGGLE_OUT;
                 }
                 return;
