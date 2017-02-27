@@ -115,7 +115,6 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopInit() {
         if (autoCommand != null) autoCommand.cancel();
-//        new RaisePincers().start();
         ledStrip.setStripColor(LEDColors.TELEOP);
     }
 

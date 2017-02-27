@@ -194,9 +194,7 @@ public class OI {
     public double getPincerSpeed() {
         double result = -operatorConsole.getAxis(Joystick.AxisType.kY);
         result = Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
-//        result /= 2;
         result *= 0.5;
-        result -= 0.1;
         return result;
     }
 
