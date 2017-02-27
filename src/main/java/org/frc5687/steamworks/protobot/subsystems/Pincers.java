@@ -4,9 +4,11 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
+import org.frc5687.steamworks.protobot.LEDColors;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.actions.RaisePincers;
 
+import static org.frc5687.steamworks.protobot.Robot.ledStrip;
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 import static org.frc5687.steamworks.protobot.Robot.pincers;
 
@@ -106,6 +108,7 @@ public class Pincers extends Subsystem implements PIDOutput {
     }
 
     public void updateDashboard() {
+        if (hasGear()) { ledStrip.setStripColor(LEDColors.GEAR_IN_PINCERS); }
         SmartDashboard.putNumber("Pincers/PotentiometerValue", potentiometer.get());
         SmartDashboard.putNumber("Pincers/IR Value", ir.getValue());
         SmartDashboard.putNumber("Pincers/Amperage", pdp.getPincersAmps());
