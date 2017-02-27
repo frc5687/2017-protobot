@@ -1,4 +1,4 @@
-package org.frc5687.steamworks.protobot.commands;
+package org.frc5687.steamworks.protobot.commands.actions;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,6 +9,7 @@ import java.util.Date;
 
 import static org.frc5687.steamworks.protobot.Robot.ledStrip;
 import static org.frc5687.steamworks.protobot.Robot.mandibles;
+import static org.frc5687.steamworks.protobot.Robot.oi;
 
 public class OpenMandibles extends Command {
 
@@ -27,12 +28,13 @@ public class OpenMandibles extends Command {
 
     @Override
     protected void execute() {
-        mandibles.open();
+        if (new Date().getTime() < endTime) mandibles.open();
+        else mandibles.stop();
     }
 
     @Override
     protected boolean isFinished() {
-        return new Date().getTime() > endTime;
+        return (new Date().getTime() > endTime) && (!oi.isOpenMandiblesPressed());
     }
 
     @Override

@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.frc5687.steamworks.protobot.commands.*;
-import org.frc5687.steamworks.protobot.commands.actions.GimmeGear;
+import org.frc5687.steamworks.protobot.commands.actions.*;
+import org.frc5687.steamworks.protobot.commands.composite.CatchGear;
 import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
 
@@ -30,6 +30,8 @@ public class OI {
 
     public static final int RINGLIGHT_ON = 11;
     public static final int RINGLIGHT_OFF = 12;
+
+    public static final int WIGGLE_MANDIBLES = 9;
 
     public static final int GIMME_LEFT = Gamepad.Buttons.LEFT_STICK.getNumber();
     public static final int GIMME_RIGHT = Gamepad.Buttons.RIGHT_STICK.getNumber();
@@ -82,8 +84,6 @@ public class OI {
         gpOpenGearButton = new JoystickButton(gamepad, GP_OPEN_GEAR);
         gpCloseGearButton = new JoystickButton(gamepad, GP_CLOSE_GEAR);
 
-        gearWiggle = new JoystickButton(gamepad, Gamepad.Buttons.A.getNumber());
-
         /*
          * Operator Console Buttons
          */
@@ -101,6 +101,8 @@ public class OI {
         ocOpenGearButton = new JoystickButton(operatorConsole, OC_OPEN_GEAR);
 
         catchGearButton = new JoystickButton(operatorConsole, CATCH_GEAR);
+
+        gearWiggle = new JoystickButton(operatorConsole, WIGGLE_MANDIBLES);
 
         /*
          * Button Functions
@@ -185,9 +187,15 @@ public class OI {
         return catchGearButton.get();
     }
 
+    public boolean isOpenMandiblesPressed() {
+        return ocOpenGearButton.get() || gpOpenGearButton.get();
+    }
+
     public double getPincerSpeed() {
         double result = -operatorConsole.getAxis(Joystick.AxisType.kY);
-        return Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
+        result = Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
+        result *= 0.5;
+        return result;
     }
 
     public boolean isGimmeGearPressed() {

@@ -50,7 +50,7 @@ public class AutoApproachTarget extends Command {
         angleController = new PIDController(Constants.Auto.Drive.AnglePID.kP, Constants.Auto.Drive.AnglePID.kI, Constants.Auto.Drive.AnglePID.kD, imu, anglePID);
         angleController.setInputRange(Constants.Auto.MIN_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
         double maxSpeed = speed * Constants.Auto.Drive.AnglePID.MAX_DIFFERENCE;
-        SmartDashboard.putNumber("AutoApproachTarget/AnglePID/MAX_SPEED", maxSpeed);
+        SmartDashboard.putNumber("AutoApproachTarget/AnglePID/RAISE_SPEED", maxSpeed);
         DriverStation.reportError("Turn PID Max Output: " + speed, false);
         angleController.setOutputRange(-maxSpeed, maxSpeed);
         angleController.setContinuous();

@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
-import org.frc5687.steamworks.protobot.commands.RunClimberManually;
+import org.frc5687.steamworks.protobot.commands.actions.RunClimberManually;
 
 public class Climber extends Subsystem {
 

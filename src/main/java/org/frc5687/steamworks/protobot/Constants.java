@@ -27,7 +27,7 @@ public class Constants {
 
         public static final double OPEN_SPEED = -.5;
         public static final double CLOSE_SPEED = .1;
-        public static final double CLAMP_SPEED = .1;
+        public static final double CLAMP_SPEED = .2;
         public static final long OPEN_TIME = 250;
         public static final long CLOSE_TIME = 250;
         public static final double TONY_MAX_POT_LIMIT = 0.5;
@@ -145,8 +145,12 @@ public class Constants {
         public static final double POTENTIOMETER_LIFTED_RHODY = 0.386;
         public static final double POTENTIOMETER_LOWERED_TONY = .270;
         public static final double POTENTIOMETER_LOWERED_RHODY = 0.64;
-        public static final double MAX_SPEED = 0.5;
+        public static final double LOWER_SPEED = 0.5;
+        public static final double RAISE_SPEED = -0.5;
         public static final int IR_THRESHOLD = 2000;
+        public static final long RAISE_TIME = 500;
+        public static final long LOWER_TIME = 500;
+        public static final double HARDSTOP_AMPS = 5.0;
 
         public class PID {
 

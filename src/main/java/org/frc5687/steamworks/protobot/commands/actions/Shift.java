@@ -1,4 +1,4 @@
-package org.frc5687.steamworks.protobot.commands;
+package org.frc5687.steamworks.protobot.commands.actions;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -24,8 +24,7 @@ public class Shift extends Command {
     @Override
     protected void initialize() {
         DriverStation.reportError("Starting shift command", false);
-//        state = State.STOP_MOTOR;
-        state = State.SHIFT;
+        state = State.STOP_MOTOR;
     }
 
     @Override
@@ -47,8 +46,7 @@ public class Shift extends Command {
                 DriverStation.reportError("Shift state SHIFT", false);
                 shifter.shift(gear);
                 endTime = System.currentTimeMillis() + Constants.Shifter.SHIFT_TIME;
-                //        state = State.WAIT_FOR_SHIFT;
-                state = State.DONE;
+                state = State.WAIT_FOR_SHIFT;
                 break;
             case WAIT_FOR_SHIFT:
                 DriverStation.reportError("Shift state WAIT_FOR_SHIFT", false);

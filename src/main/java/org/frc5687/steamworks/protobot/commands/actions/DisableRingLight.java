@@ -1,12 +1,12 @@
-package org.frc5687.steamworks.protobot.commands;
+package org.frc5687.steamworks.protobot.commands.actions;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 import static org.frc5687.steamworks.protobot.Robot.lights;
 
-public class EnableRingLight extends Command {
+public class DisableRingLight extends Command {
 
-    public EnableRingLight() {
+    public DisableRingLight() {
         requires(lights);
     }
 
@@ -16,12 +16,12 @@ public class EnableRingLight extends Command {
 
     @Override
     protected void execute() {
-        lights.turnRingLightOn();
+        lights.turnRingLightOff();
     }
 
     @Override
     protected boolean isFinished() {
-        return lights.getRingLight();
+        return !lights.getRingLight();
     }
 
     @Override
