@@ -5,8 +5,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
-import org.frc5687.steamworks.protobot.commands.RunPincersManually;
-import org.frc5687.steamworks.protobot.utils.PIDListener;
+import org.frc5687.steamworks.protobot.commands.actions.RaisePincers;
 
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 import static org.frc5687.steamworks.protobot.Robot.pincers;
@@ -30,7 +29,7 @@ public class Pincers extends Subsystem implements PIDOutput {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new RunPincersManually());
+        setDefaultCommand(new RaisePincers());
     }
 
     protected void createController() {
@@ -39,7 +38,7 @@ public class Pincers extends Subsystem implements PIDOutput {
         }
         controller = new PIDController(Constants.Pincers.PID.kP, Constants.Pincers.PID.kI, Constants.Pincers.PID.kD, pincers.getPotentiometer(), this);
         controller.setInputRange(Constants.Pincers.PID.MIN_INPUT, Constants.Pincers.PID.MAX_INPUT);
-        controller.setOutputRange(-Constants.Pincers.MAX_SPEED, Constants.Pincers.MAX_SPEED);
+        controller.setOutputRange(-Constants.Pincers.RAISE_SPEED, Constants.Pincers.RAISE_SPEED);
         controller.setAbsoluteTolerance(Constants.Pincers.PID.TOLERANCE);
     }
 
@@ -70,7 +69,7 @@ public class Pincers extends Subsystem implements PIDOutput {
     public void rest() {
         createController();
         controller.setSetpoint(rest);
-//        controller.enable();
+        controller.enable();
         DriverStation.reportError("Setting setpoint to " + rest + " in Pincers.rest()", false);
     }
 
@@ -109,15 +108,15 @@ public class Pincers extends Subsystem implements PIDOutput {
     public void updateDashboard() {
         SmartDashboard.putNumber("Pincers/PotentiometerValue", potentiometer.get());
         SmartDashboard.putNumber("Pincers/IR Value", ir.getValue());
-        SmartDashboard.putNumber("Pincers/SetPoint", controller == null ? 0 : controller.getSetpoint());
         SmartDashboard.putNumber("Pincers/Amperage", pdp.getPincersAmps());
-        SmartDashboard.putBoolean("Pincers/On Target", controller == null ? false : controller.onTarget());
+        SmartDashboard.putNumber("Pincers/PID/SetPoint", controller == null ? 0 : controller.getSetpoint());
+        SmartDashboard.putBoolean("Pincers/PID/On Target", controller == null ? false : controller.onTarget());
         SmartDashboard.putNumber("Pincers/Speed", pincerMotor.getSpeed());
     }
 
     @Override
     public void pidWrite(double v) {
-//        setPincerSpeed(v);
+        setPincerSpeed(v);
     }
 
     public boolean hasGear() {

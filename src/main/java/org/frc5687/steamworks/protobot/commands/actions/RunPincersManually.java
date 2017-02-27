@@ -1,37 +1,33 @@
-package org.frc5687.steamworks.protobot.commands;
+package org.frc5687.steamworks.protobot.commands.actions;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
+import static org.frc5687.steamworks.protobot.Robot.oi;
 import static org.frc5687.steamworks.protobot.Robot.pincers;
 
-public class OpenPincers extends Command {
+public class RunPincersManually extends Command {
 
-    public OpenPincers() {
+    public RunPincersManually() {
         requires(pincers);
     }
 
     @Override
     protected void initialize() {
-        DriverStation.reportError("Opening Pincers", false);
     }
 
     @Override
     protected void execute() {
-        pincers.open();
+        pincers.setPincerSpeed(oi.getPincerSpeed());
     }
 
     @Override
     protected boolean isFinished() {
-        return pincers.isOpen();
+        return false;
     }
 
     @Override
     protected void end() {
-    }
-
-    @Override
-    protected void interrupted() {
+        pincers.setPincerSpeed(0);
     }
 
 }

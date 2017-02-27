@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.frc5687.steamworks.protobot.commands.*;
-import org.frc5687.steamworks.protobot.commands.actions.GimmeGear;
+import org.frc5687.steamworks.protobot.commands.actions.*;
+import org.frc5687.steamworks.protobot.commands.composite.CatchGear;
 import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
 
@@ -117,13 +117,13 @@ public class OI {
         ocCloseGearButton.whenPressed(new CloseMandibles());
         ocOpenGearButton.whenPressed(new OpenMandibles());
 
-//        raisePincers.whenPressed(new RaisePincers());
-//        lowerPincers.whenPressed(new LowerPincers());
+        raisePincers.whenPressed(new RaisePincers());
+        lowerPincers.whenPressed(new LowerPincers());
 
         openPincers.whenPressed(new ClosePincers());
         closePincers.whenPressed(new OpenPincers());
 
-//        catchGearButton.whenPressed(new CatchGear());
+        catchGearButton.whenPressed(new CatchGear());
 
         ringLightOn.whenPressed(new EnableRingLight());
         ringLightOff.whenPressed(new DisableRingLight());

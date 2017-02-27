@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
-import org.frc5687.steamworks.protobot.commands.DriveWith2Joysticks;
+import org.frc5687.steamworks.protobot.commands.actions.DriveWith2Joysticks;
 
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 
