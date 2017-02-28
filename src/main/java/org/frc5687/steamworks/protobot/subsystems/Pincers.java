@@ -69,6 +69,10 @@ public class Pincers extends Subsystem implements PIDOutput {
         piston.set(DoubleSolenoid.Value.kReverse);
     }
 
+    public void relax() {
+        piston.set(DoubleSolenoid.Value.kOff);
+    }
+
     public void rest() {
         createController();
         controller.setSetpoint(rest);
@@ -94,6 +98,10 @@ public class Pincers extends Subsystem implements PIDOutput {
 
     public boolean isClosed() {
         return piston.get() == DoubleSolenoid.Value.kForward;
+    }
+
+    public boolean isRelaxed() {
+        return piston.get() == DoubleSolenoid.Value.kOff;
     }
 
     public boolean onTarget() {
