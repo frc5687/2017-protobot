@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.actions.*;
-import org.frc5687.steamworks.protobot.commands.composite.CatchGear;
+import org.frc5687.steamworks.protobot.commands.composite.DeployPincers;
 import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
 
@@ -21,12 +21,13 @@ public class OI {
     public static final int OC_CLOSE_GEAR = 7;
 
     public static final int RAISE_PINCERS = 4;
-    public static final int LOWER_PINCERS = 3;
+    public static final int LOWER_PINCERS = 9;
 
     public static final int OPEN_PINCERS = 5;
     public static final int CLOSE_PINCERS = 6;
 
-    public static final int CATCH_GEAR = 10;
+    public static final int OC_DEPLOY_PINCERS = 3;
+    public static final int GP_DEPLOY_PINCERS = Gamepad.Buttons.X.getNumber();
 
     public static final int RINGLIGHT_ON = 11;
     public static final int RINGLIGHT_OFF = 12;
@@ -45,7 +46,8 @@ public class OI {
     private JoystickButton ocOpenGearButton;
     private JoystickButton ocCloseGearButton;
 
-    private JoystickButton catchGearButton;
+    public JoystickButton ocDeployPincers;
+    public JoystickButton gpDeployPincers;
 
     private JoystickButton ascendClimber;
     private JoystickButton descendClimber;
@@ -100,7 +102,8 @@ public class OI {
         ocCloseGearButton = new JoystickButton(operatorConsole, OC_CLOSE_GEAR);
         ocOpenGearButton = new JoystickButton(operatorConsole, OC_OPEN_GEAR);
 
-        catchGearButton = new JoystickButton(operatorConsole, CATCH_GEAR);
+        ocDeployPincers = new JoystickButton(operatorConsole, OC_DEPLOY_PINCERS);
+        gpDeployPincers = new JoystickButton(gamepad, GP_DEPLOY_PINCERS);
 
         gearWiggle = new JoystickButton(operatorConsole, WIGGLE_MANDIBLES);
 
@@ -123,7 +126,8 @@ public class OI {
         openPincers.whenPressed(new ClosePincers());
         closePincers.whenPressed(new OpenPincers());
 
-        catchGearButton.whenPressed(new CatchGear());
+        ocDeployPincers.whenPressed(new DeployPincers());
+        gpDeployPincers.whenPressed(new DeployPincers());
 
         ringLightOn.whenPressed(new EnableRingLight());
         ringLightOff.whenPressed(new DisableRingLight());
@@ -183,8 +187,8 @@ public class OI {
         return gearWiggle.get();
     }
 
-    public boolean isCatchGearPressed() {
-        return catchGearButton.get();
+    public boolean isDeployPincersPressed() {
+        return ocDeployPincers.get();
     }
 
     public boolean isOpenMandiblesPressed() {
@@ -202,4 +206,11 @@ public class OI {
         return gimmeGearLeft.get() || gimmeGearRight.get();
     }
 
+    public boolean isgpButtonPressed(int gpButton) {
+        return gamepad.getRawButton(gpButton);
+    }
+
+    public boolean isocButtonPressed(int ocButton) {
+        return operatorConsole.getRawButton(ocButton);
+    }
 }
