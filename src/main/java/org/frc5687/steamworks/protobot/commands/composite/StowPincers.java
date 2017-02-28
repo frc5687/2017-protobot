@@ -2,6 +2,7 @@ package org.frc5687.steamworks.protobot.commands.composite;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.frc5687.steamworks.protobot.commands.actions.ClosePincers;
+import org.frc5687.steamworks.protobot.commands.actions.HoldPincers;
 import org.frc5687.steamworks.protobot.commands.actions.RaisePincers;
 import org.frc5687.steamworks.protobot.commands.actions.Rest;
 
@@ -15,7 +16,7 @@ public class StowPincers extends CommandGroup {
     public StowPincers() {
         addSequential(new ClosePincers());
         addSequential(new RaisePincers());
-        addSequential(new Rest(pincers));
+        addSequential(new HoldPincers());
     }
 
 }
