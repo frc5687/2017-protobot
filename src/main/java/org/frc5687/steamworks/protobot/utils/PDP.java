@@ -16,10 +16,6 @@ public class PDP extends PowerDistributionPanel {
         indicator = new DigitalInput(RobotMap.Misc.INDICATOR);
     }
 
-    public double getGearHandlerAmps() {
-        return getCurrent(RobotMap.Mandibles.PDP_MANDIBLES_MOTOR);
-    }
-
     public double getClimberAAmps() {
         return getCurrent(RobotMap.Climber.PDP_CLIMBER_MOTOR_A);
     }
@@ -75,4 +71,7 @@ public class PDP extends PowerDistributionPanel {
         return indicator.get();
     }
 
+    public double getMandiblesAmps() {
+        return getCurrent(RobotMap.Mandibles.PDP_MANDIBLES_MOTOR);
+    }
 }
