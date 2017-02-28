@@ -22,8 +22,8 @@ public class DriveWith2Joysticks extends Command {
 
     @Override
     protected void execute() {
-        if (oi.isLeftTriggerPressed()) driveTrain.tankDrive(Constants.Drive.FULL_FORWARDS_SPEED);
-        else if (oi.isRightTriggerPressed()) driveTrain.tankDrive(Constants.Drive.FULL_BACKWARDS_SPEED);
+        if (oi.isLeftTriggerPressed()) driveTrain.tankDrive(Constants.DriveTrain.FULL_FORWARDS_SPEED);
+        else if (oi.isRightTriggerPressed()) driveTrain.tankDrive(Constants.DriveTrain.FULL_BACKWARDS_SPEED);
         else driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed());
     }
 

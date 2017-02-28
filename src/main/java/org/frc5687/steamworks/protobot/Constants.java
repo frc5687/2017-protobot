@@ -23,7 +23,7 @@ public class Constants {
         return isTony ? tonyValue : protobotValue;
     }
 
-    public class GearHandler {
+    public class Mandibles {
 
         public static final double OPEN_SPEED = -.5;
         public static final double CLOSE_SPEED = .1;
@@ -39,7 +39,7 @@ public class Constants {
 
     }
 
-    public class Drive {
+    public class DriveTrain {
 
         public static final boolean LEFT_MOTORS_INVERTED = false;
         public static final boolean RIGHT_MOTORS_INVERTED = true;
