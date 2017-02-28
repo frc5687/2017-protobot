@@ -5,14 +5,19 @@ import org.frc5687.steamworks.protobot.Constants;
 
 import static org.frc5687.steamworks.protobot.Robot.mandibles;
 import static org.frc5687.steamworks.protobot.Robot.oi;
+import static org.frc5687.steamworks.protobot.Robot.pdp;
 
-public class CloseMandibles extends Command {
+/**
+ * Default command for the mandibles system.  Starts by closing the the mandibles until the hard-stop is hit (based on amp draw).
+ * Then brakes the motor using the Victor.
+ */
+public class ReceiveMandibles extends Command {
 
     private State state;
     private long endTime;
     private long switchTime;
 
-    public CloseMandibles() {
+    public ReceiveMandibles() {
         requires(mandibles);
     }
 
@@ -27,10 +32,10 @@ public class CloseMandibles extends Command {
         switch (state) {
             case CLOSE:
                 mandibles.close();
-                if (System.currentTimeMillis() >= endTime) state = State.CLAMP;
+                if (System.currentTimeMillis() >= endTime || pdp.getMandiblesAmps() > Constants.Mandibles.THRESHOLD_AMPS) { state = State.CLAMP; }
                 return;
             case CLAMP:
-                mandibles.clamp();
+                mandibles.setSpeed(0);
                 if (oi.isGearWigglePressed()) {
                     state = State.WIGGLE_OUT;
                     switchTime = System.currentTimeMillis() + Constants.Mandibles.WIGGLE_OUT_TIME;

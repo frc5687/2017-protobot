@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.actions.*;
 import org.frc5687.steamworks.protobot.commands.composite.DeployPincers;
-import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
 import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
 
@@ -15,8 +14,19 @@ import org.frc5687.steamworks.protobot.utils.Helpers;
  */
 public class OI {
 
+<<<<<<< HEAD
     public static final int GP_EJECT_MANDIBLES = 8;
     public static final int GP_RECEIVE_MANDIBLES = 7;
+=======
+    public static final int GP_OPEN_GEAR = 8;
+    public static final int GP_CLOSE_GEAR = 7;
+
+    public static final int OC_OPEN_GEAR = 8;
+    public static final int OC_CLOSE_GEAR = 7;
+
+    public static final int RAISE_PINCERS = 4;
+    public static final int LOWER_PINCERS = 9;
+>>>>>>> master
 
     public static final int OPEN_PINCERS = 5;
     public static final int CLOSE_PINCERS = 6;
@@ -27,8 +37,8 @@ public class OI {
     public static final int RINGLIGHT_ON = 11;
     public static final int RINGLIGHT_OFF = 12;
 
-    public static final int OC_RECEIVE_MANDIBLES = 4;
-    public static final int OC_EJECT_MANDIBLES = 6;
+    public static final int OC_MANDIBLES_RECEIVE = 4;
+    public static final int OC_MANDIBLES_EJECT = 6;
 
 
     public static final int WIGGLE_MANDIBLES = 9;
@@ -53,6 +63,9 @@ public class OI {
 
     private JoystickButton shiftLow;
     private JoystickButton shiftHigh;
+
+    private JoystickButton raisePincers;
+    private JoystickButton lowerPincers;
 
     private JoystickButton openPincers;
     private JoystickButton closePincers;
@@ -86,14 +99,17 @@ public class OI {
          * Operator Console Buttons
          */
 
+        // raisePincers = new JoystickButton(operatorConsole, RAISE_PINCERS);
+        // lowerPincers = new JoystickButton(operatorConsole, LOWER_PINCERS);
+
         openPincers = new JoystickButton(operatorConsole, OPEN_PINCERS);
         closePincers = new JoystickButton(operatorConsole, CLOSE_PINCERS);
 
         ringLightOn = new JoystickButton(operatorConsole, RINGLIGHT_ON);
         ringLightOff = new JoystickButton(operatorConsole, RINGLIGHT_OFF);
 
-        ocReceiveMandiblesButton = new JoystickButton(operatorConsole, OC_RECEIVE_MANDIBLES);
-        ocEjectMandiblesButton = new JoystickButton(operatorConsole, OC_EJECT_MANDIBLES);
+        ocReceiveMandiblesButton = new JoystickButton(operatorConsole, OC_MANDIBLES_RECEIVE);
+        ocEjectMandiblesButton = new JoystickButton(operatorConsole, OC_MANDIBLES_EJECT);
 
         ocDeployPincers = new JoystickButton(operatorConsole, OC_DEPLOY_PINCERS);
         gpDeployPincers = new JoystickButton(gamepad, GP_DEPLOY_PINCERS);
@@ -112,6 +128,9 @@ public class OI {
 
         ocReceiveMandiblesButton.whenPressed(new ReceiveMandibles());
         ocEjectMandiblesButton.whenPressed(new EjectMandibles());
+
+        raisePincers.whenPressed(new RaisePincers());
+        lowerPincers.whenPressed(new LowerPincers());
 
         openPincers.whenPressed(new ClosePincers());
         closePincers.whenPressed(new OpenPincers());
