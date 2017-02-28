@@ -33,12 +33,12 @@ public class OpenMandibles extends Command {
 
     @Override
     protected boolean isFinished() {
-        return (System.currentTimeMillis() > endMillis || pdp.getMandiblesAmps() > Constants.Mandibles.THRESHOLD_AMPS);
+        return (System.currentTimeMillis() > endMillis || pdp.getMandiblesAmps() > Constants.Mandibles.THRESHOLD_OPEN_AMPS);
     }
 
     @Override
     protected void end() {
-        mandibles.stop();
+        mandibles.setSpeed(-Constants.Mandibles.CLAMP_SPEED);
     }
 
     @Override

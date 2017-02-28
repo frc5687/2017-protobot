@@ -98,8 +98,6 @@ public class OI {
         ocDeployPincers = new JoystickButton(operatorConsole, OC_DEPLOY_PINCERS);
         gpDeployPincers = new JoystickButton(gamepad, GP_DEPLOY_PINCERS);
 
-        gearWiggle = new JoystickButton(operatorConsole, WIGGLE_MANDIBLES);
-
         /*
          * Button Functions
          */
@@ -174,7 +172,7 @@ public class OI {
     }
 
     public boolean isGearWigglePressed() {
-        return gearWiggle.get();
+        return ocReceiveMandiblesButton.get() || gpReceiveMandiblesButton.get();
     }
 
     public boolean isDeployPincersPressed() {

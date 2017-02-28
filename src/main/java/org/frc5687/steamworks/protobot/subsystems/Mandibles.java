@@ -2,6 +2,7 @@ package org.frc5687.steamworks.protobot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -9,6 +10,8 @@ import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.LEDColors;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.actions.ReceiveMandibles;
+
+import java.sql.Driver;
 
 import static org.frc5687.steamworks.protobot.Robot.ledStrip;
 import static org.frc5687.steamworks.protobot.Robot.pdp;
@@ -35,27 +38,27 @@ public class Mandibles extends Subsystem {
     }
 
     public void open() {
-        gearMotor.set(Constants.Mandibles.OPEN_SPEED);
+        setSpeed(Constants.Mandibles.OPEN_SPEED);
     }
 
     public void close() {
-        gearMotor.set(Constants.Mandibles.CLOSE_SPEED);
+        setSpeed(Constants.Mandibles.CLOSE_SPEED);
     }
 
     public void clamp() {
-        gearMotor.set(Constants.Mandibles.CLAMP_SPEED);
+        setSpeed(Constants.Mandibles.CLAMP_SPEED);
     }
 
     public void wiggleOut() {
-        gearMotor.set(Constants.Mandibles.WIGGLE_SPEED);
+        setSpeed(Constants.Mandibles.WIGGLE_SPEED);
     }
 
     public void wiggleIn() {
-        gearMotor.set(-Constants.Mandibles.WIGGLE_SPEED);
+        setSpeed(-Constants.Mandibles.WIGGLE_SPEED);
     }
 
     public void stop() {
-        gearMotor.set(0);
+        setSpeed(0);
     }
 
     public boolean gearPresent() {
