@@ -7,6 +7,7 @@ import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.LEDColors;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.actions.RaisePincers;
+import org.frc5687.steamworks.protobot.commands.composite.StowPincers;
 
 import static org.frc5687.steamworks.protobot.Robot.ledStrip;
 import static org.frc5687.steamworks.protobot.Robot.pdp;
@@ -31,7 +32,7 @@ public class Pincers extends Subsystem implements PIDOutput {
 
     @Override
     protected void initDefaultCommand() {
-//        setDefaultCommand(new RaisePincers());
+        setDefaultCommand(new StowPincers());
     }
 
     protected void createController() {
