@@ -31,7 +31,7 @@ public class Pincers extends Subsystem implements PIDOutput {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new RaisePincers());
+//        setDefaultCommand(new RaisePincers());
     }
 
     protected void createController() {
