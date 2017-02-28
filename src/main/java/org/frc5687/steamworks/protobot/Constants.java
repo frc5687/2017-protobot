@@ -36,7 +36,7 @@ public class Constants {
         public static final long WIGGLE_OUT_TIME = 30;
         public static final long WIGGLE_IN_TIME = 70;
         public static final long IR_GEAR_DETECTED = 1500;
-
+        public static final double THRESHOLD_AMPS = 3.0;
     }
 
     public class DriveTrain {

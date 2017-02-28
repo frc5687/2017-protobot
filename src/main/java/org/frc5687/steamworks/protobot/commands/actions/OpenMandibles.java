@@ -7,13 +7,13 @@ import org.frc5687.steamworks.protobot.LEDColors;
 
 import java.util.Date;
 
-import static org.frc5687.steamworks.protobot.Robot.ledStrip;
-import static org.frc5687.steamworks.protobot.Robot.mandibles;
-import static org.frc5687.steamworks.protobot.Robot.oi;
+import static org.frc5687.steamworks.protobot.Robot.*;
 
+/**
+ * Created by Ben Bernard on 2/27/2017.
+ */
 public class OpenMandibles extends Command {
-
-    private long endTime;
+    private long endMillis;
 
     public OpenMandibles() {
         requires(mandibles);
@@ -22,19 +22,18 @@ public class OpenMandibles extends Command {
     @Override
     protected void initialize() {
         DriverStation.reportError("Ejecting gear", false);
-        ledStrip.setStripColor(LEDColors.TELEOP);
-        endTime = new Date().getTime() + Constants.Mandibles.OPEN_TIME;
+        ledStrip.setStripColor(LEDColors.MANDIBLES_OPEN);
+        endMillis = System.currentTimeMillis() + Constants.Mandibles.OPEN_TIME;
     }
 
     @Override
     protected void execute() {
-        if (new Date().getTime() < endTime) mandibles.open();
-        else mandibles.stop();
+        mandibles.open();
     }
 
     @Override
     protected boolean isFinished() {
-        return (new Date().getTime() > endTime) && (!oi.isOpenMandiblesPressed());
+        return (System.currentTimeMillis() > endMillis || pdp.getMandiblesAmps() > Constants.Mandibles.THRESHOLD_AMPS);
     }
 
     @Override

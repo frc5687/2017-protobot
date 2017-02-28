@@ -59,11 +59,11 @@ public class DriveTrain extends Subsystem implements PIDSource {
     }
 
     public double getLeftSpeed() {
-        return leftFrontMotor.getSpeed() * (Constants.Drive.LEFT_MOTORS_INVERTED ? -1 : 1);
+        return leftFrontMotor.getSpeed() * (Constants.DriveTrain.LEFT_MOTORS_INVERTED ? -1 : 1);
     }
 
     public void setLeftSpeed(double speed) {
-        speed = speed * (Constants.Drive.LEFT_MOTORS_INVERTED ? -1 : 1);
+        speed = speed * (Constants.DriveTrain.LEFT_MOTORS_INVERTED ? -1 : 1);
         leftFrontMotor.setSpeed(speed);
         leftRearMotor.setSpeed(speed);
         leftTopMotor.setSpeed(speed);
@@ -86,11 +86,11 @@ public class DriveTrain extends Subsystem implements PIDSource {
     }
 
     public double getRightSpeed() {
-        return rightFrontMotor.getSpeed() * (Constants.Drive.RIGHT_MOTORS_INVERTED ? -1 : 1);
+        return rightFrontMotor.getSpeed() * (Constants.DriveTrain.RIGHT_MOTORS_INVERTED ? -1 : 1);
     }
 
     public void setRightSpeed(double speed) {
-        speed = speed * (Constants.Drive.RIGHT_MOTORS_INVERTED ? -1 : 1);
+        speed = speed * (Constants.DriveTrain.RIGHT_MOTORS_INVERTED ? -1 : 1);
         rightFrontMotor.setSpeed(speed);
         rightRearMotor.setSpeed(speed);
         rightTopMotor.setSpeed(speed);
@@ -160,8 +160,8 @@ public class DriveTrain extends Subsystem implements PIDSource {
         SmartDashboard.putNumber("DriveTrain/RPS/Right", getRightRPS());
         SmartDashboard.putNumber("DriveTrain/RPS/Left", getLeftRPS());
 
-        SmartDashboard.putBoolean("DriveTrain/Inverted/Right", Constants.Drive.RIGHT_MOTORS_INVERTED);
-        SmartDashboard.putBoolean("DriveTrain/Inverted/Left", Constants.Drive.LEFT_MOTORS_INVERTED);
+        SmartDashboard.putBoolean("DriveTrain/Inverted/Right", Constants.DriveTrain.RIGHT_MOTORS_INVERTED);
+        SmartDashboard.putBoolean("DriveTrain/Inverted/Left", Constants.DriveTrain.LEFT_MOTORS_INVERTED);
 
         SmartDashboard.putNumber("DriveTrain/Amps/Right/Front", pdp.getRightFrontAmps());
         SmartDashboard.putNumber("DriveTrain/Amps/Right/Top", pdp.getRightTopAmps());

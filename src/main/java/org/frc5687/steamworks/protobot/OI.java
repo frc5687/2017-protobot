@@ -14,14 +14,8 @@ import org.frc5687.steamworks.protobot.utils.Helpers;
  */
 public class OI {
 
-    public static final int GP_OPEN_GEAR = 8;
-    public static final int GP_CLOSE_GEAR = 7;
-
-    public static final int OC_OPEN_GEAR = 8;
-    public static final int OC_CLOSE_GEAR = 7;
-
-    public static final int RAISE_PINCERS = 4;
-    public static final int LOWER_PINCERS = 3;
+    public static final int GP_EJECT_MANDIBLES = 8;
+    public static final int GP_RECEIVE_MANDIBLES = 7;
 
     public static final int OPEN_PINCERS = 5;
     public static final int CLOSE_PINCERS = 6;
@@ -31,6 +25,10 @@ public class OI {
     public static final int RINGLIGHT_ON = 11;
     public static final int RINGLIGHT_OFF = 12;
 
+    public static final int OC_MANDIBLES_RECEIVE = 4;
+    public static final int OC_MANDIBLES_EJECT = 6;
+
+
     public static final int WIGGLE_MANDIBLES = 9;
 
     public static final int GIMME_LEFT = Gamepad.Buttons.LEFT_STICK.getNumber();
@@ -39,11 +37,11 @@ public class OI {
     private Gamepad gamepad;
     private Joystick operatorConsole;
 
-    private JoystickButton gpOpenGearButton;
-    private JoystickButton gpCloseGearButton;
+    public JoystickButton gpEjectMandiblesButton;
+    public JoystickButton gpReceiveMandiblesButton;
 
-    private JoystickButton ocOpenGearButton;
-    private JoystickButton ocCloseGearButton;
+    public JoystickButton ocReceiveMandiblesButton;
+    public JoystickButton ocEjectMandiblesButton;
 
     private JoystickButton catchGearButton;
 
@@ -81,15 +79,15 @@ public class OI {
         shiftLow = new JoystickButton(gamepad, Gamepad.Buttons.LEFT_BUMPER.getNumber());
         shiftHigh = new JoystickButton(gamepad, Gamepad.Buttons.RIGHT_BUMPER.getNumber());
 
-        gpOpenGearButton = new JoystickButton(gamepad, GP_OPEN_GEAR);
-        gpCloseGearButton = new JoystickButton(gamepad, GP_CLOSE_GEAR);
+        gpEjectMandiblesButton = new JoystickButton(gamepad, GP_EJECT_MANDIBLES);
+        gpReceiveMandiblesButton = new JoystickButton(gamepad, GP_RECEIVE_MANDIBLES);
 
         /*
          * Operator Console Buttons
          */
 
-        raisePincers = new JoystickButton(operatorConsole, RAISE_PINCERS);
-        lowerPincers = new JoystickButton(operatorConsole, LOWER_PINCERS);
+        // raisePincers = new JoystickButton(operatorConsole, RAISE_PINCERS);
+        // lowerPincers = new JoystickButton(operatorConsole, LOWER_PINCERS);
 
         openPincers = new JoystickButton(operatorConsole, OPEN_PINCERS);
         closePincers = new JoystickButton(operatorConsole, CLOSE_PINCERS);
@@ -97,8 +95,8 @@ public class OI {
         ringLightOn = new JoystickButton(operatorConsole, RINGLIGHT_ON);
         ringLightOff = new JoystickButton(operatorConsole, RINGLIGHT_OFF);
 
-        ocCloseGearButton = new JoystickButton(operatorConsole, OC_CLOSE_GEAR);
-        ocOpenGearButton = new JoystickButton(operatorConsole, OC_OPEN_GEAR);
+        ocReceiveMandiblesButton = new JoystickButton(operatorConsole, OC_MANDIBLES_RECEIVE);
+        ocEjectMandiblesButton = new JoystickButton(operatorConsole, OC_MANDIBLES_EJECT);
 
         catchGearButton = new JoystickButton(operatorConsole, CATCH_GEAR);
 
@@ -111,11 +109,11 @@ public class OI {
         shiftHigh.whenPressed(new Shift(DoubleSolenoid.Value.kForward));
         shiftLow.whenPressed(new Shift(DoubleSolenoid.Value.kReverse));
 
-        gpCloseGearButton.whenPressed(new CloseMandibles());
-        gpOpenGearButton.whenPressed(new OpenMandibles());
+        gpReceiveMandiblesButton.whenPressed(new ReceiveMandibles());
+        gpEjectMandiblesButton.whenPressed(new EjectMandibles());
 
-        ocCloseGearButton.whenPressed(new CloseMandibles());
-        ocOpenGearButton.whenPressed(new OpenMandibles());
+        ocReceiveMandiblesButton.whenPressed(new ReceiveMandibles());
+        ocEjectMandiblesButton.whenPressed(new EjectMandibles());
 
         raisePincers.whenPressed(new RaisePincers());
         lowerPincers.whenPressed(new LowerPincers());
@@ -164,11 +162,11 @@ public class OI {
     }
 
     public boolean isGearInPressed() {
-        return gpCloseGearButton.get();
+        return gpReceiveMandiblesButton.get();
     }
 
     public boolean isGearOutPressed() {
-        return gpOpenGearButton.get();
+        return gpEjectMandiblesButton.get();
     }
 
     public boolean isAscendClimberPressed() {
@@ -187,8 +185,8 @@ public class OI {
         return catchGearButton.get();
     }
 
-    public boolean isOpenMandiblesPressed() {
-        return ocOpenGearButton.get() || gpOpenGearButton.get();
+    public boolean isEjectMandiblesPressed() {
+        return ocEjectMandiblesButton.get() || gpEjectMandiblesButton.get();
     }
 
     public double getPincerSpeed() {

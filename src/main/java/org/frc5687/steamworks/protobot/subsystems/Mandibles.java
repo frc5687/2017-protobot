@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.LEDColors;
 import org.frc5687.steamworks.protobot.RobotMap;
-import org.frc5687.steamworks.protobot.commands.actions.CloseMandibles;
+import org.frc5687.steamworks.protobot.commands.actions.ReceiveMandibles;
 
 import static org.frc5687.steamworks.protobot.Robot.ledStrip;
 import static org.frc5687.steamworks.protobot.Robot.pdp;
@@ -27,7 +27,7 @@ public class Mandibles extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new CloseMandibles());
+        setDefaultCommand(new ReceiveMandibles());
     }
 
     public void setSpeed(double speed) {
@@ -70,7 +70,7 @@ public class Mandibles extends Subsystem {
         if (gearPresent()) { ledStrip.setStripColor(LEDColors.GEAR_IN_MANDIBLES);}
         SmartDashboard.putNumber("Mandibles/MotorSpeed", gearMotor.getSpeed());
         SmartDashboard.putNumber("Mandibles/PotentiometerValue", potentiometerValue());
-        SmartDashboard.putNumber("Mandibles/MotorAmperage", pdp.getGearHandlerAmps());
+        SmartDashboard.putNumber("Mandibles/MotorAmperage", pdp.getMandiblesAmps());
         SmartDashboard.putNumber("Mandibles/IRValue", ir.getValue());
     }
 }
