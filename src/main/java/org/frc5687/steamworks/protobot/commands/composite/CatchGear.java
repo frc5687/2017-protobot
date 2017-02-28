@@ -35,8 +35,8 @@ public class CatchGear extends CommandGroup {
         @Override
         protected boolean isFinished() {
             if (pincers.hasGear()) DriverStation.reportError("Got a gear", false);
-            if (!oi.isCatchGearPressed()) DriverStation.reportError("Button released", false);
-            return !oi.isCatchGearPressed() || pincers.hasGear();
+            if (!oi.isDeployPincersPressed()) DriverStation.reportError("Button released", false);
+            return !oi.isDeployPincersPressed() || pincers.hasGear();
         }
 
     }
