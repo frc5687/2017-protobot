@@ -120,7 +120,7 @@ public class Pincers extends Subsystem implements PIDOutput {
 
     @Override
     public void pidWrite(double v) {
-        setPincerSpeed(v);
+//        setPincerSpeed(v);
     }
 
     public boolean hasGear() {
