@@ -69,6 +69,10 @@ public class Pincers extends Subsystem implements PIDOutput {
         piston.set(DoubleSolenoid.Value.kReverse);
     }
 
+    public void relax() {
+        piston.set(DoubleSolenoid.Value.kOff);
+    }
+
     public void rest() {
         createController();
         controller.setSetpoint(rest);
@@ -96,6 +100,10 @@ public class Pincers extends Subsystem implements PIDOutput {
         return piston.get() == DoubleSolenoid.Value.kForward;
     }
 
+    public boolean isRelaxed() {
+        return piston.get() == DoubleSolenoid.Value.kOff;
+    }
+
     public boolean onTarget() {
         return controller.onTarget();
     }
@@ -116,6 +124,7 @@ public class Pincers extends Subsystem implements PIDOutput {
         SmartDashboard.putNumber("Pincers/PID/SetPoint", controller == null ? 0 : controller.getSetpoint());
         SmartDashboard.putBoolean("Pincers/PID/On Target", controller == null ? false : controller.onTarget());
         SmartDashboard.putNumber("Pincers/Speed", pincerMotor.getSpeed());
+        SmartDashboard.putString("Pincers/Piston", piston.get().name());
     }
 
     @Override

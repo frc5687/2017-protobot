@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.actions.*;
 import org.frc5687.steamworks.protobot.commands.composite.DeployPincers;
 import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
+import org.frc5687.steamworks.protobot.commands.composite.ReleasePincers;
 import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
 
@@ -23,6 +24,9 @@ public class OI {
 
     public static final int OC_DEPLOY_PINCERS = 3;
     public static final int GP_DEPLOY_PINCERS = Gamepad.Buttons.X.getNumber();
+
+    public static final int OC_RELEASE_PINCERS = 5;
+    public static final int GP_RELEASE_PINCERS = Gamepad.Buttons.Y.getNumber();
 
     public static final int RINGLIGHT_ON = 11;
     public static final int RINGLIGHT_OFF = 12;
@@ -47,6 +51,9 @@ public class OI {
 
     public JoystickButton ocDeployPincers;
     public JoystickButton gpDeployPincers;
+
+    public JoystickButton ocReleasePincers;
+    public JoystickButton gpReleasePincers;
 
     private JoystickButton ascendClimber;
     private JoystickButton descendClimber;
@@ -82,6 +89,9 @@ public class OI {
         gpEjectMandiblesButton = new JoystickButton(gamepad, GP_EJECT_MANDIBLES);
         gpReceiveMandiblesButton = new JoystickButton(gamepad, GP_RECEIVE_MANDIBLES);
 
+        gpDeployPincers = new JoystickButton(gamepad, GP_DEPLOY_PINCERS);
+        gpReleasePincers = new JoystickButton(gamepad, GP_RELEASE_PINCERS);
+
         /*
          * Operator Console Buttons
          */
@@ -96,7 +106,8 @@ public class OI {
         ocEjectMandiblesButton = new JoystickButton(operatorConsole, OC_EJECT_MANDIBLES);
 
         ocDeployPincers = new JoystickButton(operatorConsole, OC_DEPLOY_PINCERS);
-        gpDeployPincers = new JoystickButton(gamepad, GP_DEPLOY_PINCERS);
+        ocReleasePincers = new JoystickButton(operatorConsole, OC_RELEASE_PINCERS);
+
 
         /*
          * Button Functions
@@ -111,11 +122,14 @@ public class OI {
         ocReceiveMandiblesButton.whenPressed(new ReceiveMandibles());
         ocEjectMandiblesButton.whenPressed(new EjectMandibles());
 
-        openPincers.whenPressed(new ClosePincers());
-        closePincers.whenPressed(new OpenPincers());
+//        openPincers.whenPressed(new ClosePincers());
+//        closePincers.whenPressed(new OpenPincers());
 
         ocDeployPincers.whenPressed(new DeployPincers());
         gpDeployPincers.whenPressed(new DeployPincers());
+
+        ocReleasePincers.whenPressed(new ReleasePincers());
+        gpReleasePincers.whenPressed(new ReleasePincers());
 
         ringLightOn.whenPressed(new EnableRingLight());
         ringLightOff.whenPressed(new DisableRingLight());
