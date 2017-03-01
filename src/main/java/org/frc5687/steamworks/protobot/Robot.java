@@ -1,6 +1,8 @@
 package org.frc5687.steamworks.protobot;
 
 import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SPI;
@@ -71,6 +73,18 @@ public class Robot extends IterativeRobot {
             imu = null;
         }
 
+        try {
+            UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
+            camera0.setResolution(640, 480);
+        } catch (Exception e) {
+            DriverStation.reportError(e.getMessage(), true);
+        }
+        try {
+            UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
+            camera1.setResolution(640, 480);
+        } catch (Exception e) {
+            DriverStation.reportError(e.getMessage(), true);
+        }
     }
 
     @Override
