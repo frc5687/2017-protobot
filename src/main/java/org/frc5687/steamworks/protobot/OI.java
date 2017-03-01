@@ -26,14 +26,14 @@ public class OI {
     public static final int GP_DEPLOY_PINCERS = Gamepad.Buttons.X.getNumber();
 
     public static final int OC_RELEASE_PINCERS = 5;
-    public static final int GP_RELEASE_PINCERS = Gamepad.Buttons.Y.getNumber();
+    public static final int GP_RELEASE_PINCERS = Gamepad.Buttons.A.getNumber();
 
-    public static final int RINGLIGHT_ON = 11;
-    public static final int RINGLIGHT_OFF = 12;
 
     public static final int OC_RECEIVE_MANDIBLES = 4;
     public static final int OC_EJECT_MANDIBLES = 6;
 
+    public static final int OC_AUTO_CLIMB = 12;
+    public static final int GP_AUTO_CLIMB = Gamepad.Buttons.Y.getNumber();
 
     public static final int WIGGLE_MANDIBLES = 9;
 
@@ -54,6 +54,8 @@ public class OI {
 
     public JoystickButton ocReleasePincers;
     public JoystickButton gpReleasePincers;
+    public JoystickButton ocAutoClimb;
+    public JoystickButton gpAutoClimb;
 
     private JoystickButton ascendClimber;
     private JoystickButton descendClimber;
@@ -64,13 +66,12 @@ public class OI {
     private JoystickButton openPincers;
     private JoystickButton closePincers;
 
-    private JoystickButton ringLightOn;
-    private JoystickButton ringLightOff;
-
     private JoystickButton gearWiggle;
 
     private JoystickButton gimmeGearLeft;
     private JoystickButton gimmeGearRight;
+
+
 
     public OI() {
         gamepad = new Gamepad(0);
@@ -80,8 +81,8 @@ public class OI {
          * X Box Gamepad Buttons
          */
 
-        ascendClimber = new JoystickButton(gamepad, Gamepad.Buttons.Y.getNumber());
-        descendClimber = new JoystickButton(gamepad, Gamepad.Buttons.X.getNumber());
+        //ascendClimber = new JoystickButton(gamepad, Gamepad.Buttons.Y.getNumber());
+        //descendClimber = new JoystickButton(gamepad, Gamepad.Buttons.X.getNumber());
 
         shiftLow = new JoystickButton(gamepad, Gamepad.Buttons.LEFT_BUMPER.getNumber());
         shiftHigh = new JoystickButton(gamepad, Gamepad.Buttons.RIGHT_BUMPER.getNumber());
@@ -98,9 +99,6 @@ public class OI {
 
         openPincers = new JoystickButton(operatorConsole, OPEN_PINCERS);
         closePincers = new JoystickButton(operatorConsole, CLOSE_PINCERS);
-
-        ringLightOn = new JoystickButton(operatorConsole, RINGLIGHT_ON);
-        ringLightOff = new JoystickButton(operatorConsole, RINGLIGHT_OFF);
 
         ocReceiveMandiblesButton = new JoystickButton(operatorConsole, OC_RECEIVE_MANDIBLES);
         ocEjectMandiblesButton = new JoystickButton(operatorConsole, OC_EJECT_MANDIBLES);
@@ -130,15 +128,17 @@ public class OI {
 
         ocReleasePincers.whenPressed(new ReleasePincers());
         gpReleasePincers.whenPressed(new ReleasePincers());
-
-        ringLightOn.whenPressed(new EnableRingLight());
-        ringLightOff.whenPressed(new DisableRingLight());
-
         gimmeGearLeft = new JoystickButton(gamepad, GIMME_LEFT);
         gimmeGearRight = new JoystickButton(gamepad, GIMME_RIGHT);
 
         gimmeGearLeft.whenPressed(new GimmeGear());
         gimmeGearRight.whenPressed(new GimmeGear());
+
+        gpAutoClimb = new JoystickButton(gamepad, GP_AUTO_CLIMB);
+        ocAutoClimb = new JoystickButton(operatorConsole, OC_AUTO_CLIMB);
+
+        gpAutoClimb.whenPressed(new Climb());
+        ocAutoClimb.whenPressed(new Climb());
 
     }
 
@@ -178,11 +178,11 @@ public class OI {
     }
 
     public boolean isAscendClimberPressed() {
-        return ascendClimber.get();
+        return false;
     }
 
     public boolean isDescendClimberPressed() {
-        return descendClimber.get();
+        return false;
     }
 
     public boolean isGearWigglePressed() {
@@ -214,5 +214,9 @@ public class OI {
 
     public boolean isocButtonPressed(int ocButton) {
         return operatorConsole.getRawButton(ocButton);
+    }
+
+    public boolean isAutoClimbPressed() {
+        return ocAutoClimb.get() || gpAutoClimb.get();
     }
 }

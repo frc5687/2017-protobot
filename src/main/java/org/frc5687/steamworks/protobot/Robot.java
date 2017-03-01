@@ -157,6 +157,7 @@ public class Robot extends IterativeRobot {
         lights.updateDashboard();
         ledStrip.updateDashboard();
         autoRotorChooser.updateDashboard();
+        climber.updateDashboard();
 
         SmartDashboard.putBoolean("IsTony", Constants.isTony);
         SmartDashboard.putNumber("Yaw", imu.getYaw());
