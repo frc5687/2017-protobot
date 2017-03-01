@@ -89,6 +89,9 @@ public class OI {
         gpEjectMandiblesButton = new JoystickButton(gamepad, GP_EJECT_MANDIBLES);
         gpReceiveMandiblesButton = new JoystickButton(gamepad, GP_RECEIVE_MANDIBLES);
 
+        gpDeployPincers = new JoystickButton(gamepad, GP_DEPLOY_PINCERS);
+        gpReleasePincers = new JoystickButton(gamepad, GP_RELEASE_PINCERS);
+
         /*
          * Operator Console Buttons
          */
@@ -103,10 +106,7 @@ public class OI {
         ocEjectMandiblesButton = new JoystickButton(operatorConsole, OC_EJECT_MANDIBLES);
 
         ocDeployPincers = new JoystickButton(operatorConsole, OC_DEPLOY_PINCERS);
-        gpDeployPincers = new JoystickButton(gamepad, GP_DEPLOY_PINCERS);
-
         ocReleasePincers = new JoystickButton(operatorConsole, OC_RELEASE_PINCERS);
-        gpReleasePincers = new JoystickButton(gamepad, GP_RELEASE_PINCERS);
 
 
         /*
