@@ -36,7 +36,7 @@ public class ReceiveMandibles extends Command {
                 if (System.currentTimeMillis() >= endTime || pdp.getMandiblesAmps() > Constants.Mandibles.THRESHOLD_CLOSE_AMPS) { state = State.CLAMP; }
                 break;
             case CLAMP:
-                mandibles.setSpeed(0);
+                mandibles.setSpeed(Constants.Mandibles.CLAMP_SPEED);
                 if (oi.isGearWigglePressed()) {
                     state = State.WIGGLE_OUT;
                     switchTime = System.currentTimeMillis() + Constants.Mandibles.WIGGLE_OUT_TIME;
