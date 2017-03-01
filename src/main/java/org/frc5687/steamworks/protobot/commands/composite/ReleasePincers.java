@@ -14,7 +14,7 @@ import static org.frc5687.steamworks.protobot.Robot.pincers;
 public class ReleasePincers extends CommandGroup {
 
     public ReleasePincers() {
-        addSequential(new RelaxPincers());
+        addSequential(new OpenPincers());
         addSequential(new SetLEDStrip(LEDColors.PINCERS_OPEN));
         addSequential(new WaitForButtonRelease(pincers, OI.OC_RELEASE_PINCERS, OI.GP_RELEASE_PINCERS));
     }

@@ -124,6 +124,7 @@ public class Pincers extends Subsystem implements PIDOutput {
         SmartDashboard.putNumber("Pincers/PID/SetPoint", controller == null ? 0 : controller.getSetpoint());
         SmartDashboard.putBoolean("Pincers/PID/On Target", controller == null ? false : controller.onTarget());
         SmartDashboard.putNumber("Pincers/Speed", pincerMotor.getSpeed());
+        SmartDashboard.putString("Pincers/Piston", piston.get().name());
     }
 
     @Override
