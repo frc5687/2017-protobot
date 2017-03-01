@@ -11,7 +11,7 @@ import static org.frc5687.steamworks.protobot.Robot.mandibles;
 public class HoldMandiblesOpen extends WaitForButtonRelease {
 
     public HoldMandiblesOpen() {
-        super(mandibles, OI.OC_EJECT_MANDIBLES, OI.GP_EJECT_MANDIBLES);
+        super(mandibles, OI.OC_EJECT_MANDIBLES, OI.GP_EJECT_BOTH);
     }
 
     @Override

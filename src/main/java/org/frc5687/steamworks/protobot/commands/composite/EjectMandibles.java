@@ -11,6 +11,6 @@ public class EjectMandibles extends CommandGroup {
 
     public EjectMandibles() {
         addSequential(new OpenMandibles());
-        addSequential(new WaitForButtonRelease(mandibles, OI.OC_EJECT_MANDIBLES, OI.GP_EJECT_MANDIBLES));
+        addSequential(new WaitForButtonRelease(mandibles, OI.OC_EJECT_MANDIBLES, OI.GP_EJECT_BOTH));
     }
 }

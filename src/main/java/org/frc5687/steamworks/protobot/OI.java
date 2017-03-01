@@ -16,26 +16,26 @@ import org.frc5687.steamworks.protobot.utils.Helpers;
  */
 public class OI {
 
-    public static final int GP_EJECT_MANDIBLES = 8;
-    public static final int GP_RECEIVE_MANDIBLES = 7;
+
+    public static final int GP_DEPLOY_PINCERS = Gamepad.Axes.LEFT_TRIGGER.getNumber();
+    public static final int GP_EJECT_BOTH = Gamepad.Axes.RIGHT_TRIGGER.getNumber();
+    public static final int GP_RECEIVE_MANDIBLES = Gamepad.Buttons.A.getNumber();
+    public static final int GP_AUTO_CLIMB = Gamepad.Buttons.Y.getNumber();
+
 
     public static final int OPEN_PINCERS = 5;
     public static final int CLOSE_PINCERS = 6;
 
     public static final int OC_DEPLOY_PINCERS = 3;
-    public static final int GP_DEPLOY_PINCERS = Gamepad.Buttons.X.getNumber();
 
     public static final int OC_RELEASE_PINCERS = 5;
-    public static final int GP_RELEASE_PINCERS = Gamepad.Buttons.A.getNumber();
 
 
     public static final int OC_RECEIVE_MANDIBLES = 4;
     public static final int OC_EJECT_MANDIBLES = 6;
 
     public static final int OC_AUTO_CLIMB = 12;
-    public static final int GP_AUTO_CLIMB = Gamepad.Buttons.Y.getNumber();
 
-    public static final int WIGGLE_MANDIBLES = 9;
 
     public static final int GIMME_LEFT = Gamepad.Buttons.LEFT_STICK.getNumber();
     public static final int GIMME_RIGHT = Gamepad.Buttons.RIGHT_STICK.getNumber();
@@ -53,7 +53,7 @@ public class OI {
     public JoystickButton gpDeployPincers;
 
     public JoystickButton ocReleasePincers;
-    public JoystickButton gpReleasePincers;
+    //public JoystickButton gpReleasePincers;
     public JoystickButton ocAutoClimb;
     public JoystickButton gpAutoClimb;
 
@@ -87,11 +87,11 @@ public class OI {
         shiftLow = new JoystickButton(gamepad, Gamepad.Buttons.LEFT_BUMPER.getNumber());
         shiftHigh = new JoystickButton(gamepad, Gamepad.Buttons.RIGHT_BUMPER.getNumber());
 
-        gpEjectMandiblesButton = new JoystickButton(gamepad, GP_EJECT_MANDIBLES);
+        gpEjectMandiblesButton = new JoystickButton(gamepad, GP_EJECT_BOTH);
         gpReceiveMandiblesButton = new JoystickButton(gamepad, GP_RECEIVE_MANDIBLES);
 
         gpDeployPincers = new JoystickButton(gamepad, GP_DEPLOY_PINCERS);
-        gpReleasePincers = new JoystickButton(gamepad, GP_RELEASE_PINCERS);
+        // gpReleasePincers = new JoystickButton(gamepad, GP_RELEASE_PINCERS);
 
         /*
          * Operator Console Buttons
@@ -127,7 +127,7 @@ public class OI {
         gpDeployPincers.whenPressed(new DeployPincers());
 
         ocReleasePincers.whenPressed(new ReleasePincers());
-        gpReleasePincers.whenPressed(new ReleasePincers());
+        //gpReleasePincers.whenPressed(new ReleasePincers());
         gimmeGearLeft = new JoystickButton(gamepad, GIMME_LEFT);
         gimmeGearRight = new JoystickButton(gamepad, GIMME_RIGHT);
 
@@ -159,14 +159,6 @@ public class OI {
         double result = transformStickToSpeed(Gamepad.Axes.RIGHT_Y);
         SmartDashboard.putNumber("OI/RIghtSpeed", result);
         return result;
-    }
-
-    public boolean isLeftTriggerPressed() {
-        return (gamepad.getRawAxis(Gamepad.Axes.LEFT_TRIGGER) > Constants.OI.TRIGGER_THRESHHOLD);
-    }
-
-    public boolean isRightTriggerPressed() {
-        return (gamepad.getRawAxis(Gamepad.Axes.RIGHT_TRIGGER) > Constants.OI.TRIGGER_THRESHHOLD);
     }
 
     public boolean isGearInPressed() {
