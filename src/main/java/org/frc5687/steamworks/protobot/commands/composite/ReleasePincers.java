@@ -16,7 +16,7 @@ public class ReleasePincers extends CommandGroup {
     public ReleasePincers() {
         addSequential(new OpenPincers());
         addSequential(new SetLEDStrip(LEDColors.PINCERS_OPEN));
-        addSequential(new WaitForButtonRelease(pincers, OI.OC_RELEASE_PINCERS, OI.GP_RELEASE_PINCERS));
+        addSequential(new MovePincersForwards());
     }
 
 }
