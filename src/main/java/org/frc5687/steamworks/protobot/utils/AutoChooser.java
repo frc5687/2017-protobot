@@ -20,7 +20,7 @@ public class AutoChooser {
     public AutoChooser() {
         positionSwitch = new RotarySwitch(RobotMap.AutoChooser.POSITION_SWITCH, .01, .092, .235, .505, .680, .823, .958);
         gearSwitch = new RotarySwitch(RobotMap.AutoChooser.GEAR_SWITCH,  .01, .092, .235, .505, .680, .823, .958);
-        hopperSwitch = new RotarySwitch(RobotMap.AutoChooser.HOPPER_SWITCH,  .01, .092, .235, .505, .680, .823, .958);
+        hopperSwitch = new RotarySwitch(RobotMap.AutoChooser.HOPPER_SWITCH,  .043, .09, .17, .23, .31, .5, .59, .68, .75, .82, .91, .96);
     }
 
 
