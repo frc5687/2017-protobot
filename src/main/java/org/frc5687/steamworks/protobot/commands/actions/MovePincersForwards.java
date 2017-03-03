@@ -32,6 +32,6 @@ public class MovePincersForwards extends Command {
 
     @Override
     protected boolean isFinished() {
-        return !oi.isEjectGearPressed();
+        return !oi.isReleasePincersPressed();
     }
 }

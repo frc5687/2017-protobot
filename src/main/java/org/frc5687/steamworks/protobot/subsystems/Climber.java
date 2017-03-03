@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.actions.RunClimberManually;
+import org.frc5687.steamworks.protobot.commands.actions.StopClimber;
 
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 
@@ -20,7 +21,7 @@ public class Climber extends Subsystem {
     }
 
     public void initDefaultCommand() {
-        setDefaultCommand(new RunClimberManually());
+        setDefaultCommand(new StopClimber());
     }
 
     public void setSpeed(double speed) {
@@ -44,5 +45,4 @@ public class Climber extends Subsystem {
         SmartDashboard.putNumber("Climber/Amps/Fore", pdp.getClimberAAmps());
         SmartDashboard.putNumber("Climber/Amps/Aft", pdp.getClimberBAmps());
     }
-
 }

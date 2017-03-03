@@ -34,7 +34,6 @@ public class Climb extends Command {
 
     @Override
     protected void end() {
-        DriverStation.reportError("Stopping climber.", false);
         climber.setSpeed(0);
     }
 

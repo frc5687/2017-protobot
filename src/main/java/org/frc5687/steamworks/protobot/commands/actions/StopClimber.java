@@ -20,12 +20,10 @@ public class StopClimber extends Command {
 
     @Override
     protected void initialize() {
-        DriverStation.reportError("Stopping climber.", false);
     }
 
     @Override
     protected void execute() {
-        SmartDashboard.putString("Climber/Climb/State", "Stop");
         climber.setSpeed(0);
     }
     @Override
@@ -35,7 +33,6 @@ public class StopClimber extends Command {
 
     @Override
     protected void end() {
-        climber.setSpeed(0);
     }
 
     @Override

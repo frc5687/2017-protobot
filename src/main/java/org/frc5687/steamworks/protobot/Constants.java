@@ -132,7 +132,7 @@ public class Constants {
 
     public class OI {
 
-        public static final double TRIGGER_THRESHHOLD = 0.5; //TODO find actual when pressed value
+        public static final double AXIS_BUTTON_THRESHHOLD = 0.2; //TODO find actual when pressed value
 
     }
 

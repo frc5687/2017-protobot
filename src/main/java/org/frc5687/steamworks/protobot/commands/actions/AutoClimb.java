@@ -17,7 +17,6 @@ public class AutoClimb extends Command {
 
     private State _state;
     private long _startupEndMillis;
-    private boolean _wasReleased;
 
     public AutoClimb() {
         requires(climber);
@@ -28,7 +27,6 @@ public class AutoClimb extends Command {
     protected void initialize() {
         _state = State.STARTUP;
         _startupEndMillis = System.currentTimeMillis() + Constants.Climber.STARTUP_MILLIS;
-        _wasReleased = false;
         DriverStation.reportError("Starting autoclimb.", false);
     }
 
@@ -70,9 +68,6 @@ public class AutoClimb extends Command {
                 ledStrip.setStripColor(Color.RED);
                 break;
         }
-        if (!oi.isAutoClimbPressed()) {
-            _wasReleased=true;
-        }
     }
 
     public enum State {
@@ -85,12 +80,12 @@ public class AutoClimb extends Command {
 
     @Override
     protected boolean isFinished() {
-        return false; // _wasReleased && oi.isAutoClimbPressed();
+        return false;
     }
 
     @Override
     protected void end() {
-        Scheduler.getInstance().add(new StopClimber());
+        climber.setSpeed(0);
     }
 
     @Override
