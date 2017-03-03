@@ -27,7 +27,8 @@ public class GimmeGear extends Command {
     }
 
     protected boolean isFinished() {
-        return mandibles.gearPresent();
+        return false;
+        // return mandibles.gearPresent();
         // return oi.isGimmeGearPressed();
     }
 

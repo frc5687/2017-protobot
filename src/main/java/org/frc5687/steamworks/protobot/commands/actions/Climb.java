@@ -2,95 +2,40 @@ package org.frc5687.steamworks.protobot.commands.actions;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.frc5687.steamworks.protobot.Constants;
-import org.frc5687.steamworks.protobot.utils.Color;
 
-import static org.frc5687.steamworks.protobot.Robot.*;
-import static org.opencv.features2d.FeatureDetector.FAST;
+import static org.frc5687.steamworks.protobot.Robot.climber;
 
 /**
  * Created by Ben Bernard on 2/28/2017.
  */
 public class Climb extends Command {
+    private double _speed;
 
-    private State _state;
-    private long _startupEndMillis;
-    private boolean _wasReleased;
-
-    public Climb() {
+    public Climb(double speed) {
         requires(climber);
+        _speed = speed;
     }
 
 
     @Override
     protected void initialize() {
-        _state = State.STARTUP;
-        _startupEndMillis = System.currentTimeMillis() + Constants.Climber.STARTUP_MILLIS;
-        _wasReleased = false;
-        DriverStation.reportError("Starting autoclimb.", false);
+        DriverStation.reportError("Starting climber at speed " + _speed, false);
     }
 
     @Override
     protected void execute() {
-        SmartDashboard.putString("Climber/Climb/State", _state.toString());
-        switch (_state) {
-            case STARTUP:
-                climber.setSpeed(Constants.Climber.PICKUP_SPEED);
-                if (System.currentTimeMillis() > _startupEndMillis) {
-                    _state = State.PICKUP;
-                }
-                break;
-            case PICKUP:
-                climber.setSpeed(Constants.Climber.PICKUP_SPEED);
-                ledStrip.setStripColor(Color.YELLOW);
-                if (pdp.getMeanClimberAmps() > Constants.Climber.HAVE_ROPE_AMPS) {
-                    DriverStation.reportError("Saw amps at " + pdp.getMeanClimberAmps() + ". Moving to CLIMB.", false);
-                    _state = State.CLIMB;
-                }
-                break;
-            case CLIMB:
-                climber.setSpeed(Constants.Climber.ASCEND_SPEED);
-                ledStrip.setStripColor(Color.BLUE);
-                if (pdp.getMeanClimberAmps() > Constants.Climber.REACHED_TOP_AMPS) {
-                    DriverStation.reportError("Saw amps at " + pdp.getMeanClimberAmps() + ". Moving to REACHED_TOP.", false);
-                    _state = State.REACHED_TOP;
-                } else if (pdp.getMeanClimberAmps() < Constants.Climber.REACHED_TOP_AMPS) {
-                    DriverStation.reportError("Saw amps at " + pdp.getMeanClimberAmps() + ". Moving to LOST_GRIP.", false);
-                    _state = State.LOST_GRIP;
-                }
-                break;
-            case REACHED_TOP:
-                climber.setSpeed(Constants.Climber.ASCEND_SPEED);
-                ledStrip.setStripColor(Color.GREEN);
-                break;
-            case LOST_GRIP:
-                climber.setSpeed(Constants.Climber.ASCEND_SPEED);
-                ledStrip.setStripColor(Color.RED);
-                break;
-        }
-        if (!oi.isAutoClimbPressed()) {
-            _wasReleased=true;
-        }
+        climber.setSpeed(_speed);
     }
-
-    public enum State {
-        STARTUP,
-        PICKUP,
-        CLIMB,
-        LOST_GRIP,
-        REACHED_TOP
-    }
-
     @Override
     protected boolean isFinished() {
-        return _wasReleased && oi.isAutoClimbPressed();
+        return false;
     }
 
     @Override
     protected void end() {
-        Scheduler.getInstance().add(new StopClimber());
+        DriverStation.reportError("Stopping climber.", false);
+        climber.setSpeed(0);
     }
 
     @Override

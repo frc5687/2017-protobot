@@ -7,17 +7,22 @@ import static org.frc5687.steamworks.protobot.Robot.oi;
 import static org.frc5687.steamworks.protobot.Robot.pincers;
 
 /**
- * Command for moving the pincers slowly forwards until the button is released
+ * Created by Ben Bernard on 2/28/2017.
  */
-public class MovePincersForwards extends Command {
+public class HoldPincersDown extends Command {
 
-    public MovePincersForwards() {
+    public HoldPincersDown() {
         requires(pincers);
     }
 
     @Override
     protected void execute() {
-        pincers.setPincerSpeed(Constants.Pincers.FORWARDS_SPEED);
+        pincers.setPincerSpeed(-Constants.Pincers.HOLD_SPEED);
+    }
+
+    @Override
+    protected boolean isFinished() {
+        return !oi.isDeployPincersPressed();
     }
 
     @Override
@@ -28,10 +33,5 @@ public class MovePincersForwards extends Command {
     @Override
     protected void interrupted() {
         end();
-    }
-
-    @Override
-    protected boolean isFinished() {
-        return !oi.isEjectGearPressed();
     }
 }
