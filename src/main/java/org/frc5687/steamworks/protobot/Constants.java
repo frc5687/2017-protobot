@@ -152,6 +152,7 @@ public class Constants {
         public static final double LOWER_SPEED = 0.5;
         public static final double RAISE_SPEED = -0.5;
         public static final double HOLD_SPEED = -0.2;
+        public static final double FORWARDS_SPEED = 0.1;
 
         public static final int IR_THRESHOLD = 2000;
         public static final long RAISE_TIME = 500;

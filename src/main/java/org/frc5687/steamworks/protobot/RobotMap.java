@@ -40,7 +40,7 @@ public class RobotMap {
         public static final int MANDIBLES_MOTOR = 6;
         public static final int POTENTIOMETER = 1;
         public static final int PDP_MANDIBLES_MOTOR = 10;
-        public static final int MANDIBLES_IR = 7;
+        public static final int MANDIBLES_IR = 2;
 
     }
 
@@ -83,7 +83,7 @@ public class RobotMap {
         public static final int PISTON_RETRACTOR = 4;
         public static final int PISTON_EXTENDER = 5;
         public static final int PDP_PINCERS_MOTOR = 4;
-        public static final int IR = 2;
+        public static final int IR = 7;
 
     }
 
