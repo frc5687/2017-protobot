@@ -6,21 +6,23 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
+import org.frc5687.steamworks.protobot.utils.PiTrackerProxy;
+import org.frc5687.steamworks.protobot.utils.TonyPose;
 
-import static org.frc5687.steamworks.protobot.Robot.driveTrain;
-import static org.frc5687.steamworks.protobot.Robot.imu;
-import static org.frc5687.steamworks.protobot.Robot.lights;
+import static org.frc5687.steamworks.protobot.Robot.*;
 
-public class AutoApproachTarget extends Command {
+public class AutoVisualApproachTarget extends Command {
 
     private double speed;
     private PIDController distanceController;
     private PIDController angleController;
     private PIDListener distancePID;
     private PIDListener anglePID;
+
+    private double _previousOffsetAngle = -1000;
 //    private double endTime;
 
-    public AutoApproachTarget(double speed) {
+    public AutoVisualApproachTarget(double speed) {
         requires(driveTrain);
         this.speed = speed;
     }
@@ -64,6 +66,23 @@ public class AutoApproachTarget extends Command {
 
     @Override
     protected void execute() {
+        // See what we can find out from the piTracker...
+        PiTrackerProxy.Frame frame = piTrackerProxy.getLatestFrame();
+        if (frame!=null & frame.isSighted() && frame.getOffsetAngle()!=_previousOffsetAngle) {
+            _previousOffsetAngle = frame.getOffsetAngle();
+            TonyPose pose = (TonyPose)poseTracker.get(frame.getMillis());
+            if (pose!=null) {
+                double targetAngle = pose.getAngle() + _previousOffsetAngle;
+                if (targetAngle > 180) { targetAngle-=360; }
+                else if (targetAngle < -180) { targetAngle+=360; }
+                synchronized (angleController) {
+                    angleController.setSetpoint(targetAngle);
+                    angleController.enable();
+                }
+            }
+        }
+
+
         double distanceFactor = 0;
         double angleFactor = 0;
         synchronized (distancePID) {

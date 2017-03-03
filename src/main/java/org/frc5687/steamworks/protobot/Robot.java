@@ -13,10 +13,9 @@ import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
 import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
 import org.frc5687.steamworks.protobot.commands.autonomous.*;
 import org.frc5687.steamworks.protobot.subsystems.*;
-import org.frc5687.steamworks.protobot.utils.AutoChooser;
-import org.frc5687.steamworks.protobot.utils.PDP;
+import org.frc5687.steamworks.protobot.utils.*;
 
-public class Robot extends IterativeRobot {
+public class Robot extends IterativeRobot implements IPoseTrackable {
 
     public static DriveTrain driveTrain;
     public static Mandibles mandibles;
@@ -26,6 +25,8 @@ public class Robot extends IterativeRobot {
     public static LEDStrip ledStrip;
     public static Robot robot;
     public static Pincers pincers;
+    public static PiTrackerProxy piTrackerProxy;
+    public static PoseTracker poseTracker;
 
     public static AHRS imu;
     public static PDP pdp;
@@ -56,6 +57,7 @@ public class Robot extends IterativeRobot {
         pincers = new Pincers();
         autoRotorChooser = new AutoChooser();
 
+
         pdp = new PDP(); // must be initialized after other subsystems
         oi = new OI(); // must be initialized after subsystems
 
@@ -85,11 +87,27 @@ public class Robot extends IterativeRobot {
         } catch (Exception e) {
             DriverStation.reportError(e.getMessage(), true);
         }
+
+        if (Constants.isTony) {
+            ledStrip.setStripColor(LEDColors.TONY_BOOTUP);
+            DriverStation.reportError("Tony reporting for duty!", false);
+        } else {
+            ledStrip.setStripColor(LEDColors.RHODY_BOOTUP);
+            DriverStation.reportError("Rhody at your service!", false);
+        }
+
+        piTrackerProxy = new PiTrackerProxy(20);
+        poseTracker = new PoseTracker(this);
+
     }
 
     @Override
     public void disabledInit() {
-        ledStrip.setStripColor(LEDColors.DISABLED);
+        if (Constants.isTony) {
+            ledStrip.setStripColor(LEDColors.TONY_BOOTUP);
+        } else {
+            ledStrip.setStripColor(LEDColors.RHODY_BOOTUP);
+        }
     }
 
     @Override
@@ -177,4 +195,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Yaw", imu.getYaw());
     }
 
+    @Override
+    public Pose getPose() {
+        return new TonyPose(imu.getYaw(), driveTrain.getLeftDistance(), driveTrain.getRightDistance(), 0);
+    }
 }
