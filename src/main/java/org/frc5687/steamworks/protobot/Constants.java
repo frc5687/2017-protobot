@@ -125,8 +125,8 @@ public class Constants {
         public static final double FUNNEL_RELEASE_SPEED = 1;
         public static final long FUNNEL_RELEASE_TIME = 167;
         public static final double PICKUP_SPEED = 0.5;
-        public static final double HAVE_ROPE_AMPS = 3.0;
-        public static final double REACHED_TOP_AMPS = 8.0;
+        public static final double HAVE_ROPE_AMPS = 10.0;
+        public static final double REACHED_TOP_AMPS = 18.0;
         public static final long STARTUP_MILLIS = 500;
     }
 
