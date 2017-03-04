@@ -68,7 +68,6 @@ public class PiTrackerProxy {
                 buffer.append(Boolean.toString(false /*lights.getRingLight()*/));
                 buffer.append(";");
 
-                // DriverStation.reportError("Sending packet to pi (" +piAddress.toString()+ ":" + _piPort+ "): " +buffer.toString(), false);
                 byte[] sendData = new byte[1024];
                 sendData = buffer.toString().getBytes();
                 DatagramPacket sendPacket = new DatagramPacket(sendData, buffer.length(), piAddress, _piPort);

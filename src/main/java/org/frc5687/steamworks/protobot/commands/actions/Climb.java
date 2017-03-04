@@ -20,7 +20,6 @@ public class Climb extends Command {
 
     @Override
     protected void initialize() {
-        DriverStation.reportError("Starting climber at speed " + _speed, false);
     }
 
     @Override

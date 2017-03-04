@@ -22,20 +22,16 @@ public class CatchGear extends CommandGroup {
 
     @Override
     protected void initialize() {
-        DriverStation.reportError("Catching gear", false);
     }
 
     private class WaitToClose extends Command {
 
         @Override
         protected void initialize() {
-            DriverStation.reportError("Waiting to close", false);
         }
 
         @Override
         protected boolean isFinished() {
-            if (pincers.hasGear()) DriverStation.reportError("Got a gear", false);
-            if (!oi.isDeployPincersPressed()) DriverStation.reportError("Button released", false);
             return !oi.isDeployPincersPressed() || pincers.hasGear();
         }
 

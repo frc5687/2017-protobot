@@ -21,7 +21,6 @@ public class OpenMandibles extends Command {
 
     @Override
     protected void initialize() {
-        DriverStation.reportError("Ejecting gear", false);
         ledStrip.setStripColor(LEDColors.MANDIBLES_OPEN);
         endMillis = System.currentTimeMillis() + Constants.Mandibles.OPEN_TIME;
     }

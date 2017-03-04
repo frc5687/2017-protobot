@@ -17,7 +17,6 @@ public class GimmeGear extends Command {
     Color previousColor;
 
     protected void initialize() {
-        DriverStation.reportError("Gimme gear! started", false);
         previousColor = ledStrip.getStripColor();
     }
 
@@ -34,7 +33,6 @@ public class GimmeGear extends Command {
 
     @Override
     protected void end() {
-        DriverStation.reportError("Gimme gear! done", false);
         ledStrip.setStripColor(previousColor);
     }
 }

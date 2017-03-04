@@ -150,6 +150,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        poll();
         updateDashboard();
     }
 
@@ -163,18 +164,25 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
     }
 
-    public void updateDashboard() {
-        driveTrain.updateDashboard();
-        mandibles.updateDashboard();
-        shifter.updateDashboard();
-        pincers.updateDashboard();
-        lights.updateDashboard();
-        ledStrip.updateDashboard();
-        autoRotorChooser.updateDashboard();
-        climber.updateDashboard();
+    public void poll() {
+        mandibles.poll();
+        pincers.poll();
+    }
 
-        SmartDashboard.putBoolean("IsTony", Constants.isTony);
-        SmartDashboard.putNumber("Yaw", imu.getYaw());
+    public void updateDashboard() {
+        if (!DriverStation.getInstance().isFMSAttached()) {
+            driveTrain.updateDashboard();
+            mandibles.updateDashboard();
+            shifter.updateDashboard();
+            pincers.updateDashboard();
+            lights.updateDashboard();
+            ledStrip.updateDashboard();
+            autoRotorChooser.updateDashboard();
+            climber.updateDashboard();
+
+            SmartDashboard.putBoolean("IsTony", Constants.isTony);
+            SmartDashboard.putNumber("Yaw", imu.getYaw());
+        }
     }
 
 }

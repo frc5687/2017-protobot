@@ -13,7 +13,6 @@ public class OpenPincers extends Command {
 
     @Override
     protected void initialize() {
-        DriverStation.reportError("Opening Pincers", false);
     }
 
     @Override

@@ -15,7 +15,6 @@ public class RunClimberManually extends Command {
 
     @Override
     protected void initialize() {
-        DriverStation.reportError("Running climber manually.", false);
 
     }
 

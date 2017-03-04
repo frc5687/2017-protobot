@@ -17,7 +17,6 @@ public class ClosePincers extends Command {
     @Override
     protected void initialize() {
         endMillis = System.currentTimeMillis() + Constants.Pincers.CLOSE_DELAY;
-        DriverStation.reportError("Closing Pincers", false);
     }
 
     @Override

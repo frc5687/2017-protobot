@@ -16,7 +16,6 @@ public class RelaxPincers extends Command {
 
     @Override
     protected void initialize() {
-        DriverStation.reportError("Relaxing Pincers", false);
     }
 
     @Override

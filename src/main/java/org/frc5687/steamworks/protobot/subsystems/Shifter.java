@@ -23,12 +23,10 @@ public class Shifter extends Subsystem {
     }
 
     public void shiftHigh() {
-        DriverStation.reportError("Shifting to high gear", false);
         shifterSolenoid.set(DoubleSolenoid.Value.kForward);
     }
 
     public void shiftLow() {
-        DriverStation.reportError("Shifting to low gear", false);
         shifterSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 
@@ -40,7 +38,6 @@ public class Shifter extends Subsystem {
      * Disables the double solenoid
      */
     public void disablePiston() {
-        DriverStation.reportError("Disabling shifter", false);
         shifterSolenoid.set(DoubleSolenoid.Value.kOff);
     }
 
