@@ -1,5 +1,7 @@
 package org.frc5687.steamworks.protobot.utils;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -64,6 +66,8 @@ public class PoseTracker {
             throw new RuntimeException("Asynchronous collect called on a PoseTracker instance with no trackable.");
         }
         Pose pose = _trackable.getPose();
+        SmartDashboard.putNumber("PoseTracker/PoseCollected", pose.getMillis());
+
         add(pose);
     }
 
@@ -85,11 +89,13 @@ public class PoseTracker {
             }
             // If there's nothing there, we're out of buffer
             if (_poses[read] == null) {
+                SmartDashboard.putNumber("PoseTracker/PoseFound", afterPose.getMillis());
                 return afterPose;
             }
 
             // If the pose time is before the requested time, we'er out of buffer
             if (_poses[read].getMillis() < millis) {
+                SmartDashboard.putNumber("PoseTracker/PoseFound", afterPose.getMillis());
                 return afterPose;
             }
 

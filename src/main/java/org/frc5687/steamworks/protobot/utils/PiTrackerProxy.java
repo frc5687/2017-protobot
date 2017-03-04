@@ -1,6 +1,8 @@
 package org.frc5687.steamworks.protobot.utils;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import java.util.Timer;
 
 import java.io.IOException;
@@ -69,6 +71,7 @@ public class PiTrackerProxy {
                 buffer.append(";");
 
                 // DriverStation.reportError("Sending packet to pi (" +piAddress.toString()+ ":" + _piPort+ "): " +buffer.toString(), false);
+                SmartDashboard.putString("PiTrackerProxy/PacketSent", buffer.toString());
                 byte[] sendData = new byte[1024];
                 sendData = buffer.toString().getBytes();
                 DatagramPacket sendPacket = new DatagramPacket(sendData, buffer.length(), piAddress, _piPort);
@@ -160,6 +163,7 @@ public class PiTrackerProxy {
                         String raw = new String(receivePacket.getData(), 0, receivePacket.getLength());
 
                         // DriverStation.reportError("Pi listener received packet from " + _piAddress.toString() + ": " + raw, false);
+                        SmartDashboard.putString("PiTrackerProxy/PacketReceived", raw.toString());
                         Frame frame = new Frame(raw);
                         _tracker.setLatestFrame(frame);
                     }
