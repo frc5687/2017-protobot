@@ -182,8 +182,8 @@ public class Constants {
 
             public static final double CROSS_BASELINE_DISTANCE = 100;
             public static final double CROSS_FIELD_DISTANCE = 0;
-            public static final double RETREAT_DISTANCE = 18;
-            public static final double DEPOSIT_GEAR_IR_VOLTAGE = 1.176;
+            public static final double RETREAT_DISTANCE = 24;
+            public static final double DEPOSIT_GEAR_IR_VOLTAGE = 1.15;
             public static final double DEPOSIT_GEAR_NEAR_INITIAL_DISTANCE = 24;
             public static final double DEPOSIT_GEAR_NEAR_ANGLE = 45;
             public static final double DEPOSIT_GEAR_NEAR_DIAGONAL_DISTANCE = 59;
@@ -195,11 +195,11 @@ public class Constants {
 
         public class Align {
 
-            public static final double SPEED = 0.5;
+            public static final double SPEED = 0.6;
 
             public static final double kP = 0.05;
             public static final double kI = 0.01;
-            public static final double kD = 0.00;
+            public static final double kD = 0.1;
             public static final double TOLERANCE = 1;
             public static final double MAX_OUTPUT = 0;
             /*
