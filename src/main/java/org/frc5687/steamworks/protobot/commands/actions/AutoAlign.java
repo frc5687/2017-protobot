@@ -29,7 +29,7 @@ public class AutoAlign extends Command implements PIDOutput {
     @Override
     protected void initialize() {
         controller = new PIDController(Align.kP, Align.kI, Align.kD, imu, this);
-        // controller.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
+//        controller.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
         controller.setInputRange(Constants.Auto.MIN_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
         controller.setOutputRange(-speed, speed);
         controller.setAbsoluteTolerance(Align.TOLERANCE);
