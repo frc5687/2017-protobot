@@ -77,13 +77,13 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
 
         try {
             UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
-            camera0.setResolution(640, 480);
+            camera0.setResolution(160, 120);
         } catch (Exception e) {
             DriverStation.reportError(e.getMessage(), true);
         }
         try {
             UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
-            camera1.setResolution(640, 480);
+            camera1.setResolution(160, 120);
         } catch (Exception e) {
             DriverStation.reportError(e.getMessage(), true);
         }
@@ -122,13 +122,13 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
                 autoCommand = new AutoDepositLeft();
                 break;
             case 2:
-                autoCommand = new AutoAlign(-120, 0.5);
+                autoCommand = new AutoAlign(60, 0.5);
                 break;
             case 3:
                 autoCommand = new AutoDepositGear();
                 break;
             case 4:
-                autoCommand = new AutoAlign(120, 0.5);
+                autoCommand = new AutoAlign(-60, 0.5);
                 break;
             case 5:
                 autoCommand = new AutoDepositRightFromFarRight();
