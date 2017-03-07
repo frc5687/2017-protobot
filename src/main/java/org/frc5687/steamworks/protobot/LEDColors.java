@@ -18,4 +18,6 @@ public class LEDColors {
     public static final Color PINCERS_OPEN = Color.PURPLE;
     public static final Color GEAR_IN_PINCERS = Color.ORANGE;
 
+    public static final Color TONY_BOOTUP = Color.YELLOW;
+    public static final Color RHODY_BOOTUP = Color.GREEN;
 }

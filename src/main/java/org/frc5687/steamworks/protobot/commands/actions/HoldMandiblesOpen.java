@@ -11,8 +11,23 @@ import static org.frc5687.steamworks.protobot.Robot.oi;
  */
 public class HoldMandiblesOpen extends Command {
 
+    private long millis;
+    private long endTime;
+
     public HoldMandiblesOpen() {
+        this(0);
+    }
+
+    public HoldMandiblesOpen(long millis) {
+
         requires(mandibles);
+        this.millis = millis;
+
+    }
+
+    @Override
+    protected void initialize() {
+        endTime = System.currentTimeMillis() + millis;
     }
 
     @Override
@@ -22,6 +37,6 @@ public class HoldMandiblesOpen extends Command {
 
     @Override
     protected boolean isFinished() {
-        return !oi.isEjectGearPressed();
+        return System.currentTimeMillis() > endTime && !oi.isEjectGearPressed();
     }
 }

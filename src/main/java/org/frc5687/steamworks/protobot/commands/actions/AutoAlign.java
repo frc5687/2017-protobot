@@ -20,6 +20,8 @@ public class AutoAlign extends Command implements PIDOutput {
     private double angle;
     private double speed;
 
+    private double pidOut;
+
     public AutoAlign(double angle, double speed) {
         requires(driveTrain);
         this.angle = angle;
@@ -29,7 +31,7 @@ public class AutoAlign extends Command implements PIDOutput {
     @Override
     protected void initialize() {
         controller = new PIDController(Align.kP, Align.kI, Align.kD, imu, this);
-        // controller.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
+//        controller.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
         controller.setInputRange(Constants.Auto.MIN_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
         controller.setOutputRange(-speed, speed);
         controller.setAbsoluteTolerance(Align.TOLERANCE);
@@ -42,14 +44,16 @@ public class AutoAlign extends Command implements PIDOutput {
 
     @Override
     protected void execute() {
-        if(!controller.onTarget()) endTime = System.currentTimeMillis() + Align.STEADY_TIME;
+        // if(!controller.onTarget()) endTime = System.currentTimeMillis() + Align.STEADY_TIME;
+        DriverStation.reportError("Align: " + pidOut + "," + -pidOut, false);
+        driveTrain.tankDrive(pidOut, -pidOut); // positive output is counterclockwise
         SmartDashboard.putBoolean("AutoAlign/onTarget", controller.onTarget());
         SmartDashboard.putNumber("AutoAlign/imu", imu.getYaw());
     }
 
     @Override
     protected boolean isFinished() {
-        return System.currentTimeMillis() >= endTime;
+        return controller.onTarget();
     }
 
     @Override
@@ -62,7 +66,7 @@ public class AutoAlign extends Command implements PIDOutput {
     @Override
     public void pidWrite(double output) {
         synchronized (this) {
-            driveTrain.tankDrive(-output, output); // positive output is counterclockwise
+            pidOut = output;
         }
     }
 

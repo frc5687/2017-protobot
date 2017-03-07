@@ -44,6 +44,7 @@ public class OI {
     public static final int OC_FAST_CLIMB = 10;
     public static final int OC_MANUAL_CLIMB = 9;
 
+    public static final int OC_TOGGLE_RINGLIGHT = 8;
 
 
     private Gamepad gamepad;
@@ -55,6 +56,8 @@ public class OI {
     public JoystickButton gpAutoClimb;
     public JoystickButton gpFastClimb;
     public JoystickButton gpSlowClimb;
+
+    public JoystickButton ocToggleRinglight;
 
     private JoystickButton shiftLow;
     private JoystickButton shiftHigh;
@@ -117,6 +120,7 @@ public class OI {
         ocReleasePincers = new JoystickButton(operatorConsole, OC_RELEASE_PINCERS);
 
 
+        ocToggleRinglight = new JoystickButton(operatorConsole, OC_TOGGLE_RINGLIGHT);
         /*
          * Button Functions
          */
@@ -153,6 +157,7 @@ public class OI {
         ocFastClimb.toggleWhenPressed(new Climb(Constants.Climber.ASCEND_SPEED));
         ocManualClimb.toggleWhenPressed(new RunClimberManually());
 
+        ocToggleRinglight.toggleWhenPressed(new RunRingLight());
     }
 
     private double transformStickToSpeed(Gamepad.Axes stick) {

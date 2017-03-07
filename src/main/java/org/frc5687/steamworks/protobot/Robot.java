@@ -13,10 +13,9 @@ import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
 import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
 import org.frc5687.steamworks.protobot.commands.autonomous.*;
 import org.frc5687.steamworks.protobot.subsystems.*;
-import org.frc5687.steamworks.protobot.utils.AutoChooser;
-import org.frc5687.steamworks.protobot.utils.PDP;
+import org.frc5687.steamworks.protobot.utils.*;
 
-public class Robot extends IterativeRobot {
+public class Robot extends IterativeRobot implements IPoseTrackable {
 
     public static DriveTrain driveTrain;
     public static Mandibles mandibles;
@@ -26,6 +25,8 @@ public class Robot extends IterativeRobot {
     public static LEDStrip ledStrip;
     public static Robot robot;
     public static Pincers pincers;
+    public static PiTrackerProxy piTrackerProxy;
+    public static PoseTracker poseTracker;
 
     public static AHRS imu;
     public static PDP pdp;
@@ -56,6 +57,7 @@ public class Robot extends IterativeRobot {
         pincers = new Pincers();
         autoRotorChooser = new AutoChooser();
 
+
         pdp = new PDP(); // must be initialized after other subsystems
         oi = new OI(); // must be initialized after subsystems
 
@@ -75,21 +77,39 @@ public class Robot extends IterativeRobot {
 
         try {
             UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
-            camera0.setResolution(640, 480);
+            camera0.setResolution(160, 120);
+            camera0.setFPS(15);
         } catch (Exception e) {
             DriverStation.reportError(e.getMessage(), true);
         }
         try {
             UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
-            camera1.setResolution(640, 480);
+            camera1.setResolution(160, 120);
+            camera1.setFPS(15);
         } catch (Exception e) {
             DriverStation.reportError(e.getMessage(), true);
         }
+
+        if (Constants.isTony) {
+            ledStrip.setStripColor(LEDColors.TONY_BOOTUP);
+            DriverStation.reportError("Tony reporting for duty!", false);
+        } else {
+            ledStrip.setStripColor(LEDColors.RHODY_BOOTUP);
+            DriverStation.reportError("Rhody at your service!", false);
+        }
+
+        piTrackerProxy = new PiTrackerProxy(20);
+        poseTracker = new PoseTracker(this);
+
     }
 
     @Override
     public void disabledInit() {
-        ledStrip.setStripColor(LEDColors.DISABLED);
+        if (Constants.isTony) {
+            ledStrip.setStripColor(LEDColors.TONY_BOOTUP);
+        } else {
+            ledStrip.setStripColor(LEDColors.RHODY_BOOTUP);
+        }
     }
 
     @Override
@@ -101,10 +121,10 @@ public class Robot extends IterativeRobot {
                 autoCommand = null;
                 break;
             case 1:
-                autoCommand = new AutoDepositLeft();
+                autoCommand = new AutoDepositLeftFromFarLeft();
                 break;
             case 2:
-                autoCommand = new AutoDrive(72, .5);
+                autoCommand = new AutoAlign(60, 0.5);
                 break;
             case 3:
                 autoCommand = new AutoDepositGear();
@@ -185,4 +205,8 @@ public class Robot extends IterativeRobot {
         }
     }
 
+    @Override
+    public Pose getPose() {
+        return new TonyPose(imu.getYaw(), driveTrain.getLeftDistance(), driveTrain.getRightDistance(), 0);
+    }
 }

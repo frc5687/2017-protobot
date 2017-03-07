@@ -67,7 +67,6 @@ public class PDP extends PowerDistributionPanel {
     }
 
     public boolean isTony() {
-        DriverStation.reportError("Indicator reports " + Boolean.toString(indicator.get()), false);
         return indicator.get();
     }
 

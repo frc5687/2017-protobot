@@ -12,6 +12,6 @@ public class EjectMandibles extends CommandGroup {
 
     public EjectMandibles() {
         addSequential(new OpenMandibles());
-        addSequential(new HoldMandiblesOpen());
+        addSequential(new HoldMandiblesOpen(250));
     }
 }
