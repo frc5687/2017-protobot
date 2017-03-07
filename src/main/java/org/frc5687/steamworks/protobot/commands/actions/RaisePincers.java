@@ -23,7 +23,6 @@ public class RaisePincers extends Command {
 
     @Override
     protected void initialize() {
-        DriverStation.reportError("Raising Pincers", false);
         // pincers.raise();  // was used for the PID approach
         endMillis = System.currentTimeMillis() + Constants.Pincers.RAISE_TIME;
     }

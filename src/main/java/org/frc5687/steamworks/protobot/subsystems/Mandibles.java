@@ -69,8 +69,11 @@ public class Mandibles extends Subsystem {
         return limitPotentiometer.get();
     }
 
-    public void updateDashboard() {
+    public void poll() {
         if (gearPresent()) { ledStrip.setStripColor(LEDColors.GEAR_IN_MANDIBLES);}
+    }
+
+    public void updateDashboard() {
         SmartDashboard.putNumber("Mandibles/MotorSpeed", gearMotor.getSpeed());
         SmartDashboard.putNumber("Mandibles/PotentiometerValue", potentiometerValue());
         SmartDashboard.putNumber("Mandibles/MotorAmperage", pdp.getMandiblesAmps());

@@ -54,7 +54,6 @@ public class Pincers extends Subsystem implements PIDOutput {
         createController();
         controller.setSetpoint(setPoint);
         controller.enable();
-        DriverStation.reportError("Setting setpoint to " + setPoint + " in Pincers.raise()", false);
     }
 
     public void lower() {
@@ -62,7 +61,6 @@ public class Pincers extends Subsystem implements PIDOutput {
         createController();
         controller.setSetpoint(setPoint);
         controller.enable();
-        DriverStation.reportError("Setting setpoint to " + setPoint + " in Pincers.lower()", false);
     }
 
     public void open() {
@@ -77,7 +75,6 @@ public class Pincers extends Subsystem implements PIDOutput {
         createController();
         controller.setSetpoint(rest);
         controller.enable();
-        DriverStation.reportError("Setting setpoint to " + rest + " in Pincers.rest()", false);
     }
 
     public void close() {
@@ -116,8 +113,11 @@ public class Pincers extends Subsystem implements PIDOutput {
         return potentiometer;
     }
 
-    public void updateDashboard() {
+    public void poll() {
         if (hasGear()) { ledStrip.setStripColor(LEDColors.GEAR_IN_PINCERS); }
+    }
+
+    public void updateDashboard() {
         SmartDashboard.putNumber("Pincers/PotentiometerValue", potentiometer.get());
         SmartDashboard.putNumber("Pincers/IR Value", ir.getValue());
         SmartDashboard.putNumber("Pincers/Amperage", pdp.getPincersAmps());

@@ -19,7 +19,6 @@ public class LowerPincers extends Command {
 
     @Override
     protected void initialize() {
-        DriverStation.reportError("Lowering Pincers", false);
         endMillis = System.currentTimeMillis() + Constants.Pincers.LOWER_TIME;
     }
 

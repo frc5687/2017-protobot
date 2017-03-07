@@ -39,6 +39,7 @@ public class Climber extends Subsystem {
     public void stop() {
         setSpeed(0);
     }
+
     public void updateDashboard() {
         SmartDashboard.putNumber("Climber/Speed/Fore", climberMotorFore.get());
         SmartDashboard.putNumber("Climber/Speed/Aft", climberMotorAft.get());
