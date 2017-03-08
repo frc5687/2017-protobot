@@ -120,6 +120,9 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         switch (position) {
             case 0:
                 autoCommand = null;
+                if (oi.isYesPressed() && oi.isNoPressed()) {
+                    autoCommand = new FullSelfTest();
+                }
                 break;
             case 1:
                 autoCommand = new AutoDepositLeftFromFarLeft();
@@ -155,9 +158,6 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
 
     @Override
     public void testInit() {
-        DriverStation.reportError("Robot test init", false);
-        Command testCommand = new FullSelfTest();
-        testCommand.start();
     }
 
     @Override

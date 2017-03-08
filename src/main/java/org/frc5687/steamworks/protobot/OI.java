@@ -237,4 +237,12 @@ public class OI {
     public double getClimberSpeed() {
         return (1 - operatorConsole.getAxis(Joystick.AxisType.kThrottle))/2;
     }
+
+    public boolean isYesPressed() {
+        return gamepad.getRawButton(Gamepad.Buttons.BACK);
+    }
+
+    public boolean isNoPressed() {
+        return gamepad.getRawButton(Gamepad.Buttons.START);
+    }
 }

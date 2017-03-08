@@ -7,6 +7,8 @@ import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 
 public class FullSelfTest extends CommandGroup {
     public FullSelfTest() {
+        addSequential(new WaitForClearButtons());
+        addSequential(new ConfirmTest("Please ensure the robot is drydocked and press Start to continue.", "Test started.", "Test aborted."));
         addSequential(new TestDriveTrain(1));
     }
 }
