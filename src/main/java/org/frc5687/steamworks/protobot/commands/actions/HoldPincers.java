@@ -1,24 +1,22 @@
-package org.frc5687.steamworks.protobot.commands;
+package org.frc5687.steamworks.protobot.commands.actions;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.frc5687.steamworks.protobot.Constants;
 
-import static org.frc5687.steamworks.protobot.Robot.oi;
 import static org.frc5687.steamworks.protobot.Robot.pincers;
 
-public class RunPincersManually extends Command {
+/**
+ * Created by Ben Bernard on 2/28/2017.
+ */
+public class HoldPincers extends Command {
 
-    public RunPincersManually() {
+    public HoldPincers() {
         requires(pincers);
     }
 
     @Override
-    protected void initialize() {
-    }
-
-    @Override
     protected void execute() {
-        double speed = oi.getPincerSpeed() / 2;
-        pincers.setPincerSpeed(speed);
+        pincers.setPincerSpeed(Constants.Pincers.HOLD_SPEED);
     }
 
     @Override
@@ -31,4 +29,8 @@ public class RunPincersManually extends Command {
         pincers.setPincerSpeed(0);
     }
 
+    @Override
+    protected void interrupted() {
+        end();
+    }
 }

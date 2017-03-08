@@ -1,12 +1,8 @@
 package org.frc5687.steamworks.protobot.utils;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import org.frc5687.steamworks.protobot.Constants;
-import org.frc5687.steamworks.protobot.Robot;
 import org.frc5687.steamworks.protobot.RobotMap;
 
 /**
@@ -20,12 +16,14 @@ public class PDP extends PowerDistributionPanel {
         indicator = new DigitalInput(RobotMap.Misc.INDICATOR);
     }
 
-    public double getGearHandlerAmps() {
-        return getCurrent(RobotMap.GearHandler.PDP_GEAR_MOTOR);
+    public double getClimberAAmps() {
+        return getCurrent(RobotMap.Climber.PDP_CLIMBER_MOTOR_A);
     }
-
-    public double getClimberAmps() {
-        return getCurrent(RobotMap.Climber.PDP_CLIMBER_MOTOR);
+    public double getClimberBAmps() {
+        return getCurrent(RobotMap.Climber.PDP_CLIMBER_MOTOR_B);
+    }
+    public double getMeanClimberAmps() {
+        return (getClimberAAmps() + getClimberBAmps()) / 2 ;
     }
 
     public double getPincersAmps() {
@@ -69,8 +67,10 @@ public class PDP extends PowerDistributionPanel {
     }
 
     public boolean isTony() {
-        DriverStation.reportError("Indicator reports " + Boolean.toString(indicator.get()), false);
         return indicator.get();
     }
 
+    public double getMandiblesAmps() {
+        return getCurrent(RobotMap.Mandibles.PDP_MANDIBLES_MOTOR);
+    }
 }

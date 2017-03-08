@@ -42,6 +42,10 @@ public class LEDStrip extends Subsystem {
         updateDashboard();
     }
 
+    public Color getStripColor() {
+        return new Color(redStrip.getRaw(), greenStrip.getRaw(), blueStrip.getRaw());
+    }
+
     public void updateDashboard() {
         try {
             SmartDashboard.putNumber("ledstrip/red", redStrip.getRaw());

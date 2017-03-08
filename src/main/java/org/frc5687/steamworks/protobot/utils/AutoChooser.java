@@ -9,121 +9,40 @@ import org.frc5687.steamworks.protobot.RobotMap;
  * Created by Caleb on 2/20/2017.
  */
 public class AutoChooser {
-    private AnalogPotentiometer positionSwitch;
-    private AnalogPotentiometer gearSwitch;
-    private AnalogPotentiometer hopperSwitch;
+    private RotarySwitch positionSwitch;
+    private RotarySwitch gearSwitch;
+    private RotarySwitch hopperSwitch;
 
     public boolean checkWithinTarget(double target,double tolerance, AnalogPotentiometer knob){
         return (knob.get() >= target - tolerance && knob.get()<= target + tolerance);
     }
 
     public AutoChooser() {
-        positionSwitch = new AnalogPotentiometer(RobotMap.AutoChooser.POSITION_SWITCH);
-        gearSwitch = new AnalogPotentiometer(RobotMap.AutoChooser.GEAR_SWITCH);
-        hopperSwitch = new AnalogPotentiometer(RobotMap.AutoChooser.HOPPER_SWITCH);
+        positionSwitch = new RotarySwitch(RobotMap.AutoChooser.POSITION_SWITCH, .01, .092, .235, .505, .680, .823, .958);
+        gearSwitch = new RotarySwitch(RobotMap.AutoChooser.GEAR_SWITCH,  .01, .092, .235, .505, .680, .823, .958);
+        hopperSwitch = new RotarySwitch(RobotMap.AutoChooser.HOPPER_SWITCH,  .043, .09, .17, .23, .31, .5, .59, .68, .75, .82, .91, .96);
     }
 
-    public boolean positionIsAtZero(){
-        return checkWithinTarget(Constants.Auto.PositionRotor.ZERO_TARGET, Constants.Auto.PositionRotor.TOLERANCE, positionSwitch);
-
-    }
-
-    public boolean gearIsAtZero(){
-        return checkWithinTarget(Constants.Auto.GearRotor.ZERO_TARGET, Constants.Auto.GearRotor.TOLERANCE, gearSwitch);
-    }
-
-
-    public boolean gearIsAtOne(){
-        return checkWithinTarget(Constants.Auto.GearRotor.ONE_TARGET, Constants.Auto.GearRotor.TOLERANCE, gearSwitch);
-    }
-
-    public boolean gearIsAtTwo() {
-        return checkWithinTarget(Constants.Auto.GearRotor.TWO_TARGET, Constants.Auto.GearRotor.TOLERANCE, gearSwitch);
-    }
-
-    public boolean gearIsAtThree() {
-        return checkWithinTarget(Constants.Auto.GearRotor.THREE_TARGET, Constants.Auto.GearRotor.TOLERANCE, gearSwitch);
-    }
-
-    public boolean positionIsAtOne(){
-        return checkWithinTarget(Constants.Auto.PositionRotor.ONE_TARGET, Constants.Auto.PositionRotor.TOLERANCE, positionSwitch);
-    }
-
-    public boolean positionIsAtTwo(){
-        return checkWithinTarget(Constants.Auto.PositionRotor.TWO_TARGET, Constants.Auto.PositionRotor.TOLERANCE, positionSwitch);
-    }
-
-    public boolean positionIsAtThree(){
-        return checkWithinTarget(Constants.Auto.PositionRotor.THREE_TARGET, Constants.Auto.PositionRotor.TOLERANCE, positionSwitch);
-    }
-
-    public boolean positionIsAtFour(){
-        return checkWithinTarget(Constants.Auto.PositionRotor.FOUR_TARGET, Constants.Auto.PositionRotor.TOLERANCE, positionSwitch);
-    }
-
-    public boolean positionIsAtFive(){
-        return checkWithinTarget(Constants.Auto.PositionRotor.FIVE_TARGET, Constants.Auto.PositionRotor.TOLERANCE, positionSwitch);    }
-
-    public boolean autoHopper(){
-        return checkWithinTarget(Constants.Auto.HopperRotor.ONE_TARGET, Constants.Auto.HopperRotor.TOLERANCE, gearSwitch);
-    }
 
     public int positionRotorValue(){
-
-        if(positionIsAtZero()){
-            return 0;
-        }
-
-        if (positionIsAtOne()){
-            return 1;
-        }
-
-        if (positionIsAtTwo()){
-            return 2;
-        }
-
-        if (positionIsAtThree()){
-            return 3;
-        }
-
-        if (positionIsAtFour()){
-            return 4;
-        }
-
-       if (positionIsAtFive()){
-            return 5;
-        }
-
-        return -1;
+        return positionSwitch.get();
     }
 
     public int gearRotorValue(){
-        if (gearIsAtZero()){
-            return 0;
-        }
+        return gearSwitch.get();
+    }
 
-        if(gearIsAtOne()){
-            return 1;
-        }
-
-        if(gearIsAtTwo()){
-            return 2;
-        }
-
-        if(gearIsAtThree()){
-            return 3;
-        }
-        return -1;
+    public int hopperRotorValue(){
+        return hopperSwitch.get();
     }
 
 
-
     public void updateDashboard(){
-        SmartDashboard.putNumber("AutoChooser/PositionValue", positionSwitch.get());
-        SmartDashboard.putNumber("AutoChooser/GearValue", gearSwitch.get());
-        SmartDashboard.putNumber("AutoChooser/HopperValue", hopperSwitch.get());
-        SmartDashboard.putNumber("AutoChooser/PositionRotorPosition", positionRotorValue());
-        SmartDashboard.putNumber("AutoChooser/GearRotorPosition", gearRotorValue());
-        SmartDashboard.putBoolean("AutoChooser/HopperRotorPosition", autoHopper());
+        SmartDashboard.putNumber("AutoChooser/PositionValue", positionSwitch.getRaw());
+        SmartDashboard.putNumber("AutoChooser/GearValue", gearSwitch.getRaw());
+        SmartDashboard.putNumber("AutoChooser/HopperValue", hopperSwitch.getRaw());
+        SmartDashboard.putNumber("AutoChooser/PositionRotorPosition", positionSwitch.get());
+        SmartDashboard.putNumber("AutoChooser/GearRotorPosition", gearSwitch.get());
+        SmartDashboard.putNumber("AutoChooser/HopperRotorPosition", hopperSwitch.get());
     }
 }

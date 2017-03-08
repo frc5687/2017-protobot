@@ -1,4 +1,4 @@
-package org.frc5687.steamworks.protobot.commands;
+package org.frc5687.steamworks.protobot.commands.actions;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
@@ -22,9 +22,7 @@ public class DriveWith2Joysticks extends Command {
 
     @Override
     protected void execute() {
-        if (oi.isLeftTriggerPressed()) driveTrain.tankDrive(Constants.Drive.FULL_FORWARDS_SPEED);
-        else if (oi.isRightTriggerPressed()) driveTrain.tankDrive(Constants.Drive.FULL_BACKWARDS_SPEED);
-        else driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed());
+        driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed());
     }
 
     @Override

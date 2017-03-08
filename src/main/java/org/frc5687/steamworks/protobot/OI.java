@@ -3,7 +3,13 @@ package org.frc5687.steamworks.protobot;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.frc5687.steamworks.protobot.commands.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.frc5687.steamworks.protobot.commands.actions.*;
+import org.frc5687.steamworks.protobot.commands.composite.DeployPincers;
+import org.frc5687.steamworks.protobot.commands.composite.EjectGear;
+import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
+import org.frc5687.steamworks.protobot.commands.composite.ReleasePincers;
+import org.frc5687.steamworks.protobot.utils.AxisButton;
 import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
 
@@ -12,50 +18,70 @@ import org.frc5687.steamworks.protobot.utils.Helpers;
  */
 public class OI {
 
-    public static final int GP_OPEN_GEAR = 8;
-    public static final int GP_CLOSE_GEAR = 7;
 
-    public static final int OC_OPEN_GEAR = 8;
-    public static final int OC_CLOSE_GEAR = 7;
+    public static final int GP_DEPLOY_PINCERS = Gamepad.Axes.LEFT_TRIGGER.getNumber();
+    public static final int GP_EJECT_GEAR = Gamepad.Axes.RIGHT_TRIGGER.getNumber();
 
-    public static final int RAISE_PINCERS = 4;
-    public static final int LOWER_PINCERS = 3;
+    public static final int GP_RECEIVE_MANDIBLES = Gamepad.Buttons.A.getNumber();
+    public static final int GP_AUTO_CLIMB = Gamepad.Buttons.Y.getNumber();
+    public static final int GP_SLOW_CLIMB = Gamepad.Buttons.X.getNumber();
+    public static final int GP_FAST_CLIMB = Gamepad.Buttons.B.getNumber();
+
+    public static final int GP_GIMME_LEFT = Gamepad.Buttons.LEFT_STICK.getNumber();
+    public static final int GP_GIMME_RIGHT = Gamepad.Buttons.RIGHT_STICK.getNumber();
+
 
     public static final int OPEN_PINCERS = 5;
     public static final int CLOSE_PINCERS = 6;
 
-    public static final int CATCH_GEAR = 10;
+    public static final int OC_DEPLOY_PINCERS = 3;
+    public static final int OC_RECEIVE_MANDIBLES = 4;
+    public static final int OC_RELEASE_PINCERS = 5;
+    public static final int OC_EJECT_MANDIBLES = 6;
 
-    public static final int RINGLIGHT_ON = 11;
-    public static final int RINGLIGHT_OFF = 12;
+    public static final int OC_AUTO_CLIMB = 12;
+    public static final int OC_SLOW_CLIMB = 11;
+    public static final int OC_FAST_CLIMB = 10;
+    public static final int OC_MANUAL_CLIMB = 9;
+
+    public static final int OC_TOGGLE_RINGLIGHT = 8;
+
 
     private Gamepad gamepad;
     private Joystick operatorConsole;
 
-    private JoystickButton gpOpenGearButton;
-    private JoystickButton gpCloseGearButton;
+    public AxisButton gpEjectGearButton;
+    public JoystickButton gpReceiveMandiblesButton;
+    public AxisButton gpDeployPincers;
+    public JoystickButton gpAutoClimb;
+    public JoystickButton gpFastClimb;
+    public JoystickButton gpSlowClimb;
 
-    private JoystickButton ocOpenGearButton;
-    private JoystickButton ocCloseGearButton;
-
-    private JoystickButton catchGearButton;
-
-    private JoystickButton ascendClimber;
-    private JoystickButton descendClimber;
+    public JoystickButton ocToggleRinglight;
 
     private JoystickButton shiftLow;
     private JoystickButton shiftHigh;
 
-    private JoystickButton raisePincers;
-    private JoystickButton lowerPincers;
+    private JoystickButton gimmeGearLeft;
+    private JoystickButton gimmeGearRight;
 
-    private JoystickButton openPincers;
-    private JoystickButton closePincers;
 
-    private JoystickButton ringLightOn;
-    private JoystickButton ringLightOff;
+    public JoystickButton ocReceiveMandiblesButton;
+    public JoystickButton ocEjectMandiblesButton;
+
+    public JoystickButton ocDeployPincers;
+
+    public JoystickButton ocReleasePincers;
+    public JoystickButton ocAutoClimb;
+    public JoystickButton ocSlowClimb;
+    public JoystickButton ocFastClimb;
+    public JoystickButton ocManualClimb;
+
 
     private JoystickButton gearWiggle;
+
+
+
 
     public OI() {
         gamepad = new Gamepad(0);
@@ -65,111 +91,150 @@ public class OI {
          * X Box Gamepad Buttons
          */
 
-        ascendClimber = new JoystickButton(gamepad, Gamepad.Buttons.Y.getNumber());
-        descendClimber = new JoystickButton(gamepad, Gamepad.Buttons.X.getNumber());
 
         shiftLow = new JoystickButton(gamepad, Gamepad.Buttons.LEFT_BUMPER.getNumber());
         shiftHigh = new JoystickButton(gamepad, Gamepad.Buttons.RIGHT_BUMPER.getNumber());
 
-        gpOpenGearButton = new JoystickButton(gamepad, GP_OPEN_GEAR);
-        gpCloseGearButton = new JoystickButton(gamepad, GP_CLOSE_GEAR);
+        gpEjectGearButton = new AxisButton(gamepad, GP_EJECT_GEAR, Constants.OI.AXIS_BUTTON_THRESHHOLD);
+        gpReceiveMandiblesButton = new JoystickButton(gamepad, GP_RECEIVE_MANDIBLES);
 
-        gearWiggle = new JoystickButton(gamepad, Gamepad.Buttons.A.getNumber());
+        gpDeployPincers = new AxisButton(gamepad, GP_DEPLOY_PINCERS, Constants.OI.AXIS_BUTTON_THRESHHOLD);
+
+        shiftHigh.whenPressed(new Shift(DoubleSolenoid.Value.kForward));
+        shiftLow.whenPressed(new Shift(DoubleSolenoid.Value.kReverse));
+
+        gpReceiveMandiblesButton.whenPressed(new ReceiveMandibles());
+        gpEjectGearButton.whenPressed(new EjectGear());
+
+        gpDeployPincers.whenPressed(new DeployPincers());
+
 
         /*
          * Operator Console Buttons
          */
 
-        raisePincers = new JoystickButton(operatorConsole, RAISE_PINCERS);
-        lowerPincers = new JoystickButton(operatorConsole, LOWER_PINCERS);
+        ocReceiveMandiblesButton = new JoystickButton(operatorConsole, OC_RECEIVE_MANDIBLES);
+        ocEjectMandiblesButton = new JoystickButton(operatorConsole, OC_EJECT_MANDIBLES);
 
-        openPincers = new JoystickButton(operatorConsole, OPEN_PINCERS);
-        closePincers = new JoystickButton(operatorConsole, CLOSE_PINCERS);
+        ocDeployPincers = new JoystickButton(operatorConsole, OC_DEPLOY_PINCERS);
+        ocReleasePincers = new JoystickButton(operatorConsole, OC_RELEASE_PINCERS);
 
-        ringLightOn = new JoystickButton(operatorConsole, RINGLIGHT_ON);
-        ringLightOff = new JoystickButton(operatorConsole, RINGLIGHT_OFF);
 
-        ocCloseGearButton = new JoystickButton(operatorConsole, OC_CLOSE_GEAR);
-        ocOpenGearButton = new JoystickButton(operatorConsole, OC_OPEN_GEAR);
-
-        catchGearButton = new JoystickButton(operatorConsole, CATCH_GEAR);
-
+        ocToggleRinglight = new JoystickButton(operatorConsole, OC_TOGGLE_RINGLIGHT);
         /*
          * Button Functions
          */
 
-        shiftHigh.whenPressed(new Shift(DoubleSolenoid.Value.kForward));
-        shiftLow.whenPressed(new Shift(DoubleSolenoid.Value.kReverse));
 
-        gpCloseGearButton.whenPressed(new CloseMandibles());
-        gpOpenGearButton.whenPressed(new OpenMandibles());
+        ocReceiveMandiblesButton.whenPressed(new ReceiveMandibles());
+        ocEjectMandiblesButton.whenPressed(new EjectMandibles());
 
-        ocCloseGearButton.whenPressed(new CloseMandibles());
-        ocOpenGearButton.whenPressed(new OpenMandibles());
+        ocDeployPincers.whenPressed(new DeployPincers());
 
-        raisePincers.whenPressed(new RaisePincers());
-        lowerPincers.whenPressed(new LowerPincers());
+        ocReleasePincers.whenPressed(new ReleasePincers());
+        //gpReleasePincers.whenPressed(new ReleasePincers());
+        gimmeGearLeft = new JoystickButton(gamepad, GP_GIMME_LEFT);
+        gimmeGearRight = new JoystickButton(gamepad, GP_GIMME_RIGHT);
 
-        openPincers.whenPressed(new ClosePincers());
-        closePincers.whenPressed(new OpenPincers());
+        gimmeGearLeft.whileHeld(new GimmeGear());
+        gimmeGearRight.whileHeld(new GimmeGear());
 
-        catchGearButton.whenPressed(new CatchGear());
+        gpAutoClimb = new JoystickButton(gamepad, GP_AUTO_CLIMB);
+        gpSlowClimb = new JoystickButton(gamepad, GP_SLOW_CLIMB);
+        gpFastClimb = new JoystickButton(gamepad, GP_FAST_CLIMB);
 
-        ringLightOn.whenPressed(new EnableRingLight());
-        ringLightOff.whenPressed(new DisableRingLight());
+        ocAutoClimb = new JoystickButton(operatorConsole, OC_AUTO_CLIMB);
+        ocSlowClimb = new JoystickButton(operatorConsole, OC_SLOW_CLIMB);
+        ocFastClimb = new JoystickButton(operatorConsole, OC_FAST_CLIMB);
+        ocManualClimb = new JoystickButton(operatorConsole, OC_MANUAL_CLIMB);
 
+        gpAutoClimb.toggleWhenPressed(new AutoClimb());
+        gpSlowClimb.toggleWhenPressed(new Climb(Constants.Climber.PICKUP_SPEED));
+        gpFastClimb.toggleWhenPressed(new Climb(Constants.Climber.ASCEND_SPEED));
+
+        ocAutoClimb.toggleWhenPressed(new AutoClimb());
+        ocSlowClimb.toggleWhenPressed(new Climb(Constants.Climber.PICKUP_SPEED));
+        ocFastClimb.toggleWhenPressed(new Climb(Constants.Climber.ASCEND_SPEED));
+        ocManualClimb.toggleWhenPressed(new RunClimberManually());
+
+        ocToggleRinglight.toggleWhenPressed(new RunRingLight());
     }
 
     private double transformStickToSpeed(Gamepad.Axes stick) {
-        double result = gamepad.getRawAxis(stick);
+        double result = gamepad.getRawAxis(stick) * -1;
         result = Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
         result = Helpers.applySensitivityTransform(result);
         return result;
     }
 
     public double getLeftSpeed() {
-        return transformStickToSpeed(Gamepad.Axes.LEFT_Y);
+        double result = transformStickToSpeed(Gamepad.Axes.LEFT_Y);
+        SmartDashboard.putNumber("OI/LeftSpeed", result);
+        return result;
     }
 
     public double getRightSpeed() {
-        return transformStickToSpeed(Gamepad.Axes.RIGHT_Y);
-    }
-
-    public boolean isLeftTriggerPressed() {
-        return (gamepad.getRawAxis(Gamepad.Axes.LEFT_TRIGGER) > Constants.OI.TRIGGER_THRESHHOLD);
-    }
-
-    public boolean isRightTriggerPressed() {
-        return (gamepad.getRawAxis(Gamepad.Axes.RIGHT_TRIGGER) > Constants.OI.TRIGGER_THRESHHOLD);
+        double result = transformStickToSpeed(Gamepad.Axes.RIGHT_Y);
+        SmartDashboard.putNumber("OI/RIghtSpeed", result);
+        return result;
     }
 
     public boolean isGearInPressed() {
-        return gpCloseGearButton.get();
+        return gpReceiveMandiblesButton.get();
     }
 
     public boolean isGearOutPressed() {
-        return gpOpenGearButton.get();
+        return gpEjectGearButton.get();
     }
 
     public boolean isAscendClimberPressed() {
-        return ascendClimber.get();
+        return false;
     }
 
     public boolean isDescendClimberPressed() {
-        return descendClimber.get();
+        return false;
     }
 
     public boolean isGearWigglePressed() {
-        return gearWiggle.get();
+        return ocReceiveMandiblesButton.get() || gpReceiveMandiblesButton.get();
     }
 
-    public boolean isCatchGearPressed() {
-        return catchGearButton.get();
+    public boolean isDeployPincersPressed() {
+        return ocDeployPincers.get() || gpDeployPincers.get();
+    }
+
+    public boolean isEjectGearPressed() {
+        return ocEjectMandiblesButton.get() || gpEjectGearButton.get();
     }
 
     public double getPincerSpeed() {
         double result = -operatorConsole.getAxis(Joystick.AxisType.kY);
-        return Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
+        result = Helpers.applyDeadband(result, Constants.Deadbands.DRIVE_STICK);
+        result *= 0.5;
+        return result;
     }
 
+    public boolean isGimmeGearPressed() {
+        return gimmeGearLeft.get() || gimmeGearRight.get();
+    }
+
+    public boolean isgpButtonPressed(int gpButton) {
+        return gamepad.getRawButton(gpButton);
+    }
+
+    public boolean isocButtonPressed(int ocButton) {
+        return operatorConsole.getRawButton(ocButton);
+    }
+
+    public boolean isAutoClimbPressed() {
+        return ocAutoClimb.get() || gpAutoClimb.get();
+    }
+
+    public boolean isReleasePincersPressed() {
+        return ocReleasePincers.get() || gpEjectGearButton.get();
+    }
+
+    public double getClimberSpeed() {
+        return (1 - operatorConsole.getAxis(Joystick.AxisType.kThrottle))/2;
+    }
 }

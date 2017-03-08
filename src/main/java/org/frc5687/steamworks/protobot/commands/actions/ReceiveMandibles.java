@@ -1,25 +1,31 @@
-package org.frc5687.steamworks.protobot.commands;
+package org.frc5687.steamworks.protobot.commands.actions;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 
 import static org.frc5687.steamworks.protobot.Robot.mandibles;
 import static org.frc5687.steamworks.protobot.Robot.oi;
+import static org.frc5687.steamworks.protobot.Robot.pdp;
 
-public class CloseMandibles extends Command {
+/**
+ * Default command for the mandibles system.  Starts by closing the the mandibles until the hard-stop is hit (based on amp draw).
+ * Then brakes the motor using the Victor.
+ */
+public class ReceiveMandibles extends Command {
 
     private State state;
     private long endTime;
     private long switchTime;
 
-    public CloseMandibles() {
+    public ReceiveMandibles() {
         requires(mandibles);
     }
 
     @Override
     protected void initialize() {
         state = State.CLOSE;
-        endTime = System.currentTimeMillis() + Constants.GearHandler.CLOSE_TIME;
+        endTime = System.currentTimeMillis() + Constants.Mandibles.CLOSE_TIME;
     }
 
     @Override
@@ -27,33 +33,35 @@ public class CloseMandibles extends Command {
         switch (state) {
             case CLOSE:
                 mandibles.close();
-                if (System.currentTimeMillis() >= endTime) state = State.CLAMP;
-                return;
+                if (System.currentTimeMillis() >= endTime || pdp.getMandiblesAmps() > Constants.Mandibles.THRESHOLD_CLOSE_AMPS) { state = State.CLAMP; }
+                break;
             case CLAMP:
-                mandibles.clamp();
+                mandibles.setSpeed(Constants.Mandibles.CLAMP_SPEED);
                 if (oi.isGearWigglePressed()) {
                     state = State.WIGGLE_OUT;
-                    switchTime = System.currentTimeMillis() + Constants.GearHandler.WIGGLE_OUT_TIME;
+                    switchTime = System.currentTimeMillis() + Constants.Mandibles.WIGGLE_OUT_TIME;
                 }
-                return;
+                break;
             case WIGGLE_OUT:
                 mandibles.wiggleOut();
                 if (!oi.isGearWigglePressed()) state = State.CLAMP;
                 else if (System.currentTimeMillis() > switchTime) {
-                    switchTime = System.currentTimeMillis() + Constants.GearHandler.WIGGLE_OUT_TIME;
+                    switchTime = System.currentTimeMillis() + Constants.Mandibles.WIGGLE_OUT_TIME;
                     state = State.WIGGLE_IN;
                 }
-                return;
+                break;
             case WIGGLE_IN:
                 mandibles.wiggleIn();
                 if (!oi.isGearWigglePressed()) state = State.CLAMP;
                 else if (System.currentTimeMillis() > switchTime) {
-                    switchTime = System.currentTimeMillis() + Constants.GearHandler.WIGGLE_IN_TIME;
+                    switchTime = System.currentTimeMillis() + Constants.Mandibles.WIGGLE_IN_TIME;
                     state = State.WIGGLE_OUT;
                 }
-                return;
+                break;
+            default:
+                mandibles.setSpeed(Constants.Mandibles.CLAMP_SPEED);
         }
-        mandibles.close();
+        SmartDashboard.getString("Mandibles/ReceiveState", state.toString());
     }
 
     @Override

@@ -4,9 +4,12 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
+import org.frc5687.steamworks.protobot.LEDColors;
 import org.frc5687.steamworks.protobot.RobotMap;
-import org.frc5687.steamworks.protobot.commands.RunPincersManually;
+import org.frc5687.steamworks.protobot.commands.actions.RaisePincers;
+import org.frc5687.steamworks.protobot.commands.composite.StowPincers;
 
+import static org.frc5687.steamworks.protobot.Robot.ledStrip;
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 import static org.frc5687.steamworks.protobot.Robot.pincers;
 
@@ -29,16 +32,16 @@ public class Pincers extends Subsystem implements PIDOutput {
 
     @Override
     protected void initDefaultCommand() {
+        setDefaultCommand(new StowPincers());
     }
 
     protected void createController() {
         if (controller != null) {
-//            controller.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 0", 0));
             return;
         }
         controller = new PIDController(Constants.Pincers.PID.kP, Constants.Pincers.PID.kI, Constants.Pincers.PID.kD, pincers.getPotentiometer(), this);
         controller.setInputRange(Constants.Pincers.PID.MIN_INPUT, Constants.Pincers.PID.MAX_INPUT);
-        controller.setOutputRange(-Constants.Pincers.MAX_SPEED, Constants.Pincers.MAX_SPEED);
+        controller.setOutputRange(-Constants.Pincers.RAISE_SPEED, Constants.Pincers.RAISE_SPEED);
         controller.setAbsoluteTolerance(Constants.Pincers.PID.TOLERANCE);
     }
 
@@ -51,7 +54,6 @@ public class Pincers extends Subsystem implements PIDOutput {
         createController();
         controller.setSetpoint(setPoint);
         controller.enable();
-        DriverStation.reportError("Setting setpoint to " + setPoint + " in Pincers.raise()", false);
     }
 
     public void lower() {
@@ -59,18 +61,20 @@ public class Pincers extends Subsystem implements PIDOutput {
         createController();
         controller.setSetpoint(setPoint);
         controller.enable();
-        DriverStation.reportError("Setting setpoint to " + setPoint + " in Pincers.lower()", false);
     }
 
     public void open() {
         piston.set(DoubleSolenoid.Value.kReverse);
     }
 
+    public void relax() {
+        piston.set(DoubleSolenoid.Value.kOff);
+    }
+
     public void rest() {
         createController();
         controller.setSetpoint(rest);
-//        controller.enable();
-        DriverStation.reportError("Setting setpoint to " + rest + " in Pincers.rest()", false);
+        controller.enable();
     }
 
     public void close() {
@@ -93,6 +97,10 @@ public class Pincers extends Subsystem implements PIDOutput {
         return piston.get() == DoubleSolenoid.Value.kForward;
     }
 
+    public boolean isRelaxed() {
+        return piston.get() == DoubleSolenoid.Value.kOff;
+    }
+
     public boolean onTarget() {
         return controller.onTarget();
     }
@@ -105,19 +113,23 @@ public class Pincers extends Subsystem implements PIDOutput {
         return potentiometer;
     }
 
+    public void poll() {
+        if (hasGear()) { ledStrip.setStripColor(LEDColors.GEAR_IN_PINCERS); }
+    }
+
     public void updateDashboard() {
         SmartDashboard.putNumber("Pincers/PotentiometerValue", potentiometer.get());
         SmartDashboard.putNumber("Pincers/IR Value", ir.getValue());
-        SmartDashboard.putNumber("Pincers/SetPoint", controller == null ? 0 : controller.getSetpoint());
         SmartDashboard.putNumber("Pincers/Amperage", pdp.getPincersAmps());
-        SmartDashboard.putBoolean("Pincers/On Target", controller == null ? false : controller.onTarget());
-        SmartDashboard.putNumber("Pincer/Amperage", pdp.getPincersAmps());
-        SmartDashboard.putNumber("Pincer/Speed", pincerMotor.getSpeed());
+        SmartDashboard.putNumber("Pincers/PID/SetPoint", controller == null ? 0 : controller.getSetpoint());
+        SmartDashboard.putBoolean("Pincers/PID/On Target", controller == null ? false : controller.onTarget());
+        SmartDashboard.putNumber("Pincers/Speed", pincerMotor.getSpeed());
+        SmartDashboard.putString("Pincers/Piston", piston.get().name());
     }
 
     @Override
     public void pidWrite(double v) {
-        setPincerSpeed(v);
+//        setPincerSpeed(v);
     }
 
     public boolean hasGear() {

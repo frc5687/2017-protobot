@@ -23,28 +23,31 @@ public class Constants {
         return isTony ? tonyValue : protobotValue;
     }
 
-    public class GearHandler {
+    public class Mandibles {
 
         public static final double OPEN_SPEED = -.5;
-        public static final double CLOSE_SPEED = .1;
-        public static final double CLAMP_SPEED = .1;
-        public static final long OPEN_TIME = 250;
-        public static final long CLOSE_TIME = 250;
+        public static final double CLOSE_SPEED = .2;
+        public static final double CLAMP_SPEED = .15;
+        public static final double HOLD_OPEN_SPEED = -.15;
+        public static final long OPEN_TIME = 500;
+        public static final long CLOSE_TIME = 1000;
         public static final double TONY_MAX_POT_LIMIT = 0.5;
         public static final double PROTOBOT_MAX_POT_LIMIT = 0.5;
         public static final double WIGGLE_SPEED = 0.2;
         public static final long WIGGLE_OUT_TIME = 30;
         public static final long WIGGLE_IN_TIME = 70;
-
+        public static final long IR_GEAR_DETECTED = 1500;
+        public static final double THRESHOLD_OPEN_AMPS = 15.0;
+        public static final double THRESHOLD_CLOSE_AMPS = 10.0;
     }
 
-    public class Drive {
+    public class DriveTrain {
 
-        public static final boolean LEFT_MOTORS_INVERTED = true;
-        public static final boolean RIGHT_MOTORS_INVERTED = false;
+        public static final boolean LEFT_MOTORS_INVERTED = false;
+        public static final boolean RIGHT_MOTORS_INVERTED = true;
 
-        public static final double FULL_FORWARDS_SPEED = -1;
-        public static final double FULL_BACKWARDS_SPEED = 1;
+        public static final double FULL_FORWARDS_SPEED = 1;
+        public static final double FULL_BACKWARDS_SPEED = -1;
 
     }
 
@@ -117,17 +120,19 @@ public class Constants {
     }
 
     public class Climber {
-
         public static final boolean MOTOR_INVERTED = true;
-        public static final double ASCEND_SPEED = 1;
+        public static final double ASCEND_SPEED = 1.0;
         public static final double FUNNEL_RELEASE_SPEED = 1;
         public static final long FUNNEL_RELEASE_TIME = 167;
-
+        public static final double PICKUP_SPEED = 0.5;
+        public static final double HAVE_ROPE_AMPS = 10.0;
+        public static final double REACHED_TOP_AMPS = 18.0;
+        public static final long STARTUP_MILLIS = 500;
     }
 
     public class OI {
 
-        public static final double TRIGGER_THRESHHOLD = 0.5; //TODO find actual when pressed value
+        public static final double AXIS_BUTTON_THRESHHOLD = 0.2; //TODO find actual when pressed value
 
     }
 
@@ -141,18 +146,26 @@ public class Constants {
     public class Pincers {
 
         public static final double POTENTIOMETER_LIFTED_TONY = .006;
-        public static final double POTENTIOMETER_LIFTED_RHODY = 0.396;
+        public static final double POTENTIOMETER_LIFTED_RHODY = 0.386;
         public static final double POTENTIOMETER_LOWERED_TONY = .270;
         public static final double POTENTIOMETER_LOWERED_RHODY = 0.64;
-        public static final double MAX_SPEED = 0.5;
+        public static final double LOWER_SPEED = 0.5;
+        public static final double RAISE_SPEED = -0.5;
+        public static final double HOLD_SPEED = -0.2;
+        public static final double FORWARDS_SPEED = 0.1;
+
         public static final int IR_THRESHOLD = 2000;
+        public static final long RAISE_TIME = 500;
+        public static final long LOWER_TIME = 500;
+        public static final double HARDSTOP_AMPS = 5.0;
+        public static final long CLOSE_DELAY = 100;
 
         public class PID {
 
             public static final double MIN_INPUT = 0;
             public static final double MAX_INPUT = 1;
             public static final double kP = 1.5;
-            public static final double kI = 0;
+            public static final double kI = 0.15;
             public static final double kD = 0;
             public static final double TOLERANCE = 0.02;
 
@@ -169,28 +182,25 @@ public class Constants {
 
             public static final double CROSS_BASELINE_DISTANCE = 100;
             public static final double CROSS_FIELD_DISTANCE = 0;
-            public static final double RETREAT_DISTANCE = 18;
-            public static final double DEPOSIT_GEAR_INITIAL_DISTANCE = 0;
-            public static final double DEPOSIT_GEAR_TURN = 0;
-            public static final double DEPOSIT_GEAR_FINAL_DISTANCE = 0;
-            public static final double DEPOSIT_GEAR_CENTER_DISTANCE = 98;
+            public static final double RETREAT_DISTANCE = 24;
+            public static final double DEPOSIT_GEAR_IR_VOLTAGE = 1.155;
+            public static final double DEPOSIT_GEAR_NEAR_INITIAL_DISTANCE = 24;
+            public static final double DEPOSIT_GEAR_NEAR_ANGLE = 45;
+            public static final double DEPOSIT_GEAR_NEAR_DIAGONAL_DISTANCE = 59;
 
-            public class Rhody {
-                public static final double TARGET_IR_READING = 700;
-            }
-
-            public class Tony {
-                public static final double TARGET_IR_READING = 700;
-            }
+            public static final double DEPOSIT_GEAR_FAR_INITIAL_DISTANCE = 93;
+            public static final double DEPOSIT_GEAR_FAR_ANGLE = 60;
 
         }
 
         public class Align {
 
-            public static final double kP = 0.05;
-            public static final double kI = 0;
-            public static final double kD = 0.02;
-            public static final double TOLERANCE = 0.1;
+            public static final double SPEED = 0.6;
+
+            public static final double kP = 0.01;
+            public static final double kI = 0.0005;
+            public static final double kD = -0.001;
+            public static final double TOLERANCE = .5;
             public static final double MAX_OUTPUT = 0;
             /*
              *time the angle must be on target for to be considered steady
@@ -201,22 +211,30 @@ public class Constants {
 
         public class Drive {
 
-            public static final double SPEED = 0.5;
+            public static final double SPEED = 0.7;
 
             public static final long STEADY_TIME = 200;
 
+            public class IRPID {
+                public static final double kP = 0.5;
+                public static final double kI = 0.01;
+                public static final double kD = 0.001;
+                public static final double TOLERANCE = .005;
+            }
+
             public class DistancePID {
-                public static final double kP = -0.05;
+                public static final double kP = 0.05;
                 public static final double kI = 0;
                 public static final double kD = 0;
                 public static final double TOLERANCE = 1;
             }
 
             public class AnglePID {
-                public static final double kP = 0.075;
-                public static final double kI = 0;
-                public static final double kD = -0.15;
-                public static final double MAX_DIFFERENCE = 0.1;
+                public static final double kP = 0.05;
+                public static final double kI = 0.01;
+                public static final double kD = 0.0;
+
+                public static final double MAX_DIFFERENCE = 0.2;
             }
 
         }

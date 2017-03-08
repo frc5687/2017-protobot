@@ -1,13 +1,14 @@
-package org.frc5687.steamworks.protobot.commands;
+package org.frc5687.steamworks.protobot.commands.actions;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
-import static org.frc5687.steamworks.protobot.Robot.lights;
+import static org.frc5687.steamworks.protobot.Robot.pincers;
 
-public class EnableRingLight extends Command {
+public class OpenPincers extends Command {
 
-    public EnableRingLight() {
-        requires(lights);
+    public OpenPincers() {
+        requires(pincers);
     }
 
     @Override
@@ -16,12 +17,12 @@ public class EnableRingLight extends Command {
 
     @Override
     protected void execute() {
-        lights.turnRingLightOn();
+        pincers.open();
     }
 
     @Override
     protected boolean isFinished() {
-        return lights.getRingLight();
+        return pincers.isOpen();
     }
 
     @Override
