@@ -1,13 +1,13 @@
 package org.frc5687.steamworks.protobot.utils;
 
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 
-public class SafeJoystickButton extends Trigger {
+public class SafeButton extends Button {
 
-    private JoystickButton a, b;
+    private Trigger a, b;
 
-    public SafeJoystickButton(JoystickButton buttonA, JoystickButton buttonB) {
+    public SafeButton(Trigger buttonA, Trigger buttonB) {
         a = buttonA;
         b = buttonB;
     }
