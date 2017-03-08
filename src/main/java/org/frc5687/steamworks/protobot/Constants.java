@@ -220,6 +220,15 @@ public class Constants {
                 public static final double kI = 0.01;
                 public static final double kD = 0.001;
                 public static final double TOLERANCE = .005;
+
+                /**
+                 * a in the voltage-to-distance equation distance = a * voltage ^ b
+                 */
+                public static final double TRANSFORM_COEFFICIENT = 27.385;
+                /**
+                 * b in the voltage-to-distance equation distance = a * voltage ^ b
+                 */
+                public static final double TRANSFORM_POWER = -1.203;
             }
 
             public class DistancePID {

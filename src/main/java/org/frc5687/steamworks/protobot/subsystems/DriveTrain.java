@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.actions.DriveWith2Joysticks;
+import org.frc5687.steamworks.protobot.utils.IRPIDSource;
 
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 
@@ -33,7 +34,7 @@ public class DriveTrain extends Subsystem implements PIDSource {
         rightEncoder = initializeEncoder(RobotMap.Drive.RIGHT_ENCODER_CHANNEL_A, RobotMap.Drive.RIGHT_ENCODER_CHANNEL_B, Constants.Encoders.RightDrive.REVERSED, Constants.Encoders.RightDrive.INCHES_PER_PULSE);
         leftEncoder = initializeEncoder(RobotMap.Drive.LEFT_ENCODER_CHANNEL_A, RobotMap.Drive.LEFT_ENCODER_CHANNEL_B, Constants.Encoders.LeftDrive.REVERSED, Constants.Encoders.LeftDrive.INCHES_PER_PULSE);
 
-        irSensor = new AnalogInput(RobotMap.Drive.IR_DRIVE_SENSOR);
+        irSensor = new IRPIDSource(RobotMap.Drive.IR_DRIVE_SENSOR);
     }
 
     @Override
