@@ -15,11 +15,20 @@ public class WaitForClearButtons extends Command {
 
     @Override
     protected void initialize() {
+        DriverStation.reportError("Waiting for buttons to clear.", false);
+    }
 
+    @Override
+    protected void end() {
+        DriverStation.reportError("Buttons clear.", false);
     }
 
     @Override
     protected boolean isFinished() {
-        return !(oi.isYesPressed() || oi.isNoPressed());
+        boolean y = oi.isYesPressed();
+        boolean n = oi.isNoPressed();
+
+        DriverStation.reportError("Y=" + y + ", no=" + n, false);
+        return !(y || n);
     }
 }

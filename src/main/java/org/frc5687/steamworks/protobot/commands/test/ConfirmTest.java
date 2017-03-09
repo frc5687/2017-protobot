@@ -26,7 +26,7 @@ public class ConfirmTest extends Command {
 
     @Override
     protected void initialize() {
-        DriverStation.reportWarning(_message, false);
+        DriverStation.reportError(_message, false);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ConfirmTest extends Command {
     protected boolean isFinished() {
         if (_clear) {
             if (oi.isYesPressed()) {
-                DriverStation.reportWarning(_success, false);
+                DriverStation.reportError(_success, false);
                 return true;
             } else if (oi.isNoPressed()) {
                 DriverStation.reportError(_failure, false);
