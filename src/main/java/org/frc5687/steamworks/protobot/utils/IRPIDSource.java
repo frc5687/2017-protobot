@@ -9,9 +9,14 @@ public class IRPIDSource extends AnalogInput {
         super(channel);
     }
 
+
+    public double getRaw() {
+        return super.getVoltage();
+    }
+
     @Override
     public double pidGet() {
-        return Constants.Auto.Drive.IRPID.TRANSFORM_COEFFICIENT * Math.pow(getValue(), Constants.Auto.Drive.IRPID.TRANSFORM_POWER);
+        return Constants.Auto.Drive.IRPID.TRANSFORM_COEFFICIENT * Math.pow(getRaw(), Constants.Auto.Drive.IRPID.TRANSFORM_POWER);
     }
 
 }
