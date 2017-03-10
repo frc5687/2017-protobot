@@ -32,9 +32,9 @@ public class AutoApproachTarget extends Command {
 
         driveTrain.resetDriveEncoders();
 
-        double kP = Double.parseDouble(SmartDashboard.getString("DB/String 0", "0"));
-        double kI = Double.parseDouble(SmartDashboard.getString("DB/String 1", "0"));
-        double kD = Double.parseDouble(SmartDashboard.getString("DB/String 2", "0"));
+        double kP = Double.parseDouble(SmartDashboard.getString("DB/String 0", "0.04"));
+        double kI = Double.parseDouble(SmartDashboard.getString("DB/String 1", "0.001"));
+        double kD = Double.parseDouble(SmartDashboard.getString("DB/String 2", "0.02"));
 
         //distanceController = new PIDController(Constants.Auto.Drive.IRPID.kP, Constants.Auto.Drive.IRPID.kI, Constants.Auto.Drive.IRPID.kD, driveTrain.getIrSensor(), distancePID);
         distanceController = new PIDController(kP, kI, kD, driveTrain.getIrSensor(), distancePID);

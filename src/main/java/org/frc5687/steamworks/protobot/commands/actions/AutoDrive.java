@@ -27,6 +27,12 @@ public class AutoDrive extends Command {
         this(distance, speed, false);
     }
 
+    /***
+     * Drives for a set distance at a set speed.
+     * @param distance
+     * @param speed
+     * @param usePID
+     */
     public AutoDrive(double distance, double speed, boolean usePID) {
         requires(driveTrain);
         this.speed = speed;
@@ -76,7 +82,7 @@ public class AutoDrive extends Command {
                 distanceFactor = distancePID.get();
             }
         } else {
-            distanceFactor = speed;
+            distanceFactor = distance > 0 ? speed : -speed;
         }
 
         synchronized (anglePID) {
