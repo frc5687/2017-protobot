@@ -213,7 +213,8 @@ public class Constants {
 
             public static final double SPEED = 0.7;
 
-            public static final long STEADY_TIME = 200;
+            public static final long STEADY_TIME = 100;
+            public static final long ALIGN_STEADY_TIME = 100;
 
             public class IRPID {
                 public static final double kP = 0.5;
