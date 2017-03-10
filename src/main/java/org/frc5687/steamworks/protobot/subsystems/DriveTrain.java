@@ -20,7 +20,7 @@ public class DriveTrain extends Subsystem implements PIDSource {
     private VictorSP rightTopMotor;
     private Encoder rightEncoder;
     private Encoder leftEncoder;
-    private AnalogInput irSensor;
+    private IRPIDSource irSensor;
 
     public DriveTrain() {
         leftFrontMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_FRONT);

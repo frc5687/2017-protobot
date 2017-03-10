@@ -16,7 +16,7 @@ public class IRPIDSource extends AnalogInput {
 
     @Override
     public double pidGet() {
-        return Constants.Auto.Drive.IRPID.TRANSFORM_COEFFICIENT * Math.pow(getRaw(), Constants.Auto.Drive.IRPID.TRANSFORM_POWER);
+        return Constants.Auto.Drive.IRPID.TRANSFORM_COEFFICIENT * Math.pow(getRaw(), Constants.Auto.Drive.IRPID.TRANSFORM_POWER) / 2.54;
     }
 
 }

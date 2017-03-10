@@ -10,6 +10,7 @@ import org.frc5687.steamworks.protobot.Constants.Auto.Drive;
 
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 import static org.frc5687.steamworks.protobot.Robot.imu;
+import static org.frc5687.steamworks.protobot.Robot.shifter;
 
 public class AutoDrive extends Command {
 
@@ -20,28 +21,36 @@ public class AutoDrive extends Command {
     private PIDListener distancePID;
     private PIDListener anglePID;
     private double endTime;
+    private boolean usePID;
 
     public AutoDrive(double distance, double speed) {
+        this(distance, speed, false);
+    }
+
+    public AutoDrive(double distance, double speed, boolean usePID) {
         requires(driveTrain);
         this.speed = speed;
         this.distance = distance;
+        this.usePID = usePID;
     }
 
     @Override
     protected void initialize() {
         driveTrain.resetDriveEncoders();
-        distancePID = new PIDListener();
-        SmartDashboard.putNumber("AutoDrive/kP", Drive.DistancePID.kP);
-        SmartDashboard.putNumber("AutoDrive/kI", Drive.DistancePID.kI);
-        SmartDashboard.putNumber("AutoDrive/kD", Drive.DistancePID.kD);
-        SmartDashboard.putNumber("AutoDrive/kT", Drive.DistancePID.TOLERANCE);
+        if (usePID) {
+            distancePID = new PIDListener();
+            SmartDashboard.putNumber("AutoDrive/kP", Drive.DistancePID.kP);
+            SmartDashboard.putNumber("AutoDrive/kI", Drive.DistancePID.kI);
+            SmartDashboard.putNumber("AutoDrive/kD", Drive.DistancePID.kD);
+            SmartDashboard.putNumber("AutoDrive/kT", Drive.DistancePID.TOLERANCE);
 
-        distanceController = new PIDController(Drive.DistancePID.kP, Drive.DistancePID.kI, Drive.DistancePID.kD, driveTrain, distancePID);
-//        distanceController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
-        distanceController.setAbsoluteTolerance(Drive.DistancePID.TOLERANCE);
-        distanceController.setOutputRange(-speed, speed);
-        distanceController.setSetpoint(distance);
-        distanceController.enable();
+            distanceController = new PIDController(Drive.DistancePID.kP, Drive.DistancePID.kI, Drive.DistancePID.kD, driveTrain, distancePID);
+        //        distanceController.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
+            distanceController.setAbsoluteTolerance(Drive.DistancePID.TOLERANCE);
+            distanceController.setOutputRange(-speed, speed);
+            distanceController.setSetpoint(distance);
+            distanceController.enable();
+        }
 
         anglePID = new PIDListener();
         angleController = new PIDController(Drive.AnglePID.kP, Drive.AnglePID.kI, Drive.AnglePID.kD, imu, anglePID);
@@ -62,8 +71,12 @@ public class AutoDrive extends Command {
     protected void execute() {
         double distanceFactor = 0;
         double angleFactor = 0;
-        synchronized (distancePID) {
-            distanceFactor = distancePID.get();
+        if (usePID) {
+            synchronized (distancePID) {
+                distanceFactor = distancePID.get();
+            }
+        } else {
+            distanceFactor = speed;
         }
 
         synchronized (anglePID) {
@@ -72,10 +85,9 @@ public class AutoDrive extends Command {
         SmartDashboard.putNumber("AutoDrive/distanceFactor", distanceFactor);
         SmartDashboard.putNumber("AutoDrive/angleFactor", angleFactor);
 
-        if(!distanceController.onTarget()) endTime = System.currentTimeMillis() + Drive.STEADY_TIME;
         driveTrain.tankDrive(distanceFactor + angleFactor, distanceFactor - angleFactor, true);
 
-        SmartDashboard.putBoolean("AutoDrive/onTarget", distanceController.onTarget());
+        SmartDashboard.putBoolean("AutoDrive/onTarget", distanceController == null ? false : distanceController.onTarget());
         SmartDashboard.putNumber("AutoDrive/imu", imu.getYaw());
         SmartDashboard.putNumber("AutoDrive/distance", driveTrain.pidGet());
         SmartDashboard.putNumber("AutoDrive/turnPID", anglePID.get());
@@ -83,7 +95,12 @@ public class AutoDrive extends Command {
 
     @Override
     protected boolean isFinished() {
-        return System.currentTimeMillis() >= endTime;
+        if (usePID) {
+            return distanceController.onTarget();
+        } else {
+
+            return distance == 0 ? true : distance < 0 ? (driveTrain.getDistance() < distance) : (driveTrain.getDistance() >  distance);
+        }
     }
 
     @Override
