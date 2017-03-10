@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.actions.*;
-import org.frc5687.steamworks.protobot.commands.composite.DeployPincers;
+import org.frc5687.steamworks.protobot.commands.composite.DeployDustpan;
 import org.frc5687.steamworks.protobot.commands.composite.EjectGear;
 import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
 import org.frc5687.steamworks.protobot.commands.composite.ReleasePincers;
@@ -19,7 +19,7 @@ import org.frc5687.steamworks.protobot.utils.Helpers;
 public class OI {
 
 
-    public static final int GP_DEPLOY_PINCERS = Gamepad.Axes.LEFT_TRIGGER.getNumber();
+    public static final int GP_DEPLOY_DUSTPAN = Gamepad.Axes.LEFT_TRIGGER.getNumber();
     public static final int GP_EJECT_GEAR = Gamepad.Axes.RIGHT_TRIGGER.getNumber();
 
     public static final int GP_RECEIVE_MANDIBLES = Gamepad.Buttons.A.getNumber();
@@ -34,7 +34,7 @@ public class OI {
     public static final int OPEN_PINCERS = 5;
     public static final int CLOSE_PINCERS = 6;
 
-    public static final int OC_DEPLOY_PINCERS = 3;
+    public static final int OC_DEPLOY_DUSTPAN = 3;
     public static final int OC_RECEIVE_MANDIBLES = 4;
     public static final int OC_RELEASE_PINCERS = 5;
     public static final int OC_EJECT_MANDIBLES = 6;
@@ -52,7 +52,7 @@ public class OI {
 
     public AxisButton gpEjectGearButton;
     public JoystickButton gpReceiveMandiblesButton;
-    public AxisButton gpDeployPincers;
+    public AxisButton gpDeployDustpan;
     public JoystickButton gpAutoClimb;
     public JoystickButton gpFastClimb;
     public JoystickButton gpSlowClimb;
@@ -69,9 +69,9 @@ public class OI {
     public JoystickButton ocReceiveMandiblesButton;
     public JoystickButton ocEjectMandiblesButton;
 
-    public JoystickButton ocDeployPincers;
+    public JoystickButton ocDeployDustpan;
 
-    public JoystickButton ocReleasePincers;
+    public JoystickButton ocEjectDustpan;
     public JoystickButton ocAutoClimb;
     public JoystickButton ocSlowClimb;
     public JoystickButton ocFastClimb;
@@ -98,7 +98,7 @@ public class OI {
         gpEjectGearButton = new AxisButton(gamepad, GP_EJECT_GEAR, Constants.OI.AXIS_BUTTON_THRESHHOLD);
         gpReceiveMandiblesButton = new JoystickButton(gamepad, GP_RECEIVE_MANDIBLES);
 
-        gpDeployPincers = new AxisButton(gamepad, GP_DEPLOY_PINCERS, Constants.OI.AXIS_BUTTON_THRESHHOLD);
+        gpDeployDustpan = new AxisButton(gamepad, GP_DEPLOY_DUSTPAN, Constants.OI.AXIS_BUTTON_THRESHHOLD);
 
         shiftHigh.whenPressed(new Shift(DoubleSolenoid.Value.kForward));
         shiftLow.whenPressed(new Shift(DoubleSolenoid.Value.kReverse));
@@ -106,7 +106,7 @@ public class OI {
         gpReceiveMandiblesButton.whenPressed(new ReceiveMandibles());
         gpEjectGearButton.whenPressed(new EjectGear());
 
-        gpDeployPincers.whenPressed(new DeployPincers());
+        gpDeployDustpan.whenPressed(new DeployDustpan());
 
 
         /*
@@ -116,8 +116,8 @@ public class OI {
         ocReceiveMandiblesButton = new JoystickButton(operatorConsole, OC_RECEIVE_MANDIBLES);
         ocEjectMandiblesButton = new JoystickButton(operatorConsole, OC_EJECT_MANDIBLES);
 
-        ocDeployPincers = new JoystickButton(operatorConsole, OC_DEPLOY_PINCERS);
-        ocReleasePincers = new JoystickButton(operatorConsole, OC_RELEASE_PINCERS);
+        ocDeployDustpan = new JoystickButton(operatorConsole, OC_DEPLOY_DUSTPAN);
+        ocEjectDustpan = new JoystickButton(operatorConsole, OC_RELEASE_PINCERS);
 
 
         ocToggleRinglight = new JoystickButton(operatorConsole, OC_TOGGLE_RINGLIGHT);
@@ -129,9 +129,9 @@ public class OI {
         ocReceiveMandiblesButton.whenPressed(new ReceiveMandibles());
         ocEjectMandiblesButton.whenPressed(new EjectMandibles());
 
-        ocDeployPincers.whenPressed(new DeployPincers());
+        ocDeployDustpan.whenPressed(new DeployDustpan());
 
-        ocReleasePincers.whenPressed(new ReleasePincers());
+        ocEjectDustpan.whenPressed(new ReleasePincers());
         //gpReleasePincers.whenPressed(new ReleasePincers());
         gimmeGearLeft = new JoystickButton(gamepad, GP_GIMME_LEFT);
         gimmeGearRight = new JoystickButton(gamepad, GP_GIMME_RIGHT);
@@ -200,7 +200,7 @@ public class OI {
     }
 
     public boolean isDeployPincersPressed() {
-        return ocDeployPincers.get() || gpDeployPincers.get();
+        return ocDeployDustpan.get() || gpDeployDustpan.get();
     }
 
     public boolean isEjectGearPressed() {
@@ -231,7 +231,7 @@ public class OI {
     }
 
     public boolean isReleasePincersPressed() {
-        return ocReleasePincers.get() || gpEjectGearButton.get();
+        return ocEjectDustpan.get() || gpEjectGearButton.get();
     }
 
     public double getClimberSpeed() {

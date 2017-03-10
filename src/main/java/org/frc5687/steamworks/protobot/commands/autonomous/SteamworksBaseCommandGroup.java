@@ -9,7 +9,7 @@ public class SteamworksBaseCommandGroup extends CommandGroup {
     public SteamworksBaseCommandGroup() {
         addParallel(new EnableRingLight());
         addParallel(new ReleaseFunnel());
-        addParallel(new RaisePincers());
+        addParallel(new RaiseDustpan());
         addParallel(new ReceiveMandibles());
         addSequential(new Shift(DoubleSolenoid.Value.kReverse));
     }

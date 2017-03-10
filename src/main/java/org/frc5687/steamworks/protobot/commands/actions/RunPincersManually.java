@@ -3,12 +3,12 @@ package org.frc5687.steamworks.protobot.commands.actions;
 import edu.wpi.first.wpilibj.command.Command;
 
 import static org.frc5687.steamworks.protobot.Robot.oi;
-import static org.frc5687.steamworks.protobot.Robot.pincers;
+import static org.frc5687.steamworks.protobot.Robot.dustpan;
 
 public class RunPincersManually extends Command {
 
     public RunPincersManually() {
-        requires(pincers);
+        requires(dustpan);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class RunPincersManually extends Command {
 
     @Override
     protected void execute() {
-        pincers.setPincerSpeed(oi.getPincerSpeed());
+        dustpan.setLifterSpeed(oi.getPincerSpeed());
     }
 
     @Override
@@ -27,7 +27,7 @@ public class RunPincersManually extends Command {
 
     @Override
     protected void end() {
-        pincers.setPincerSpeed(0);
+        dustpan.setLifterSpeed(0);
     }
 
 }

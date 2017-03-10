@@ -1,14 +1,15 @@
 package org.frc5687.steamworks.protobot.commands.actions;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
+import org.frc5687.steamworks.protobot.Constants;
 
-import static org.frc5687.steamworks.protobot.Robot.pincers;
+import static org.frc5687.steamworks.protobot.Robot.dustpan;
 
-public class OpenPincers extends Command {
+public class HoldDust extends Command {
 
-    public OpenPincers() {
-        requires(pincers);
+    private long endMillis;
+    public HoldDust() {
+        requires(dustpan);
     }
 
     @Override
@@ -17,12 +18,12 @@ public class OpenPincers extends Command {
 
     @Override
     protected void execute() {
-        pincers.open();
+        dustpan.hold();
     }
 
     @Override
     protected boolean isFinished() {
-        return pincers.isOpen();
+        return true;
     }
 
     @Override

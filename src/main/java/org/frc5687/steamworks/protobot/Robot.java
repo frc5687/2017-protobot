@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
-import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
 import org.frc5687.steamworks.protobot.commands.autonomous.*;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import org.frc5687.steamworks.protobot.utils.*;
@@ -24,7 +23,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
     public static Lights lights;
     public static LEDStrip ledStrip;
     public static Robot robot;
-    public static Pincers pincers;
+    public static Dustpan dustpan;
     public static PiTrackerProxy piTrackerProxy;
     public static PoseTracker poseTracker;
 
@@ -54,7 +53,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         climber = new Climber();
         lights = new Lights();
         ledStrip = new LEDStrip();
-        pincers = new Pincers();
+        dustpan = new Dustpan();
         autoRotorChooser = new AutoChooser();
 
 
@@ -186,7 +185,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
 
     public void poll() {
         mandibles.poll();
-        pincers.poll();
+        dustpan.poll();
     }
 
     public void updateDashboard() {
@@ -194,7 +193,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
             driveTrain.updateDashboard();
             mandibles.updateDashboard();
             shifter.updateDashboard();
-            pincers.updateDashboard();
+            dustpan.updateDashboard();
             lights.updateDashboard();
             ledStrip.updateDashboard();
             autoRotorChooser.updateDashboard();

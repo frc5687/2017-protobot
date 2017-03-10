@@ -143,7 +143,7 @@ public class Constants {
 
     }
 
-    public class Pincers {
+    public class Dustpan {
 
         public static final double POTENTIOMETER_LIFTED_TONY = .006;
         public static final double POTENTIOMETER_LIFTED_RHODY = 0.386;
@@ -151,7 +151,7 @@ public class Constants {
         public static final double POTENTIOMETER_LOWERED_RHODY = 0.64;
         public static final double LOWER_SPEED = 0.5;
         public static final double RAISE_SPEED = -0.5;
-        public static final double HOLD_SPEED = -0.2;
+        public static final double LIFTER_HOLD_SPEED = -0.2;
         public static final double FORWARDS_SPEED = 0.1;
 
         public static final int IR_THRESHOLD = 2000;
@@ -159,6 +159,9 @@ public class Constants {
         public static final long LOWER_TIME = 500;
         public static final double HARDSTOP_AMPS = 5.0;
         public static final long CLOSE_DELAY = 100;
+        public static final double COLLECT_SPEED = 0.5;
+        public static final double ROLLER_HOLD_SPEED = 0.1;
+        public static final double EJECT_SPEED = -0.5;
 
         public class PID {
 

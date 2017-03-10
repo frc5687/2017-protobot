@@ -1,17 +1,13 @@
 package org.frc5687.steamworks.protobot.commands.actions;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
-import static org.frc5687.steamworks.protobot.Robot.pincers;
+import static org.frc5687.steamworks.protobot.Robot.dustpan;
 
-/**
- * Command to relax the pincers piston
- */
-public class RelaxPincers extends Command {
+public class CollectDust extends Command {
 
-    public RelaxPincers() {
-        requires(pincers);
+    public CollectDust() {
+        requires(dustpan);
     }
 
     @Override
@@ -20,12 +16,12 @@ public class RelaxPincers extends Command {
 
     @Override
     protected void execute() {
-        pincers.relax();
+        dustpan.collect();
     }
 
     @Override
     protected boolean isFinished() {
-        return pincers.isRelaxed();
+        return true;
     }
 
     @Override

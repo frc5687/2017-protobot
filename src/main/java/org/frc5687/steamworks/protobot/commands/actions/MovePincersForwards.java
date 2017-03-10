@@ -4,25 +4,25 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
 
 import static org.frc5687.steamworks.protobot.Robot.oi;
-import static org.frc5687.steamworks.protobot.Robot.pincers;
+import static org.frc5687.steamworks.protobot.Robot.dustpan;
 
 /**
- * Command for moving the pincers slowly forwards until the button is released
+ * Command for moving the dustpan slowly forwards until the button is released
  */
 public class MovePincersForwards extends Command {
 
     public MovePincersForwards() {
-        requires(pincers);
+        requires(dustpan);
     }
 
     @Override
     protected void execute() {
-        pincers.setPincerSpeed(Constants.Pincers.FORWARDS_SPEED);
+        dustpan.setLifterSpeed(Constants.Dustpan.FORWARDS_SPEED);
     }
 
     @Override
     protected void end() {
-        pincers.setPincerSpeed(0);
+        dustpan.setLifterSpeed(0);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package org.frc5687.steamworks.protobot.utils;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import org.frc5687.steamworks.protobot.RobotMap;
 
@@ -26,8 +25,8 @@ public class PDP extends PowerDistributionPanel {
         return (getClimberAAmps() + getClimberBAmps()) / 2 ;
     }
 
-    public double getPincersAmps() {
-        return getCurrent(RobotMap.Pincers.PDP_PINCERS_MOTOR);
+    public double getDustpanLifterAmps() {
+        return getCurrent(RobotMap.Dustpan.PDP_DUSTPAN_LIFTER_MOTOR);
     }
 
     public double getMeanDrivetrainAmps() {

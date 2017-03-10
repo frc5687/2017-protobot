@@ -4,20 +4,20 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
 
 import static org.frc5687.steamworks.protobot.Robot.oi;
-import static org.frc5687.steamworks.protobot.Robot.pincers;
+import static org.frc5687.steamworks.protobot.Robot.dustpan;
 
 /**
  * Created by Ben Bernard on 2/28/2017.
  */
-public class HoldPincersDown extends Command {
+public class HoldDustpanDown extends Command {
 
-    public HoldPincersDown() {
-        requires(pincers);
+    public HoldDustpanDown() {
+        requires(dustpan);
     }
 
     @Override
     protected void execute() {
-        pincers.setPincerSpeed(-Constants.Pincers.HOLD_SPEED);
+        dustpan.setLifterSpeed(-Constants.Dustpan.LIFTER_HOLD_SPEED);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class HoldPincersDown extends Command {
 
     @Override
     protected void end() {
-        pincers.setPincerSpeed(0);
+        dustpan.setLifterSpeed(0);
     }
 
     @Override
