@@ -33,16 +33,20 @@ public class AutoAlign extends Command implements PIDOutput {
 
     @Override
     protected void initialize() {
-        controller = new PIDController(Align.kP, Align.kI, Align.kD, imu, this);
-        controller.setPID(SmartDashboard.getNumber("DB/Slider 0", 0), SmartDashboard.getNumber("DB/Slider 1", 0), SmartDashboard.getNumber("DB/Slider 2", 0));
+        double kP = Double.parseDouble(SmartDashboard.getString("DB/String 0", ".04"));
+        double kI = Double.parseDouble(SmartDashboard.getString("DB/String 1", ".006"));
+        double kD = Double.parseDouble(SmartDashboard.getString("DB/String 2", ".09"));
+
+        controller = new PIDController(kP, kI, kD, imu, this);
         controller.setInputRange(Constants.Auto.MIN_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
         controller.setOutputRange(-speed, speed);
         controller.setAbsoluteTolerance(Align.TOLERANCE);
-        controller.setAbsoluteTolerance(SmartDashboard.getNumber("DB/Slider 3", 180));
+        controller.setAbsoluteTolerance(SmartDashboard.getNumber("DB/Slider 3", 1));
         controller.setContinuous();
         controller.setSetpoint(angle);
         controller.enable();
-        DriverStation.reportError("AutoAlign initialized", false);
+        DriverStation.reportError("AutoAlign initialized to " + angle + " at " + speed, false);
+        DriverStation.reportError("kP="+kP+" , kI="+kI+", kD="+kD, false);
         startTimeMillis = System.currentTimeMillis();
     }
 
@@ -53,6 +57,7 @@ public class AutoAlign extends Command implements PIDOutput {
         driveTrain.tankDrive(pidOut, -pidOut); // positive output is counterclockwise
         SmartDashboard.putBoolean("AutoAlign/onTarget", controller.onTarget());
         SmartDashboard.putNumber("AutoAlign/imu", imu.getYaw());
+        SmartDashboard.putData("AutoAlign/pid", controller);
     }
 
     @Override
@@ -78,6 +83,7 @@ public class AutoAlign extends Command implements PIDOutput {
     public void pidWrite(double output) {
         synchronized (this) {
             pidOut = output;
+            SmartDashboard.putNumber("AutoAlign/pidOut", pidOut);
         }
     }
 
