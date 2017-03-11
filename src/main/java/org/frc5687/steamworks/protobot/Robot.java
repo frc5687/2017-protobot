@@ -198,6 +198,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
             ledStrip.updateDashboard();
             autoRotorChooser.updateDashboard();
             climber.updateDashboard();
+            pdp.updateDashboard();
 
             SmartDashboard.putBoolean("IsTony", Constants.isTony);
             SmartDashboard.putNumber("Yaw", imu.getYaw());
