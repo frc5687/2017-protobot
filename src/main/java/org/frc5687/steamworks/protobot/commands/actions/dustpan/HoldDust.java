@@ -5,32 +5,32 @@ import org.frc5687.steamworks.protobot.Constants;
 
 import static org.frc5687.steamworks.protobot.Robot.dustpan;
 
-/**
- * Created by Ben Bernard on 2/28/2017.
- */
-public class HoldDustpan extends Command {
+public class HoldDust extends Command {
 
-    public HoldDustpan() {
-        requires(dustpan);
+    public HoldDust() {
+        requires(dustpan.roller);
+    }
+
+    @Override
+    protected void initialize() {
     }
 
     @Override
     protected void execute() {
-        dustpan.setLifterSpeed(Constants.Dustpan.LIFTER_HOLD_SPEED);
+        dustpan.hold();
     }
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     @Override
     protected void end() {
-        dustpan.setLifterSpeed(0);
     }
 
     @Override
     protected void interrupted() {
-        end();
     }
+
 }

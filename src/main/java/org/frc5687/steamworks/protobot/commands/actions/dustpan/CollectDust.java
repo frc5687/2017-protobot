@@ -7,7 +7,7 @@ import static org.frc5687.steamworks.protobot.Robot.dustpan;
 public class CollectDust extends Command {
 
     public CollectDust() {
-        requires(dustpan);
+        requires(dustpan.roller);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class CollectDust extends Command {
 
     @Override
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     @Override

@@ -1,35 +1,36 @@
 package org.frc5687.steamworks.protobot.commands.actions;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.frc5687.steamworks.protobot.Constants;
 
 import static org.frc5687.steamworks.protobot.Robot.dustpan;
 
-public class EjectDust extends Command {
+/**
+ * Created by Ben Bernard on 2/28/2017.
+ */
+public class HoldDustpan extends Command {
 
-    public EjectDust() {
-        requires(dustpan);
-    }
-
-    @Override
-    protected void initialize() {
+    public HoldDustpan() {
+        requires(dustpan.lifter);
     }
 
     @Override
     protected void execute() {
-        dustpan.eject();
+        dustpan.lifter.set(Constants.Dustpan.LIFTER_HOLD_SPEED);
     }
 
     @Override
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     @Override
     protected void end() {
+        dustpan.lifter.set(0);
     }
 
     @Override
     protected void interrupted() {
+        end();
     }
-
 }

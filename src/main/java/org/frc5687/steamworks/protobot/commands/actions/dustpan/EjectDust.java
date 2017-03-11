@@ -1,15 +1,13 @@
 package org.frc5687.steamworks.protobot.commands.actions;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.frc5687.steamworks.protobot.Constants;
 
 import static org.frc5687.steamworks.protobot.Robot.dustpan;
 
-public class HoldDust extends Command {
+public class EjectDust extends Command {
 
-    private long endMillis;
-    public HoldDust() {
-        requires(dustpan);
+    public EjectDust() {
+        requires(dustpan.roller);
     }
 
     @Override
@@ -18,7 +16,7 @@ public class HoldDust extends Command {
 
     @Override
     protected void execute() {
-        dustpan.hold();
+        dustpan.eject();
     }
 
     @Override
