@@ -138,8 +138,8 @@ public class Constants {
 
     public class Shifter {
 
-        public static final long STOP_MOTOR_TIME = 120; //TODO find correct values
-        public static final long SHIFT_TIME = 120; //TODO find correct values
+        public static final long STOP_MOTOR_TIME = 60; //TODO find correct values
+        public static final long SHIFT_TIME = 60; //TODO find correct values
 
     }
 
