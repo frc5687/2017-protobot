@@ -3,6 +3,7 @@ package org.frc5687.steamworks.protobot.commands.autonomous;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.frc5687.steamworks.protobot.commands.actions.*;
+import org.frc5687.steamworks.protobot.commands.actions.dustpan.RaiseDustpan;
 
 public class SteamworksBaseCommandGroup extends CommandGroup {
 

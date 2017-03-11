@@ -1,4 +1,4 @@
-package org.frc5687.steamworks.protobot.commands.actions;
+package org.frc5687.steamworks.protobot.commands.actions.dustpan;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -21,7 +21,7 @@ public class EjectDust extends Command {
 
     @Override
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     @Override

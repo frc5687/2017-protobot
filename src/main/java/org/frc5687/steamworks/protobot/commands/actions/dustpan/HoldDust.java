@@ -1,4 +1,4 @@
-package org.frc5687.steamworks.protobot.commands.actions;
+package org.frc5687.steamworks.protobot.commands.actions.dustpan;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
@@ -22,7 +22,7 @@ public class HoldDust extends Command {
 
     @Override
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     @Override

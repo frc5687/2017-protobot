@@ -8,7 +8,7 @@ import org.frc5687.steamworks.protobot.commands.actions.*;
 import org.frc5687.steamworks.protobot.commands.composite.DeployDustpan;
 import org.frc5687.steamworks.protobot.commands.composite.EjectGear;
 import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
-import org.frc5687.steamworks.protobot.commands.composite.ReleasePincers;
+import org.frc5687.steamworks.protobot.commands.composite.EjectDustpan;
 import org.frc5687.steamworks.protobot.utils.AxisButton;
 import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
@@ -131,7 +131,7 @@ public class OI {
 
         ocDeployDustpan.whenPressed(new DeployDustpan());
 
-        ocEjectDustpan.whenPressed(new ReleasePincers());
+        ocEjectDustpan.whenPressed(new EjectDustpan());
         //gpReleasePincers.whenPressed(new ReleasePincers());
         gimmeGearLeft = new JoystickButton(gamepad, GP_GIMME_LEFT);
         gimmeGearRight = new JoystickButton(gamepad, GP_GIMME_RIGHT);

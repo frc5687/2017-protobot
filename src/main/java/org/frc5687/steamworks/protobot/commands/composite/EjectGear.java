@@ -8,6 +8,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class EjectGear extends CommandGroup {
     public EjectGear() {
         addParallel(new EjectMandibles());
-        addParallel(new ReleasePincers());
+        addParallel(new EjectDustpan());
     }
 }
