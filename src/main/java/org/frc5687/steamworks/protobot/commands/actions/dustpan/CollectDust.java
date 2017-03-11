@@ -1,28 +1,29 @@
-package org.frc5687.steamworks.protobot.commands.actions;
+package org.frc5687.steamworks.protobot.commands.actions.dustpan;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
-import static org.frc5687.steamworks.protobot.Robot.pincers;
+import static org.frc5687.steamworks.protobot.Robot.dustpan;
 
-public class OpenPincers extends Command {
+public class CollectDust extends Command {
 
-    public OpenPincers() {
-        requires(pincers);
+    public CollectDust() {
+        requires(dustpan.roller);
     }
 
     @Override
     protected void initialize() {
+        DriverStation.reportError("CollectDust", false);
     }
 
     @Override
     protected void execute() {
-        pincers.open();
+        dustpan.collect();
     }
 
     @Override
     protected boolean isFinished() {
-        return pincers.isOpen();
+        return false;
     }
 
     @Override

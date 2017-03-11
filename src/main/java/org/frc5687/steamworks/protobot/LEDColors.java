@@ -14,9 +14,9 @@ public class LEDColors {
     public static final Color GEAR_IN_MANDIBLES = Color.YELLOW;
     public static final Color MANDIBLES_OPEN = Color.RED;
     public static final Color CLIMBING = Color.SKY_BLUE;
-    public static final Color PINCERS_DEPLOYED = Color.BLUE;
-    public static final Color PINCERS_OPEN = Color.PURPLE;
-    public static final Color GEAR_IN_PINCERS = Color.ORANGE;
+    public static final Color DUSTPAN_DEPLOYED = Color.BLUE;
+    public static final Color DUSTPAN_EJECT = Color.PURPLE;
+    public static final Color GEAR_IN_DUSTPAN = Color.ORANGE;
 
     public static final Color TONY_BOOTUP = Color.YELLOW;
     public static final Color RHODY_BOOTUP = Color.GREEN;
