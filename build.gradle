@@ -13,7 +13,7 @@ apply plugin: "idea"
 frc {
     team = "5687"
     robotClass = "org.frc5687.steamworks.protobot.Robot"
-    rioIP="10.56.87.2"
+    rioIP="10.56.87.21"
 }
 
 wpi {

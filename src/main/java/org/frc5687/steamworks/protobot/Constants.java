@@ -146,7 +146,8 @@ public class Constants {
     public class Dustpan {
         public static final double LOWER_SPEED = 0.5;
         public static final double RAISE_SPEED = -0.5;
-        public static final double LIFTER_HOLD_SPEED = -0.2;
+        public static final double HOLD_DOWN_SPEED = 0.2;
+        public static final double HOLD_UP_SPEED = -0.2;
         public static final double FORWARDS_SPEED = 0.3;
 
         public static final int IR_THRESHOLD = 2000;

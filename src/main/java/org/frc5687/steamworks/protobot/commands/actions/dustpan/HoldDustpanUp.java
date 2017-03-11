@@ -8,7 +8,7 @@ import org.frc5687.steamworks.protobot.Constants;
 public class HoldDustpanUp extends HoldDustpan {
 
     public HoldDustpanUp() {
-        super(Constants.Dustpan.LIFTER_HOLD_SPEED);
+        super(Constants.Dustpan.HOLD_UP_SPEED);
     }
 
 }
