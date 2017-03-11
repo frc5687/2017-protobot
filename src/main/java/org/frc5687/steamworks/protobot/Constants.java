@@ -159,7 +159,7 @@ public class Constants {
         public static final long LOWER_TIME = 500;
         public static final double HARDSTOP_AMPS = 5.0;
         public static final long CLOSE_DELAY = 100;
-        public static final double COLLECT_SPEED = 0.5;
+        public static final double COLLECT_SPEED = .5;
         public static final double ROLLER_HOLD_SPEED = 0.1;
         public static final double EJECT_SPEED = -0.5;
 

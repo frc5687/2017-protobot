@@ -10,7 +10,7 @@ import org.frc5687.steamworks.protobot.commands.actions.*;
 public class ReleasePincers extends CommandGroup {
 
     public ReleasePincers() {
-        addSequential(new CollectDust());
+        addSequential(new EjectDust());
         addSequential(new SetLEDStrip(LEDColors.DUSTPAN_EJECT));
         addSequential(new MovePincersForwards());
     }
