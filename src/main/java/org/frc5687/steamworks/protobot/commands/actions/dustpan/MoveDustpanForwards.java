@@ -1,5 +1,6 @@
 package org.frc5687.steamworks.protobot.commands.actions.dustpan;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
 
@@ -9,10 +10,16 @@ import static org.frc5687.steamworks.protobot.Robot.dustpan;
 /**
  * Command for moving the dustpan slowly forwards until the button is released
  */
-public class MovePincersForwards extends Command {
+public class MoveDustpanForwards extends Command {
 
-    public MovePincersForwards() {
+    public MoveDustpanForwards() {
         requires(dustpan.lifter);
+    }
+
+    @Override
+    protected void initialize() {
+
+        DriverStation.reportError("MoveDustpanForwards", false);
     }
 
     @Override
@@ -34,4 +41,5 @@ public class MovePincersForwards extends Command {
     protected boolean isFinished() {
         return !oi.isReleasePincersPressed();
     }
+
 }

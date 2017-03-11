@@ -1,5 +1,6 @@
 package org.frc5687.steamworks.protobot.commands.actions.dustpan;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
 
@@ -24,6 +25,8 @@ public class MoveDustpan extends Command {
     @Override
     protected void initialize() {
         endMillis = System.currentTimeMillis() + time;
+
+        DriverStation.reportError("MoveDustpan at " + speed, false);
     }
 
     @Override

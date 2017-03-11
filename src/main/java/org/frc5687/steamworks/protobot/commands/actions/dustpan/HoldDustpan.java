@@ -1,5 +1,6 @@
 package org.frc5687.steamworks.protobot.commands.actions.dustpan;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
 
@@ -15,6 +16,12 @@ public class HoldDustpan extends Command {
     public HoldDustpan(double speed) {
         requires(dustpan.lifter);
         this.speed = speed;
+    }
+
+    @Override
+    protected void initialize() {
+
+        DriverStation.reportError("HoldDustpan at " + speed, false);
     }
 
     @Override

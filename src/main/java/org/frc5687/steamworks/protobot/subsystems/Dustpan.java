@@ -6,7 +6,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.LEDColors;
 import org.frc5687.steamworks.protobot.RobotMap;
+import org.frc5687.steamworks.protobot.commands.actions.dustpan.HoldDust;
 import org.frc5687.steamworks.protobot.commands.actions.dustpan.RaiseDustpan;
+import org.frc5687.steamworks.protobot.commands.composite.StowDustpan;
 
 import static org.frc5687.steamworks.protobot.Robot.*;
 
@@ -30,7 +32,7 @@ public class Dustpan {
 
         @Override
         protected void initDefaultCommand() {
-            setDefaultCommand(new RaiseDustpan());
+            setDefaultCommand(new StowDustpan());
         }
 
     }
@@ -49,7 +51,7 @@ public class Dustpan {
 
         @Override
         protected void initDefaultCommand() {
-            setDefaultCommand(new RaiseDustpan());
+            setDefaultCommand(new HoldDust());
         }
 
     }

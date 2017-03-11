@@ -12,7 +12,7 @@ import static org.frc5687.steamworks.protobot.Robot.dustpan;
 public class HoldDustpanDown extends HoldDustpan {
 
     public HoldDustpanDown() {
-        super(Constants.Dustpan.LIFTER_HOLD_SPEED);
+        super(0);
     }
 
 }
