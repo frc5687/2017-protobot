@@ -118,7 +118,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         int position = autoRotorChooser.positionRotorValue();
         switch (position) {
             case 0:
-                autoCommand = null;
+                autoCommand = null; //new AutoVisionTest();
                 break;
             case 1:
                 autoCommand = new AutoDepositLeftFromFarLeft();
@@ -199,6 +199,9 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
             ledStrip.updateDashboard();
             autoRotorChooser.updateDashboard();
             climber.updateDashboard();
+
+            piTrackerProxy.updateDashboard();
+            poseTracker.updateDashboard();
 
             SmartDashboard.putBoolean("IsTony", Constants.isTony);
             SmartDashboard.putNumber("Yaw", imu.getYaw());
