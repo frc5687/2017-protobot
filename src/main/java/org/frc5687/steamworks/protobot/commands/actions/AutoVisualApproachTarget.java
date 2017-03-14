@@ -70,7 +70,7 @@ public class AutoVisualApproachTarget extends Command {
     protected void execute() {
         // See what we can find out from the piTracker...
         PiTrackerProxy.Frame frame = piTrackerProxy.getLatestFrame();
-        if (frame!=null & frame.isSighted() && Math.abs(frame.getOffsetAngle()-_previousOffsetAngle) > Constants.Auto.Drive.AnglePID.TOLERANCE) {
+        if (frame!=null && frame.isSighted() && Math.abs(frame.getOffsetAngle()-_previousOffsetAngle) > Constants.Auto.Drive.AnglePID.TOLERANCE) {
             _previousOffsetAngle = frame.getOffsetAngle();
             TonyPose pose = (TonyPose)poseTracker.get(frame.getMillis());
             if (pose!=null) {
