@@ -1,5 +1,6 @@
 package org.frc5687.steamworks.protobot.commands.actions;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -53,6 +54,7 @@ public class AutoVisualApproachTarget extends Command {
         anglePID = new PIDListener();
         angleController = new PIDController(Constants.Auto.Drive.AnglePID.kP, Constants.Auto.Drive.AnglePID.kI, Constants.Auto.Drive.AnglePID.kD, imu, anglePID);
         angleController.setInputRange(Constants.Auto.MIN_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
+        angleController.setAbsoluteTolerance(Constants.Auto.Drive.AnglePID.TOLERANCE);
         double maxSpeed = speed * Constants.Auto.Drive.AnglePID.MAX_DIFFERENCE;
         SmartDashboard.putNumber("AutoApproachTarget/AnglePID/RAISE_SPEED", maxSpeed);
         DriverStation.reportError("Turn PID Max Output: " + speed, false);
@@ -61,14 +63,14 @@ public class AutoVisualApproachTarget extends Command {
         angleController.setSetpoint(imu.getYaw());
         angleController.enable();
 
-        DriverStation.reportError("AutoApproach initialized", false);
+        DriverStation.reportError("AutoVisualApproachTarget initialized with angle " + angleController.getSetpoint(), false);
     }
 
     @Override
     protected void execute() {
         // See what we can find out from the piTracker...
         PiTrackerProxy.Frame frame = piTrackerProxy.getLatestFrame();
-        if (frame!=null & frame.isSighted() && frame.getOffsetAngle()!=_previousOffsetAngle) {
+        if (frame!=null && frame.isSighted() && Math.abs(frame.getOffsetAngle()-_previousOffsetAngle) > Constants.Auto.Drive.AnglePID.TOLERANCE) {
             _previousOffsetAngle = frame.getOffsetAngle();
             TonyPose pose = (TonyPose)poseTracker.get(frame.getMillis());
             if (pose!=null) {
@@ -77,6 +79,7 @@ public class AutoVisualApproachTarget extends Command {
                 else if (targetAngle < -180) { targetAngle+=360; }
                 synchronized (angleController) {
                     angleController.setSetpoint(targetAngle);
+                    DriverStation.reportError("AutoVisualApproachTarget retargeting angle " + angleController.getSetpoint(), false);
                     angleController.enable();
                 }
             }

@@ -236,6 +236,7 @@ public class Constants {
                 public static final double kD = 0.0;
 
                 public static final double MAX_DIFFERENCE = 0.2;
+                public static final double TOLERANCE = .5;
             }
 
         }
