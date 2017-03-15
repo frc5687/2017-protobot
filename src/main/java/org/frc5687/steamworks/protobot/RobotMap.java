@@ -63,8 +63,8 @@ public class RobotMap {
 
     public static class Climber {
 
-        public static final int CLIMBER_MOTOR_FORE = 7;
-        public static final int CLIMBER_MOTOR_AFT = 9;
+        public static final int CLIMBER_MOTOR_FORE = 15;
+        public static final int CLIMBER_MOTOR_AFT = 16;
         public static final int PDP_CLIMBER_MOTOR_A = 2;
         public static final int PDP_CLIMBER_MOTOR_B = 12;
 
@@ -76,13 +76,13 @@ public class RobotMap {
 
     }
 
-    public static class Pincers {
+    public static class Dustpan {
 
-        public static final int PINCER_MOTOR = 8;
+        public static final int LIFTER_MOTOR = 8;
+        public static final int ROLLER_MOTOR = 7; // or 9?
         public static final int POTENTIOMETER = 0;
-        public static final int PISTON_RETRACTOR = 4;
-        public static final int PISTON_EXTENDER = 5;
-        public static final int PDP_PINCERS_MOTOR = 4;
+        public static final int PDP_DUSTPAN_LIFTER_MOTOR = 4;
+        public static final int PDP_DUSTPAN_ROLLER_MOTOR = 2;
         public static final int IR = 7;
 
     }
