@@ -14,7 +14,6 @@ import static org.frc5687.steamworks.protobot.Robot.*;
 
 public class Dustpan {
 
-    private AnalogInput ir;
     public Lifter lifter;
     public Roller roller;
 
@@ -35,14 +34,26 @@ public class Dustpan {
             setDefaultCommand(new StowDustpan());
         }
 
+        public void poll() {
+
+        }
+        public void updateDashboard() {
+            SmartDashboard.putNumber("Dustpan/Lifter/Amperage", pdp.getDustpanLifterAmps());
+        }
     }
 
     public class Roller extends Subsystem {
 
+        private AnalogInput ir;
         private VictorSP motor;
 
         public Roller() {
+            ir = new AnalogInput(RobotMap.Dustpan.IR);
             motor = new VictorSP(RobotMap.Dustpan.ROLLER_MOTOR);
+        }
+
+        public boolean hasGear() {
+            return ir.getValue() >= Constants.Dustpan.IR_THRESHOLD;
         }
 
         public void set(double speed) {
@@ -54,17 +65,25 @@ public class Dustpan {
             setDefaultCommand(new HoldDust());
         }
 
+        public void poll() {
+            if (hasGear()) { ledStrip.setStripColor(LEDColors.GEAR_IN_DUSTPAN); }
+        }
+
+        public void updateDashboard() {
+            SmartDashboard.putNumber("Dustpan/Roller/IR Value", ir.getValue());
+            SmartDashboard.putNumber("Dustpan/Roller/Speed", roller.motor.getSpeed());
+        }
+
+
     }
 
     public Dustpan() {
         roller = new Roller();
         lifter = new Lifter();
-        ir = new AnalogInput(RobotMap.Dustpan.IR);
     }
 
     public void hold() {
         roller.set(Constants.Dustpan.ROLLER_HOLD_SPEED);
-
     }
 
     public void eject() {
@@ -77,17 +96,14 @@ public class Dustpan {
     }
 
     public void poll() {
-        if (hasGear()) { ledStrip.setStripColor(LEDColors.GEAR_IN_DUSTPAN); }
+        lifter.poll();
+        roller.poll();
     }
 
     public void updateDashboard() {
-        SmartDashboard.putNumber("Pincers/IR Value", ir.getValue());
-        SmartDashboard.putNumber("Pincers/Amperage", pdp.getDustpanLifterAmps());
-        SmartDashboard.putNumber("Pincers/Speed", roller.motor.getSpeed());
+        lifter.updateDashboard();
+        roller.updateDashboard();
     }
 
-    public boolean hasGear() {
-        return ir.getValue() >= Constants.Dustpan.IR_THRESHOLD;
-    }
 
 }
