@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
 import org.frc5687.steamworks.protobot.commands.autonomous.*;
+import org.frc5687.steamworks.protobot.commands.test.AutoVisionTest;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import org.frc5687.steamworks.protobot.utils.*;
 
@@ -117,19 +118,20 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         int position = autoRotorChooser.positionRotorValue();
         switch (position) {
             case 0:
-                autoCommand = null;
+                autoCommand = new AutoVisionTest();
                 break;
             case 1:
                 autoCommand = new AutoDepositLeftFromFarLeft();
                 break;
             case 2:
-                autoCommand = new AutoAlign(60, 0.5);
+                autoCommand = new AutoDrive(36, 1.0, false);
+                // autoCommand = new AutoAlign(60, 0.5);
                 break;
             case 3:
                 autoCommand = new AutoDepositGear();
                 break;
             case 4:
-                autoCommand = new AutoAlign(-60, 0.5);
+                autoCommand = new AutoDrive(24, .5);
                 break;
             case 5:
                 autoCommand = new AutoDepositRightFromFarRight();
@@ -199,6 +201,9 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
             autoRotorChooser.updateDashboard();
             climber.updateDashboard();
             pdp.updateDashboard();
+
+            piTrackerProxy.updateDashboard();
+            poseTracker.updateDashboard();
 
             SmartDashboard.putBoolean("IsTony", Constants.isTony);
             SmartDashboard.putNumber("Yaw", imu.getYaw());

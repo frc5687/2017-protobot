@@ -1,5 +1,7 @@
 package org.frc5687.steamworks.protobot.utils;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * Created by Ben Bernard on 6/20/2016.
  */
@@ -24,6 +26,12 @@ public class TonyPose extends Pose {
 
     public double getDistance() {
         return _distance;
+    }
+
+    public void updateDashboard(String prefix) {
+        super.updateDashboard(prefix);
+        SmartDashboard.putNumber(prefix + "/angle", _angle);
+        SmartDashboard.putNumber(prefix + "/distance", _distance);
     }
 
 }

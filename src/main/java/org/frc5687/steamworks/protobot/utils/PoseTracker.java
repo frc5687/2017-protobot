@@ -20,6 +20,9 @@ public class PoseTracker {
 
 
     public PoseTracker(IPoseTrackable trackable, boolean async, int period, int history) {
+        SmartDashboard.putBoolean("PoseTracker/Mode/Async", async);
+        SmartDashboard.putNumber("PoseTracker/Mode/Period", period);
+        SmartDashboard.putNumber("PoseTracker/Mode/History", history);
         _trackable = trackable;
         _async = async;
         _period = period;
@@ -62,7 +65,7 @@ public class PoseTracker {
     }
 
     synchronized private void collect() {
-        if (_async || _trackable == null) {
+        if (_async && _trackable == null) {
             throw new RuntimeException("Asynchronous collect called on a PoseTracker instance with no trackable.");
         }
         Pose pose = _trackable.getPose();
@@ -107,6 +110,28 @@ public class PoseTracker {
 
     }
 
+    synchronized public Pose getLatestPose() {
+        Pose afterPose = null;
+        int read = _nextwrite - 1;
+        if (read < 0) {
+            read = _bufferSize - 1;
+        }
+        // If there's nothing there, we're out of buffer
+        if (_poses[read] == null) {
+            return null;
+        } else {
+            return _poses[read];
+        }
+    }
+
+
+    synchronized public void updateDashboard() {
+        Pose pose = getLatestPose();
+        if (pose!=null) {
+            pose.updateDashboard("PoseTracker");
+        }
+    }
+
     protected class PoseTrackerTask extends TimerTask {
 
         private PoseTracker _poseTracker;
@@ -120,5 +145,6 @@ public class PoseTracker {
             _poseTracker.collect();
         }
     }
+
 
 }
