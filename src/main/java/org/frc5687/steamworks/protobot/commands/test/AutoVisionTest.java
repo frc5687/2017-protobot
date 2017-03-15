@@ -12,7 +12,8 @@ import org.frc5687.steamworks.protobot.commands.test.VisionTest;
 public class AutoVisionTest extends CommandGroup {
     public AutoVisionTest() {
         addSequential(new EnableRingLight());
-        addSequential(new AutoVisualApproachTarget(.5));
+        addSequential(new AutoAlignVision(.5));
+        //addSequential(new AutoVisualApproachTarget(.5));
         addSequential(new DisableRingLight());
     }
 }
