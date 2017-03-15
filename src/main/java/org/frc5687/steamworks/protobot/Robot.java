@@ -125,13 +125,13 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
                 autoCommand = new AutoDepositLeftFromFarLeft();
                 break;
             case 2:
-                autoCommand = new AutoAlign(60, 0.5);
+                autoCommand = new AutoAlign(60, .8);
                 break;
             case 3:
                 autoCommand = new AutoDepositGear();
                 break;
             case 4:
-                autoCommand = new AutoAlign(-60, 0.5);
+                autoCommand = new AutoDrive(24, .5);
                 break;
             case 5:
                 autoCommand = new AutoDepositRightFromFarRight();
