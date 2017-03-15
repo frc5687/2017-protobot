@@ -85,6 +85,16 @@ public class PiTrackerProxy {
         // trackingPose = latestFrame==null?null: (OutliersPose)poseTracker.getRaw(latestFrame.adjustedMillis);
     }
 
+    synchronized public void updateDashboard() {
+        Frame frame = getLatestFrame();
+        if (frame!=null) {
+            SmartDashboard.putNumber("PiTrackerProxy/millis", frame.getMillis());
+            SmartDashboard.putBoolean("PiTrackerProxy/sighted", frame.isSighted());
+            SmartDashboard.putNumber("PiTrackerProxy/offsetAngle", frame.getOffsetAngle());
+            SmartDashboard.putNumber("PiTrackerProxy/distance", frame.getDistance());
+        }
+    }
+
     protected synchronized void setLatestFrame(Frame frame) {
         _latestFrame = frame;
     }
