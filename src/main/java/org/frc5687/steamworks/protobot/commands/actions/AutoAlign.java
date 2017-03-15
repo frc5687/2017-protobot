@@ -33,9 +33,9 @@ public class AutoAlign extends Command implements PIDOutput {
 
     @Override
     protected void initialize() {
-        double kP = Double.parseDouble(SmartDashboard.getString("DB/String 0", ".04"));
-        double kI = Double.parseDouble(SmartDashboard.getString("DB/String 1", ".006"));
-        double kD = Double.parseDouble(SmartDashboard.getString("DB/String 2", ".09"));
+        double kP = Align.kP; // Double.parseDouble(SmartDashboard.getString("DB/String 0", ".04"));
+        double kI = Align.kI; // Double.parseDouble(SmartDashboard.getString("DB/String 1", ".006"));
+        double kD = Align.kD; //Double.parseDouble(SmartDashboard.getString("DB/String 2", ".09"));
 
         controller = new PIDController(kP, kI, kD, imu, this);
         controller.setInputRange(Constants.Auto.MIN_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);

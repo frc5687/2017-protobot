@@ -98,7 +98,7 @@ public class Constants {
             public static final double INCHES_PER_ROTATION = Math.PI * WHEEL_DIAMETER;
             public static final double SCALAR_RATIO = 8;
 //            public static final double INCHES_PER_PULSE = INCHES_PER_ROTATION * SCALAR_RATIO / PULSES_PER_ROTATION;
-            public static final double INCHES_PER_PULSE = 0.1225;
+            public static final double INCHES_PER_PULSE = 0.12371134;
             public static final double MAX_PERIOD = 5;
 
         }
@@ -197,9 +197,9 @@ public class Constants {
 
             public static final double SPEED = 0.6;
 
-            public static final double kP = 0.01;
-            public static final double kI = 0.0005;
-            public static final double kD = -0.001;
+            public static final double kP = 0.04;
+            public static final double kI = 0.006;
+            public static final double kD = 0.09;
             public static final double TOLERANCE = .5;
             public static final double MAX_OUTPUT = 0;
             /*
