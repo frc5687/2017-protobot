@@ -16,7 +16,7 @@ public class AutoDepositLeft extends SteamworksBaseCommandGroup {
 
         addSequential(new AutoVisualApproachTarget(Constants.Auto.Drive.SPEED));
         addSequential(new EjectMandibles());
-        addSequential(new AutoDrive(-Constants.Auto.AnglesAndDistances.RETREAT_DISTANCE, -Constants.Auto.Drive.SPEED));
+        addSequential(new AutoDrive(-Constants.Auto.AnglesAndDistances.RETREAT_DISTANCE, -Constants.Auto.Drive.SPEED, false));
     }
 
 }

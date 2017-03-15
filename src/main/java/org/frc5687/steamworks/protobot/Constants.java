@@ -184,6 +184,7 @@ public class Constants {
             public static final double CROSS_FIELD_DISTANCE = 0;
             public static final double RETREAT_DISTANCE = 24;
             public static final double DEPOSIT_GEAR_IR_VOLTAGE = 1.155;
+            public static final double DEPOSIT_GEAR_IR_DISTANCE = 7.5; // inches
             public static final double DEPOSIT_GEAR_NEAR_INITIAL_DISTANCE = 24;
             public static final double DEPOSIT_GEAR_NEAR_ANGLE = 45;
             public static final double DEPOSIT_GEAR_NEAR_DIAGONAL_DISTANCE = 59;
@@ -219,8 +220,17 @@ public class Constants {
             public class IRPID {
                 public static final double kP = 0.5;
                 public static final double kI = 0.01;
-                public static final double kD = 0.001;
-                public static final double TOLERANCE = .005;
+                public static final double kD = 0.02;
+                public static final double TOLERANCE = .5;
+
+                /**
+                 * a in the voltage-to-distance equation distance = a * voltage ^ b
+                 */
+                public static final double TRANSFORM_COEFFICIENT = 27.385;
+                /**
+                 * b in the voltage-to-distance equation distance = a * voltage ^ b
+                 */
+                public static final double TRANSFORM_POWER = -1.203;
             }
 
             public class DistancePID {
