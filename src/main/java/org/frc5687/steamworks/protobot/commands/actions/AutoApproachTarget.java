@@ -29,14 +29,17 @@ public class AutoApproachTarget extends Command {
     protected void initialize() {
         lights.turnRingLightOn();
         distancePID = new PIDListener();
-
         driveTrain.resetDriveEncoders();
 
+        /*
         double kP = Double.parseDouble(SmartDashboard.getString("DB/String 0", "0.04"));
         double kI = Double.parseDouble(SmartDashboard.getString("DB/String 1", "0.001"));
         double kD = Double.parseDouble(SmartDashboard.getString("DB/String 2", "0.02"));
+        */
+        double kP = Constants.Auto.Drive.IRPID.kP;
+        double kI = Constants.Auto.Drive.IRPID.kI;
+        double kD = Constants.Auto.Drive.IRPID.kD;
 
-        //distanceController = new PIDController(Constants.Auto.Drive.IRPID.kP, Constants.Auto.Drive.IRPID.kI, Constants.Auto.Drive.IRPID.kD, driveTrain.getIrSensor(), distancePID);
         distanceController = new PIDController(kP, kI, kD, driveTrain.getIrSensor(), distancePID);
         distanceController.setAbsoluteTolerance(Constants.Auto.Drive.IRPID.TOLERANCE);
         distanceController.setInputRange(0, 90);  // Inches
@@ -77,12 +80,12 @@ public class AutoApproachTarget extends Command {
         }
         SmartDashboard.putNumber("AutoApproachTarget/distanceFactor", distanceFactor);
         SmartDashboard.putNumber("AutoApproachTarget/angleFactor", angleFactor);
-
+        DriverStation.reportError("Distance="+driveTrain.getIrSensor().pidGet() +", DistanceFactor=" + distanceFactor + ", AngleFactor=" + angleFactor, false);
         driveTrain.tankDrive(distanceFactor + angleFactor, distanceFactor - angleFactor);
 
         SmartDashboard.putBoolean("AutoApproachTarget/IRPID/onTarget", distanceController.onTarget());
-        SmartDashboard.putNumber("AutoApproachTarget/IRPID/voltage", driveTrain.getIrSensor().pidGet());
-        SmartDashboard.putNumber("AutoApproachTarget/IRPID/value", driveTrain.getIrSensor().getValue());
+        SmartDashboard.putNumber("AutoApproachTarget/IRPID/distance", driveTrain.getIrSensor().pidGet());
+        SmartDashboard.putNumber("AutoApproachTarget/IRPID/raw", driveTrain.getIrSensor().getRaw());
         SmartDashboard.putNumber("AutoApproachTarget/IRPID/error", distanceController.getError());
         SmartDashboard.putNumber("AutoApproachTarget/AnglePID/yaw", imu.getYaw());
         SmartDashboard.putNumber("AutoApproachTarget/AnglePID/value", anglePID.get());
@@ -90,12 +93,12 @@ public class AutoApproachTarget extends Command {
 
     @Override
     protected boolean isFinished() {
-        return distanceController.onTarget() || driveTrain.getIrSensor().pidGet() <= Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_DISTANCE;
+        return distanceController.onTarget();// || driveTrain.getIrSensor().pidGet() <= Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_DISTANCE;
     }
 
     @Override
     protected void end() {
-        DriverStation.reportError("AutoApproach Finished (" + driveTrain.getDistance() + ")", false);
+        DriverStation.reportError("AutoApproachTarget Finished (" + driveTrain.getIrSensor().pidGet() + ")", false);
         angleController.disable();
         driveTrain.tankDrive(0, 0);
         lights.turnRingLightOff();

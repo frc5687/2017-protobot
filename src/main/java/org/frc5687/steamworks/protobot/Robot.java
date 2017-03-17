@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
+import org.frc5687.steamworks.protobot.commands.actions.AutoApproachTarget;
 import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
 import org.frc5687.steamworks.protobot.commands.autonomous.*;
 import org.frc5687.steamworks.protobot.commands.test.AutoVisionTest;
@@ -64,6 +65,8 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
 
         Constants.isTony = pdp.isTony(); // must be set before subsystems
 
+        driveTrain.resetDriveEncoders();
+
         try {
             // Try to connect to the navX imu.
             imu = new AHRS(SPI.Port.kMXP);
@@ -76,19 +79,21 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
             imu = null;
         }
 
-        try {
-            UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
-            camera0.setResolution(160, 120);
-            camera0.setFPS(15);
-        } catch (Exception e) {
-            DriverStation.reportError(e.getMessage(), true);
-        }
-        try {
-            UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
-            camera1.setResolution(160, 120);
-            camera1.setFPS(15);
-        } catch (Exception e) {
-            DriverStation.reportError(e.getMessage(), true);
+        if (pdp.isTony()) {
+            try {
+                UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
+                camera0.setResolution(160, 120);
+                camera0.setFPS(15);
+            } catch (Exception e) {
+                DriverStation.reportError(e.getMessage(), true);
+            }
+            try {
+                UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
+                camera1.setResolution(160, 120);
+                camera1.setFPS(15);
+            } catch (Exception e) {
+                DriverStation.reportError(e.getMessage(), true);
+            }
         }
 
         if (Constants.isTony) {
@@ -125,14 +130,17 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
                 autoCommand = new AutoDepositLeftFromFarLeft();
                 break;
             case 2:
-                autoCommand = new AutoDrive(36, 1.0, false);
+                autoCommand = new AutoDepositLeftVision();
+                // autoCommand = new AutoApproachTarget(.7);
+                // autoCommand = new AutoDrive(24, 1.0, false, true);
                 // autoCommand = new AutoAlign(60, 0.5);
                 break;
             case 3:
                 autoCommand = new AutoDepositGear();
                 break;
             case 4:
-                autoCommand = new AutoDrive(24, .5);
+                autoCommand = new AutoDepositRightVision();
+                // autoCommand = new AutoDrive(24, .5, true, true);
                 break;
             case 5:
                 autoCommand = new AutoDepositRightFromFarRight();
@@ -201,7 +209,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
             ledStrip.updateDashboard();
             autoRotorChooser.updateDashboard();
             climber.updateDashboard();
-            pdp.updateDashboard();
+            //pdp.updateDashboard();
 
             piTrackerProxy.updateDashboard();
             poseTracker.updateDashboard();

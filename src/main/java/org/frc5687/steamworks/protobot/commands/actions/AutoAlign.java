@@ -41,12 +41,11 @@ public class AutoAlign extends Command implements PIDOutput {
         controller.setInputRange(Constants.Auto.MIN_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
         controller.setOutputRange(-speed, speed);
         controller.setAbsoluteTolerance(Align.TOLERANCE);
-        controller.setAbsoluteTolerance(SmartDashboard.getNumber("DB/Slider 3", 1));
         controller.setContinuous();
         controller.setSetpoint(angle);
         controller.enable();
         DriverStation.reportError("AutoAlign initialized to " + angle + " at " + speed, false);
-        DriverStation.reportError("kP="+kP+" , kI="+kI+", kD="+kD, false);
+        DriverStation.reportError("kP="+kP+" , kI="+kI+", kD="+kD + ",T="+ Align.TOLERANCE, false);
         startTimeMillis = System.currentTimeMillis();
     }
 

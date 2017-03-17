@@ -24,7 +24,7 @@ public class MoveDustpan extends Command {
 
     @Override
     protected void initialize() {
-        endMillis = System.currentTimeMillis() + time;
+        endMillis =  time==0 ? 0 : System.currentTimeMillis() + time;
 
         DriverStation.reportError("MoveDustpan at " + speed, false);
     }
@@ -46,7 +46,7 @@ public class MoveDustpan extends Command {
 
     @Override
     protected boolean isFinished() {
-        return System.currentTimeMillis() > endMillis || pdp.getDustpanLifterAmps() > Constants.Dustpan.HARDSTOP_AMPS;
+        return (endMillis > 0 && System.currentTimeMillis() > endMillis) || pdp.getDustpanLifterAmps() > Constants.Dustpan.HARDSTOP_AMPS;
     }
 
 }

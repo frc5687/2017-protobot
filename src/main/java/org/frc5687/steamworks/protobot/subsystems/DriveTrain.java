@@ -172,11 +172,11 @@ public class DriveTrain extends Subsystem implements PIDSource {
         SmartDashboard.putNumber("DriveTrain/Amps/Left/Rear", pdp.getLeftRearAmps());
         SmartDashboard.putNumber("DriveTrain/Amps/Average", pdp.getMeanDrivetrainAmps());
 
-        SmartDashboard.putNumber("DriveTrain/IR Sensor", irSensor.pidGet());
-        SmartDashboard.putNumber("DriveTrain/IR Sensor Raw", irSensor.getVoltage());
+        SmartDashboard.putNumber("DriveTrain/IR Sensor Distance", irSensor.pidGet());
+        SmartDashboard.putNumber("DriveTrain/IR Sensor Raw", irSensor.getRaw());
     }
 
-    public AnalogInput getIrSensor() {
+    public IRPIDSource getIrSensor() {
         return irSensor;
     }
 

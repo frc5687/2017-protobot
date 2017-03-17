@@ -26,8 +26,8 @@ public class Constants {
     public class Mandibles {
 
         public static final double OPEN_SPEED = -.5;
-        public static final double CLOSE_SPEED = .2;
-        public static final double CLAMP_SPEED = .15;
+        public static final double CLOSE_SPEED = .3;
+        public static final double CLAMP_SPEED = .2;
         public static final double HOLD_OPEN_SPEED = -.15;
         public static final long OPEN_TIME = 500;
         public static final long CLOSE_TIME = 1000;
@@ -144,16 +144,16 @@ public class Constants {
     }
 
     public class Dustpan {
-        public static final double LOWER_SPEED = 0.5;
-        public static final double RAISE_SPEED = -0.5;
+        public static final double LOWER_SPEED = 0.7;
+        public static final double RAISE_SPEED = -0.7;
         public static final double HOLD_DOWN_SPEED = 0.2;
         public static final double HOLD_UP_SPEED = -0.2;
         public static final double FORWARDS_SPEED = 0.3;
 
         public static final int IR_THRESHOLD = 2000;
-        public static final long RAISE_TIME = 500;
+        public static final long RAISE_TIME = 1000;
         public static final long LOWER_TIME = 500;
-        public static final double HARDSTOP_AMPS = 5.0;
+        public static final double HARDSTOP_AMPS = 7.0;
         public static final long EJECT_ROLLERS_DELAY = 100;
         public static final double COLLECT_SPEED = .5;
         public static final double ROLLER_HOLD_SPEED = 0.1;
@@ -183,7 +183,7 @@ public class Constants {
             public static final double CROSS_FIELD_DISTANCE = 0;
             public static final double RETREAT_DISTANCE = 24;
             public static final double DEPOSIT_GEAR_IR_VOLTAGE = 1.155;
-            public static final double DEPOSIT_GEAR_IR_DISTANCE = 7.5; // inches
+            public static final double DEPOSIT_GEAR_IR_DISTANCE = 9.0; // inches
             public static final double DEPOSIT_GEAR_NEAR_INITIAL_DISTANCE = 24;
             public static final double DEPOSIT_GEAR_NEAR_ANGLE = 45;
             public static final double DEPOSIT_GEAR_NEAR_DIAGONAL_DISTANCE = 59;
@@ -191,6 +191,8 @@ public class Constants {
             public static final double DEPOSIT_GEAR_FAR_INITIAL_DISTANCE = 93;
             public static final double DEPOSIT_GEAR_FAR_ANGLE = 60;
 
+            public static final long MANDIBLE_HOLD_TIME = 5000;
+            public static final long PAUSE_AT_SPRING_TIME = 250;
         }
 
         public class Align {
@@ -217,9 +219,9 @@ public class Constants {
             public static final long ALIGN_STEADY_TIME = 100;
 
             public class IRPID {
-                public static final double kP = 0.5;
-                public static final double kI = 0.01;
-                public static final double kD = 0.02;
+                public static final double kP = 0.05;
+                public static final double kI = 0.00;
+                public static final double kD = 0.03;
                 public static final double TOLERANCE = .5;
 
                 /**
@@ -232,17 +234,17 @@ public class Constants {
                 public static final double TRANSFORM_POWER = -1.203;
             }
 
-            public class DistancePID {
+            public class EncoderPID {
                 public static final double kP = 0.05;
                 public static final double kI = 0;
-                public static final double kD = 0;
+                public static final double kD = .02;
                 public static final double TOLERANCE = 1;
             }
 
             public class AnglePID {
-                public static final double kP = 0.05;
-                public static final double kI = 0.01;
-                public static final double kD = 0.0;
+                public static final double kP = 0.04;
+                public static final double kI = 0.006;
+                public static final double kD = 0.09;
 
                 public static final double MAX_DIFFERENCE = 0.2;
                 public static final double TOLERANCE = .5;
