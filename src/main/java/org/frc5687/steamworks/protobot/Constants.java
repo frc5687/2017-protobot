@@ -149,10 +149,13 @@ public class Constants {
         public static final double HOLD_DOWN_SPEED = 0.2;
         public static final double HOLD_UP_SPEED = -0.2;
         public static final double FORWARDS_SPEED = 0.3;
+        public static final double OVERRIDE_UP_SPEED = -1.0;
+        public static final double OVERRIDE_DOWN_SPEED = 1.0;
 
         public static final int IR_THRESHOLD = 2000;
         public static final long RAISE_TIME = 500;
         public static final long LOWER_TIME = 500;
+        public static final long OVERRIDE_TIME = 200;
         public static final double HARDSTOP_AMPS = 5.0;
         public static final long EJECT_ROLLERS_DELAY = 100;
         public static final double COLLECT_SPEED = .5;
