@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.actions.*;
+import org.frc5687.steamworks.protobot.commands.actions.dustpan.OverrideDustpanDown;
+import org.frc5687.steamworks.protobot.commands.actions.dustpan.OverrideDustpanUp;
 import org.frc5687.steamworks.protobot.commands.composite.DeployDustpan;
 import org.frc5687.steamworks.protobot.commands.composite.EjectGear;
 import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
@@ -46,6 +48,9 @@ public class OI {
 
     public static final int OC_TOGGLE_RINGLIGHT = 8;
 
+    public static final int OVERRIDE_DUSTPAN_UP = 0;
+    public static final int OVERRIDE_DUSTPAN_DOWN = 0;
+
 
     private Gamepad gamepad;
     private Joystick operatorConsole;
@@ -77,6 +82,8 @@ public class OI {
     public JoystickButton ocFastClimb;
     public JoystickButton ocManualClimb;
 
+    public JoystickButton overrideDustpanUp;
+    public JoystickButton overrideDustpanDown;
 
     private JoystickButton gearWiggle;
 
@@ -121,6 +128,10 @@ public class OI {
 
 
         ocToggleRinglight = new JoystickButton(operatorConsole, OC_TOGGLE_RINGLIGHT);
+
+        overrideDustpanUp = new JoystickButton(operatorConsole, OVERRIDE_DUSTPAN_UP);
+        overrideDustpanDown = new JoystickButton(operatorConsole, OVERRIDE_DUSTPAN_DOWN);
+
         /*
          * Button Functions
          */
@@ -158,6 +169,9 @@ public class OI {
         ocManualClimb.toggleWhenPressed(new RunClimberManually());
 
         ocToggleRinglight.toggleWhenPressed(new RunRingLight());
+
+        overrideDustpanUp.whenPressed(new OverrideDustpanUp());
+        overrideDustpanDown.whenPressed(new OverrideDustpanDown());
     }
 
     private double transformStickToSpeed(Gamepad.Axes stick) {
