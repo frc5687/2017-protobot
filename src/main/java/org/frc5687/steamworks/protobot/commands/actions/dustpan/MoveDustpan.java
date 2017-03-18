@@ -12,6 +12,7 @@ import static org.frc5687.steamworks.protobot.Robot.pdp;
  */
 public class MoveDustpan extends Command {
 
+    private long clearMillis;
     private long endMillis;
     private final long time;
     private final double speed;
@@ -24,6 +25,7 @@ public class MoveDustpan extends Command {
 
     @Override
     protected void initialize() {
+        clearMillis = System.currentTimeMillis() + 250;
         endMillis =  time==0 ? 0 : System.currentTimeMillis() + time;
 
         DriverStation.reportError("MoveDustpan at " + speed, false);

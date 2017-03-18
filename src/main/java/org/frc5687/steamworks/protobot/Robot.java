@@ -124,7 +124,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         int position = autoRotorChooser.positionRotorValue();
         switch (position) {
             case 0:
-                autoCommand = new AutoVisionTest();
+                autoCommand = null; // new AutoVisionTest();
                 break;
             case 1:
                 autoCommand = new AutoDepositLeftFromFarLeft();
