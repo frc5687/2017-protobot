@@ -11,9 +11,11 @@ public class LEDColors {
     public static final Color AUTONOMOUS = Color.LIME;
     public static final Color DISABLED = Color.BLACK;
     public static final Color GIMME_GEAR = Color.GREEN;
-    public static final Color GEAR_IN_MANDIBLES = Color.YELLOW;
+    public static final Color GEAR_IN_MANDIBLES = Color.ORANGE;
     public static final Color MANDIBLES_OPEN = Color.RED;
+    public static final Color CLIMBER_RUNNING = Color.SKY_BLUE;
     public static final Color CLIMBING = Color.SKY_BLUE;
+    public static final Color REACHED_TOP = Color.WHITE;
     public static final Color DUSTPAN_DEPLOYED = Color.BLUE;
     public static final Color DUSTPAN_EJECT = Color.PURPLE;
     public static final Color GEAR_IN_DUSTPAN = Color.ORANGE;

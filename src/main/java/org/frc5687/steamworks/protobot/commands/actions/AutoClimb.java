@@ -42,7 +42,7 @@ public class AutoClimb extends Command {
                 break;
             case PICKUP:
                 climber.setSpeed(Constants.Climber.PICKUP_SPEED);
-                ledStrip.setStripColor(Color.YELLOW);
+                ledStrip.setClimberRunning(true);
                 if (pdp.getMeanClimberAmps() > Constants.Climber.HAVE_ROPE_AMPS) {
                     DriverStation.reportError("Saw amps at " + pdp.getMeanClimberAmps() + ". Moving to CLIMB.", false);
                     _state = State.CLIMB;
@@ -50,7 +50,7 @@ public class AutoClimb extends Command {
                 break;
             case CLIMB:
                 climber.setSpeed(Constants.Climber.ASCEND_SPEED);
-                ledStrip.setStripColor(Color.BLUE);
+                ledStrip.setClimbing(true);
                 if (pdp.getMeanClimberAmps() > Constants.Climber.REACHED_TOP_AMPS) {
                     DriverStation.reportError("Saw amps at " + pdp.getMeanClimberAmps() + ". Moving to REACHED_TOP.", false);
                     _state = State.REACHED_TOP;
@@ -61,11 +61,11 @@ public class AutoClimb extends Command {
                 break;
             case REACHED_TOP:
                 climber.setSpeed(Constants.Climber.ASCEND_SPEED);
-                ledStrip.setStripColor(Color.GREEN);
+                ledStrip.setAtTop(true);
                 break;
             case LOST_GRIP:
                 climber.setSpeed(Constants.Climber.ASCEND_SPEED);
-                ledStrip.setStripColor(Color.RED);
+                ledStrip.setClimberRunning(true);
                 break;
         }
     }
@@ -86,6 +86,7 @@ public class AutoClimb extends Command {
     @Override
     protected void end() {
         climber.setSpeed(0);
+        ledStrip.setClimberRunning(false);
     }
 
     @Override

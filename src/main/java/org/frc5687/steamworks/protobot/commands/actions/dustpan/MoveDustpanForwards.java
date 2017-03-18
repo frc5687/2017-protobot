@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
 
+import static org.frc5687.steamworks.protobot.Robot.ledStrip;
 import static org.frc5687.steamworks.protobot.Robot.oi;
 import static org.frc5687.steamworks.protobot.Robot.dustpan;
 
@@ -18,7 +19,6 @@ public class MoveDustpanForwards extends Command {
 
     @Override
     protected void initialize() {
-
         DriverStation.reportError("MoveDustpanForwards", false);
     }
 

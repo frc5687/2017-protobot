@@ -16,7 +16,6 @@ import static org.frc5687.steamworks.protobot.Robot.oi;
 public class EjectDustpan extends CommandGroup {
 
     public EjectDustpan() {
-        addParallel(new SetLEDStrip(LEDColors.DUSTPAN_EJECT));
         addParallel(new MoveDustpanForwards());
         addSequential(new TimeoutDustpanRollers(Constants.Dustpan.EJECT_ROLLERS_DELAY));
         addParallel(new EjectDust());

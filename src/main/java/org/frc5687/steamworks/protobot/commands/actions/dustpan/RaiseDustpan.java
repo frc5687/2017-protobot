@@ -17,4 +17,9 @@ public class RaiseDustpan extends MoveDustpan {
         super(Constants.Dustpan.RAISE_TIME, Constants.Dustpan.RAISE_SPEED);
     }
 
+    @Override
+    protected void initialize() {
+        super.initialize();
+        ledStrip.setDustpanDeployed(false);
+    }
 }

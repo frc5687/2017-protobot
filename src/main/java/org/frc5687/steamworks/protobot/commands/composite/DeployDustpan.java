@@ -18,7 +18,6 @@ public class DeployDustpan extends CommandGroup {
     public DeployDustpan() {
         addSequential(new LowerDustpan());
         addParallel(new CollectDust());
-        addSequential(new SetLEDStrip(LEDColors.DUSTPAN_DEPLOYED));
         addSequential(new HoldDustpanDown());
     }
 

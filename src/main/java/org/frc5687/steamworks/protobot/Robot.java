@@ -188,6 +188,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         updateDashboard();
+        poll();
     }
 
     @Override
@@ -197,6 +198,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
     public void poll() {
         mandibles.poll();
         dustpan.poll();
+        ledStrip.poll();
     }
 
     public void updateDashboard() {
