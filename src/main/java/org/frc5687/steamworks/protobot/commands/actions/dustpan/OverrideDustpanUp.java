@@ -5,7 +5,7 @@ import org.frc5687.steamworks.protobot.Constants;
 public class OverrideDustpanUp extends OverrideDustpan {
 
     public OverrideDustpanUp() {
-        super(Constants.Dustpan.OVERRIDE_UP_SPEED);
+        super(Constants.Dustpan.LIFTER_OVERRIDE_UP_SPEED);
     }
 
 }
