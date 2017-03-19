@@ -70,7 +70,7 @@ public class Mandibles extends Subsystem {
     }
 
     public void poll() {
-        if (gearPresent()) { ledStrip.setStripColor(LEDColors.GEAR_IN_MANDIBLES);}
+        ledStrip.setGearInMandibles(gearPresent());
     }
 
     public void updateDashboard() {

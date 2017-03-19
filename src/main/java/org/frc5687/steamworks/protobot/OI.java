@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.actions.*;
+import org.frc5687.steamworks.protobot.commands.actions.dustpan.OverrideDustpanDown;
+import org.frc5687.steamworks.protobot.commands.actions.dustpan.OverrideDustpanUp;
 import org.frc5687.steamworks.protobot.commands.composite.DeployDustpan;
 import org.frc5687.steamworks.protobot.commands.composite.EjectGear;
 import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
@@ -44,7 +46,10 @@ public class OI {
     public static final int OC_FAST_CLIMB = 10;
     public static final int OC_MANUAL_CLIMB = 9;
 
-    public static final int OC_TOGGLE_RINGLIGHT = 8;
+    public static final int OC_TOGGLE_RINGLIGHT = 0;
+
+    public static final int OVERRIDE_DUSTPAN_UP = 8;
+    public static final int OVERRIDE_DUSTPAN_DOWN = 7;
 
 
     private Gamepad gamepad;
@@ -77,6 +82,8 @@ public class OI {
     public JoystickButton ocFastClimb;
     public JoystickButton ocManualClimb;
 
+    public JoystickButton overrideDustpanUp;
+    public JoystickButton overrideDustpanDown;
 
     private JoystickButton gearWiggle;
 
@@ -120,7 +127,11 @@ public class OI {
         ocEjectDustpan = new JoystickButton(operatorConsole, OC_RELEASE_PINCERS);
 
 
-        ocToggleRinglight = new JoystickButton(operatorConsole, OC_TOGGLE_RINGLIGHT);
+        // ocToggleRinglight = new JoystickButton(operatorConsole, OC_TOGGLE_RINGLIGHT);
+
+        overrideDustpanUp = new JoystickButton(operatorConsole, OVERRIDE_DUSTPAN_UP);
+        overrideDustpanDown = new JoystickButton(operatorConsole, OVERRIDE_DUSTPAN_DOWN);
+
         /*
          * Button Functions
          */
@@ -157,7 +168,10 @@ public class OI {
         ocFastClimb.toggleWhenPressed(new Climb(Constants.Climber.ASCEND_SPEED));
         ocManualClimb.toggleWhenPressed(new RunClimberManually());
 
-        ocToggleRinglight.toggleWhenPressed(new RunRingLight());
+        // ocToggleRinglight.toggleWhenPressed(new RunRingLight());
+
+        overrideDustpanUp.whileHeld(new OverrideDustpanUp());
+        overrideDustpanDown.whileHeld(new OverrideDustpanDown());
     }
 
     private double transformStickToSpeed(Gamepad.Axes stick) {

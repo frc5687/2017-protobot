@@ -66,7 +66,7 @@ public class Dustpan {
         }
 
         public void poll() {
-            if (hasGear()) { ledStrip.setStripColor(LEDColors.GEAR_IN_DUSTPAN); }
+            ledStrip.setGearInDustpan(hasGear());
         }
 
         public void updateDashboard() {

@@ -124,7 +124,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         int position = autoRotorChooser.positionRotorValue();
         switch (position) {
             case 0:
-                autoCommand = new AutoVisionTest();
+                autoCommand = null; // new AutoVisionTest();
                 break;
             case 1:
                 autoCommand = new AutoDepositLeftFromFarLeft();
@@ -188,6 +188,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         updateDashboard();
+        poll();
     }
 
     @Override
@@ -197,6 +198,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
     public void poll() {
         mandibles.poll();
         dustpan.poll();
+        ledStrip.poll();
     }
 
     public void updateDashboard() {

@@ -149,15 +149,18 @@ public class Constants {
         public static final double HOLD_DOWN_SPEED = 0.2;
         public static final double HOLD_UP_SPEED = -0.2;
         public static final double FORWARDS_SPEED = 0.3;
+        public static final double LIFTER_OVERRIDE_UP_SPEED = -1.0;
+        public static final double LIFTER_OVERRIDE_DOWN_SPEED = 1.0;
 
-        public static final int IR_THRESHOLD = 2000;
+        public static final int IR_THRESHOLD = 1500;
         public static final long RAISE_TIME = 1000;
         public static final long LOWER_TIME = 500;
         public static final double HARDSTOP_AMPS = 7.0;
+        public static final long OVERRIDE_TIME = 200;
         public static final long EJECT_ROLLERS_DELAY = 100;
-        public static final double COLLECT_SPEED = .5;
+        public static final double COLLECT_SPEED = .75;
         public static final double ROLLER_HOLD_SPEED = 0.1;
-        public static final double EJECT_SPEED = -0.25;
+        public static final double EJECT_SPEED = -0.3;
 
         public class PID {
 
@@ -188,7 +191,7 @@ public class Constants {
             public static final double DEPOSIT_GEAR_NEAR_ANGLE = 45;
             public static final double DEPOSIT_GEAR_NEAR_DIAGONAL_DISTANCE = 59;
 
-            public static final double DEPOSIT_GEAR_FAR_INITIAL_DISTANCE = 93;
+            public static final double DEPOSIT_GEAR_FAR_INITIAL_DISTANCE = 89;
             public static final double DEPOSIT_GEAR_FAR_ANGLE = 60;
 
             public static final long MANDIBLE_HOLD_TIME = 5000;
@@ -251,37 +254,9 @@ public class Constants {
             }
 
         }
-
-        public class PositionRotor {
-
-            public static final double ZERO_TARGET = 0;
-            public static final double ONE_TARGET = 0;
-            public static final double TWO_TARGET = 0;
-            public static final double THREE_TARGET = 0;
-            public static final double FOUR_TARGET = 0;
-            public static final double FIVE_TARGET = 0;
-            public static final double TOLERANCE = 0;
-
-        }
-
-        public class GearRotor {
-
-            public static final double ZERO_TARGET = 0;
-            public static final double ONE_TARGET = 0;
-            public static final double TWO_TARGET = 0;
-            public static final double THREE_TARGET = 0;
-            public static final double TOLERANCE = 0.1;
-
-        }
-
-        public class HopperRotor {
-
-            public static final double ZERO_TARGET = 0;
-            public static final double ONE_TARGET = 0;
-            public static final double TOLERANCE = 0;
-
-        }
-
     }
 
+    public class RotarySwitch {
+        public static final double TOLERANCE = 0.06;
+    }
 }

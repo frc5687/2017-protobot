@@ -21,7 +21,7 @@ public class OpenMandibles extends Command {
 
     @Override
     protected void initialize() {
-        ledStrip.setStripColor(LEDColors.MANDIBLES_OPEN);
+        ledStrip.setMandiblesOpen(true);
         endMillis = System.currentTimeMillis() + Constants.Mandibles.OPEN_TIME;
     }
 
