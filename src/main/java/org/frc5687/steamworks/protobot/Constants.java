@@ -26,8 +26,8 @@ public class Constants {
     public class Mandibles {
 
         public static final double OPEN_SPEED = -.5;
-        public static final double CLOSE_SPEED = .2;
-        public static final double CLAMP_SPEED = .15;
+        public static final double CLOSE_SPEED = .3;
+        public static final double CLAMP_SPEED = .2;
         public static final double HOLD_OPEN_SPEED = -.15;
         public static final long OPEN_TIME = 500;
         public static final long CLOSE_TIME = 1000;
@@ -98,7 +98,7 @@ public class Constants {
             public static final double INCHES_PER_ROTATION = Math.PI * WHEEL_DIAMETER;
             public static final double SCALAR_RATIO = 8;
 //            public static final double INCHES_PER_PULSE = INCHES_PER_ROTATION * SCALAR_RATIO / PULSES_PER_ROTATION;
-            public static final double INCHES_PER_PULSE = .0973;
+            public static final double INCHES_PER_PULSE = 0.12371134;
             public static final double MAX_PERIOD = 5;
 
         }
@@ -138,27 +138,29 @@ public class Constants {
 
     public class Shifter {
 
-        public static final long STOP_MOTOR_TIME = 120; //TODO find correct values
-        public static final long SHIFT_TIME = 120; //TODO find correct values
+        public static final long STOP_MOTOR_TIME = 60; //TODO find correct values
+        public static final long SHIFT_TIME = 60; //TODO find correct values
 
     }
 
-    public class Pincers {
+    public class Dustpan {
+        public static final double LOWER_SPEED = 0.7;
+        public static final double RAISE_SPEED = -0.7;
+        public static final double HOLD_DOWN_SPEED = 0.2;
+        public static final double HOLD_UP_SPEED = -0.2;
+        public static final double FORWARDS_SPEED = 0.3;
+        public static final double LIFTER_OVERRIDE_UP_SPEED = -1.0;
+        public static final double LIFTER_OVERRIDE_DOWN_SPEED = 1.0;
 
-        public static final double POTENTIOMETER_LIFTED_TONY = .006;
-        public static final double POTENTIOMETER_LIFTED_RHODY = 0.386;
-        public static final double POTENTIOMETER_LOWERED_TONY = .270;
-        public static final double POTENTIOMETER_LOWERED_RHODY = 0.64;
-        public static final double LOWER_SPEED = 0.5;
-        public static final double RAISE_SPEED = -0.5;
-        public static final double HOLD_SPEED = -0.2;
-        public static final double FORWARDS_SPEED = 0.1;
-
-        public static final int IR_THRESHOLD = 2000;
-        public static final long RAISE_TIME = 500;
+        public static final int IR_THRESHOLD = 1500;
+        public static final long RAISE_TIME = 1000;
         public static final long LOWER_TIME = 500;
-        public static final double HARDSTOP_AMPS = 5.0;
-        public static final long CLOSE_DELAY = 100;
+        public static final double HARDSTOP_AMPS = 7.0;
+        public static final long OVERRIDE_TIME = 200;
+        public static final long EJECT_ROLLERS_DELAY = 100;
+        public static final double COLLECT_SPEED = .75;
+        public static final double ROLLER_HOLD_SPEED = 0.1;
+        public static final double EJECT_SPEED = -0.3;
 
         public class PID {
 
@@ -184,22 +186,25 @@ public class Constants {
             public static final double CROSS_FIELD_DISTANCE = 0;
             public static final double RETREAT_DISTANCE = 24;
             public static final double DEPOSIT_GEAR_IR_VOLTAGE = 1.155;
+            public static final double DEPOSIT_GEAR_IR_DISTANCE = 9.0; // inches
             public static final double DEPOSIT_GEAR_NEAR_INITIAL_DISTANCE = 24;
             public static final double DEPOSIT_GEAR_NEAR_ANGLE = 45;
             public static final double DEPOSIT_GEAR_NEAR_DIAGONAL_DISTANCE = 59;
 
-            public static final double DEPOSIT_GEAR_FAR_INITIAL_DISTANCE = 93;
+            public static final double DEPOSIT_GEAR_FAR_INITIAL_DISTANCE = 89;
             public static final double DEPOSIT_GEAR_FAR_ANGLE = 60;
 
+            public static final long MANDIBLE_HOLD_TIME = 5000;
+            public static final long PAUSE_AT_SPRING_TIME = 250;
         }
 
         public class Align {
 
             public static final double SPEED = 0.6;
 
-            public static final double kP = 0.01;
-            public static final double kI = 0.0005;
-            public static final double kD = -0.001;
+            public static final double kP = 0.04;
+            public static final double kI = 0.006;
+            public static final double kD = 0.09;
             public static final double TOLERANCE = .5;
             public static final double MAX_OUTPUT = 0;
             /*
@@ -213,62 +218,45 @@ public class Constants {
 
             public static final double SPEED = 0.7;
 
-            public static final long STEADY_TIME = 200;
+            public static final long STEADY_TIME = 100;
+            public static final long ALIGN_STEADY_TIME = 100;
 
             public class IRPID {
-                public static final double kP = 0.5;
-                public static final double kI = 0.01;
-                public static final double kD = 0.001;
-                public static final double TOLERANCE = .005;
+                public static final double kP = 0.05;
+                public static final double kI = 0.00;
+                public static final double kD = 0.03;
+                public static final double TOLERANCE = .5;
+
+                /**
+                 * a in the voltage-to-distance equation distance = a * voltage ^ b
+                 */
+                public static final double TRANSFORM_COEFFICIENT = 27.385;
+                /**
+                 * b in the voltage-to-distance equation distance = a * voltage ^ b
+                 */
+                public static final double TRANSFORM_POWER = -1.203;
             }
 
-            public class DistancePID {
+            public class EncoderPID {
                 public static final double kP = 0.05;
                 public static final double kI = 0;
-                public static final double kD = 0;
+                public static final double kD = .02;
                 public static final double TOLERANCE = 1;
             }
 
             public class AnglePID {
-                public static final double kP = 0.05;
-                public static final double kI = 0.01;
-                public static final double kD = 0.0;
+                public static final double kP = 0.04;
+                public static final double kI = 0.006;
+                public static final double kD = 0.09;
 
                 public static final double MAX_DIFFERENCE = 0.2;
+                public static final double TOLERANCE = .5;
             }
 
         }
-
-        public class PositionRotor {
-
-            public static final double ZERO_TARGET = 0;
-            public static final double ONE_TARGET = 0;
-            public static final double TWO_TARGET = 0;
-            public static final double THREE_TARGET = 0;
-            public static final double FOUR_TARGET = 0;
-            public static final double FIVE_TARGET = 0;
-            public static final double TOLERANCE = 0;
-
-        }
-
-        public class GearRotor {
-
-            public static final double ZERO_TARGET = 0;
-            public static final double ONE_TARGET = 0;
-            public static final double TWO_TARGET = 0;
-            public static final double THREE_TARGET = 0;
-            public static final double TOLERANCE = 0.1;
-
-        }
-
-        public class HopperRotor {
-
-            public static final double ZERO_TARGET = 0;
-            public static final double ONE_TARGET = 0;
-            public static final double TOLERANCE = 0;
-
-        }
-
     }
 
+    public class RotarySwitch {
+        public static final double TOLERANCE = 0.06;
+    }
 }

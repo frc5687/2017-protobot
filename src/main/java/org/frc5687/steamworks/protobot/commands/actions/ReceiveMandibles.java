@@ -4,9 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 
-import static org.frc5687.steamworks.protobot.Robot.mandibles;
-import static org.frc5687.steamworks.protobot.Robot.oi;
-import static org.frc5687.steamworks.protobot.Robot.pdp;
+import static org.frc5687.steamworks.protobot.Robot.*;
 
 /**
  * Default command for the mandibles system.  Starts by closing the the mandibles until the hard-stop is hit (based on amp draw).
@@ -26,6 +24,7 @@ public class ReceiveMandibles extends Command {
     protected void initialize() {
         state = State.CLOSE;
         endTime = System.currentTimeMillis() + Constants.Mandibles.CLOSE_TIME;
+        ledStrip.setMandiblesOpen(false);
     }
 
     @Override

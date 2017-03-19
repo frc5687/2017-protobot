@@ -5,19 +5,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
-import org.frc5687.steamworks.protobot.commands.actions.RunClimberManually;
 import org.frc5687.steamworks.protobot.commands.actions.StopClimber;
 
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 
 public class Climber extends Subsystem {
 
-    private VictorSP climberMotorFore;
-    private VictorSP climberMotorAft;
+    private VictorSP climberMotors;
 
     public Climber() {
-        climberMotorFore = new VictorSP(RobotMap.Climber.CLIMBER_MOTOR_FORE);
-        climberMotorAft = new VictorSP(RobotMap.Climber.CLIMBER_MOTOR_AFT);
+        climberMotors = new VictorSP(RobotMap.Climber.CLIMBER_MOTORS);
     }
 
     public void initDefaultCommand() {
@@ -28,8 +25,7 @@ public class Climber extends Subsystem {
         if (Constants.Climber.MOTOR_INVERTED) {
             speed = -speed;
         }
-        climberMotorFore.set(speed);
-        climberMotorAft.set(speed);
+        climberMotors.set(speed);
     }
 
     public double getAmps(){
@@ -45,8 +41,7 @@ public class Climber extends Subsystem {
     }
 
     public void updateDashboard() {
-        SmartDashboard.putNumber("Climber/Speed/Fore", climberMotorFore.get());
-        SmartDashboard.putNumber("Climber/Speed/Aft", climberMotorAft.get());
+        SmartDashboard.putNumber("Climber/Speed/Fore", climberMotors.get());
         SmartDashboard.putNumber("Climber/Amps/Fore", pdp.getClimberAAmps());
         SmartDashboard.putNumber("Climber/Amps/Aft", pdp.getClimberBAmps());
     }

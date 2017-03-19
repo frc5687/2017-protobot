@@ -10,11 +10,13 @@ public class AutoDepositGear extends SteamworksBaseCommandGroup {
 
     public AutoDepositGear() {
         super();
-        addSequential(new AutoApproachTarget(Constants.Auto.Drive.SPEED));
+        addSequential(new AutoDrive(12, .5, false, false));
+        addSequential(new AutoDrive(18, 1, false, false));
+        addSequential(new AutoApproachTarget(0.7));
         addSequential(new EjectMandibles());
-        addSequential(new HoldMandiblesOpen(500));
-        addParallel(new HoldMandiblesOpen(5000));
-        addSequential(new AutoDrive(-Constants.Auto.AnglesAndDistances.RETREAT_DISTANCE, Constants.Auto.Drive.SPEED));
+        addSequential(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.PAUSE_AT_SPRING_TIME));
+        addParallel(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.MANDIBLE_HOLD_TIME));
+        addSequential(new AutoDrive(-Constants.Auto.AnglesAndDistances.RETREAT_DISTANCE, Constants.Auto.Drive.SPEED, false, true));
     }
 
 }

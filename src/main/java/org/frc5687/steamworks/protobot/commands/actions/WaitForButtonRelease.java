@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import static org.frc5687.steamworks.protobot.Robot.oi;
 
 /**
- * Command that holds the pincers in their current state until a specified button is released
+ * Command that holds the dustpan in their current state until a specified button is released
  */
 public class WaitForButtonRelease extends Command {
 

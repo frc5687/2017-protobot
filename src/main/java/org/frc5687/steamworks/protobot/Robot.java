@@ -10,8 +10,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
+import org.frc5687.steamworks.protobot.commands.actions.AutoApproachTarget;
 import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
 import org.frc5687.steamworks.protobot.commands.autonomous.*;
+import org.frc5687.steamworks.protobot.commands.test.AutoVisionTest;
 import org.frc5687.steamworks.protobot.commands.test.FullSelfTest;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import org.frc5687.steamworks.protobot.utils.*;
@@ -25,7 +27,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
     public static Lights lights;
     public static LEDStrip ledStrip;
     public static Robot robot;
-    public static Pincers pincers;
+    public static Dustpan dustpan;
     public static PiTrackerProxy piTrackerProxy;
     public static PoseTracker poseTracker;
 
@@ -55,7 +57,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         climber = new Climber();
         lights = new Lights();
         ledStrip = new LEDStrip();
-        pincers = new Pincers();
+        dustpan = new Dustpan();
         autoRotorChooser = new AutoChooser();
 
 
@@ -63,6 +65,8 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         oi = new OI(); // must be initialized after subsystems
 
         Constants.isTony = pdp.isTony(); // must be set before subsystems
+
+        driveTrain.resetDriveEncoders();
 
         try {
             // Try to connect to the navX imu.
@@ -76,19 +80,21 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
             imu = null;
         }
 
-        try {
-            UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
-            camera0.setResolution(160, 120);
-            camera0.setFPS(15);
-        } catch (Exception e) {
-            DriverStation.reportError(e.getMessage(), true);
-        }
-        try {
-            UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
-            camera1.setResolution(160, 120);
-            camera1.setFPS(15);
-        } catch (Exception e) {
-            DriverStation.reportError(e.getMessage(), true);
+        if (pdp.isTony()) {
+            try {
+                UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
+                camera0.setResolution(160, 120);
+                camera0.setFPS(15);
+            } catch (Exception e) {
+                DriverStation.reportError(e.getMessage(), true);
+            }
+            try {
+                UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
+                camera1.setResolution(160, 120);
+                camera1.setFPS(15);
+            } catch (Exception e) {
+                DriverStation.reportError(e.getMessage(), true);
+            }
         }
 
         if (Constants.isTony) {
@@ -125,13 +131,17 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
                 autoCommand = new AutoDepositLeftFromFarLeft();
                 break;
             case 2:
-                autoCommand = new AutoAlign(60, 0.5);
+                autoCommand = new AutoDepositLeftVision();
+                // autoCommand = new AutoApproachTarget(.7);
+                // autoCommand = new AutoDrive(24, 1.0, false, true);
+                // autoCommand = new AutoAlign(60, 0.5);
                 break;
             case 3:
                 autoCommand = new AutoDepositGear();
                 break;
             case 4:
-                autoCommand = new AutoAlign(-60, 0.5);
+                autoCommand = new AutoDepositRightVision();
+                // autoCommand = new AutoDrive(24, .5, true, true);
                 break;
             case 5:
                 autoCommand = new AutoDepositRightFromFarRight();
@@ -178,6 +188,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         updateDashboard();
+        poll();
     }
 
     @Override
@@ -189,7 +200,8 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
 
     public void poll() {
         mandibles.poll();
-        pincers.poll();
+        dustpan.poll();
+        ledStrip.poll();
     }
 
     public void updateDashboard() {
@@ -197,11 +209,15 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
             driveTrain.updateDashboard();
             mandibles.updateDashboard();
             shifter.updateDashboard();
-            pincers.updateDashboard();
+            dustpan.updateDashboard();
             lights.updateDashboard();
             ledStrip.updateDashboard();
             autoRotorChooser.updateDashboard();
             climber.updateDashboard();
+            //pdp.updateDashboard();
+
+            piTrackerProxy.updateDashboard();
+            poseTracker.updateDashboard();
 
             SmartDashboard.putBoolean("IsTony", Constants.isTony);
             SmartDashboard.putNumber("Yaw", imu.getYaw());

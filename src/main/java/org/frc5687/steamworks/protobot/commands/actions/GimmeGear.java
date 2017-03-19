@@ -22,7 +22,7 @@ public class GimmeGear extends Command {
 
     @Override
     protected void execute() {
-        ledStrip.setStripColor(LEDColors.GIMME_GEAR);
+        ledStrip.setGimmeGear(true);
     }
 
     protected boolean isFinished() {
@@ -33,6 +33,6 @@ public class GimmeGear extends Command {
 
     @Override
     protected void end() {
-        ledStrip.setStripColor(previousColor);
+        ledStrip.setGimmeGear(false);
     }
 }
