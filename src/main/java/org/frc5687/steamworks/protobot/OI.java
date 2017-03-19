@@ -9,6 +9,8 @@ import org.frc5687.steamworks.protobot.commands.composite.DeployPincers;
 import org.frc5687.steamworks.protobot.commands.composite.EjectGear;
 import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
 import org.frc5687.steamworks.protobot.commands.composite.ReleasePincers;
+import org.frc5687.steamworks.protobot.commands.test.FullSelfTest;
+import org.frc5687.steamworks.protobot.commands.test.SelfTestBootstrapper;
 import org.frc5687.steamworks.protobot.utils.AxisButton;
 import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
@@ -30,6 +32,7 @@ public class OI {
     public static final int GP_GIMME_LEFT = Gamepad.Buttons.LEFT_STICK.getNumber();
     public static final int GP_GIMME_RIGHT = Gamepad.Buttons.RIGHT_STICK.getNumber();
 
+    public static final int GP_YES = Gamepad.Buttons.START.getNumber();
 
     public static final int OPEN_PINCERS = 5;
     public static final int CLOSE_PINCERS = 6;
@@ -56,6 +59,8 @@ public class OI {
     public JoystickButton gpAutoClimb;
     public JoystickButton gpFastClimb;
     public JoystickButton gpSlowClimb;
+
+    public JoystickButton gpYesButton;
 
     public JoystickButton ocToggleRinglight;
 
@@ -100,6 +105,8 @@ public class OI {
 
         gpDeployPincers = new AxisButton(gamepad, GP_DEPLOY_PINCERS, Constants.OI.AXIS_BUTTON_THRESHHOLD);
 
+        gpYesButton = new JoystickButton(gamepad, GP_YES);
+
         shiftHigh.whenPressed(new Shift(DoubleSolenoid.Value.kForward));
         shiftLow.whenPressed(new Shift(DoubleSolenoid.Value.kReverse));
 
@@ -108,6 +115,7 @@ public class OI {
 
         gpDeployPincers.whenPressed(new DeployPincers());
 
+        gpYesButton.whenPressed(new SelfTestBootstrapper());
 
         /*
          * Operator Console Buttons

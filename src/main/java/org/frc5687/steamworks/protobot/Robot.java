@@ -119,12 +119,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         int position = autoRotorChooser.positionRotorValue();
         switch (position) {
             case 0:
-                DriverStation.reportError("Position 0", false);
-                autoCommand = null;
-                if (oi.isYesPressed() && oi.isNoPressed()) {
-                    DriverStation.reportError("Self test", false);
-                    autoCommand = new FullSelfTest();
-                }
+                autoCommand = new SteamworksBaseCommandGroup();
                 break;
             case 1:
                 autoCommand = new AutoDepositLeftFromFarLeft();
