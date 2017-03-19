@@ -254,37 +254,9 @@ public class Constants {
             }
 
         }
-
-        public class PositionRotor {
-
-            public static final double ZERO_TARGET = 0;
-            public static final double ONE_TARGET = 0;
-            public static final double TWO_TARGET = 0;
-            public static final double THREE_TARGET = 0;
-            public static final double FOUR_TARGET = 0;
-            public static final double FIVE_TARGET = 0;
-            public static final double TOLERANCE = 0;
-
-        }
-
-        public class GearRotor {
-
-            public static final double ZERO_TARGET = 0;
-            public static final double ONE_TARGET = 0;
-            public static final double TWO_TARGET = 0;
-            public static final double THREE_TARGET = 0;
-            public static final double TOLERANCE = 0.1;
-
-        }
-
-        public class HopperRotor {
-
-            public static final double ZERO_TARGET = 0;
-            public static final double ONE_TARGET = 0;
-            public static final double TOLERANCE = 0;
-
-        }
-
     }
 
+    public class RotarySwitch {
+        public static final double TOLERANCE = 0.06;
+    }
 }
