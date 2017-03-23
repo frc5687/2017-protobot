@@ -182,8 +182,10 @@ public class Constants {
 
         public class AnglesAndDistances {
 
+            public static final double STRAIGHT_ANGLE = 0;
+
             public static final double CROSS_BASELINE_DISTANCE = 100;
-            public static final double CROSS_FIELD_DISTANCE = 0;
+            public static final double TRAVERSE_NEUTRAL_ZONE_DISTANCE = 200;
             public static final double RETREAT_DISTANCE = 24;
             public static final double DEPOSIT_GEAR_IR_VOLTAGE = 1.155;
             public static final double DEPOSIT_GEAR_IR_DISTANCE = 9.0; // inches
