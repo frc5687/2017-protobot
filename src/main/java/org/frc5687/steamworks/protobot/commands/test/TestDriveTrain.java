@@ -16,13 +16,13 @@ public class TestDriveTrain extends Command {
     private double _targetAmps;
     private int _targetTicks;
 
-    private State _state = State.FRONTRIGHT;
+    private State _state = State.RIGHTFRONT;
     private long _endMillis;
 
     private double _maxAmps = 0;
 
-    public TestDriveTrain(double runSpeed) {
-        _runSpeed = runSpeed;
+    public TestDriveTrain() {
+        _runSpeed = 1.0;
         _runMillis = 1000;
         _targetAmps = 2;
         _targetTicks = 4000;
@@ -31,9 +31,10 @@ public class TestDriveTrain extends Command {
     @Override
     protected void initialize() {
         DriverStation.reportError("Starting drivetrain test", false);
-        _state = State.FRONTRIGHT;
+        _state = State.RIGHTFRONT;
         _maxAmps = 0;
         _endMillis = System.currentTimeMillis() + _runMillis;
+        driveTrain.resetDriveEncoders();
     }
     boolean pass=true;
 
@@ -41,138 +42,99 @@ public class TestDriveTrain extends Command {
     protected void execute() {
 
         switch (_state) {
-            case FRONTRIGHT:
+            case RIGHTFRONT:
                 driveTrain.runFrontRightMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getRightFrontAmps());
                 if (System.currentTimeMillis() > _endMillis) {
-                    _state = State.FRONTRIGHTDONE;
-                    _endMillis =+ System.currentTimeMillis();
+                    _state = State.RIGHTFRONTDONE;
                 }
                 break;
-            case FRONTRIGHTDONE:
-                if (Math.abs((_targetAmps - _maxAmps) / _targetAmps) > kTOLERANCE) {
-                    pass = false;
-                    DriverStation.reportError("Target amperage not reached on "  + ".  Expected " + _targetAmps + " but measured " + _maxAmps + ".", false);
-                }
-                if (Math.abs((_targetTicks - driveTrain.getRightTicks()) / _targetTicks) > kTOLERANCE) {
-                    pass = false;
-                    DriverStation.reportError("Target ticks not reached on front right.  Expected " + _targetTicks + " but measured "+driveTrain.getRightTicks() + ".", false);
-                }
-                _state = State.FRONTLEFT;
+            case RIGHTFRONTDONE:
                 driveTrain.runFrontRightMotor(0);
-                _maxAmps = 0;
+                report("right front", driveTrain.getRightTicks());
+                _state = State.RIGHTTOP;
                 break;
-            case FRONTLEFT:
-                driveTrain.runFrontLeftMotor(_runSpeed);
-                _maxAmps = Math.max(_maxAmps, pdp.getLeftFrontAmps());
-                if (System.currentTimeMillis() > _endMillis){
-                    _state = State.FRONTLEFTDONE;
-                    _endMillis =+ System.currentTimeMillis();
-                }
-                break;
-            case FRONTLEFTDONE:
 
-                if (Math.abs((_targetAmps - _maxAmps) / _targetAmps) > kTOLERANCE) {
-                    pass = false;
-                    DriverStation.reportError("Target amperage not reached on "  + ".  Expected " + _targetAmps + " but measured " + _maxAmps + ".", false);
-                }
-                if (Math.abs((_targetTicks - driveTrain.getRightTicks()) / _targetTicks) > kTOLERANCE) {
-                    pass = false;
-                    DriverStation.reportError("Target ticks not reached on front right.  Expected " + _targetTicks + " but measured "+driveTrain.getRightTicks() + ".", false);
-                }
-                driveTrain.runTopLeftMotor(0);
-                _state = State.TOPRIGHT;
-                _maxAmps = 0;
-
-                break;
-            case TOPRIGHT:
+            case RIGHTTOP:
                 driveTrain.runTopRightMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getRightTopAmps());
                 if (System.currentTimeMillis() > _endMillis) {
-                    _state = State.TOPRIGHTDONE;
-                    _endMillis =+ System.currentTimeMillis();
+                    _state = State.RIGHTTOPDONE;
                 }
                 break;
-            case TOPRIGHTDONE:
-                if (Math.abs((_targetAmps - _maxAmps) / _targetAmps) > kTOLERANCE) {
-                    pass = false;
-                    DriverStation.reportError("Target amperage not reached on "  + ".  Expected " + _targetAmps + " but measured " + _maxAmps + ".", false);
-                }
-                if (Math.abs((_targetTicks - driveTrain.getRightTicks()) / _targetTicks) > kTOLERANCE) {
-                    pass = false;
-                    DriverStation.reportError("Target ticks not reached on front right.  Expected " + _targetTicks + " but measured "+ driveTrain.getRightTicks() + ".", false);
-                }
-                driveTrain.runTopRightMotor(0);
-                _state = State.TOPLEFT;
-                _maxAmps = 0;
+            case RIGHTTOPDONE:
+                driveTrain.runFrontRightMotor(0);
+                report("right top", driveTrain.getRightTicks());
+                _state = State.RIGHTREAR;
                 break;
-            case TOPLEFT:
+
+            case RIGHTREAR:
+                driveTrain.runRearRightMotor(_runSpeed);
+                _maxAmps = Math.max(_maxAmps, pdp.getRightRearAmps());
+                if (System.currentTimeMillis() > _endMillis) {
+                    _state = State.RIGHTREARDONE;
+                }
+                break;
+            case RIGHTREARDONE:
+                driveTrain.runRearRightMotor(0);
+                report("right rear", driveTrain.getRightTicks());
+                _state = State.LEFTFRONT;
+                break;
+
+            case LEFTFRONT:
+                driveTrain.runFrontLeftMotor(_runSpeed);
+                _maxAmps = Math.max(_maxAmps, pdp.getLeftFrontAmps());
+                if (System.currentTimeMillis() > _endMillis) {
+                    _state = State.LEFTFRONTDONE;
+                }
+                break;
+            case LEFTFRONTDONE:
+                driveTrain.runFrontLeftMotor(0);
+                report("left front", driveTrain.getLeftTicks());
+                _state = State.LEFTTOP;
+                break;
+
+            case LEFTTOP:
                 driveTrain.runTopLeftMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getLeftTopAmps());
                 if (System.currentTimeMillis() > _endMillis) {
-                    _state = State.TOPLEFTDONE;
-                    _endMillis =+ System.currentTimeMillis();
+                    _state = State.LEFTTOPDONE;
                 }
                 break;
-            case TOPLEFTDONE:
-                if (Math.abs((_targetAmps - _maxAmps) / _targetAmps) > kTOLERANCE) {
-                    pass = false;
-                    DriverStation.reportError("Target amperage not reached on "  + ".  Expected " + _targetAmps + " but measured " + _maxAmps + ".", false);
-                }
-                if (Math.abs((_targetTicks - driveTrain.getRightTicks()) / _targetTicks) > kTOLERANCE) {
-                    pass = false;
-                    DriverStation.reportError("Target ticks not reached on front right.  Expected " + _targetTicks + " but measured "+ driveTrain.getRightTicks() + ".", false);
-                }
-                driveTrain.runTopLeftMotor(0);
-                _state = State.REARLEFT;
-                _maxAmps = 0;
+            case LEFTTOPDONE:
+                driveTrain.runFrontLeftMotor(0);
+                report("left top", driveTrain.getLeftTicks());
+                _state = State.LEFTREAR;
                 break;
 
-
-            case REARLEFT:
+            case LEFTREAR:
                 driveTrain.runRearLeftMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getLeftRearAmps());
                 if (System.currentTimeMillis() > _endMillis) {
-                    _state = State.REARLEFTDONE;
-                    _endMillis =+ System.currentTimeMillis();
+                    _state = State.LEFTREARDONE;
                 }
                 break;
-            case REARLEFTDONE:
-                if (Math.abs((_targetAmps - _maxAmps) / _targetAmps) > kTOLERANCE) {
-                    pass = false;
-                    DriverStation.reportError("Target amperage not reached on "  + ".  Expected " + _targetAmps + " but measured " + _maxAmps + ".", false);
-                }
-                if (Math.abs((_targetTicks - driveTrain.getRightTicks()) / _targetTicks) > kTOLERANCE) {
-                    pass = false;
-                    DriverStation.reportError("Target ticks not reached on front right.  Expected " + _targetTicks + " but measured "+ driveTrain.getRightTicks() + ".", false);
-                }
-                _maxAmps = 0;
-                driveTrain.runTopLeftMotor(0);
-                _state = State.REARRIGHT;
-                break;
-            case REARRIGHT:
-                driveTrain.runRearRightMotor(_runSpeed);
-                _maxAmps = Math.max(_maxAmps, pdp.getLeftRearAmps());
-                if (System.currentTimeMillis() > _endMillis) {
-                    _state = State.REARRIGHTDONE;
-                    _endMillis =+ System.currentTimeMillis();
-                }
-                break;
-            case REARRIGHTDONE:
-                if (Math.abs((_targetAmps - _maxAmps) / _targetAmps) > kTOLERANCE) {
-                    pass = false;
-                    DriverStation.reportError("Target amperage not reached on "  + ".  Expected " + _targetAmps + " but measured " + _maxAmps + ".", false);
-                }
-                if (Math.abs((_targetTicks - driveTrain.getRightTicks()) / _targetTicks) > kTOLERANCE) {
-                    pass = false;
-                    DriverStation.reportError("Target ticks not reached on front right.  Expected " + _targetTicks + " but measured " + driveTrain.getRightTicks() + ".", false);
-                }
-                _maxAmps = 0;
+            case LEFTREARDONE:
+                driveTrain.runRearLeftMotor(0);
+                report("left rear", driveTrain.getLeftTicks());
+                _state = State.DONE;
                 break;
         }
 
     }
-
+    private void report(String side, long ticks) {
+        if (_maxAmps < _targetAmps) {
+            pass = false;
+            DriverStation.reportError("Target amperage not reached on " + side  + ".  Expected " + _targetAmps + " but measured " + _maxAmps + ".", false);
+        }
+        if (Math.abs((_targetTicks - ticks) / _targetTicks) > kTOLERANCE) {
+            pass = false;
+            DriverStation.reportError("Target ticks not reached on " + side + ".  Expected " + _targetTicks + " but measured " + ticks + ".", false);
+        }
+        driveTrain.resetDriveEncoders();
+        _maxAmps = 0;
+        _endMillis = System.currentTimeMillis() + _runMillis;
+    }
     @Override
     protected void end() {
     }
@@ -184,19 +146,19 @@ public class TestDriveTrain extends Command {
 
 
     private enum State {
-        FRONTRIGHT,
-        FRONTLEFT,
-        TOPRIGHT,
-        TOPLEFT,
-        REARRIGHT,
-        REARLEFT,
-        FRONTRIGHTDONE,
-        FRONTLEFTDONE,
-        TOPRIGHTDONE,
-        TOPLEFTDONE,
-        REARRIGHTDONE,
-        REARLEFTDONE,
-        DONE;
+        RIGHTFRONT,
+        RIGHTFRONTDONE,
+        RIGHTTOP,
+        RIGHTTOPDONE,
+        RIGHTREAR,
+        RIGHTREARDONE,
+        LEFTFRONT,
+        LEFTFRONTDONE,
+        LEFTTOP,
+        LEFTTOPDONE,
+        LEFTREAR,
+        LEFTREARDONE,
+        DONE
     }
 
 }

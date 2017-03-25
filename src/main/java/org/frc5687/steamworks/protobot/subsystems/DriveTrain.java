@@ -51,7 +51,7 @@ public class DriveTrain extends Subsystem implements PIDSource {
         return leftEncoder.getDistance();
     }
 
-    public double getLeftTicks() {
+    public long getLeftTicks() {
         return leftEncoder.get();
     }
 
@@ -78,7 +78,7 @@ public class DriveTrain extends Subsystem implements PIDSource {
         return rightEncoder.getDistance();
     }
 
-    public double getRightTicks() {
+    public long getRightTicks() {
         return rightEncoder.get();
     }
 

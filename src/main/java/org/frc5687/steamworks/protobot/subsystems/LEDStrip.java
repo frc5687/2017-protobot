@@ -40,7 +40,6 @@ public class LEDStrip extends Subsystem {
 
 
     public void poll() {
-        DriverStation.reportError("Polling colors", false);
         setStripColor(pickColor());
     }
 
