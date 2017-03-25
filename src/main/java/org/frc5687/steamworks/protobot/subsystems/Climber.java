@@ -28,6 +28,10 @@ public class Climber extends Subsystem {
         climberMotors.set(speed);
     }
 
+    public double getAmps(){
+        return pdp.getClimberAAmps();
+    }
+
     public void ascend() {
         setSpeed(Constants.Climber.ASCEND_SPEED);
     }

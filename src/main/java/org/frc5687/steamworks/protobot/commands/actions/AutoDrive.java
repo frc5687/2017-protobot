@@ -29,9 +29,10 @@ public class AutoDrive extends Command {
 
     /***
      * Drives for a set distance at a set speed.
-     * @param distance
-     * @param speed
-     * @param usePID
+     * @param distance Distance to drive
+     * @param speed Speed to drive
+     * @param usePID Whether to use pid or not
+     * @param stopOnFinish Whether to stop the motors when we are done
      */
     public AutoDrive(double distance, double speed, boolean usePID, boolean stopOnFinish) {
         requires(driveTrain);

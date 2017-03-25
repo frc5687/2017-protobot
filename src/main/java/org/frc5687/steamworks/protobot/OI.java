@@ -11,6 +11,8 @@ import org.frc5687.steamworks.protobot.commands.composite.DeployDustpan;
 import org.frc5687.steamworks.protobot.commands.composite.EjectGear;
 import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
 import org.frc5687.steamworks.protobot.commands.composite.EjectDustpan;
+import org.frc5687.steamworks.protobot.commands.test.FullSelfTest;
+import org.frc5687.steamworks.protobot.commands.test.SelfTestBootstrapper;
 import org.frc5687.steamworks.protobot.utils.AxisButton;
 import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
@@ -32,6 +34,7 @@ public class OI {
     public static final int GP_GIMME_LEFT = Gamepad.Buttons.LEFT_STICK.getNumber();
     public static final int GP_GIMME_RIGHT = Gamepad.Buttons.RIGHT_STICK.getNumber();
 
+    public static final int GP_YES = Gamepad.Buttons.START.getNumber();
 
     public static final int OPEN_PINCERS = 5;
     public static final int CLOSE_PINCERS = 6;
@@ -61,6 +64,8 @@ public class OI {
     public JoystickButton gpAutoClimb;
     public JoystickButton gpFastClimb;
     public JoystickButton gpSlowClimb;
+
+    public JoystickButton gpYesButton;
 
     public JoystickButton ocToggleRinglight;
 
@@ -107,6 +112,8 @@ public class OI {
 
         gpDeployDustpan = new AxisButton(gamepad, GP_DEPLOY_DUSTPAN, Constants.OI.AXIS_BUTTON_THRESHHOLD);
 
+        gpYesButton = new JoystickButton(gamepad, GP_YES);
+
         shiftHigh.whenPressed(new Shift(DoubleSolenoid.Value.kForward));
         shiftLow.whenPressed(new Shift(DoubleSolenoid.Value.kReverse));
 
@@ -115,6 +122,7 @@ public class OI {
 
         gpDeployDustpan.whenPressed(new DeployDustpan());
 
+        gpYesButton.whenPressed(new SelfTestBootstrapper());
 
         /*
          * Operator Console Buttons
@@ -250,5 +258,13 @@ public class OI {
 
     public double getClimberSpeed() {
         return (1 - operatorConsole.getAxis(Joystick.AxisType.kThrottle))/2;
+    }
+
+    public boolean isYesPressed() {
+        return gamepad.getRawButton(Gamepad.Buttons.BACK);
+    }
+
+    public boolean isNoPressed() {
+        return gamepad.getRawButton(Gamepad.Buttons.START);
     }
 }
