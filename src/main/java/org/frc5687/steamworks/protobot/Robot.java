@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
@@ -122,35 +123,41 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
     public void autonomousInit() {
         imu.zeroYaw();
         int position = autoRotorChooser.positionRotorValue();
+        int hopper = autoRotorChooser.hopperRotorValue();
+        CommandGroup autoCommandGroup = new CommandGroup();
         switch (position) {
             case 0:
-                autoCommand = null; // new AutoVisionTest();
                 break;
             case 1:
-                autoCommand = new AutoDepositLeftFromFarLeft();
+                autoCommandGroup.addSequential(new AutoDepositLeftFromFarLeft());
+                if(hopper == 1) {
+                    autoCommandGroup.addSequential(new AutoDrive(0,0)); // put AutoTraverseNeutralZoneFromSide here
+                }
                 break;
             case 2:
-                autoCommand = new AutoDepositLeftVision();
-                // autoCommand = new AutoApproachTarget(.7);
-                // autoCommand = new AutoDrive(24, 1.0, false, true);
-                // autoCommand = new AutoAlign(60, 0.5);
+                autoCommandGroup.addSequential(new AutoDepositLeftVision());
+                if(hopper == 1) {
+                    autoCommandGroup.addSequential(new AutoDrive(0,0)); // put AutoTraverseNeutralZoneFromSide here
+                }
                 break;
             case 3:
-                autoCommand = new AutoDepositGear();
+                autoCommandGroup.addSequential(new AutoDepositGear());
+                if(hopper == 1) {
+                    autoCommandGroup.addSequential(new AutoDrive(0,0)); // put AutoTraverseNeutralZoneFromSide here
+                } else if (hopper == 2) {
+                    autoCommandGroup.addSequential(new AutoDrive(0, 0));
+                }
                 break;
             case 4:
-                autoCommand = new AutoDepositRightVision();
-                // autoCommand = new AutoDrive(24, .5, true, true);
+                autoCommandGroup.addSequential(new AutoDepositRightVision());
                 break;
             case 5:
-                autoCommand = new AutoDepositRightFromFarRight();
+                autoCommandGroup.addSequential(new AutoDepositRightFromFarRight());
                 break;
             default:
                 autoCommand = null;
                 break;
         }
-        // autoCommand = new AutoAlign(-60, 0.5);
-        // autoCommand = new AutoDepositRightFromFarRight();
         if (autoCommand != null) {
             autoCommand.start();
         }
