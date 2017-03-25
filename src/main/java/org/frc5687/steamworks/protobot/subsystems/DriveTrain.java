@@ -151,22 +151,22 @@ public class DriveTrain extends Subsystem implements PIDSource {
     }
 
     public void runRightFrontMotor(double runSpeed){
-        rightFrontMotor.set(runSpeed);
+        rightFrontMotor.set(runSpeed * (Constants.DriveTrain.RIGHT_MOTORS_INVERTED ? -1 : 1));
     }
     public void runRightTopMotor(double runSpeed){
-        rightTopMotor.set(runSpeed);
+        rightTopMotor.set(runSpeed * (Constants.DriveTrain.RIGHT_MOTORS_INVERTED ? -1 : 1));
     }
     public void runRightRearMotor(double runSpeed){
-        rightRearMotor.set(runSpeed);
+        rightRearMotor.set(runSpeed * (Constants.DriveTrain.RIGHT_MOTORS_INVERTED ? -1 : 1));
     }
     public void runLeftFrontMotor(double runSpeed){
-        leftFrontMotor.set(runSpeed);
+        leftFrontMotor.set(runSpeed * (Constants.DriveTrain.LEFT_MOTORS_INVERTED ? -1 : 1));
     }
     public void runLeftTopMotor(double runSpeed){
-        leftTopMotor.set(runSpeed);
+        leftTopMotor.set(runSpeed * (Constants.DriveTrain.LEFT_MOTORS_INVERTED ? -1 : 1));
     }
     public void runLeftRearMotor(double runSpeed){
-        leftRearMotor.set(runSpeed);
+        leftRearMotor.set(runSpeed * (Constants.DriveTrain.LEFT_MOTORS_INVERTED ? -1 : 1));
     }
 
     public void updateDashboard() {

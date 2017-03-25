@@ -10,7 +10,7 @@ import static org.frc5687.steamworks.protobot.Robot.pdp;
  * Created by Ben Bernard on 2/23/2017.
  */
 public class TestDriveTrain extends Command {
-    private static double kTOLERANCE = 0.1;
+    private static double kTOLERANCE = 0.25;
     private double _runSpeed;
     private int _runMillis;
     private double _targetAmps;
@@ -24,8 +24,8 @@ public class TestDriveTrain extends Command {
     public TestDriveTrain() {
         _runSpeed = 1.0;
         _runMillis = 1000;
-        _targetAmps = 2;
-        _targetTicks = 4000;
+        _targetAmps = 10;
+        _targetTicks = 1400;
     }
 
     @Override
