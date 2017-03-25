@@ -12,14 +12,14 @@ import static org.frc5687.steamworks.protobot.Robot.pdp;
 
 public class DriveTrain extends Subsystem implements PIDSource {
 
-    public VictorSP leftFrontMotor;
-    public VictorSP leftRearMotor;
-    public VictorSP leftTopMotor;
-    public VictorSP rightFrontMotor;
-    public VictorSP rightRearMotor;
-    public VictorSP rightTopMotor;
-    public Encoder rightEncoder;
-    public Encoder leftEncoder;
+    private VictorSP leftFrontMotor;
+    private VictorSP leftRearMotor;
+    private VictorSP leftTopMotor;
+    private VictorSP rightFrontMotor;
+    private VictorSP rightRearMotor;
+    private VictorSP rightTopMotor;
+    private Encoder rightEncoder;
+    private Encoder leftEncoder;
     private IRPIDSource irSensor;
 
     public DriveTrain() {
@@ -150,22 +150,22 @@ public class DriveTrain extends Subsystem implements PIDSource {
         tankDrive(speed, speed);
     }
 
-    public void runFrontRightMotor(double runSpeed){
+    public void runRightFrontMotor(double runSpeed){
         rightFrontMotor.set(runSpeed);
     }
-    public void runFrontLeftMotor(double runSpeed){
-        leftFrontMotor.set(runSpeed);
-    }
-    public void runTopRightMotor(double runSpeed){
+    public void runRightTopMotor(double runSpeed){
         rightTopMotor.set(runSpeed);
     }
-    public void runTopLeftMotor(double runSpeed){
-        leftTopMotor.set(runSpeed);
-    }
-    public void runRearRightMotor(double runSpeed){
+    public void runRightRearMotor(double runSpeed){
         rightRearMotor.set(runSpeed);
     }
-    public void runRearLeftMotor(double runSpeed){
+    public void runLeftFrontMotor(double runSpeed){
+        leftFrontMotor.set(runSpeed);
+    }
+    public void runLeftTopMotor(double runSpeed){
+        leftTopMotor.set(runSpeed);
+    }
+    public void runLeftRearMotor(double runSpeed){
         leftRearMotor.set(runSpeed);
     }
 

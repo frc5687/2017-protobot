@@ -43,79 +43,79 @@ public class TestDriveTrain extends Command {
 
         switch (_state) {
             case RIGHTFRONT:
-                driveTrain.runFrontRightMotor(_runSpeed);
+                driveTrain.runRightFrontMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getRightFrontAmps());
                 if (System.currentTimeMillis() > _endMillis) {
                     _state = State.RIGHTFRONTDONE;
                 }
                 break;
             case RIGHTFRONTDONE:
-                driveTrain.runFrontRightMotor(0);
+                driveTrain.runRightFrontMotor(0);
                 report("right front", driveTrain.getRightTicks());
                 _state = State.RIGHTTOP;
                 break;
 
             case RIGHTTOP:
-                driveTrain.runTopRightMotor(_runSpeed);
+                driveTrain.runRightTopMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getRightTopAmps());
                 if (System.currentTimeMillis() > _endMillis) {
                     _state = State.RIGHTTOPDONE;
                 }
                 break;
             case RIGHTTOPDONE:
-                driveTrain.runFrontRightMotor(0);
+                driveTrain.runRightFrontMotor(0);
                 report("right top", driveTrain.getRightTicks());
                 _state = State.RIGHTREAR;
                 break;
 
             case RIGHTREAR:
-                driveTrain.runRearRightMotor(_runSpeed);
+                driveTrain.runRightRearMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getRightRearAmps());
                 if (System.currentTimeMillis() > _endMillis) {
                     _state = State.RIGHTREARDONE;
                 }
                 break;
             case RIGHTREARDONE:
-                driveTrain.runRearRightMotor(0);
+                driveTrain.runRightRearMotor(0);
                 report("right rear", driveTrain.getRightTicks());
                 _state = State.LEFTFRONT;
                 break;
 
             case LEFTFRONT:
-                driveTrain.runFrontLeftMotor(_runSpeed);
+                driveTrain.runLeftFrontMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getLeftFrontAmps());
                 if (System.currentTimeMillis() > _endMillis) {
                     _state = State.LEFTFRONTDONE;
                 }
                 break;
             case LEFTFRONTDONE:
-                driveTrain.runFrontLeftMotor(0);
+                driveTrain.runLeftFrontMotor(0);
                 report("left front", driveTrain.getLeftTicks());
                 _state = State.LEFTTOP;
                 break;
 
             case LEFTTOP:
-                driveTrain.runTopLeftMotor(_runSpeed);
+                driveTrain.runLeftTopMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getLeftTopAmps());
                 if (System.currentTimeMillis() > _endMillis) {
                     _state = State.LEFTTOPDONE;
                 }
                 break;
             case LEFTTOPDONE:
-                driveTrain.runFrontLeftMotor(0);
+                driveTrain.runLeftFrontMotor(0);
                 report("left top", driveTrain.getLeftTicks());
                 _state = State.LEFTREAR;
                 break;
 
             case LEFTREAR:
-                driveTrain.runRearLeftMotor(_runSpeed);
+                driveTrain.runLeftRearMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getLeftRearAmps());
                 if (System.currentTimeMillis() > _endMillis) {
                     _state = State.LEFTREARDONE;
                 }
                 break;
             case LEFTREARDONE:
-                driveTrain.runRearLeftMotor(0);
+                driveTrain.runLeftRearMotor(0);
                 report("left rear", driveTrain.getLeftTicks());
                 _state = State.DONE;
                 break;
