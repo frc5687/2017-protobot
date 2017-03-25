@@ -86,4 +86,7 @@ public class AutoAlign extends Command implements PIDOutput {
         }
     }
 
+    public void setAngle(double angle) {
+        this.angle = angle;
+    }
 }
