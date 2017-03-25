@@ -51,7 +51,7 @@ public class DriveTrain extends Subsystem implements PIDSource {
         return leftEncoder.getDistance();
     }
 
-    public double getLeftTicks() {
+    public long getLeftTicks() {
         return leftEncoder.get();
     }
 
@@ -78,7 +78,7 @@ public class DriveTrain extends Subsystem implements PIDSource {
         return rightEncoder.getDistance();
     }
 
-    public double getRightTicks() {
+    public long getRightTicks() {
         return rightEncoder.get();
     }
 
@@ -88,6 +88,11 @@ public class DriveTrain extends Subsystem implements PIDSource {
 
     public double getRightSpeed() {
         return rightFrontMotor.getSpeed() * (Constants.DriveTrain.RIGHT_MOTORS_INVERTED ? -1 : 1);
+    }
+
+    public void resetEncoders(){
+        leftEncoder.reset();
+        rightEncoder.reset();
     }
 
     public void setRightSpeed(double speed) {
@@ -143,6 +148,25 @@ public class DriveTrain extends Subsystem implements PIDSource {
 
     public void tankDrive(double speed) {
         tankDrive(speed, speed);
+    }
+
+    public void runRightFrontMotor(double runSpeed){
+        rightFrontMotor.set(runSpeed * (Constants.DriveTrain.RIGHT_MOTORS_INVERTED ? -1 : 1));
+    }
+    public void runRightTopMotor(double runSpeed){
+        rightTopMotor.set(runSpeed * (Constants.DriveTrain.RIGHT_MOTORS_INVERTED ? -1 : 1));
+    }
+    public void runRightRearMotor(double runSpeed){
+        rightRearMotor.set(runSpeed * (Constants.DriveTrain.RIGHT_MOTORS_INVERTED ? -1 : 1));
+    }
+    public void runLeftFrontMotor(double runSpeed){
+        leftFrontMotor.set(runSpeed * (Constants.DriveTrain.LEFT_MOTORS_INVERTED ? -1 : 1));
+    }
+    public void runLeftTopMotor(double runSpeed){
+        leftTopMotor.set(runSpeed * (Constants.DriveTrain.LEFT_MOTORS_INVERTED ? -1 : 1));
+    }
+    public void runLeftRearMotor(double runSpeed){
+        leftRearMotor.set(runSpeed * (Constants.DriveTrain.LEFT_MOTORS_INVERTED ? -1 : 1));
     }
 
     public void updateDashboard() {

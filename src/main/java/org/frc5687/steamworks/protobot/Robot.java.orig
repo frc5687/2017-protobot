@@ -128,7 +128,10 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         CommandGroup autoCommandGroup = new CommandGroup();
         switch (position) {
             case 0:
+<<<<<<< HEAD
+=======
                 autoCommand = new SteamworksBaseCommandGroup();
+>>>>>>> master
                 break;
             case 1:
                 autoCommandGroup.addSequential(new AutoDepositLeftFromFarLeft());
