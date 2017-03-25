@@ -39,7 +39,7 @@ public class PDP extends PowerDistributionPanel {
         return getTotalDriveTrainAmps() / 6;
     }
 
-    /**
+    /*
      * Methods for getting current from individual drivetrain cims
      */
 

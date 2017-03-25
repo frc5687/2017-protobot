@@ -14,6 +14,7 @@ import org.frc5687.steamworks.protobot.commands.actions.AutoApproachTarget;
 import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
 import org.frc5687.steamworks.protobot.commands.autonomous.*;
 import org.frc5687.steamworks.protobot.commands.test.AutoVisionTest;
+import org.frc5687.steamworks.protobot.commands.test.FullSelfTest;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import org.frc5687.steamworks.protobot.utils.*;
 
@@ -124,7 +125,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         int position = autoRotorChooser.positionRotorValue();
         switch (position) {
             case 0:
-                autoCommand = null; // new AutoVisionTest();
+                autoCommand = new SteamworksBaseCommandGroup();
                 break;
             case 1:
                 autoCommand = new AutoDepositLeftFromFarLeft();
@@ -164,7 +165,6 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
 
     @Override
     public void testInit() {
-
     }
 
     @Override
@@ -193,6 +193,9 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
 
     @Override
     public void testPeriodic() {
+        DriverStation.reportError("Robot test periodic", false);
+        Scheduler.getInstance().run();
+        updateDashboard();
     }
 
     public void poll() {
