@@ -69,10 +69,11 @@ public class AutoAlignVision extends Command implements PIDOutput {
 
 
         // if(!controller.onTarget()) endTime = System.currentTimeMillis() + Align.STEADY_TIME;
-        DriverStation.reportError("Align: " + pidOut + "," + -pidOut, false);
+        // DriverStation.reportError("Align: " + pidOut + "," + -pidOut, false);
         driveTrain.tankDrive(pidOut, -pidOut); // positive output is counterclockwise
         SmartDashboard.putBoolean("AutoAlignVision/onTarget", controller.onTarget());
         SmartDashboard.putNumber("AutoAlignVision/imu", imu.getYaw());
+        SmartDashboard.putNumber("AutoAlignVision/pidOut", pidOut);
     }
 
     @Override

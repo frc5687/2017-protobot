@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
 import org.frc5687.steamworks.protobot.commands.actions.AutoApproachTarget;
 import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
+import org.frc5687.steamworks.protobot.commands.actions.DriveArc;
 import org.frc5687.steamworks.protobot.commands.autonomous.*;
 import org.frc5687.steamworks.protobot.commands.test.AutoVisionTest;
 import org.frc5687.steamworks.protobot.commands.test.FullSelfTest;
@@ -125,7 +126,9 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         int position = autoRotorChooser.positionRotorValue();
         switch (position) {
             case 0:
-                autoCommand = new SteamworksBaseCommandGroup();
+                // autoCommand = new SteamworksBaseCommandGroup();
+                autoCommand = new DriveArc(0.367088608, 1.0, 700, true);
+                // autoCommand = new AutoVisionTest();
                 break;
             case 1:
                 autoCommand = new AutoDepositLeftFromFarLeft();
