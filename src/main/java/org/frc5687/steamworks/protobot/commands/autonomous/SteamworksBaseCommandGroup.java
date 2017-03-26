@@ -6,6 +6,7 @@ import org.frc5687.steamworks.protobot.commands.actions.*;
 import org.frc5687.steamworks.protobot.commands.actions.dustpan.HoldDustpanUp;
 import org.frc5687.steamworks.protobot.commands.actions.dustpan.RaiseDustpan;
 import org.frc5687.steamworks.protobot.commands.composite.StowDustpan;
+import org.frc5687.steamworks.protobot.subsystems.Shifter;
 
 public class SteamworksBaseCommandGroup extends CommandGroup {
 
@@ -14,7 +15,7 @@ public class SteamworksBaseCommandGroup extends CommandGroup {
         addParallel(new ReleaseFunnel());
         addParallel(new StowDustpan());
         addParallel(new ReceiveMandibles());
-        addSequential(new Shift(DoubleSolenoid.Value.kReverse));
+        addSequential(new Shift(Shifter.Gear.LOW));
     }
 
 }

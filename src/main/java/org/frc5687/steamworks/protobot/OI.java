@@ -13,6 +13,7 @@ import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
 import org.frc5687.steamworks.protobot.commands.composite.EjectDustpan;
 import org.frc5687.steamworks.protobot.commands.test.FullSelfTest;
 import org.frc5687.steamworks.protobot.commands.test.SelfTestBootstrapper;
+import org.frc5687.steamworks.protobot.subsystems.Shifter;
 import org.frc5687.steamworks.protobot.utils.AxisButton;
 import org.frc5687.steamworks.protobot.utils.Gamepad;
 import org.frc5687.steamworks.protobot.utils.Helpers;
@@ -114,8 +115,8 @@ public class OI {
 
         gpYesButton = new JoystickButton(gamepad, GP_YES);
 
-        shiftHigh.whenPressed(new Shift(DoubleSolenoid.Value.kForward));
-        shiftLow.whenPressed(new Shift(DoubleSolenoid.Value.kReverse));
+        shiftHigh.whenPressed(new Shift(Shifter.Gear.HIGH));
+        shiftLow.whenPressed(new Shift(Shifter.Gear.LOW));
 
         gpReceiveMandiblesButton.whenPressed(new ReceiveMandibles());
         gpEjectGearButton.whenPressed(new EjectGear());

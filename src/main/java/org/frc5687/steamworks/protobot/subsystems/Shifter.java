@@ -53,4 +53,20 @@ public class Shifter extends Subsystem {
         SmartDashboard.putString("shifter/Gear", shifterSolenoid.get() == DoubleSolenoid.Value.kForward ? "High" : (shifterSolenoid.get() == DoubleSolenoid.Value.kReverse ? "Low" : "Unknown"));
     }
 
+    public enum Gear {
+        HIGH(DoubleSolenoid.Value.kForward),
+        LOW(DoubleSolenoid.Value.kReverse);
+
+        private DoubleSolenoid.Value solenoidValue;
+
+        Gear(DoubleSolenoid.Value solenoidValue) {
+            this.solenoidValue = solenoidValue;
+        }
+
+        public DoubleSolenoid.Value getSolenoidValue() {
+            return solenoidValue;
+        }
+
+    }
+
 }
