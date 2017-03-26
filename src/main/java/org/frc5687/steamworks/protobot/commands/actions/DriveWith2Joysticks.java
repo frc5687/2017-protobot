@@ -1,5 +1,6 @@
 package org.frc5687.steamworks.protobot.commands.actions;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.subsystems.Shifter;
@@ -28,17 +29,25 @@ public class DriveWith2Joysticks extends Command {
     @Override
     protected void execute() {
         driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed());
-        autoShift();
+        runShifterAutomatically();
     }
 
-    private void autoShift() {
+    private void runShifterAutomatically() {
         if (System.currentTimeMillis() > waitPeriodEndTime) {
             switch (shifter.getGear()) {
                 case kForward:
+                    if(driveTrain.getRate() > Constants.Shifter.SHIFT_UP_TRHESHOLD) {
+                        shift(Shifter.Gear.HIGH);
+                    }
                     break;
                 case kReverse:
+                    if(driveTrain.getRate() > Constants.Shifter.SHIFT_UP_TRHESHOLD) {
+                        shift(Shifter.Gear.LOW);
+                    }
                     break;
                 default:
+                    DriverStation.reportWarning("Shifter solenoid neither forwards or reversed!", false);
+                    shift(Shifter.Gear.HIGH);
                     break;
             }
         }

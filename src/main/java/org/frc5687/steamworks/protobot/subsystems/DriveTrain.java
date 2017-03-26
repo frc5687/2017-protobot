@@ -90,6 +90,10 @@ public class DriveTrain extends Subsystem implements PIDSource {
         return rightFrontMotor.getSpeed() * (Constants.DriveTrain.RIGHT_MOTORS_INVERTED ? -1 : 1);
     }
 
+    public double getRate() {
+        return (getLeftRate() + getRightRate()) * 0.5;
+    }
+
     public void resetEncoders(){
         leftEncoder.reset();
         rightEncoder.reset();
