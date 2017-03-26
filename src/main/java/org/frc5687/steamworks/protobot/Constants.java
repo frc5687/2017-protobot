@@ -183,7 +183,7 @@ public class Constants {
 
         public class AnglesAndDistances {
 
-            public static final double STRAIGHT_ANGLE = 0;
+            public static final double STRAIGHT_ANGLE = 0.001;
 
             public static final double TRAVERSE_NEUTRAL_ZONE_FROM_SIDE_DISTANCE = 200; // TODO correct value
             public static final double TRAVERSE_NEUTRAL_ZONE_FROM_WALL_DISTANCE = 200; // TODO correct value
