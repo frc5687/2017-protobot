@@ -132,15 +132,17 @@ public class Constants {
 
     public class OI {
 
-        public static final double AXIS_BUTTON_THRESHHOLD = 0.2; //TODO find actual when pressed value
+        public static final double AXIS_BUTTON_THRESHHOLD = 0.2;
 
     }
 
     public class Shifter {
-        public static final long STOP_MOTOR_TIME = 60; //TODO find correct values
-        public static final long SHIFT_TIME = 60; //TODO find correct values
+        public static final long STOP_MOTOR_TIME = 60;
+        public static final long SHIFT_TIME = 60;
 
         public static final long WAIT_PERIOD = 250;
+        public static final double SHIFT_UP_TRHESHOLD = 80; // in inches per second TODO tune
+        public static final double SHIFT_DOWN_THRESHOLD = 60; // in inches per second TODO tune
     }
 
     public class Dustpan {
