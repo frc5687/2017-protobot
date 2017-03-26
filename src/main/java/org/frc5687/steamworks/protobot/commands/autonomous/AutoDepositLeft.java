@@ -1,12 +1,13 @@
 package org.frc5687.steamworks.protobot.commands.autonomous;
 
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.commands.actions.AutoVisualApproachTarget;
 import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
 import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
 import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
 
-public class AutoDepositLeft extends SteamworksBaseCommandGroup {
+public class AutoDepositLeft extends CommandGroup {
 
     public AutoDepositLeft() {
         super();

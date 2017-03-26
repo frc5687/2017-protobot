@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
 import org.frc5687.steamworks.protobot.commands.actions.AutoApproachTarget;
 import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
+import org.frc5687.steamworks.protobot.commands.actions.DriveArc;
 import org.frc5687.steamworks.protobot.commands.autonomous.*;
 import org.frc5687.steamworks.protobot.commands.test.AutoVisionTest;
 import org.frc5687.steamworks.protobot.commands.test.FullSelfTest;
@@ -129,38 +130,48 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         switch (position) {
             case 0:
 <<<<<<< HEAD
+                autoCommand = new CommandGroup();
 =======
-                autoCommand = new SteamworksBaseCommandGroup();
->>>>>>> master
+                // autoCommand = new SteamworksBaseCommandGroup();
+                autoCommand = new DriveArc(0.367088608, 1.0, 700, true);
+                // autoCommand = new AutoVisionTest();
+>>>>>>> DriveTrain/#141-Arc
                 break;
             case 1:
                 autoCommandGroup.addSequential(new AutoDepositLeftFromFarLeft());
-                if(hopper == 1) {
-                    autoCommandGroup.addSequential(new AutoDrive(0,0)); // put AutoTraverseNeutralZoneFromSide here
+                if(hopper == 2) {
+                    autoCommandGroup.addSequential(new AutoTraverseNeutralZoneFromSide());
                 }
                 break;
             case 2:
                 autoCommandGroup.addSequential(new AutoDepositLeftVision());
-                if(hopper == 1) {
-                    autoCommandGroup.addSequential(new AutoDrive(0,0)); // put AutoTraverseNeutralZoneFromSide here
+                if(hopper == 2) {
+                    autoCommandGroup.addSequential(new AutoTraverseNeutralZoneFromSide());
                 }
                 break;
             case 3:
                 autoCommandGroup.addSequential(new AutoDepositGear());
                 if(hopper == 1) {
-                    autoCommandGroup.addSequential(new AutoDrive(0,0)); // put AutoTraverseNeutralZoneFromSide here
+                    autoCommandGroup.addSequential(new AutoTraverseNeutralZoneAwayFromBoiler());
                 } else if (hopper == 2) {
-                    autoCommandGroup.addSequential(new AutoDrive(0, 0));
+                    autoCommandGroup.addSequential(new AutoTraverseNeutralZoneLeftFromCenter());
+                } else if (hopper == 3) {
+                    autoCommandGroup.addSequential(new AutoTraverseNeutralZoneRightFromCenter());
                 }
                 break;
             case 4:
                 autoCommandGroup.addSequential(new AutoDepositRightVision());
+                if(hopper == 3) {
+                    autoCommandGroup.addSequential(new AutoTraverseNeutralZoneFromSide());
+                }
                 break;
             case 5:
                 autoCommandGroup.addSequential(new AutoDepositRightFromFarRight());
+                if(hopper == 3) {
+                    autoCommandGroup.addSequential(new AutoTraverseNeutralZoneFromSide());
+                }
                 break;
             default:
-                autoCommand = null;
                 break;
         }
         if (autoCommand != null) {

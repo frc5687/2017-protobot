@@ -40,10 +40,8 @@ public class ConfirmTest extends Command {
     protected boolean isFinished() {
         if (_clear) {
             if (oi.isYesPressed()) {
-                DriverStation.reportError(_success, false);
                 return true;
             } else if (oi.isNoPressed()) {
-                DriverStation.reportError(_failure, false);
                 return true;
             }
         }

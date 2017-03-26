@@ -1,12 +1,12 @@
 package org.frc5687.steamworks.protobot.commands.autonomous;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.frc5687.steamworks.protobot.Constants;
-import org.frc5687.steamworks.protobot.commands.actions.HoldMandiblesOpen;
+import org.frc5687.steamworks.protobot.commands.actions.*;
 import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
-import org.frc5687.steamworks.protobot.commands.actions.AutoApproachTarget;
-import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
 
-public class AutoDepositGear extends SteamworksBaseCommandGroup {
+public class AutoDepositGear extends CommandGroup {
 
     public AutoDepositGear() {
         super();
@@ -16,7 +16,7 @@ public class AutoDepositGear extends SteamworksBaseCommandGroup {
         addSequential(new EjectMandibles());
         addSequential(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.PAUSE_AT_SPRING_TIME));
         addParallel(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.MANDIBLE_HOLD_TIME));
-        addSequential(new AutoDrive(-Constants.Auto.AnglesAndDistances.RETREAT_DISTANCE, Constants.Auto.Drive.SPEED, false, true));
+        addSequential(new AutoDrive(-48, Constants.Auto.Drive.SPEED, false, true));
     }
 
 }
