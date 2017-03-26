@@ -37,12 +37,12 @@ public class DriveWith2Joysticks extends Command {
             switch (shifter.getGear()) {
                 case kForward:
                     if(driveTrain.getRate() > Constants.Shifter.SHIFT_UP_TRHESHOLD) {
-                        shift(Shifter.Gear.HIGH);
+                        shift(Shifter.Gear.LOW);
                     }
                     break;
                 case kReverse:
                     if(driveTrain.getRate() > Constants.Shifter.SHIFT_UP_TRHESHOLD) {
-                        shift(Shifter.Gear.LOW);
+                        shift(Shifter.Gear.HIGH);
                     }
                     break;
                 default:
