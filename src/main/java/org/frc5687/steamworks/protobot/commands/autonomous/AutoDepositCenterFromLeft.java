@@ -1,5 +1,6 @@
 package org.frc5687.steamworks.protobot.commands.autonomous;
 
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.commands.actions.ReceiveMandibles;
 import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
@@ -10,7 +11,7 @@ import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
 /**
  * Created by Baxter on 2/25/2017.
  */
-public class AutoDepositCenterFromLeft extends SteamworksBaseCommandGroup {
+public class AutoDepositCenterFromLeft extends CommandGroup {
 
     public AutoDepositCenterFromLeft() {
         super();

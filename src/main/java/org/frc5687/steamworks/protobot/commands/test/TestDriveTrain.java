@@ -126,10 +126,14 @@ public class TestDriveTrain extends Command {
         if (_maxAmps < _targetAmps) {
             pass = false;
             DriverStation.reportError("Target amperage not reached on " + side  + ".  Expected " + _targetAmps + " but measured " + _maxAmps + ".", false);
+        } else {
+            DriverStation.reportError("Amp draw passed on " + side  + ".  Expected " + _targetAmps + " and measured  " + _maxAmps + ".", false);
         }
         if (Math.abs((_targetTicks - ticks) / _targetTicks) > kTOLERANCE) {
             pass = false;
             DriverStation.reportError("Target ticks not reached on " + side + ".  Expected " + _targetTicks + " but measured " + ticks + ".", false);
+        } else {
+            DriverStation.reportError("Target ticks reached on " + side + ".  Expected " + _targetTicks + " and measured " + ticks + ".", false);
         }
         driveTrain.resetDriveEncoders();
         _maxAmps = 0;

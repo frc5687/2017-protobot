@@ -88,7 +88,7 @@ public class AutoVisualApproachTarget extends Command {
         double distanceFactor = 0;
         double angleFactor = 0;
         synchronized (distancePID) {
-            distanceFactor = distancePID.get();
+            distanceFactor = distancePID.get() * -1;
         }
 
         synchronized (anglePID) {
@@ -109,7 +109,7 @@ public class AutoVisualApproachTarget extends Command {
 
     @Override
     protected boolean isFinished() {
-        return distanceController.onTarget() || driveTrain.getIrSensor().pidGet() >= Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_VOLTAGE;
+        return distanceController.onTarget();// || driveTrain.getIrSensor().pidGet() <= Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_DISTANCE;
     }
 
     @Override

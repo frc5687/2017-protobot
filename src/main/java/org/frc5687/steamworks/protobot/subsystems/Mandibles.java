@@ -45,10 +45,6 @@ public class Mandibles extends Subsystem {
         setSpeed(Constants.Mandibles.CLOSE_SPEED);
     }
 
-    public void clamp() {
-        setSpeed(Constants.Mandibles.CLAMP_SPEED);
-    }
-
     public void wiggleOut() {
         setSpeed(Constants.Mandibles.WIGGLE_SPEED);
     }

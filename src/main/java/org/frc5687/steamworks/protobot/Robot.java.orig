@@ -126,7 +126,54 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         imu.zeroYaw();
         int position = autoRotorChooser.positionRotorValue();
         int hopper = autoRotorChooser.hopperRotorValue();
-        autoCommand = new AutoGroup(position, 0, hopper);
+        CommandGroup autoCommandGroup = new CommandGroup();
+        switch (position) {
+            case 0:
+<<<<<<< HEAD
+                autoCommand = new CommandGroup();
+=======
+                // autoCommand = new SteamworksBaseCommandGroup();
+                autoCommand = new DriveArc(0.367088608, 1.0, 700, true);
+                // autoCommand = new AutoVisionTest();
+>>>>>>> DriveTrain/#141-Arc
+                break;
+            case 1:
+                autoCommandGroup.addSequential(new AutoDepositLeftFromFarLeft());
+                if(hopper == 2) {
+                    autoCommandGroup.addSequential(new AutoTraverseNeutralZoneFromSide());
+                }
+                break;
+            case 2:
+                autoCommandGroup.addSequential(new AutoDepositLeftVision());
+                if(hopper == 2) {
+                    autoCommandGroup.addSequential(new AutoTraverseNeutralZoneFromSide());
+                }
+                break;
+            case 3:
+                autoCommandGroup.addSequential(new AutoDepositGear());
+                if(hopper == 1) {
+                    autoCommandGroup.addSequential(new AutoTraverseNeutralZoneAwayFromBoiler());
+                } else if (hopper == 2) {
+                    autoCommandGroup.addSequential(new AutoTraverseNeutralZoneLeftFromCenter());
+                } else if (hopper == 3) {
+                    autoCommandGroup.addSequential(new AutoTraverseNeutralZoneRightFromCenter());
+                }
+                break;
+            case 4:
+                autoCommandGroup.addSequential(new AutoDepositRightVision());
+                if(hopper == 3) {
+                    autoCommandGroup.addSequential(new AutoTraverseNeutralZoneFromSide());
+                }
+                break;
+            case 5:
+                autoCommandGroup.addSequential(new AutoDepositRightFromFarRight());
+                if(hopper == 3) {
+                    autoCommandGroup.addSequential(new AutoTraverseNeutralZoneFromSide());
+                }
+                break;
+            default:
+                break;
+        }
         if (autoCommand != null) {
             autoCommand.start();
         }

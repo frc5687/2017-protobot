@@ -1,5 +1,6 @@
 package org.frc5687.steamworks.protobot.commands.autonomous;
 
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.commands.actions.*;
 import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
@@ -7,7 +8,7 @@ import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
 /**
  * Created by Baxter on 2/25/2017.
  */
-public class AutoDepositLeftFromFarLeft extends SteamworksBaseCommandGroup {
+public class AutoDepositLeftFromFarLeft extends CommandGroup {
 
     public AutoDepositLeftFromFarLeft() {
         super();
