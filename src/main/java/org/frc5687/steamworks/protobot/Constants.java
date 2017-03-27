@@ -49,6 +49,7 @@ public class Constants {
         public static final double FULL_FORWARDS_SPEED = 1;
         public static final double FULL_BACKWARDS_SPEED = -1;
 
+        public static final double STRAIGHT_TOLERANCE = 0.1;
     }
 
     public class Deadbands {
@@ -141,8 +142,9 @@ public class Constants {
         public static final long SHIFT_TIME = 60;
 
         public static final long WAIT_PERIOD = 250;
-        public static final double SHIFT_UP_TRHESHOLD = 80; // in inches per second TODO tune
+        public static final double SHIFT_UP_THRESHOLD = 80; // in inches per second TODO tune
         public static final double SHIFT_DOWN_THRESHOLD = 60; // in inches per second TODO tune
+
     }
 
     public class Dustpan {

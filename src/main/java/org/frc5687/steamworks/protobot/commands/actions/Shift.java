@@ -11,7 +11,7 @@ import static org.frc5687.steamworks.protobot.Robot.shifter;
 
 public class Shift extends Command {
 
-    private DoubleSolenoid.Value gear = DoubleSolenoid.Value.kOff;
+    private Shifter.Gear gear;
     private double initialLeftSpeed, initialRightSpeed;
     private long endTime;
     private State state = State.STOP_MOTOR;
@@ -19,7 +19,7 @@ public class Shift extends Command {
     public Shift(Shifter.Gear gear) {
         requires(driveTrain);
         requires(shifter);
-        this.gear = gear.getSolenoidValue();
+        this.gear = gear;
     }
 
     @Override

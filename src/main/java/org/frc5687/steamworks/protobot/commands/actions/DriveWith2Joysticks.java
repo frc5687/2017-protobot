@@ -14,8 +14,6 @@ import static org.frc5687.steamworks.protobot.Robot.shifter;
  */
 public class DriveWith2Joysticks extends Command {
 
-    private long waitPeriodEndTime;
-
     public DriveWith2Joysticks() {
         requires(driveTrain);
         requires(shifter);
@@ -33,28 +31,28 @@ public class DriveWith2Joysticks extends Command {
     }
 
     private void runShifterAutomatically() {
-        if (System.currentTimeMillis() > waitPeriodEndTime) {
+        if (shifter.waitPeriodElapsed() && driveTrain.isDrivingStraight()) {
             switch (shifter.getGear()) {
-                case kForward:
-                    if(driveTrain.getRate() > Constants.Shifter.SHIFT_UP_TRHESHOLD) {
+                case HIGH:
+                    if(driveTrain.getRate() < Constants.Shifter.SHIFT_DOWN_THRESHOLD) {
                         shift(Shifter.Gear.LOW);
                     }
                     break;
-                case kReverse:
-                    if(driveTrain.getRate() > Constants.Shifter.SHIFT_UP_TRHESHOLD) {
+                case LOW:
+                    if(driveTrain.getRate() > Constants.Shifter.SHIFT_UP_THRESHOLD) {
                         shift(Shifter.Gear.HIGH);
                     }
                     break;
                 default:
                     DriverStation.reportWarning("Shifter solenoid neither forwards or reversed!", false);
-                    shift(Shifter.Gear.HIGH);
+                    shift(Shifter.Gear.LOW);
                     break;
             }
         }
     }
 
     private void shift(Shifter.Gear gear) {
-        waitPeriodEndTime = System.currentTimeMillis() + Constants.Shifter.WAIT_PERIOD;
+        DriverStation.reportError("Auto-shifting into " + gear.toString(), false);
         Command shift = new Shift(gear);
         shift.start();
     }
