@@ -22,9 +22,14 @@ public class AutoDrive extends Command {
     private double endTime;
     private boolean usePID;
     private boolean stopOnFinish;
+    private double angle;
 
     public AutoDrive(double distance, double speed) {
         this(distance, speed, false, true);
+    }
+
+    public AutoDrive(double distance, double speed, boolean usePID, boolean stopOnFinish) {
+        this(distance, speed, usePID, stopOnFinish, 1000);
     }
 
     /***
@@ -34,12 +39,13 @@ public class AutoDrive extends Command {
      * @param usePID Whether to use pid or not
      * @param stopOnFinish Whether to stop the motors when we are done
      */
-    public AutoDrive(double distance, double speed, boolean usePID, boolean stopOnFinish) {
+    public AutoDrive(double distance, double speed, boolean usePID, boolean stopOnFinish, double angle) {
         requires(driveTrain);
         this.speed = speed;
         this.distance = distance;
         this.usePID = usePID;
         this.stopOnFinish = stopOnFinish;
+        this.angle = angle;
     }
 
     @Override
@@ -69,7 +75,7 @@ public class AutoDrive extends Command {
         SmartDashboard.putNumber("AutoDrive/setPoint", imu.getYaw());
         angleController.setOutputRange(-maxSpeed, maxSpeed);
         angleController.setContinuous();
-        angleController.setSetpoint(imu.getYaw());
+        angleController.setSetpoint(angle==1000?imu.getYaw():angle);
         angleController.enable();
 
         DriverStation.reportError("Auto Drive initialized", false);
