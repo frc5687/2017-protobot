@@ -2,8 +2,8 @@ package org.frc5687.steamworks.protobot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.frc5687.steamworks.protobot.Constants;
-import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
-import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
+import org.frc5687.steamworks.protobot.commands.actions.drive.AutoAlign;
+import org.frc5687.steamworks.protobot.commands.actions.drive.AutoDrive;
 
 /**
  * Created by Baxter on 3/23/2017.

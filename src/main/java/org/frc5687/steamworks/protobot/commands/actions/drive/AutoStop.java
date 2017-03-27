@@ -1,4 +1,4 @@
-package org.frc5687.steamworks.protobot.commands.actions;
+package org.frc5687.steamworks.protobot.commands.actions.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;

@@ -1,7 +1,8 @@
-package org.frc5687.steamworks.protobot.commands.actions;
+package org.frc5687.steamworks.protobot.commands.actions.drive;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import org.frc5687.steamworks.protobot.Constants;
+import org.frc5687.steamworks.protobot.commands.actions.drive.AutoAlign;
 
 /**
  * Created by Baxter on 3/25/2017.

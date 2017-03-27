@@ -7,16 +7,9 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
-import org.frc5687.steamworks.protobot.commands.actions.AutoApproachTarget;
-import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
-import org.frc5687.steamworks.protobot.commands.actions.DriveArc;
 import org.frc5687.steamworks.protobot.commands.autonomous.*;
-import org.frc5687.steamworks.protobot.commands.test.AutoVisionTest;
-import org.frc5687.steamworks.protobot.commands.test.FullSelfTest;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import org.frc5687.steamworks.protobot.utils.*;
 

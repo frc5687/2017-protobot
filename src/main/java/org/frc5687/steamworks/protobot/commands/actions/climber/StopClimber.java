@@ -1,39 +1,38 @@
-package org.frc5687.steamworks.protobot.commands.actions;
+package org.frc5687.steamworks.protobot.commands.actions.climber;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.frc5687.steamworks.protobot.Constants;
 
 import static org.frc5687.steamworks.protobot.Robot.climber;
-import static org.frc5687.steamworks.protobot.Robot.oi;
 
-public class RunClimberManually extends Command {
+/**
+ * Created by Ben Bernard on 2/28/2017.
+ */
+public class StopClimber extends Command {
 
-    public RunClimberManually() {
+
+    public StopClimber() {
         requires(climber);
     }
 
+
     @Override
     protected void initialize() {
-
     }
 
     @Override
     protected void execute() {
-        double speed = oi.getClimberSpeed();
-        SmartDashboard.putNumber("Climber/ManualSpeed", speed);
-        climber.setSpeed(speed);
+        climber.setSpeed(0);
     }
-
     @Override
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     @Override
     protected void end() {
-        DriverStation.reportError("Stopping climber.", false);
-        climber.setSpeed(0);
     }
 
     @Override
