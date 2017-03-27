@@ -53,7 +53,7 @@ public class DriveWith2Joysticks extends Command {
 
     private void shift(Shifter.Gear gear) {
         DriverStation.reportError("Auto-shifting into " + gear.toString(), false);
-        Command shift = new Shift(gear);
+        Command shift = new Shift(gear, true);
         shift.start();
     }
 

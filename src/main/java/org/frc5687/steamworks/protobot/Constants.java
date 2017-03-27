@@ -141,10 +141,11 @@ public class Constants {
         public static final long STOP_MOTOR_TIME = 60;
         public static final long SHIFT_TIME = 60;
 
-        public static final long WAIT_PERIOD = 250;
         public static final double SHIFT_UP_THRESHOLD = 80; // in inches per second TODO tune
         public static final double SHIFT_DOWN_THRESHOLD = 60; // in inches per second TODO tune
 
+        public static final long AUTO_WAIT_PERIOD = 250;
+        public static final long MANUAL_WAIT_PERIOD = 5000;
     }
 
     public class Dustpan {

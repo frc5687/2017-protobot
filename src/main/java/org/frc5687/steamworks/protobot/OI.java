@@ -115,8 +115,8 @@ public class OI {
 
         gpYesButton = new JoystickButton(gamepad, GP_YES);
 
-        shiftHigh.whenPressed(new Shift(Shifter.Gear.HIGH));
-        shiftLow.whenPressed(new Shift(Shifter.Gear.LOW));
+        shiftHigh.whenPressed(new Shift(Shifter.Gear.HIGH, false));
+        shiftLow.whenPressed(new Shift(Shifter.Gear.LOW, false));
 
         gpReceiveMandiblesButton.whenPressed(new ReceiveMandibles());
         gpEjectGearButton.whenPressed(new EjectGear());

@@ -15,7 +15,7 @@ public class SteamworksBaseCommandGroup extends CommandGroup {
         addParallel(new ReleaseFunnel());
         addParallel(new StowDustpan());
         addParallel(new ReceiveMandibles());
-        addSequential(new Shift(Shifter.Gear.LOW));
+        addSequential(new Shift(Shifter.Gear.LOW, true));
     }
 
 }

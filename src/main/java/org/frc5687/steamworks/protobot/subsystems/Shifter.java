@@ -1,7 +1,6 @@
 package org.frc5687.steamworks.protobot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
@@ -20,9 +19,9 @@ public class Shifter extends Subsystem {
     protected void initDefaultCommand() {
     }
 
-    public void shift(Gear gear) {
+    public void shift(Gear gear, boolean auto) {
         shifterSolenoid.set(gear.getSolenoidValue());
-        waitPeriodEndTime = System.currentTimeMillis() + Constants.Shifter.WAIT_PERIOD;
+        waitPeriodEndTime = System.currentTimeMillis() + (auto ? Constants.Shifter.AUTO_WAIT_PERIOD : Constants.Shifter.MANUAL_WAIT_PERIOD);
     }
 
     public boolean waitPeriodElapsed() {

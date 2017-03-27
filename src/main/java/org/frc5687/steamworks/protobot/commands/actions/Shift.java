@@ -15,11 +15,13 @@ public class Shift extends Command {
     private double initialLeftSpeed, initialRightSpeed;
     private long endTime;
     private State state = State.STOP_MOTOR;
+    private boolean auto;
 
-    public Shift(Shifter.Gear gear) {
+    public Shift(Shifter.Gear gear, boolean auto) {
         requires(driveTrain);
         requires(shifter);
         this.gear = gear;
+        this.auto = auto;
     }
 
     @Override
@@ -42,7 +44,7 @@ public class Shift extends Command {
                 if (System.currentTimeMillis() >= endTime) state = State.SHIFT;
                 break;
             case SHIFT:
-                shifter.shift(gear);
+                shifter.shift(gear, auto);
                 endTime = System.currentTimeMillis() + Constants.Shifter.SHIFT_TIME;
                 state = State.WAIT_FOR_SHIFT;
                 break;
