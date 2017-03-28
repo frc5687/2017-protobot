@@ -10,6 +10,7 @@ import org.frc5687.steamworks.protobot.commands.actions.climber.AutoClimb;
 import org.frc5687.steamworks.protobot.commands.actions.climber.Climb;
 import org.frc5687.steamworks.protobot.commands.actions.climber.RunClimberManually;
 import org.frc5687.steamworks.protobot.commands.actions.drive.Shift;
+import org.frc5687.steamworks.protobot.commands.actions.drive.ToggleAutoShift;
 import org.frc5687.steamworks.protobot.commands.actions.dustpan.OverrideDustpanDown;
 import org.frc5687.steamworks.protobot.commands.actions.dustpan.OverrideDustpanUp;
 import org.frc5687.steamworks.protobot.commands.actions.lights.GimmeGear;
