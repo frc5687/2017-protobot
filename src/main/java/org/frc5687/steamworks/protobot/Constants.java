@@ -27,7 +27,7 @@ public class Constants {
 
         public static final double OPEN_SPEED = -.5;
         public static final double CLOSE_SPEED = .3;
-        public static final double CLAMP_SPEED = .2;
+        public static final double CLAMP_SPEED = .35;
         public static final double HOLD_OPEN_SPEED = -.15;
         public static final long OPEN_TIME = 500;
         public static final long CLOSE_TIME = 1000;
@@ -39,6 +39,7 @@ public class Constants {
         public static final long IR_GEAR_DETECTED = 1500;
         public static final double THRESHOLD_OPEN_AMPS = 15.0;
         public static final double THRESHOLD_CLOSE_AMPS = 10.0;
+        public static final double RETAIN_SPEED = .2;
     }
 
     public class DriveTrain {
@@ -189,19 +190,27 @@ public class Constants {
 
         public class AnglesAndDistances {
 
+            public static final double STRAIGHT_ANGLE = 0.001;
+
+            public static final double TRAVERSE_NEUTRAL_ZONE_FROM_SIDE_DISTANCE = 150;
+            public static final double TRAVERSE_NEUTRAL_ZONE_FROM_WALL_DISTANCE = 200;
+            public static final double TRAVERSE_NEUTRAL_ZONE_FROM_CENTER_DISTANCE = 200;
+
             public static final double CROSS_BASELINE_DISTANCE = 100;
-            public static final double CROSS_FIELD_DISTANCE = 0;
             public static final double RETREAT_DISTANCE = 24;
             public static final double DEPOSIT_GEAR_IR_VOLTAGE = 1.155;
             public static final double DEPOSIT_GEAR_IR_DISTANCE = 9.0; // inches
             public static final double DEPOSIT_GEAR_NEAR_INITIAL_DISTANCE = 24;
             public static final double DEPOSIT_GEAR_NEAR_ANGLE = 45;
             public static final double DEPOSIT_GEAR_NEAR_DIAGONAL_DISTANCE = 59;
+            public static final double ESCAPE_CENTER_ANGLE_RIGHT = 80;
+            public static final double ESCAPE_CENTER_ANGLE_LEFT = -80;
+            public static final double ESCAPE_CENTER_DISTANCE = 78; // TODO correct value
 
             public static final double DEPOSIT_GEAR_FAR_INITIAL_DISTANCE = 89;
             public static final double DEPOSIT_GEAR_FAR_ANGLE = 60;
 
-            public static final long MANDIBLE_HOLD_TIME = 5000;
+            public static final long MANDIBLE_HOLD_TIME = 1000;
             public static final long PAUSE_AT_SPRING_TIME = 250;
         }
 

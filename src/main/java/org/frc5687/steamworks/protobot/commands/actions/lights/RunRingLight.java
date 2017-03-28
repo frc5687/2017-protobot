@@ -1,4 +1,4 @@
-package org.frc5687.steamworks.protobot.commands.actions;
+package org.frc5687.steamworks.protobot.commands.actions.lights;
 
 import edu.wpi.first.wpilibj.command.Command;
 

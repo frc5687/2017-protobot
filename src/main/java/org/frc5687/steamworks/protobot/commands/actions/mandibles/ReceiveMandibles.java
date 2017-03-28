@@ -1,4 +1,4 @@
-package org.frc5687.steamworks.protobot.commands.actions;
+package org.frc5687.steamworks.protobot.commands.actions.mandibles;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,13 +29,14 @@ public class ReceiveMandibles extends Command {
 
     @Override
     protected void execute() {
+        boolean gearPresent = mandibles.gearPresent();
         switch (state) {
             case CLOSE:
                 mandibles.close();
                 if (System.currentTimeMillis() >= endTime || pdp.getMandiblesAmps() > Constants.Mandibles.THRESHOLD_CLOSE_AMPS) { state = State.CLAMP; }
                 break;
             case CLAMP:
-                mandibles.setSpeed(Constants.Mandibles.CLAMP_SPEED);
+                mandibles.setSpeed(gearPresent ? Constants.Mandibles.CLAMP_SPEED : Constants.Mandibles.RETAIN_SPEED);
                 if (oi.isGearWigglePressed()) {
                     state = State.WIGGLE_OUT;
                     switchTime = System.currentTimeMillis() + Constants.Mandibles.WIGGLE_OUT_TIME;
@@ -58,7 +59,7 @@ public class ReceiveMandibles extends Command {
                 }
                 break;
             default:
-                mandibles.setSpeed(Constants.Mandibles.CLAMP_SPEED);
+                mandibles.setSpeed(gearPresent ? Constants.Mandibles.CLAMP_SPEED : Constants.Mandibles.RETAIN_SPEED);
         }
         SmartDashboard.getString("Mandibles/ReceiveState", state.toString());
     }

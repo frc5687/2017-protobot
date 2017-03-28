@@ -9,6 +9,7 @@ package org.frc5687.steamworks.protobot;
 public class RobotMap {
 
     public static class Drive {
+        //  REAR - FRONT - TOP
 
         public static final int RIGHT_MOTOR_FRONT = 3;
         public static final int RIGHT_MOTOR_REAR = 4;
@@ -56,8 +57,8 @@ public class RobotMap {
 
     public static class Shifter {
 
-        public static final int PISTON_EXTENDER = 7;
-        public static final int PISTON_RETRACTOR = 6;
+        public static final int PISTON_EXTENDER = 1;
+        public static final int PISTON_RETRACTOR = 0;
 
     }
 

@@ -9,12 +9,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.frc5687.steamworks.protobot.commands.actions.AutoAlign;
-import org.frc5687.steamworks.protobot.commands.actions.AutoApproachTarget;
-import org.frc5687.steamworks.protobot.commands.actions.AutoDrive;
 import org.frc5687.steamworks.protobot.commands.autonomous.*;
-import org.frc5687.steamworks.protobot.commands.test.AutoVisionTest;
-import org.frc5687.steamworks.protobot.commands.test.FullSelfTest;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import org.frc5687.steamworks.protobot.utils.*;
 
@@ -123,35 +118,8 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
     public void autonomousInit() {
         imu.zeroYaw();
         int position = autoRotorChooser.positionRotorValue();
-        switch (position) {
-            case 0:
-                autoCommand = new SteamworksBaseCommandGroup();
-                break;
-            case 1:
-                autoCommand = new AutoDepositLeftFromFarLeft();
-                break;
-            case 2:
-                autoCommand = new AutoDepositLeftVision();
-                // autoCommand = new AutoApproachTarget(.7);
-                // autoCommand = new AutoDrive(24, 1.0, false, true);
-                // autoCommand = new AutoAlign(60, 0.5);
-                break;
-            case 3:
-                autoCommand = new AutoDepositGear();
-                break;
-            case 4:
-                autoCommand = new AutoDepositRightVision();
-                // autoCommand = new AutoDrive(24, .5, true, true);
-                break;
-            case 5:
-                autoCommand = new AutoDepositRightFromFarRight();
-                break;
-            default:
-                autoCommand = null;
-                break;
-        }
-        // autoCommand = new AutoAlign(-60, 0.5);
-        // autoCommand = new AutoDepositRightFromFarRight();
+        int hopper = autoRotorChooser.hopperRotorValue();
+        autoCommand = new AutoGroup(position, 0, hopper);
         if (autoCommand != null) {
             autoCommand.start();
         }

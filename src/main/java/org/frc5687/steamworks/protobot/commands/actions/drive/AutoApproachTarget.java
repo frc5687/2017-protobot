@@ -1,4 +1,4 @@
-package org.frc5687.steamworks.protobot.commands.actions;
+package org.frc5687.steamworks.protobot.commands.actions.drive;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
@@ -6,23 +6,21 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
-import org.frc5687.steamworks.protobot.utils.PiTrackerProxy;
-import org.frc5687.steamworks.protobot.utils.TonyPose;
 
-import static org.frc5687.steamworks.protobot.Robot.*;
+import static org.frc5687.steamworks.protobot.Robot.driveTrain;
+import static org.frc5687.steamworks.protobot.Robot.imu;
+import static org.frc5687.steamworks.protobot.Robot.lights;
 
-public class AutoVisualApproachTarget extends Command {
+public class AutoApproachTarget extends Command {
 
     private double speed;
     private PIDController distanceController;
     private PIDController angleController;
     private PIDListener distancePID;
     private PIDListener anglePID;
-
-    private double _previousOffsetAngle = -1000;
 //    private double endTime;
 
-    public AutoVisualApproachTarget(double speed) {
+    public AutoApproachTarget(double speed) {
         requires(driveTrain);
         this.speed = speed;
     }
@@ -31,20 +29,25 @@ public class AutoVisualApproachTarget extends Command {
     protected void initialize() {
         lights.turnRingLightOn();
         distancePID = new PIDListener();
-        SmartDashboard.putNumber("AutoApproachTarget/IRPID/kP", Constants.Auto.Drive.IRPID.kP);
-        SmartDashboard.putNumber("AutoApproachTarget/IRPID/kI", Constants.Auto.Drive.IRPID.kI);
-        SmartDashboard.putNumber("AutoApproachTarget/IRPID/kD", Constants.Auto.Drive.IRPID.kD);
-        SmartDashboard.putNumber("AutoApproachTarget/IRPID/kT", Constants.Auto.Drive.IRPID.TOLERANCE);
-        SmartDashboard.putNumber("AutoApproachTarget/IRPID/SetPoint", Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_VOLTAGE);
-
         driveTrain.resetDriveEncoders();
 
-        distanceController = new PIDController(Constants.Auto.Drive.IRPID.kP, Constants.Auto.Drive.IRPID.kI, Constants.Auto.Drive.IRPID.kD, driveTrain.getIrSensor(), distancePID);
+        /*
+        double kP = Double.parseDouble(SmartDashboard.getString("DB/String 0", "0.04"));
+        double kI = Double.parseDouble(SmartDashboard.getString("DB/String 1", "0.001"));
+        double kD = Double.parseDouble(SmartDashboard.getString("DB/String 2", "0.02"));
+        */
+        double kP = Constants.Auto.Drive.IRPID.kP;
+        double kI = Constants.Auto.Drive.IRPID.kI;
+        double kD = Constants.Auto.Drive.IRPID.kD;
+
+        distanceController = new PIDController(kP, kI, kD, driveTrain.getIrSensor(), distancePID);
         distanceController.setAbsoluteTolerance(Constants.Auto.Drive.IRPID.TOLERANCE);
-        distanceController.setInputRange(0, 5.5);
+        distanceController.setInputRange(0, 90);  // Inches
         distanceController.setOutputRange(-speed, speed);
-        distanceController.setSetpoint(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_VOLTAGE);
+        distanceController.setSetpoint(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_DISTANCE);
         distanceController.enable();
+
+        SmartDashboard.putData("AutoApproachTarget/IRPID", distanceController);
 
         SmartDashboard.putNumber("AutoApproachTarget/AnglePID/kP", Constants.Auto.Drive.AnglePID.kP);
         SmartDashboard.putNumber("AutoApproachTarget/AnglePID/kI", Constants.Auto.Drive.AnglePID.kI);
@@ -53,7 +56,6 @@ public class AutoVisualApproachTarget extends Command {
         anglePID = new PIDListener();
         angleController = new PIDController(Constants.Auto.Drive.AnglePID.kP, Constants.Auto.Drive.AnglePID.kI, Constants.Auto.Drive.AnglePID.kD, imu, anglePID);
         angleController.setInputRange(Constants.Auto.MIN_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
-        angleController.setAbsoluteTolerance(Constants.Auto.Drive.AnglePID.TOLERANCE);
         double maxSpeed = speed * Constants.Auto.Drive.AnglePID.MAX_DIFFERENCE;
         SmartDashboard.putNumber("AutoApproachTarget/AnglePID/RAISE_SPEED", maxSpeed);
         DriverStation.reportError("Turn PID Max Output: " + speed, false);
@@ -62,33 +64,15 @@ public class AutoVisualApproachTarget extends Command {
         angleController.setSetpoint(imu.getYaw());
         angleController.enable();
 
-        DriverStation.reportError("AutoVisualApproachTarget initialized with angle " + angleController.getSetpoint(), false);
+        DriverStation.reportError("AutoApproach initialized", false);
     }
 
     @Override
     protected void execute() {
-        // See what we can find out from the piTracker...
-        PiTrackerProxy.Frame frame = piTrackerProxy.getLatestFrame();
-        if (frame!=null && frame.isSighted() && Math.abs(frame.getOffsetAngle()-_previousOffsetAngle) > Constants.Auto.Drive.AnglePID.TOLERANCE) {
-            _previousOffsetAngle = frame.getOffsetAngle();
-            TonyPose pose = (TonyPose)poseTracker.get(frame.getMillis());
-            if (pose!=null) {
-                double targetAngle = pose.getAngle() + _previousOffsetAngle;
-                if (targetAngle > 180) { targetAngle-=360; }
-                else if (targetAngle < -180) { targetAngle+=360; }
-                synchronized (angleController) {
-                    angleController.setSetpoint(targetAngle);
-                    DriverStation.reportError("AutoVisualApproachTarget retargeting angle " + angleController.getSetpoint(), false);
-                    angleController.enable();
-                }
-            }
-        }
-
-
         double distanceFactor = 0;
         double angleFactor = 0;
         synchronized (distancePID) {
-            distanceFactor = distancePID.get();
+            distanceFactor = distancePID.get() * -1;
         }
 
         synchronized (anglePID) {
@@ -96,12 +80,12 @@ public class AutoVisualApproachTarget extends Command {
         }
         SmartDashboard.putNumber("AutoApproachTarget/distanceFactor", distanceFactor);
         SmartDashboard.putNumber("AutoApproachTarget/angleFactor", angleFactor);
-
+        DriverStation.reportError("Distance="+driveTrain.getIrSensor().pidGet() +", DistanceFactor=" + distanceFactor + ", AngleFactor=" + angleFactor, false);
         driveTrain.tankDrive(distanceFactor + angleFactor, distanceFactor - angleFactor);
 
         SmartDashboard.putBoolean("AutoApproachTarget/IRPID/onTarget", distanceController.onTarget());
-        SmartDashboard.putNumber("AutoApproachTarget/IRPID/voltage", driveTrain.getIrSensor().pidGet());
-        SmartDashboard.putNumber("AutoApproachTarget/IRPID/value", driveTrain.getIrSensor().getValue());
+        SmartDashboard.putNumber("AutoApproachTarget/IRPID/distance", driveTrain.getIrSensor().pidGet());
+        SmartDashboard.putNumber("AutoApproachTarget/IRPID/raw", driveTrain.getIrSensor().getRaw());
         SmartDashboard.putNumber("AutoApproachTarget/IRPID/error", distanceController.getError());
         SmartDashboard.putNumber("AutoApproachTarget/AnglePID/yaw", imu.getYaw());
         SmartDashboard.putNumber("AutoApproachTarget/AnglePID/value", anglePID.get());
@@ -109,12 +93,12 @@ public class AutoVisualApproachTarget extends Command {
 
     @Override
     protected boolean isFinished() {
-        return distanceController.onTarget() || driveTrain.getIrSensor().pidGet() >= Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_VOLTAGE;
+        return distanceController.onTarget();// || driveTrain.getIrSensor().pidGet() <= Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_DISTANCE;
     }
 
     @Override
     protected void end() {
-        DriverStation.reportError("AutoApproach Finished (" + driveTrain.getDistance() + ")", false);
+        DriverStation.reportError("AutoApproachTarget Finished (" + driveTrain.getIrSensor().pidGet() + ")", false);
         angleController.disable();
         driveTrain.tankDrive(0, 0);
         lights.turnRingLightOff();

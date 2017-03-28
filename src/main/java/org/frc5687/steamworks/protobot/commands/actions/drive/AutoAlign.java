@@ -1,4 +1,4 @@
-package org.frc5687.steamworks.protobot.commands.actions;
+package org.frc5687.steamworks.protobot.commands.actions.drive;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
@@ -86,4 +86,7 @@ public class AutoAlign extends Command implements PIDOutput {
         }
     }
 
+    public void setAngle(double angle) {
+        this.angle = angle;
+    }
 }

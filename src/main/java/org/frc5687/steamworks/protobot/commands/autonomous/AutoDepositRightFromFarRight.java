@@ -1,13 +1,17 @@
 package org.frc5687.steamworks.protobot.commands.autonomous;
 
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.frc5687.steamworks.protobot.Constants;
-import org.frc5687.steamworks.protobot.commands.actions.*;
+import org.frc5687.steamworks.protobot.commands.actions.drive.AutoAlign;
+import org.frc5687.steamworks.protobot.commands.actions.drive.AutoApproachTarget;
+import org.frc5687.steamworks.protobot.commands.actions.drive.AutoDrive;
+import org.frc5687.steamworks.protobot.commands.actions.mandibles.HoldMandiblesOpen;
 import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
 
 /**
  * Created by Baxter on 2/25/2017.
  */
-public class AutoDepositRightFromFarRight extends SteamworksBaseCommandGroup {
+public class AutoDepositRightFromFarRight extends CommandGroup {
 
     public AutoDepositRightFromFarRight() {
         super();
