@@ -1,14 +1,18 @@
 package org.frc5687.steamworks.protobot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
+
+import static org.frc5687.steamworks.protobot.Robot.oi;
 
 public class Shifter extends Subsystem {
 
     private DoubleSolenoid shifterSolenoid;
+    private long waitPeriodEndTime = 0;
+    private boolean autShiftEnabled = true;
 
     public Shifter() {
         shifterSolenoid = new DoubleSolenoid(RobotMap.Shifter.PISTON_EXTENDER, RobotMap.Shifter.PISTON_RETRACTOR);
@@ -18,39 +22,54 @@ public class Shifter extends Subsystem {
     protected void initDefaultCommand() {
     }
 
-    public void shift(DoubleSolenoid.Value gear) {
-        shifterSolenoid.set(gear);
+    public void shift(Gear gear, boolean auto) {
+        shifterSolenoid.set(gear.getSolenoidValue());
+        waitPeriodEndTime = System.currentTimeMillis() + (auto ? Constants.Shifter.AUTO_WAIT_PERIOD : Constants.Shifter.MANUAL_WAIT_PERIOD);
+        if (gear==Gear.HIGH) {oi.rumbleRight();}
+        if (gear==Gear.LOW) {oi.rumbleLeft();}
     }
 
-    public void shiftHigh() {
-        shifterSolenoid.set(DoubleSolenoid.Value.kForward);
+    public boolean waitPeriodElapsed() {
+        return System.currentTimeMillis() > waitPeriodEndTime;
     }
 
-    public void shiftLow() {
-        shifterSolenoid.set(DoubleSolenoid.Value.kReverse);
-    }
-
-    public DoubleSolenoid.Value getGear() {
-        return shifterSolenoid.get();
-    }
-
-    /**
-     * Disables the double solenoid
-     */
-    public void disablePiston() {
-        shifterSolenoid.set(DoubleSolenoid.Value.kOff);
-    }
-
-    public boolean isInHighGear() {
-        return shifterSolenoid.get() == DoubleSolenoid.Value.kForward;
-    }
-
-    public boolean isInLowGear() {
-        return shifterSolenoid.get() == DoubleSolenoid.Value.kReverse;
+    public Gear getGear() {
+        DoubleSolenoid.Value current = shifterSolenoid.get();
+        if (current==Gear.HIGH.getSolenoidValue()) {
+            return Gear.HIGH;
+        } else if (current== Gear.LOW.getSolenoidValue()) {
+            return Gear.LOW;
+        }
+        return Gear.UNKNOWN;
     }
 
     public void updateDashboard() {
-        SmartDashboard.putString("shifter/Gear", shifterSolenoid.get() == DoubleSolenoid.Value.kForward ? "High" : (shifterSolenoid.get() == DoubleSolenoid.Value.kReverse ? "Low" : "Unknown"));
+        SmartDashboard.putString("shifter/Gear", getGear()==Gear.HIGH ? "High" : (getGear() == Gear.LOW ? "Low" : "Unknown"));
+    }
+
+    public enum Gear {
+        UNKNOWN(DoubleSolenoid.Value.kOff),
+        HIGH(DoubleSolenoid.Value.kForward),
+        LOW(DoubleSolenoid.Value.kReverse);
+
+        private DoubleSolenoid.Value solenoidValue;
+
+        Gear(DoubleSolenoid.Value solenoidValue) {
+            this.solenoidValue = solenoidValue;
+        }
+
+        public DoubleSolenoid.Value getSolenoidValue() {
+            return solenoidValue;
+        }
+
+    }
+
+    public boolean isAutShiftEnabled() {
+        return autShiftEnabled;
+    }
+
+    public void setAutShiftEnabled(boolean enabled) {
+        autShiftEnabled = enabled;
     }
 
 }

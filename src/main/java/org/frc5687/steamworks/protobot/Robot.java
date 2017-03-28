@@ -170,6 +170,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         mandibles.poll();
         dustpan.poll();
         ledStrip.poll();
+        oi.poll();
     }
 
     public void updateDashboard() {

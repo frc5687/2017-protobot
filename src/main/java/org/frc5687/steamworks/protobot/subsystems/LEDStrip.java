@@ -8,6 +8,8 @@ import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.utils.Color;
 import org.frc5687.steamworks.protobot.utils.LEDController;
 
+import static org.frc5687.steamworks.protobot.Robot.shifter;
+
 /**
  * Subsystem to control lights for vision tracking and shooter aid
  *
@@ -54,7 +56,7 @@ public class LEDStrip extends Subsystem {
         if (_dustpanDeployed) {return LEDColors.DUSTPAN_DEPLOYED; }
         if (DriverStation.getInstance().isAutonomous()) { return LEDColors.AUTONOMOUS; }
         if (DriverStation.getInstance().isDisabled()) { return LEDColors.DISABLED; }
-
+        if (shifter.getGear()== Shifter.Gear.HIGH) { return LEDColors.HIGH_GEAR; }
         return LEDColors.TELEOP;
     }
 

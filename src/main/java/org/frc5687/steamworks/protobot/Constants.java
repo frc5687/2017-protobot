@@ -50,6 +50,7 @@ public class Constants {
         public static final double FULL_FORWARDS_SPEED = 1;
         public static final double FULL_BACKWARDS_SPEED = -1;
 
+        public static final double STRAIGHT_TOLERANCE = 0.2;
     }
 
     public class Deadbands {
@@ -133,15 +134,21 @@ public class Constants {
 
     public class OI {
 
-        public static final double AXIS_BUTTON_THRESHHOLD = 0.2; //TODO find actual when pressed value
+        public static final double AXIS_BUTTON_THRESHHOLD = 0.2;
 
+        public static final long RUMBLE_MILLIS = 250;
+        public static final double RUMBLE_INTENSITY = 1.0;
     }
 
     public class Shifter {
+        public static final long STOP_MOTOR_TIME = 60;
+        public static final long SHIFT_TIME = 60;
 
-        public static final long STOP_MOTOR_TIME = 60; //TODO find correct values
-        public static final long SHIFT_TIME = 60; //TODO find correct values
+        public static final double SHIFT_UP_THRESHOLD = 50; // in inches per second TODO tune
+        public static final double SHIFT_DOWN_THRESHOLD = 40; // in inches per second TODO tune
 
+        public static final long AUTO_WAIT_PERIOD = 500;
+        public static final long MANUAL_WAIT_PERIOD = 5000;
     }
 
     public class Dustpan {
