@@ -16,7 +16,6 @@ public class DriveWith2Joysticks extends Command {
 
     public DriveWith2Joysticks() {
         requires(driveTrain);
-        requires(shifter);
     }
 
     @Override
@@ -31,7 +30,7 @@ public class DriveWith2Joysticks extends Command {
     }
 
     private void runShifterAutomatically() {
-        if (shifter.waitPeriodElapsed() && driveTrain.isDrivingStraight()) {
+        if (shifter.waitPeriodElapsed() && driveTrain.isDrivingStraight() && shifter.isAutShiftEnabled()) {
             switch (shifter.getGear()) {
                 case HIGH:
                     if(driveTrain.getRate() < Constants.Shifter.SHIFT_DOWN_THRESHOLD) {
@@ -52,7 +51,7 @@ public class DriveWith2Joysticks extends Command {
     }
 
     private void shift(Shifter.Gear gear) {
-        DriverStation.reportError("Auto-shifting into " + gear.toString(), false);
+        DriverStation.reportError("Auto-shifting into " + gear.toString() + "(" + driveTrain.getRate() + ")", false);
         Command shift = new Shift(gear, true);
         shift.start();
     }

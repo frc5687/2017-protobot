@@ -6,10 +6,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
 
+import static org.frc5687.steamworks.protobot.Robot.oi;
+
 public class Shifter extends Subsystem {
 
     private DoubleSolenoid shifterSolenoid;
     private long waitPeriodEndTime = 0;
+    private boolean autShiftEnabled = true;
 
     public Shifter() {
         shifterSolenoid = new DoubleSolenoid(RobotMap.Shifter.PISTON_EXTENDER, RobotMap.Shifter.PISTON_RETRACTOR);
@@ -22,6 +25,8 @@ public class Shifter extends Subsystem {
     public void shift(Gear gear, boolean auto) {
         shifterSolenoid.set(gear.getSolenoidValue());
         waitPeriodEndTime = System.currentTimeMillis() + (auto ? Constants.Shifter.AUTO_WAIT_PERIOD : Constants.Shifter.MANUAL_WAIT_PERIOD);
+        if (gear==Gear.HIGH) {oi.rumbleRight();}
+        if (gear==Gear.LOW) {oi.rumbleLeft();}
     }
 
     public boolean waitPeriodElapsed() {
@@ -59,5 +64,12 @@ public class Shifter extends Subsystem {
 
     }
 
+    public boolean isAutShiftEnabled() {
+        return autShiftEnabled;
+    }
+
+    public void setAutShiftEnabled(boolean enabled) {
+        autShiftEnabled = enabled;
+    }
 
 }

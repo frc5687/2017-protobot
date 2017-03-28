@@ -1,6 +1,8 @@
 package org.frc5687.steamworks.protobot;
 
+import edu.wpi.first.wpilibj.ControllerPower;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -30,8 +32,9 @@ public class OI {
     public static final int GP_RECEIVE_MANDIBLES = Gamepad.Buttons.A.getNumber();
     public static final int GP_AUTO_CLIMB = Gamepad.Buttons.Y.getNumber();
     public static final int GP_SLOW_CLIMB = Gamepad.Buttons.X.getNumber();
-    public static final int GP_FAST_CLIMB = Gamepad.Buttons.B.getNumber();
+    // public static final int GP_FAST_CLIMB = Gamepad
 
+    public static final int GP_AUTOSHIFT = Gamepad.Buttons.B.getNumber();
     public static final int GP_GIMME_LEFT = Gamepad.Buttons.LEFT_STICK.getNumber();
     public static final int GP_GIMME_RIGHT = Gamepad.Buttons.RIGHT_STICK.getNumber();
 
@@ -63,8 +66,10 @@ public class OI {
     public JoystickButton gpReceiveMandiblesButton;
     public AxisButton gpDeployDustpan;
     public JoystickButton gpAutoClimb;
-    public JoystickButton gpFastClimb;
+    //public JoystickButton gpFastClimb;
     public JoystickButton gpSlowClimb;
+
+    public JoystickButton gpAutoShift;
 
     public JoystickButton gpYesButton;
 
@@ -92,7 +97,7 @@ public class OI {
     public JoystickButton overrideDustpanDown;
 
     private JoystickButton gearWiggle;
-
+    private long endRumbleMillis;
 
 
 
@@ -161,8 +166,9 @@ public class OI {
 
         gpAutoClimb = new JoystickButton(gamepad, GP_AUTO_CLIMB);
         gpSlowClimb = new JoystickButton(gamepad, GP_SLOW_CLIMB);
-        gpFastClimb = new JoystickButton(gamepad, GP_FAST_CLIMB);
+        //gpFastClimb = new JoystickButton(gamepad, GP_FAST_CLIMB);
 
+        gpAutoShift = new JoystickButton(gamepad, GP_AUTOSHIFT);
         ocAutoClimb = new JoystickButton(operatorConsole, OC_AUTO_CLIMB);
         ocSlowClimb = new JoystickButton(operatorConsole, OC_SLOW_CLIMB);
         ocFastClimb = new JoystickButton(operatorConsole, OC_FAST_CLIMB);
@@ -170,7 +176,8 @@ public class OI {
 
         gpAutoClimb.toggleWhenPressed(new AutoClimb());
         gpSlowClimb.toggleWhenPressed(new Climb(Constants.Climber.PICKUP_SPEED));
-        gpFastClimb.toggleWhenPressed(new Climb(Constants.Climber.ASCEND_SPEED));
+        // gpFastClimb.toggleWhenPressed(new Climb(Constants.Climber.ASCEND_SPEED));
+        gpAutoShift.whenPressed(new ToggleAutoShift());
 
         ocAutoClimb.toggleWhenPressed(new AutoClimb());
         ocSlowClimb.toggleWhenPressed(new Climb(Constants.Climber.PICKUP_SPEED));
@@ -268,4 +275,23 @@ public class OI {
     public boolean isNoPressed() {
         return gamepad.getRawButton(Gamepad.Buttons.START);
     }
+
+    public void rumbleLeft() {
+        gamepad.setRumble(GenericHID.RumbleType.kLeftRumble, Constants.OI.RUMBLE_INTENSITY);
+        endRumbleMillis = System.currentTimeMillis() + Constants.OI.RUMBLE_MILLIS;
+    }
+
+    public void rumbleRight() {
+        gamepad.setRumble(GenericHID.RumbleType.kRightRumble, Constants.OI.RUMBLE_INTENSITY);
+        endRumbleMillis = System.currentTimeMillis() + Constants.OI.RUMBLE_MILLIS;
+    }
+
+    public void poll() {
+        if (endRumbleMillis>0 && System.currentTimeMillis() > endRumbleMillis) {
+            endRumbleMillis = 0;
+            gamepad.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
+            gamepad.setRumble(GenericHID.RumbleType.kRightRumble, 0);
+        }
+    }
+
 }

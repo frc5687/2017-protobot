@@ -1,5 +1,6 @@
 package org.frc5687.steamworks.protobot.commands.test;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -18,7 +19,7 @@ public class SelfTestBootstrapper extends Command {
 
     @Override
     protected void execute() {
-        if (!done && oi.isYesPressed() && oi.isNoPressed() && autoRotorChooser.positionRotorValue()==0) {
+        if (!done && oi.isYesPressed() && oi.isNoPressed() && !DriverStation.getInstance().isFMSAttached()) {
             Scheduler.getInstance().add(new FullSelfTest());
             done=true;
         }

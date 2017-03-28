@@ -22,4 +22,5 @@ public class LEDColors {
 
     public static final Color TONY_BOOTUP = Color.YELLOW;
     public static final Color RHODY_BOOTUP = Color.GREEN;
+    public static final Color HIGH_GEAR = Color.WHITE;
 }
