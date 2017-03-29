@@ -75,6 +75,7 @@ public class AutoDrive extends Command {
         SmartDashboard.putNumber("AutoDrive/setPoint", imu.getYaw());
         angleController.setOutputRange(-maxSpeed, maxSpeed);
         angleController.setContinuous();
+        // If an angle is supplied, use that as our setpoint.  Otherwise get the current heading and stick to it!
         angleController.setSetpoint(angle==1000?imu.getYaw():angle);
         angleController.enable();
 
