@@ -49,8 +49,8 @@ public class Shifter extends Subsystem {
 
     public enum Gear {
         UNKNOWN(DoubleSolenoid.Value.kOff),
-        HIGH(DoubleSolenoid.Value.kForward),
-        LOW(DoubleSolenoid.Value.kReverse);
+        HIGH(DoubleSolenoid.Value.kReverse),
+        LOW(DoubleSolenoid.Value.kForward);
 
         private DoubleSolenoid.Value solenoidValue;
 
