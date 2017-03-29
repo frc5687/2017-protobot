@@ -33,12 +33,12 @@ public class DriveWith2Joysticks extends Command {
         if (shifter.waitPeriodElapsed() && driveTrain.isDrivingStraight() && shifter.isAutShiftEnabled()) {
             switch (shifter.getGear()) {
                 case HIGH:
-                    if(driveTrain.getRate() < Constants.Shifter.SHIFT_DOWN_THRESHOLD) {
+                    if(Math.abs(driveTrain.getRate()) < Constants.Shifter.SHIFT_DOWN_THRESHOLD) {
                         shift(Shifter.Gear.LOW);
                     }
                     break;
                 case LOW:
-                    if(driveTrain.getRate() > Constants.Shifter.SHIFT_UP_THRESHOLD) {
+                    if(Math.abs(driveTrain.getRate()) > Constants.Shifter.SHIFT_UP_THRESHOLD) {
                         shift(Shifter.Gear.HIGH);
                     }
                     break;
