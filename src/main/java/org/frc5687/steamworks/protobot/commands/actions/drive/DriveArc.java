@@ -78,16 +78,19 @@ public class DriveArc extends Command {
             return true;
         }
         if (_angle != 1000) {
+            double yaw = imu.getYaw();
             if (_clockwise) {
-                if (imu.getYaw() >= _angle) {
-                    DriverStation.reportError("DriveArc passed angle " + _angle + " to" + imu.getYaw(), false);
+                if (yaw >= _angle) {
+                    DriverStation.reportError("DriveArc passed angle " + _angle + " to" + yaw, false);
                     return true;
                 }
+                DriverStation.reportError("Clockwise at " + yaw, false);
             } else {
-                if (imu.getYaw() <= _angle) {
-                    DriverStation.reportError("DriveArc passed angle " + _angle + " to" + imu.getYaw(), false);
+                if (yaw <= _angle) {
+                    DriverStation.reportError("DriveArc passed angle " + _angle + " to" + yaw, false);
                     return true;
                 }
+                DriverStation.reportError("Counterclockwise at " + yaw, false);
             }
         }
         return false;

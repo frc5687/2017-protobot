@@ -119,7 +119,8 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         imu.zeroYaw();
         int position = autoRotorChooser.positionRotorValue();
         int hopper = autoRotorChooser.hopperRotorValue();
-        autoCommand = new AutoGroup(position, 0, hopper);
+        autoCommand = new AutoGroup(3, 0, 1);
+        // autoCommand = new TestGroup();
         if (autoCommand != null) {
             autoCommand.start();
         }
@@ -188,7 +189,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
             poseTracker.updateDashboard();
 
             SmartDashboard.putBoolean("IsTony", Constants.isTony);
-            SmartDashboard.putNumber("Yaw", imu.getYaw());
+            SmartDashboard.putNumber("DriveTrain/yaw", imu.getYaw());
         }
     }
 
