@@ -19,12 +19,12 @@ public class AutoDrive extends Command {
     private PIDController angleController;
     private PIDListener distancePID;
     private PIDListener anglePID;
-    private double endTime;
+    private double endMillis;
     private boolean usePID;
     private boolean stopOnFinish;
 
     public AutoDrive(double distance, double speed) {
-        this(distance, speed, false, true);
+        this(distance, speed, false, true, 0);
     }
 
     /***
@@ -34,12 +34,13 @@ public class AutoDrive extends Command {
      * @param usePID Whether to use pid or not
      * @param stopOnFinish Whether to stop the motors when we are done
      */
-    public AutoDrive(double distance, double speed, boolean usePID, boolean stopOnFinish) {
+    public AutoDrive(double distance, double speed, boolean usePID, boolean stopOnFinish, long maxMillis) {
         requires(driveTrain);
         this.speed = speed;
         this.distance = distance;
         this.usePID = usePID;
         this.stopOnFinish = stopOnFinish;
+        this.endMillis = maxMillis == 0 ? Long.MAX_VALUE : System.currentTimeMillis() + maxMillis;
     }
 
     @Override
@@ -103,6 +104,7 @@ public class AutoDrive extends Command {
 
     @Override
     protected boolean isFinished() {
+        if (System.currentTimeMillis() > endMillis) { return true; }
         if (usePID) {
             return distanceController.onTarget();
         } else {
