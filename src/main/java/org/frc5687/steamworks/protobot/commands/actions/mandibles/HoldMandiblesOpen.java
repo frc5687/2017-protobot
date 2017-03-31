@@ -1,5 +1,6 @@
 package org.frc5687.steamworks.protobot.commands.actions.mandibles;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
 
@@ -42,6 +43,6 @@ public class HoldMandiblesOpen extends Command {
 
     @Override
     protected boolean isFinished() {
-        return System.currentTimeMillis() > endTime && !oi.isEjectGearPressed();
+        return System.currentTimeMillis() > endTime && (DriverStation.getInstance().isAutonomous() || !oi.isEjectGearPressed());
     }
 }

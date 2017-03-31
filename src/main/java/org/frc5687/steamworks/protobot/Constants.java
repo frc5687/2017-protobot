@@ -37,7 +37,7 @@ public class Constants {
         public static final long WIGGLE_OUT_TIME = 30;
         public static final long WIGGLE_IN_TIME = 70;
         public static final long IR_GEAR_DETECTED = 1500;
-        public static final double THRESHOLD_OPEN_AMPS = 15.0;
+        public static final double THRESHOLD_OPEN_AMPS = 10.0;
         public static final double THRESHOLD_CLOSE_AMPS = 10.0;
         public static final double RETAIN_SPEED = -.2;
     }
