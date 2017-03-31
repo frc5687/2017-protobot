@@ -25,10 +25,10 @@ public class Constants {
 
     public class Mandibles {
 
-        public static final double OPEN_SPEED = -.5;
-        public static final double CLOSE_SPEED = .3;
-        public static final double CLAMP_SPEED = .35;
-        public static final double HOLD_OPEN_SPEED = -.15;
+        public static final double OPEN_SPEED = .85;
+        public static final double CLOSE_SPEED = -.3;
+        public static final double CLAMP_SPEED = -.27;
+        public static final double HOLD_OPEN_SPEED = .15;
         public static final long OPEN_TIME = 500;
         public static final long CLOSE_TIME = 1000;
         public static final double TONY_MAX_POT_LIMIT = 0.5;
@@ -39,7 +39,7 @@ public class Constants {
         public static final long IR_GEAR_DETECTED = 1500;
         public static final double THRESHOLD_OPEN_AMPS = 15.0;
         public static final double THRESHOLD_CLOSE_AMPS = 10.0;
-        public static final double RETAIN_SPEED = .2;
+        public static final double RETAIN_SPEED = -.2;
     }
 
     public class DriveTrain {
