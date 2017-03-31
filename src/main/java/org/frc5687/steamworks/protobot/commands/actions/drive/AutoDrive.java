@@ -20,6 +20,8 @@ public class AutoDrive extends Command {
     private PIDListener distancePID;
     private PIDListener anglePID;
     private long endMillis;
+    private long maxMillis;
+
     private boolean usePID;
     private boolean stopOnFinish;
 
@@ -45,6 +47,7 @@ public class AutoDrive extends Command {
         this.usePID = usePID;
         this.stopOnFinish = stopOnFinish;
         this.endMillis = maxMillis == 0 ? Long.MAX_VALUE : System.currentTimeMillis() + maxMillis;
+        this.maxMillis = maxMillis;
     }
 
     @Override
@@ -108,7 +111,9 @@ public class AutoDrive extends Command {
 
     @Override
     protected boolean isFinished() {
-        if (System.currentTimeMillis() > endMillis) { return true; }
+        if (maxMillis!=0 && System.currentTimeMillis() > endMillis) {
+            DriverStation.reportError("AutoDrive for " + maxMillis + " timed out.", false);
+            return true; }
         if (usePID) {
             return distanceController.onTarget();
         } else {
