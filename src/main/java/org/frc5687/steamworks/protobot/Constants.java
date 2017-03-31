@@ -33,7 +33,7 @@ public class Constants {
         public static final long CLOSE_TIME = 1000;
         public static final double TONY_MAX_POT_LIMIT = 0.5;
         public static final double PROTOBOT_MAX_POT_LIMIT = 0.5;
-        public static final double WIGGLE_SPEED = 0.2;
+        public static final double WIGGLE_SPEED = -0.2;
         public static final long WIGGLE_OUT_TIME = 30;
         public static final long WIGGLE_IN_TIME = 70;
         public static final long IR_GEAR_DETECTED = 1500;
