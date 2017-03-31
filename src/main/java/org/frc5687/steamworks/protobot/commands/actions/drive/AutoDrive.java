@@ -19,12 +19,16 @@ public class AutoDrive extends Command {
     private PIDController angleController;
     private PIDListener distancePID;
     private PIDListener anglePID;
-    private double endMillis;
+    private long endMillis;
     private boolean usePID;
     private boolean stopOnFinish;
 
     public AutoDrive(double distance, double speed) {
-        this(distance, speed, false, true, 0);
+        this(distance, speed, false, true, 1000);
+    }
+
+    public AutoDrive(double distance, double speed, long maxMillis) {
+        this(distance, speed, false, true, maxMillis);
     }
 
     /***

@@ -16,7 +16,7 @@ public class AutoDepositLeftFromFarLeft extends CommandGroup {
     public AutoDepositLeftFromFarLeft() {
         super();
         // addParallel(new ReceiveMandibles());
-        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FAR_INITIAL_DISTANCE, Constants.Auto.Drive.SPEED));
+        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FAR_INITIAL_DISTANCE, Constants.Auto.Drive.SPEED, 2000));
         addSequential(new AutoAlign(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FAR_ANGLE, Constants.Auto.Align.SPEED));
         addSequential(new AutoApproachTarget(0.7));
         addSequential(new EjectMandibles());
