@@ -26,7 +26,7 @@ public class AutoDrive extends Command {
     private boolean stopOnFinish;
 
     public AutoDrive(double distance, double speed) {
-        this(distance, speed, false, true, 1000);
+        this(distance, speed, false, true, 0);
     }
 
     public AutoDrive(double distance, double speed, long maxMillis) {
@@ -46,12 +46,12 @@ public class AutoDrive extends Command {
         this.distance = distance;
         this.usePID = usePID;
         this.stopOnFinish = stopOnFinish;
-        this.endMillis = maxMillis == 0 ? Long.MAX_VALUE : System.currentTimeMillis() + maxMillis;
         this.maxMillis = maxMillis;
     }
 
     @Override
     protected void initialize() {
+        this.endMillis = maxMillis == 0 ? Long.MAX_VALUE : System.currentTimeMillis() + maxMillis;
         driveTrain.resetDriveEncoders();
         if (usePID) {
             distancePID = new PIDListener();
@@ -111,7 +111,7 @@ public class AutoDrive extends Command {
 
     @Override
     protected boolean isFinished() {
-        if (maxMillis!=0 && System.currentTimeMillis() > endMillis) {
+        if (maxMillis>0 && endMillis!=Long.MAX_VALUE && System.currentTimeMillis() > endMillis) {
             DriverStation.reportError("AutoDrive for " + maxMillis + " timed out.", false);
             return true; }
         if (usePID) {
