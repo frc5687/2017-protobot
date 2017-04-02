@@ -19,12 +19,18 @@ public class AutoDrive extends Command {
     private PIDController angleController;
     private PIDListener distancePID;
     private PIDListener anglePID;
-    private double endTime;
+    private long endMillis;
+    private long maxMillis;
+
     private boolean usePID;
     private boolean stopOnFinish;
 
     public AutoDrive(double distance, double speed) {
-        this(distance, speed, false, true);
+        this(distance, speed, false, true, 0);
+    }
+
+    public AutoDrive(double distance, double speed, long maxMillis) {
+        this(distance, speed, false, true, maxMillis);
     }
 
     /***
@@ -34,16 +40,18 @@ public class AutoDrive extends Command {
      * @param usePID Whether to use pid or not
      * @param stopOnFinish Whether to stop the motors when we are done
      */
-    public AutoDrive(double distance, double speed, boolean usePID, boolean stopOnFinish) {
+    public AutoDrive(double distance, double speed, boolean usePID, boolean stopOnFinish, long maxMillis) {
         requires(driveTrain);
         this.speed = speed;
         this.distance = distance;
         this.usePID = usePID;
         this.stopOnFinish = stopOnFinish;
+        this.maxMillis = maxMillis;
     }
 
     @Override
     protected void initialize() {
+        this.endMillis = maxMillis == 0 ? Long.MAX_VALUE : System.currentTimeMillis() + maxMillis;
         driveTrain.resetDriveEncoders();
         if (usePID) {
             distancePID = new PIDListener();
@@ -103,6 +111,9 @@ public class AutoDrive extends Command {
 
     @Override
     protected boolean isFinished() {
+        if (maxMillis>0 && endMillis!=Long.MAX_VALUE && System.currentTimeMillis() > endMillis) {
+            DriverStation.reportError("AutoDrive for " + maxMillis + " timed out.", false);
+            return true; }
         if (usePID) {
             return distanceController.onTarget();
         } else {

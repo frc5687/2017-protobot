@@ -25,21 +25,21 @@ public class Constants {
 
     public class Mandibles {
 
-        public static final double OPEN_SPEED = -.5;
-        public static final double CLOSE_SPEED = .3;
-        public static final double CLAMP_SPEED = .35;
-        public static final double HOLD_OPEN_SPEED = -.15;
+        public static final double OPEN_SPEED = .85;
+        public static final double CLOSE_SPEED = -.3;
+        public static final double CLAMP_SPEED = -.27;
+        public static final double HOLD_OPEN_SPEED = .15;
         public static final long OPEN_TIME = 500;
         public static final long CLOSE_TIME = 1000;
         public static final double TONY_MAX_POT_LIMIT = 0.5;
         public static final double PROTOBOT_MAX_POT_LIMIT = 0.5;
-        public static final double WIGGLE_SPEED = 0.2;
+        public static final double WIGGLE_SPEED = -0.2;
         public static final long WIGGLE_OUT_TIME = 30;
         public static final long WIGGLE_IN_TIME = 70;
         public static final long IR_GEAR_DETECTED = 1500;
-        public static final double THRESHOLD_OPEN_AMPS = 15.0;
+        public static final double THRESHOLD_OPEN_AMPS = 10.0;
         public static final double THRESHOLD_CLOSE_AMPS = 10.0;
-        public static final double RETAIN_SPEED = .2;
+        public static final double RETAIN_SPEED = -.2;
     }
 
     public class DriveTrain {
@@ -100,7 +100,8 @@ public class Constants {
             public static final double INCHES_PER_ROTATION = Math.PI * WHEEL_DIAMETER;
             public static final double SCALAR_RATIO = 8;
 //            public static final double INCHES_PER_PULSE = INCHES_PER_ROTATION * SCALAR_RATIO / PULSES_PER_ROTATION;
-            public static final double INCHES_PER_PULSE = 0.12371134;
+            public static final double INCHES_PER_PULSE = .0973;
+            // public static final double INCHES_PER_PULSE = 0.12371134;
             public static final double MAX_PERIOD = 5;
 
         }
@@ -196,7 +197,7 @@ public class Constants {
             public static final double TRAVERSE_NEUTRAL_ZONE_FROM_WALL_DISTANCE = 200;
             public static final double TRAVERSE_NEUTRAL_ZONE_FROM_CENTER_DISTANCE = 200;
 
-            public static final double CROSS_BASELINE_DISTANCE = 100;
+            public static final double CROSS_BASELINE_DISTANCE = 150;
             public static final double RETREAT_DISTANCE = 24;
             public static final double DEPOSIT_GEAR_IR_VOLTAGE = 1.155;
             public static final double DEPOSIT_GEAR_IR_DISTANCE = 9.0; // inches
