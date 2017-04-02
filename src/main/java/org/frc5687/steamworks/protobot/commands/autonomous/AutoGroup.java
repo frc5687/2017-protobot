@@ -8,10 +8,10 @@ import org.frc5687.steamworks.protobot.commands.test.AutoVisionTest;
  * Created by Ben Bernard on 3/26/2017.
  */
 public class AutoGroup extends SteamworksBaseCommandGroup {
-    public AutoGroup(int position, int gear, int hopper) {
+    public AutoGroup(int spring, int gear, int hopper) {
         super();
         // Add the initial operations based on position switch...
-        switch (position) {
+        switch (spring) {
             case 0:
                 break;
             case 1:
@@ -45,7 +45,7 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
                 break;
             case 1:
                 // Traverse the neutral zone as expediently as possible!
-                switch (position) {
+                switch (spring) {
                     case 0:
                         DriverStation.reportError("Adding AutoCrossBaseline", false);
                         addSequential(new AutoCrossBaseline());
@@ -71,7 +71,7 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
                 break;
             case 2:
                 // Traverse the neutral zone on the left side
-                switch (position) {
+                switch (spring) {
                     case 1:
                     case 2:
                     case 4:
@@ -88,7 +88,7 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
                 break;
             case 3:
                 // Traverse the neutral zone on the right side
-                switch (position) {
+                switch (spring) {
                     case 1:
                     case 2:
                     case 4:
@@ -107,9 +107,9 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
 
     }
 
-    public static String getDescription(int position, int gear, int hopper) {
+    public static String getDescription(int spring, int gear, int hopper) {
         StringBuffer result = new StringBuffer();
-        switch (position) {
+        switch (spring) {
             case 0:
                 result.append("No Spring ");
                 break;
@@ -139,7 +139,7 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
                 break;
             case 1:
                 // Traverse the neutral zone as expediently as possible!
-                switch (position) {
+                switch (spring) {
                     case 0:
                         result.append(" then Cross Baseline");
                         break;
@@ -159,7 +159,7 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
                 break;
             case 2:
                 // Traverse the neutral zone on the left side
-                switch (position) {
+                switch (spring) {
                     case 1:
                     case 2:
                         result.append(" then Traverse Neutral Zone on Left Side");
@@ -175,7 +175,7 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
                 break;
             case 3:
                 // Traverse the neutral zone on the right side
-                switch (position) {
+                switch (spring) {
                     case 1:
                     case 2:
                         result.append(" then Traverse Neutral Zone on Left Side");
