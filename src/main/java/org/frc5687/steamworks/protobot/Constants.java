@@ -100,7 +100,8 @@ public class Constants {
             public static final double INCHES_PER_ROTATION = Math.PI * WHEEL_DIAMETER;
             public static final double SCALAR_RATIO = 8;
 //            public static final double INCHES_PER_PULSE = INCHES_PER_ROTATION * SCALAR_RATIO / PULSES_PER_ROTATION;
-            public static final double INCHES_PER_PULSE = 0.12371134;
+            public static final double INCHES_PER_PULSE = .0973;
+            // public static final double INCHES_PER_PULSE = 0.12371134;
             public static final double MAX_PERIOD = 5;
 
         }
@@ -196,7 +197,7 @@ public class Constants {
             public static final double TRAVERSE_NEUTRAL_ZONE_FROM_WALL_DISTANCE = 200;
             public static final double TRAVERSE_NEUTRAL_ZONE_FROM_CENTER_DISTANCE = 200;
 
-            public static final double CROSS_BASELINE_DISTANCE = 100;
+            public static final double CROSS_BASELINE_DISTANCE = 150;
             public static final double RETREAT_DISTANCE = 24;
             public static final double DEPOSIT_GEAR_IR_VOLTAGE = 1.155;
             public static final double DEPOSIT_GEAR_IR_DISTANCE = 9.0; // inches

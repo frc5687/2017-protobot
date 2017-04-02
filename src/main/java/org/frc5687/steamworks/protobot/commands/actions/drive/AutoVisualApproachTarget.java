@@ -35,7 +35,6 @@ public class AutoVisualApproachTarget extends Command {
         SmartDashboard.putNumber("AutoApproachTarget/IRPID/kI", Constants.Auto.Drive.IRPID.kI);
         SmartDashboard.putNumber("AutoApproachTarget/IRPID/kD", Constants.Auto.Drive.IRPID.kD);
         SmartDashboard.putNumber("AutoApproachTarget/IRPID/kT", Constants.Auto.Drive.IRPID.TOLERANCE);
-        SmartDashboard.putNumber("AutoApproachTarget/IRPID/SetPoint", Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_VOLTAGE);
 
         driveTrain.resetDriveEncoders();
 
@@ -43,7 +42,7 @@ public class AutoVisualApproachTarget extends Command {
         distanceController.setAbsoluteTolerance(Constants.Auto.Drive.IRPID.TOLERANCE);
         distanceController.setInputRange(0, 5.5);
         distanceController.setOutputRange(-speed, speed);
-        distanceController.setSetpoint(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_VOLTAGE);
+        distanceController.setSetpoint(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_DISTANCE);
         distanceController.enable();
 
         SmartDashboard.putNumber("AutoApproachTarget/AnglePID/kP", Constants.Auto.Drive.AnglePID.kP);

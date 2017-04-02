@@ -87,6 +87,7 @@ public class PiTrackerProxy {
 
     synchronized public void updateDashboard() {
         Frame frame = getLatestFrame();
+        SmartDashboard.putNumber("PiTrackerProxy/pulse", System.currentTimeMillis());
         if (frame!=null) {
             SmartDashboard.putNumber("PiTrackerProxy/millis", frame.getMillis());
             SmartDashboard.putBoolean("PiTrackerProxy/sighted", frame.isSighted());

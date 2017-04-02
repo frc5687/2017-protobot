@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
+import org.frc5687.steamworks.protobot.commands.autonomous.AutoGroup;
 
 /**
  * Created by Caleb on 2/20/2017.
@@ -38,11 +39,14 @@ public class AutoChooser {
 
 
     public void updateDashboard(){
-        SmartDashboard.putNumber("AutoChooser/PositionValue", positionSwitch.getRaw());
-        SmartDashboard.putNumber("AutoChooser/GearValue", gearSwitch.getRaw());
-        SmartDashboard.putNumber("AutoChooser/HopperValue", hopperSwitch.getRaw());
-        SmartDashboard.putNumber("AutoChooser/PositionRotorPosition", positionSwitch.get());
-        SmartDashboard.putNumber("AutoChooser/GearRotorPosition", gearSwitch.get());
-        SmartDashboard.putNumber("AutoChooser/HopperRotorPosition", hopperSwitch.get());
+        SmartDashboard.putNumber("AutoChooser/Raw/Spring", positionSwitch.getRaw());
+        SmartDashboard.putNumber("AutoChooser/Raw/Gear", gearSwitch.getRaw());
+        SmartDashboard.putNumber("AutoChooser/Raw/Hopper", hopperSwitch.getRaw());
+        SmartDashboard.putNumber("AutoChooser/Numeric/Spring", positionSwitch.get());
+        SmartDashboard.putNumber("AutoChooser/Numeric/Gear", gearSwitch.get());
+        SmartDashboard.putNumber("AutoChooser/Numeric/Hopper", hopperSwitch.get());
+        SmartDashboard.putString("AutoChooser/Selection", AutoGroup.getDescription(positionSwitch.get(), gearSwitch.get(), hopperSwitch.get()));
+
+
     }
 }
