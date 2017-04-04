@@ -2,6 +2,8 @@ package org.frc5687.steamworks.protobot.commands.test;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.frc5687.steamworks.protobot.RobotMap;
+import org.frc5687.steamworks.protobot.commands.actions.lights.SetLEDStrip;
+import org.frc5687.steamworks.protobot.utils.Color;
 
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
 
@@ -18,8 +20,14 @@ public class FullSelfTest extends CommandGroup {
         // addSequential(new TestDustpanDeploy());
         addSequential(new ConfirmTest("Please insert a gear into the dustpan and press Start to continue.", "Test started.", "Test aborted."));
         // addSequential(new TestDustpanRecover());
-        addSequential(new ConfirmTest("Please place the vision test target in position and Start to continue.", "Test started.", "Test aborted."));
+        addSequential(new ConfirmTest("Please place the vision test target in position and press Start to continue.", "Test started.", "Test aborted."));
         addSequential(new VisionTest());
+        addSequential(new SetLEDStrip(Color.RED));
+        addSequential(new ConfirmTest("Is the LED strip solid red? Press Start for yes, Back for no.", "SelfTest/LEDStrip/Red"));
+        addSequential(new SetLEDStrip(Color.GREEN));
+        addSequential(new ConfirmTest("Is the LED strip solid green? Press Start for yes, Back for no.", "SelfTest/LEDStrip/Green"));
+        addSequential(new SetLEDStrip(Color.BLUE));
+        addSequential(new ConfirmTest("Is the LED strip solid blue? Press Start for yes, Back for no.", "SelfTest/LEDStrip/Red"));
 
     }
 }

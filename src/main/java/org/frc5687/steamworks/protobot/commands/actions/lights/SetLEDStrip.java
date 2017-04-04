@@ -16,7 +16,7 @@ public class SetLEDStrip extends Command {
 
     @Override
     protected void initialize() {
-        ledStrip.setStripColor(color);
+        ledStrip.setStripColor(color, true);
     }
 
     @Override
