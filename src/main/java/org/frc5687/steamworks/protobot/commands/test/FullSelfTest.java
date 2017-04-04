@@ -13,9 +13,12 @@ public class FullSelfTest extends CommandGroup {
         addSequential(new TestDriveTrain());
         addSequential(new ConfirmTest("Please ensure all hands are clear of the climber and press Start to continue.", "Test started.", "Test aborted."));
         addSequential(new TestClimber());
-        // addSequential(new TestCloseMandibles(0.5));
+        addSequential(new TestCloseMandibles());
         addSequential(new ConfirmTest("Please place a gear into the funnel and press Start to continue.", "Test started.", "Test aborted."));
-        // addSequential(new TestWiggleMandibles(0.5));
+        addSequential(new TestWiggleMandibles());
+        addSequential(new ConfirmTest("Please ensure the space in front of the mandibles is clear press Start to continue.", "Test started.", "Test aborted."));
+        addSequential(new TestOpenMandibles());
+        addSequential(new TestFinishMandibles());
         addSequential(new ConfirmTest("Please ensure that the area below the dustpan is clear and safe and press Start to continue.", "Test started.", "Test aborted."));
         // addSequential(new TestDustpanDeploy());
         addSequential(new ConfirmTest("Please insert a gear into the dustpan and press Start to continue.", "Test started.", "Test aborted."));
