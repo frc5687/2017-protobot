@@ -117,9 +117,9 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
     @Override
     public void autonomousInit() {
         imu.zeroYaw();
-        int position = autoRotorChooser.positionRotorValue();
-        int hopper = autoRotorChooser.hopperRotorValue();
-        autoCommand = new AutoGroup(position, 0, hopper);
+        int spring = autoRotorChooser.springSwitchValue();
+        int hopper = autoRotorChooser.hopperSwitchValue();
+        autoCommand = new AutoGroup(spring, 0, hopper);
         if (autoCommand != null) {
             autoCommand.start();
         }
@@ -170,6 +170,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         mandibles.poll();
         dustpan.poll();
         ledStrip.poll();
+        oi.poll();
     }
 
     public void updateDashboard() {

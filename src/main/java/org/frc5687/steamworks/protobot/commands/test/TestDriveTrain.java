@@ -2,8 +2,11 @@ package org.frc5687.steamworks.protobot.commands.test;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.frc5687.steamworks.protobot.LEDColors;
 
 import static org.frc5687.steamworks.protobot.Robot.driveTrain;
+import static org.frc5687.steamworks.protobot.Robot.ledStrip;
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 
 /**
@@ -23,9 +26,9 @@ public class TestDriveTrain extends Command {
 
     public TestDriveTrain() {
         _runSpeed = 1.0;
-        _runMillis = 1000;
+        _runMillis = 2000;
         _targetAmps = 10;
-        _targetTicks = 1400;
+        _targetTicks = 2800;
     }
 
     @Override
@@ -43,6 +46,7 @@ public class TestDriveTrain extends Command {
 
         switch (_state) {
             case RIGHTFRONT:
+                ledStrip.setStripColor(LEDColors.TEST_RUNNING);
                 driveTrain.runRightFrontMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getRightFrontAmps());
                 if (System.currentTimeMillis() > _endMillis) {
@@ -125,16 +129,24 @@ public class TestDriveTrain extends Command {
     private void report(String side, long ticks) {
         if (_maxAmps < _targetAmps) {
             pass = false;
+            SmartDashboard.putBoolean("SelfTest/Drivetrain/" + side + "/Amps/Passed", false);
             DriverStation.reportError("Target amperage not reached on " + side  + ".  Expected " + _targetAmps + " but measured " + _maxAmps + ".", false);
         } else {
+            SmartDashboard.putBoolean("SelfTest/Drivetrain/" + side + "/Amps/Passed", true);
             DriverStation.reportError("Amp draw passed on " + side  + ".  Expected " + _targetAmps + " and measured  " + _maxAmps + ".", false);
         }
+        SmartDashboard.putNumber("SelfTest/Drivetrain/" + side + "/Amps/Measured", _maxAmps);
         if (Math.abs((_targetTicks - ticks) / _targetTicks) > kTOLERANCE) {
             pass = false;
+            SmartDashboard.putBoolean("SelfTest/Drivetrain/" + side + "/Ticks/Passed", false);
             DriverStation.reportError("Target ticks not reached on " + side + ".  Expected " + _targetTicks + " but measured " + ticks + ".", false);
         } else {
+            SmartDashboard.putBoolean("SelfTest/Drivetrain/" + side + "/Ticks/Passed", true);
             DriverStation.reportError("Target ticks reached on " + side + ".  Expected " + _targetTicks + " and measured " + ticks + ".", false);
         }
+        ledStrip.setStripColor(pass ? LEDColors.TEST_PASSED : LEDColors.TEST_FAILED);
+
+        SmartDashboard.putNumber("SelfTest/Drivetrain/" + side + "/Ticks/Measured", ticks);
         driveTrain.resetDriveEncoders();
         _maxAmps = 0;
         _endMillis = System.currentTimeMillis() + _runMillis;

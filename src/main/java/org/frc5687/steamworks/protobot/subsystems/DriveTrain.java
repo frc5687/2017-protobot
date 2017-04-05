@@ -90,6 +90,22 @@ public class DriveTrain extends Subsystem implements PIDSource {
         return rightFrontMotor.getSpeed() * (Constants.DriveTrain.RIGHT_MOTORS_INVERTED ? -1 : 1);
     }
 
+    public double getRate() {
+        if (Math.abs(getRightTicks()) < 10) {
+            return getLeftRate();
+        }
+        if (Math.abs(getLeftTicks()) < 10) {
+            return getRightRate();
+        }
+
+        return (getLeftRate() + getRightRate()) * 0.5;
+    }
+
+    public boolean isDrivingStraight() {
+        if (Math.abs(getLeftTicks())<10 || Math.abs(getRightTicks())<10) { return true; }
+        return Math.abs(getLeftSpeed() - getRightSpeed()) / Math.abs((getLeftSpeed() + getRightSpeed())/2) < Constants.DriveTrain.STRAIGHT_TOLERANCE;
+    }
+
     public void resetEncoders(){
         leftEncoder.reset();
         rightEncoder.reset();
@@ -119,6 +135,12 @@ public class DriveTrain extends Subsystem implements PIDSource {
      * @return average of leftDistance and rightDistance
      */
     public double getDistance() {
+        if (Math.abs(getRightTicks())<10) {
+            return getLeftDistance();
+        }
+        if (Math.abs(getLeftTicks())<10) {
+            return getRightDistance();
+        }
         return (getLeftDistance() + getRightDistance()) / 2;
     }
 

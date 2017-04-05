@@ -12,7 +12,7 @@ import static org.frc5687.steamworks.protobot.Robot.*;
  */
 public class ReceiveMandibles extends Command {
 
-    private State state;
+    protected State state;
     private long endTime;
     private long switchTime;
 
@@ -37,14 +37,14 @@ public class ReceiveMandibles extends Command {
                 break;
             case CLAMP:
                 mandibles.setSpeed(gearPresent ? Constants.Mandibles.CLAMP_SPEED : Constants.Mandibles.RETAIN_SPEED);
-                if (oi.isGearWigglePressed()) {
+                if (wiggle()) {
                     state = State.WIGGLE_OUT;
                     switchTime = System.currentTimeMillis() + Constants.Mandibles.WIGGLE_OUT_TIME;
                 }
                 break;
             case WIGGLE_OUT:
                 mandibles.wiggleOut();
-                if (!oi.isGearWigglePressed()) state = State.CLAMP;
+                if (!wiggle()) state = State.CLAMP;
                 else if (System.currentTimeMillis() > switchTime) {
                     switchTime = System.currentTimeMillis() + Constants.Mandibles.WIGGLE_OUT_TIME;
                     state = State.WIGGLE_IN;
@@ -52,7 +52,7 @@ public class ReceiveMandibles extends Command {
                 break;
             case WIGGLE_IN:
                 mandibles.wiggleIn();
-                if (!oi.isGearWigglePressed()) state = State.CLAMP;
+                if (!wiggle()) state = State.CLAMP;
                 else if (System.currentTimeMillis() > switchTime) {
                     switchTime = System.currentTimeMillis() + Constants.Mandibles.WIGGLE_IN_TIME;
                     state = State.WIGGLE_OUT;
@@ -62,6 +62,10 @@ public class ReceiveMandibles extends Command {
                 mandibles.setSpeed(gearPresent ? Constants.Mandibles.CLAMP_SPEED : Constants.Mandibles.RETAIN_SPEED);
         }
         SmartDashboard.getString("Mandibles/ReceiveState", state.toString());
+    }
+
+    protected boolean wiggle() {
+        return oi.isGearWigglePressed();
     }
 
     @Override

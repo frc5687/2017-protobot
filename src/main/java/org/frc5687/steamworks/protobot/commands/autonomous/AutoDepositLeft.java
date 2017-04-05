@@ -17,7 +17,7 @@ public class AutoDepositLeft extends CommandGroup {
 
         addSequential(new AutoVisualApproachTarget(Constants.Auto.Drive.SPEED));
         addSequential(new EjectMandibles());
-        addSequential(new AutoDrive(-Constants.Auto.AnglesAndDistances.RETREAT_DISTANCE, -Constants.Auto.Drive.SPEED, false, true));
+        addSequential(new AutoDrive(-Constants.Auto.AnglesAndDistances.RETREAT_DISTANCE, -Constants.Auto.Drive.SPEED, false, true, 5000));
     }
 
 }

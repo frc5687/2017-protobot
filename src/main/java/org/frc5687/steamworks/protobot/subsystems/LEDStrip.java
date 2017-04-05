@@ -8,6 +8,8 @@ import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.utils.Color;
 import org.frc5687.steamworks.protobot.utils.LEDController;
 
+import static org.frc5687.steamworks.protobot.Robot.shifter;
+
 /**
  * Subsystem to control lights for vision tracking and shooter aid
  *
@@ -28,6 +30,8 @@ public class LEDStrip extends Subsystem {
     private boolean _gearInDustpan;
     private boolean _dustpanDeployed;
 
+    private long _overrideMillis = Long.MIN_VALUE;
+
     public LEDStrip() {
         redStrip = new LEDController(RobotMap.Lights.RED_STRIP);
         greenStrip = new LEDController(RobotMap.Lights.GREEN_STRIP);
@@ -40,7 +44,9 @@ public class LEDStrip extends Subsystem {
 
 
     public void poll() {
-        setStripColor(pickColor());
+        if (System.currentTimeMillis() > _overrideMillis) {
+            setStripColor(pickColor());
+        }
     }
 
     public Color pickColor() {
@@ -54,7 +60,7 @@ public class LEDStrip extends Subsystem {
         if (_dustpanDeployed) {return LEDColors.DUSTPAN_DEPLOYED; }
         if (DriverStation.getInstance().isAutonomous()) { return LEDColors.AUTONOMOUS; }
         if (DriverStation.getInstance().isDisabled()) { return LEDColors.DISABLED; }
-
+        if (shifter.getGear()== Shifter.Gear.HIGH) { return LEDColors.HIGH_GEAR; }
         return LEDColors.TELEOP;
     }
 
@@ -66,10 +72,21 @@ public class LEDStrip extends Subsystem {
     }
 
     public void setStripColor(Color color) {
+        setStripColor(color, false);
+    }
+
+    public void setStripColor(Color color, boolean override) {
         redStrip.setRaw(color.getRed());
         greenStrip.setRaw(color.getGreen());
         blueStrip.setRaw(color.getBlue());
+        if (override) {
+            _overrideMillis = System.currentTimeMillis() + 1000;
+        }
         updateDashboard();
+    }
+
+    public void clearOverride() {
+        _overrideMillis = Long.MIN_VALUE;
     }
 
     public Color getStripColor() {

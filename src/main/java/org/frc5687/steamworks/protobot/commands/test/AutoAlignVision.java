@@ -18,7 +18,7 @@ import static org.frc5687.steamworks.protobot.Robot.*;
 public class AutoAlignVision extends Command implements PIDOutput {
 
     private PIDController controller;
-    private double endTime;
+    private long endTime;
     private double speed;
     private double _previousOffsetAngle;
     private double pidOut;
@@ -30,6 +30,7 @@ public class AutoAlignVision extends Command implements PIDOutput {
 
     @Override
     protected void initialize() {
+        endTime = System.currentTimeMillis() + 3000;
         _previousOffsetAngle = imu.getYaw();
         controller = new PIDController(Align.kP, Align.kI, Align.kD, imu, this);
         controller.setInputRange(Constants.Auto.MIN_IMU_ANGLE, Constants.Auto.MAX_IMU_ANGLE);
@@ -78,7 +79,7 @@ public class AutoAlignVision extends Command implements PIDOutput {
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return System.currentTimeMillis() > endTime && controller.onTarget();
     }
 
     @Override
