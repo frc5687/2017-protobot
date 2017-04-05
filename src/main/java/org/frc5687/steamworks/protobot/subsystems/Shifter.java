@@ -1,5 +1,6 @@
 package org.frc5687.steamworks.protobot.subsystems;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -11,11 +12,13 @@ import static org.frc5687.steamworks.protobot.Robot.oi;
 public class Shifter extends Subsystem {
 
     private DoubleSolenoid shifterSolenoid;
+    private Compressor compressor;
     private long waitPeriodEndTime = 0;
     private boolean autShiftEnabled = true;
 
     public Shifter() {
         shifterSolenoid = new DoubleSolenoid(RobotMap.Shifter.PISTON_EXTENDER, RobotMap.Shifter.PISTON_RETRACTOR);
+        compressor = new Compressor(0);
     }
 
     @Override
@@ -41,6 +44,18 @@ public class Shifter extends Subsystem {
             return Gear.LOW;
         }
         return Gear.UNKNOWN;
+    }
+
+    public boolean isCompressorAtPressure() {
+        return compressor.getPressureSwitchValue();
+    }
+
+    public boolean isCommpressorEnabled() {
+        return compressor.enabled();
+    }
+
+    public double getCompressorCurrent() {
+        return compressor.getCompressorCurrent();
     }
 
     public void updateDashboard() {
