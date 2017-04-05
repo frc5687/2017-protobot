@@ -34,13 +34,17 @@ public class AutoDrive extends Command {
         this(distance, speed, false, true, 1000, maxMillis);
     }
 
-    /***
-     * Drives for a set distance at a set speed.
-     * @param distance Distance to drive
-     * @param speed Speed to drive
-     * @param usePID Whether to use pid or not
-     * @param stopOnFinish Whether to stop the motors when we are done
-     */
+    public AutoDrive(double distance, double speed, boolean usePID, boolean stopOnFinish, long maxMillis) {
+        this(distance, speed, usePID, stopOnFinish, 1000, maxMillis);
+    }
+
+        /***
+         * Drives for a set distance at a set speed.
+         * @param distance Distance to drive
+         * @param speed Speed to drive
+         * @param usePID Whether to use pid or not
+         * @param stopOnFinish Whether to stop the motors when we are done
+         */
     public AutoDrive(double distance, double speed, boolean usePID, boolean stopOnFinish, double angle, long maxMillis) {
         requires(driveTrain);
         this.speed = speed;
