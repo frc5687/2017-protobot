@@ -2,8 +2,10 @@ package org.frc5687.steamworks.protobot.commands.test;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.frc5687.steamworks.protobot.LEDColors;
 import org.frc5687.steamworks.protobot.commands.actions.mandibles.ReceiveMandibles;
 
+import static org.frc5687.steamworks.protobot.Robot.ledStrip;
 import static org.frc5687.steamworks.protobot.Robot.mandibles;
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 
@@ -39,13 +41,15 @@ public class TestCloseMandibles extends ReceiveMandibles {
 
     @Override
     protected void end() {
+        boolean pass = true;
         if (state==State.CLAMP) {
             DriverStation.reportError("Mandible clamp test passed (" + _maxAmps + " amps)", false);
-            SmartDashboard.putBoolean("SelfTest/Mandibles/Clamp/Passed", true);
         } else {
             DriverStation.reportError("Mandible clamp amps not reached (" + _maxAmps + " amps)", false);
-            SmartDashboard.putBoolean("SelfTest/Mandibles/Clamp/Passed", false);
+            pass =false;
         }
+        ledStrip.setStripColor(pass ? LEDColors.TEST_PASSED : LEDColors.TEST_FAILED);
+        SmartDashboard.putBoolean("SelfTest/Mandibles/Clamp/Passed", pass);
         SmartDashboard.putNumber("SelfTest/Mandibles/Clamp/Amps", _maxAmps);
         mandibles.stop();
     }

@@ -20,6 +20,11 @@ public class LowerDustpan extends MoveDustpan {
     @Override
     protected void initialize() {
         super.initialize();
+    }
+
+    @Override
+    protected void end() {
+        super.end();
         ledStrip.setDustpanDeployed(true);
     }
 }

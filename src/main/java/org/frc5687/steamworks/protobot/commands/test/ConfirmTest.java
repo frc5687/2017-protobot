@@ -38,6 +38,7 @@ public class ConfirmTest extends Command {
     @Override
     protected void initialize() {
         DriverStation.reportError(_message, false);
+        SmartDashboard.putString("SelfTest/Message", _message);
     }
 
     @Override

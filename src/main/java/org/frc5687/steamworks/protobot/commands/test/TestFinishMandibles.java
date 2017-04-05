@@ -2,8 +2,10 @@ package org.frc5687.steamworks.protobot.commands.test;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.frc5687.steamworks.protobot.LEDColors;
 import org.frc5687.steamworks.protobot.commands.actions.mandibles.ReceiveMandibles;
 
+import static org.frc5687.steamworks.protobot.Robot.ledStrip;
 import static org.frc5687.steamworks.protobot.Robot.mandibles;
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 
@@ -40,12 +42,15 @@ public class TestFinishMandibles extends ReceiveMandibles {
                 DriverStation.reportError("Mandible eject test gearstill present", false);
                 SmartDashboard.putBoolean("SelfTest/Mandibles/Eject/GearEjected", false);
                 SmartDashboard.putBoolean("SelfTest/Mandibles/Eject/Passed", false);
+                ledStrip.setStripColor(LEDColors.TEST_FAILED);
             }
         } else {
             DriverStation.reportError("Mandible eject test failed - mandibles still open.", false);
             SmartDashboard.putBoolean("SelfTest/Mandibles/Eject/GearEjected", false);
             SmartDashboard.putBoolean("SelfTest/Mandibles/Eject/Passed", false);
+            ledStrip.setStripColor(LEDColors.TEST_FAILED);
         }
+
         mandibles.stop();
     }
 }

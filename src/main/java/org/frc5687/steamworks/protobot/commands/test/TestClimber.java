@@ -4,9 +4,11 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
+import org.frc5687.steamworks.protobot.LEDColors;
 import org.frc5687.steamworks.protobot.subsystems.Climber;
 
 import static org.frc5687.steamworks.protobot.Robot.climber;
+import static org.frc5687.steamworks.protobot.Robot.ledStrip;
 
 /**
  * Created by Caleb on 3/8/2017.
@@ -64,6 +66,7 @@ public class TestClimber extends Command {
 
     @Override
     protected void end() {
+        boolean pass = true;
         climber.setSpeed(0);
         if (_slowAmps >= _slowAmpsTarget) {
             DriverStation.reportError("Climber pickup reached target amps (" + _slowAmps + ")", false);
@@ -71,6 +74,7 @@ public class TestClimber extends Command {
         } else {
             DriverStation.reportError("Climber pickup failed to reach target amps (" + _slowAmps + ")", false);
             SmartDashboard.putBoolean("SelfTest/Climber/Pickup/Passed", false);
+            pass = false;
         }
         SmartDashboard.putNumber("SelfTest/Climber/Pickup/Amps", _slowAmps);
         if (_fastAmps >= _fastAmpsTarget) {
@@ -79,9 +83,10 @@ public class TestClimber extends Command {
         } else {
             DriverStation.reportError("Climber ascend failed to reach target amps (" + _fastAmps + ")", false);
             SmartDashboard.putBoolean("SelfTest/Climber/Ascend/Passed", false);
+            pass = false;
         }
         SmartDashboard.putNumber("SelfTest/Climber/Ascend/Amps", _slowAmps);
-
+        ledStrip.setStripColor(pass ? LEDColors.TEST_PASSED : LEDColors.TEST_FAILED);
     }
     public void interrupted() {
         end();

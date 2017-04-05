@@ -3,12 +3,11 @@ package org.frc5687.steamworks.protobot.commands.test;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.frc5687.steamworks.protobot.LEDColors;
 import org.frc5687.steamworks.protobot.utils.PiTrackerProxy;
 import org.frc5687.steamworks.protobot.utils.TonyPose;
 
-import static org.frc5687.steamworks.protobot.Robot.lights;
-import static org.frc5687.steamworks.protobot.Robot.piTrackerProxy;
-import static org.frc5687.steamworks.protobot.Robot.poseTracker;
+import static org.frc5687.steamworks.protobot.Robot.*;
 
 /**
  * Created by Ben Bernard on 3/12/2017.
@@ -43,8 +42,10 @@ public class VisionTest extends Command {
         SmartDashboard.putNumber("SelfTest/Vision/Target Angle", _angle);
         if (!_targetSighted) {
             DriverStation.reportError("Vision tracking failed locate target.", false);
+            ledStrip.setStripColor(LEDColors.TEST_FAILED);
         } else {
             DriverStation.reportError("Vision tracking located target at " + _angle, false);
+            ledStrip.setStripColor(LEDColors.TEST_PASSED);
         }
         lights.turnRingLightOff();
     }
