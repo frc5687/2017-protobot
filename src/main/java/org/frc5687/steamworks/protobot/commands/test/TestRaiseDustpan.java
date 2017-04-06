@@ -40,6 +40,7 @@ public class TestRaiseDustpan extends RaiseDustpan {
             DriverStation.reportError("Dustpan raise test reached target amps (" + _maxAmps + ")", false);
             pass = false;
         }
+        dustpan.roller.set(0);
         ledStrip.setStripColor(pass ? LEDColors.TEST_PASSED : LEDColors.TEST_FAILED);
         SmartDashboard.putNumber("SelfTest/Dustpan/Raise/Amps", _maxAmps);
         SmartDashboard.putBoolean("SelfTest/Dustpan/Raise/Passed", pass);
