@@ -54,7 +54,7 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
                     case 5:
                         // For left side, traverse left
                         DriverStation.reportError("Adding AutoTraverseNeutralZoneFromSide", false);
-                        addSequential(new AutoTraverseNeutralZoneFromRightSide());
+                        addSequential(new AutoTraverseNeutralZoneFromLeftSide());
                         break;
                     case 3:
                         if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {

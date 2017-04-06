@@ -198,7 +198,7 @@ public class Constants {
             public static final double TRAVERSE_NEUTRAL_ZONE_FROM_CENTER_DISTANCE = 200;
 
             public static final double CROSS_BASELINE_DISTANCE = 150;
-            public static final double RETREAT_DISTANCE = 24;
+            public static final double RETREAT_DISTANCE = 48;
             public static final double DEPOSIT_GEAR_IR_VOLTAGE = 1.155;
             public static final double DEPOSIT_GEAR_IR_DISTANCE = 9.0; // inches
             public static final double DEPOSIT_GEAR_NEAR_INITIAL_DISTANCE = 24;
@@ -208,7 +208,7 @@ public class Constants {
             public static final double ESCAPE_CENTER_ANGLE_LEFT = -80;
             public static final double ESCAPE_CENTER_DISTANCE = 78; // TODO correct value
 
-            public static final double DEPOSIT_GEAR_SIDE_BEFORE_ARC = 74;
+            public static final double DEPOSIT_GEAR_SIDE_BEFORE_ARC = 50;
             public static final double DEPOSIT_GEAR_FAR_INITIAL_DISTANCE = 89;
             public static final double DEPOSIT_GEAR_FAR_ANGLE = 60;
 
