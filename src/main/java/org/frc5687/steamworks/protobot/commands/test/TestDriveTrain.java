@@ -26,9 +26,9 @@ public class TestDriveTrain extends Command {
 
     public TestDriveTrain() {
         _runSpeed = 1.0;
-        _runMillis = 2000;
-        _targetAmps = 10;
-        _targetTicks = 2800;
+        _runMillis = 5000;
+        _targetAmps = 3;
+        _targetTicks = 50;
     }
 
     @Override
@@ -136,7 +136,7 @@ public class TestDriveTrain extends Command {
             DriverStation.reportError("Amp draw passed on " + side  + ".  Expected " + _targetAmps + " and measured  " + _maxAmps + ".", false);
         }
         SmartDashboard.putNumber("SelfTest/Drivetrain/" + side + "/Amps/Measured", _maxAmps);
-        if (Math.abs((_targetTicks - ticks) / _targetTicks) > kTOLERANCE) {
+        if (ticks < _targetTicks) {
             pass = false;
             SmartDashboard.putBoolean("SelfTest/Drivetrain/" + side + "/Ticks/Passed", false);
             DriverStation.reportError("Target ticks not reached on " + side + ".  Expected " + _targetTicks + " but measured " + ticks + ".", false);
