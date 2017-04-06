@@ -208,6 +208,7 @@ public class Constants {
             public static final double ESCAPE_CENTER_ANGLE_LEFT = -80;
             public static final double ESCAPE_CENTER_DISTANCE = 78; // TODO correct value
 
+            public static final double DEPOSIT_GEAR_SIDE_BEFORE_ARC = 74;
             public static final double DEPOSIT_GEAR_FAR_INITIAL_DISTANCE = 89;
             public static final double DEPOSIT_GEAR_FAR_ANGLE = 60;
 
