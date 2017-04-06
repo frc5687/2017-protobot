@@ -1,8 +1,6 @@
 package org.frc5687.steamworks.protobot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import org.frc5687.steamworks.protobot.commands.test.AutoAlignVision;
-import org.frc5687.steamworks.protobot.commands.test.AutoVisionTest;
 
 /**
  * Created by Ben Bernard on 3/26/2017.
@@ -56,7 +54,7 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
                     case 5:
                         // For left side, traverse left
                         DriverStation.reportError("Adding AutoTraverseNeutralZoneFromSide", false);
-                        addSequential(new AutoTraverseNeutralZoneFromSide());
+                        addSequential(new AutoTraverseNeutralZoneFromRightSide());
                         break;
                     case 3:
                         if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
@@ -78,7 +76,7 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
                     case 5:
                         // For left side, traverse left
                         DriverStation.reportError("Adding AutoTraverseNeutralZoneFromSide", false);
-                        addSequential(new AutoTraverseNeutralZoneFromSide());
+                        addSequential(new AutoTraverseNeutralZoneFromRightSide());
                         break;
                     case 3:
                         DriverStation.reportError("Adding AutoTraverseNeutralZoneLeftFromCenter", false);
@@ -95,7 +93,7 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
                     case 5:
                         // For left side, traverse left
                         DriverStation.reportError("Adding AutoTraverseNeutralZoneFromSide", false);
-                        addSequential(new AutoTraverseNeutralZoneFromSide());
+                        addSequential(new AutoTraverseNeutralZoneFromRightSide());
                         break;
                     case 3:
                         DriverStation.reportError("Adding AutoTraverseNeutralZoneRightFromCenter", false);
