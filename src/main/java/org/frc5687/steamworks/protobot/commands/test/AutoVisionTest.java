@@ -17,7 +17,7 @@ public class AutoVisionTest extends CommandGroup {
     public AutoVisionTest() {
         addSequential(new EnableRingLight());
         addSequential(new AutoAlignVision(.7));
-        addSequential(new AutoVisualApproachTarget(.5));
+        addSequential(new AutoVisualApproachTarget(.5, 1000));
         addSequential(new EjectMandibles());
         addSequential(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.PAUSE_AT_SPRING_TIME));
         addParallel(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.MANDIBLE_HOLD_TIME));

@@ -18,13 +18,15 @@ public class AutoVisualApproachTarget extends Command {
     private PIDController angleController;
     private PIDListener distancePID;
     private PIDListener anglePID;
+    private double initialAngle;
 
     private double _previousOffsetAngle = -1000;
 //    private double endTime;
 
-    public AutoVisualApproachTarget(double speed) {
+    public AutoVisualApproachTarget(double speed, double initialAngle) {
         requires(driveTrain);
         this.speed = speed;
+        this.initialAngle = initialAngle;
     }
 
     @Override
@@ -37,6 +39,8 @@ public class AutoVisualApproachTarget extends Command {
         SmartDashboard.putNumber("AutoApproachTarget/IRPID/kT", Constants.Auto.Drive.IRPID.TOLERANCE);
 
         driveTrain.resetDriveEncoders();
+
+        if (initialAngle==1000) { initialAngle = imu.getYaw(); }
 
         distanceController = new PIDController(Constants.Auto.Drive.IRPID.kP, Constants.Auto.Drive.IRPID.kI, Constants.Auto.Drive.IRPID.kD, driveTrain.getIrSensor(), distancePID);
         distanceController.setAbsoluteTolerance(Constants.Auto.Drive.IRPID.TOLERANCE);
@@ -58,7 +62,7 @@ public class AutoVisualApproachTarget extends Command {
         DriverStation.reportError("Turn PID Max Output: " + speed, false);
         angleController.setOutputRange(-maxSpeed, maxSpeed);
         angleController.setContinuous();
-        angleController.setSetpoint(imu.getYaw());
+        angleController.setSetpoint(initialAngle);
         angleController.enable();
 
         DriverStation.reportError("AutoVisualApproachTarget initialized with angle " + angleController.getSetpoint(), false);
