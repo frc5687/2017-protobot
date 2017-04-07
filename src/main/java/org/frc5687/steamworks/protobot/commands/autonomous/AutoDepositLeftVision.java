@@ -19,7 +19,7 @@ public class AutoDepositLeftVision extends CommandGroup {
 
 
         // Arc approach:
-        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_SIDE_BEFORE_ARC, Constants.Auto.Drive.SPEED, 5000));
+        addSequential(new AutoDrive(72, Constants.Auto.Drive.SPEED, 5000));
         addSequential(new DriveArc(1.0, 0.367088608, Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FAR_ANGLE, 2000, true));
 
 

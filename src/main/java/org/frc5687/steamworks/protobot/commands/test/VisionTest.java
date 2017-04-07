@@ -23,7 +23,7 @@ public class VisionTest extends Command {
     @Override
     protected void initialize() {
         _state = State.FIND_TARGET;
-        _endMillis = System.currentTimeMillis() + 2000;
+        _endMillis = System.currentTimeMillis() + 10000;
         _targetSighted = false;
         _frameReceived = false;
         _angle = 1000;

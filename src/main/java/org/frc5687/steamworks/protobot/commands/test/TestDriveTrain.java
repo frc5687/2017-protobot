@@ -27,7 +27,7 @@ public class TestDriveTrain extends Command {
     public TestDriveTrain() {
         requires(driveTrain);
         _runSpeed = 1.0;
-        _runMillis = 5000;
+        _runMillis = 2000;
         _targetAmps = 3;
         _targetTicks = 50;
     }

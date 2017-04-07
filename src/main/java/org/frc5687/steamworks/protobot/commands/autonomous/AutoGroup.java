@@ -1,6 +1,7 @@
 package org.frc5687.steamworks.protobot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import org.frc5687.steamworks.protobot.commands.test.VisionTrackingTest;
 
 /**
  * Created by Ben Bernard on 3/26/2017.
@@ -101,6 +102,69 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
                         break;
                 }
                 break;
+            case 4:
+                // Traverse the neutral zone as expediently as possible!
+                switch (spring) {
+                    case 0:
+                        DriverStation.reportError("Adding AutoCrossBaseline", false);
+                        addSequential(new AutoCrossBaseline());
+                        break;
+                    case 1:
+                    case 2:
+                    case 4:
+                    case 5:
+                        // For left side, traverse left
+                        DriverStation.reportError("Adding AutoTraverseNeutralZoneFromSide", false);
+                        addSequential(new AutoTraverseNeutralZoneFromLeftSide());
+                        break;
+                    case 3:
+                        if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
+                            DriverStation.reportError("Adding AutoTraverseNeutralZoneLeftFromCenterArc", false);
+                            addSequential(new AutoTraverseNeutralZoneLeftFromCenterArc());
+                        } else if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue) {
+                            DriverStation.reportError("Adding AutoTraverseNeutralZoneRightFromCenterArx", false);
+                            addSequential(new AutoTraverseNeutralZoneRightFromCenterArc());
+                        }
+                        break;
+                }
+                break;
+            case 5:
+                // Traverse the neutral zone on the left side
+                switch (spring) {
+                    case 1:
+                    case 2:
+                    case 4:
+                    case 5:
+                        // For left side, traverse left
+                        DriverStation.reportError("Adding AutoTraverseNeutralZoneFromSide", false);
+                        addSequential(new AutoTraverseNeutralZoneFromRightSide());
+                        break;
+                    case 3:
+                        DriverStation.reportError("Adding AutoTraverseNeutralZoneLeftFromCenter", false);
+                        addSequential(new AutoTraverseNeutralZoneLeftFromCenterArc());
+                        break;
+                }
+                break;
+            case 6:
+                // Traverse the neutral zone on the right side
+                switch (spring) {
+                    case 1:
+                    case 2:
+                    case 4:
+                    case 5:
+                        // For left side, traverse left
+                        DriverStation.reportError("Adding AutoTraverseNeutralZoneFromSide", false);
+                        addSequential(new AutoTraverseNeutralZoneFromRightSide());
+                        break;
+                    case 3:
+                        DriverStation.reportError("Adding AutoTraverseNeutralZoneRightFromCenter", false);
+                        addSequential(new AutoTraverseNeutralZoneRightFromCenterArc());
+                        break;
+                }
+                break;
+            case 10:
+                addSequential(new VisionTrackingTest());
+                break;
         }
 
     }
@@ -186,6 +250,63 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
                         result.append(" then Traverse Neutral Zone on Right Side");
                         break;
                 }
+                break;
+            case 4:
+                // Traverse the neutral zone as expediently as possible!
+                switch (spring) {
+                    case 0:
+                        result.append(" then Cross Baseline");
+                        break;
+                    case 1:
+                    case 2:
+                        result.append(" then Traverse Neutral Zone on Left Side");
+                        break;
+                    case 4:
+                    case 5:
+                        result.append(" then Traverse Neutral Zone on Right Side");
+                        break;
+                    case 3:
+                        if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
+                            result.append(" then Traverse Neutral Zone on Left Side With Arc");
+                        } else if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue) {
+                            result.append(" then Traverse Neutral Zone on Right Side With Arc");
+                        }
+                }
+                break;
+            case 5:
+                // Traverse the neutral zone on the left side
+                switch (spring) {
+                    case 1:
+                    case 2:
+                        result.append(" then Traverse Neutral Zone on Left Side");
+                        break;
+                    case 4:
+                    case 5:
+                        result.append(" then Traverse Neutral Zone on Right Side");
+                        break;
+                    case 3:
+                        result.append(" then Traverse Neutral Zone on Left Side With Arc");
+                        break;
+                }
+                break;
+            case 6:
+                // Traverse the neutral zone on the right side
+                switch (spring) {
+                    case 1:
+                    case 2:
+                        result.append(" then Traverse Neutral Zone on Left Side");
+                        break;
+                    case 4:
+                    case 5:
+                        result.append(" then Traverse Neutral Zone on Right Side");
+                        break;
+                    case 3:
+                        result.append(" then Traverse Neutral Zone on Right Side With Arc");
+                        break;
+                }
+                break;
+            case 10:
+                result.append("Vision Tracking Test");
                 break;
         }
 

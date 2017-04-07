@@ -13,12 +13,12 @@ public class AutoTraverseNeutralZoneFromRightSide extends CommandGroup {
 
     public AutoTraverseNeutralZoneFromRightSide() {
 
-        addSequential(new DriveArc(1.0, 0.367088608, Constants.Auto.AnglesAndDistances.STRAIGHT_ANGLE, 2000, true));
-        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.TRAVERSE_NEUTRAL_ZONE_FROM_SIDE_DISTANCE, 0.7, true, true, Constants.Auto.AnglesAndDistances.STRAIGHT_ANGLE, 4000));
+        // addSequential(new DriveArc(1.0, 0.367088608, Constants.Auto.AnglesAndDistances.STRAIGHT_ANGLE, 2000, true));
+        // addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.TRAVERSE_NEUTRAL_ZONE_FROM_SIDE_DISTANCE, 0.7, true, true, Constants.Auto.AnglesAndDistances.STRAIGHT_ANGLE, 4000));
 
 
-//         addSequential(new AutoAlign(Constants.Auto.AnglesAndDistances.STRAIGHT_ANGLE, Constants.Auto.Align.SPEED));
- //        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.TRAVERSE_NEUTRAL_ZONE_FROM_SIDE_DISTANCE, Constants.Auto.Drive.SPEED, 4000));
+        addSequential(new AutoAlign(Constants.Auto.AnglesAndDistances.STRAIGHT_ANGLE, Constants.Auto.Align.SPEED));
+        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.TRAVERSE_NEUTRAL_ZONE_FROM_SIDE_DISTANCE, Constants.Auto.Drive.SPEED, 4000));
     }
 
 }
