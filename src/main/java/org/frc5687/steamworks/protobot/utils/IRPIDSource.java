@@ -14,9 +14,13 @@ public class IRPIDSource extends AnalogInput {
         return super.getVoltage();
     }
 
+    public double getDistance() {
+        return Constants.Auto.Drive.IRPID.TRANSFORM_COEFFICIENT * Math.pow(getRaw(), Constants.Auto.Drive.IRPID.TRANSFORM_POWER) / 2.54;
+
+    }
     @Override
     public double pidGet() {
-        return Constants.Auto.Drive.IRPID.TRANSFORM_COEFFICIENT * Math.pow(getRaw(), Constants.Auto.Drive.IRPID.TRANSFORM_POWER) / 2.54;
+        return getDistance();
     }
 
 }

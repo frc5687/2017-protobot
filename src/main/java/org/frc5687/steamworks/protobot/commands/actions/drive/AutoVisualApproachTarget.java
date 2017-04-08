@@ -19,6 +19,7 @@ public class AutoVisualApproachTarget extends Command {
     private PIDListener distancePID;
     private PIDListener anglePID;
     private double initialAngle;
+    private long maxMillis;
 
     private double _previousOffsetAngle = -1000;
 //    private double endTime;
@@ -32,6 +33,7 @@ public class AutoVisualApproachTarget extends Command {
     @Override
     protected void initialize() {
         lights.turnRingLightOn();
+        maxMillis = System.currentTimeMillis() + Constants.Auto.AnglesAndDistances.ABORT_APPROACH_TIMOUT;
         distancePID = new PIDListener();
         SmartDashboard.putNumber("AutoApproachTarget/IRPID/kP", Constants.Auto.Drive.IRPID.kP);
         SmartDashboard.putNumber("AutoApproachTarget/IRPID/kI", Constants.Auto.Drive.IRPID.kI);
@@ -72,7 +74,7 @@ public class AutoVisualApproachTarget extends Command {
     protected void execute() {
         // See what we can find out from the piTracker...
         PiTrackerProxy.Frame frame = piTrackerProxy.getLatestFrame();
-        if (frame!=null && frame.isSighted() && Math.abs(frame.getOffsetAngle()-_previousOffsetAngle) > Constants.Auto.Drive.AnglePID.TOLERANCE) {
+        if (frame!=null && frame.isSighted() && driveTrain.getIrSensor().pidGet() < 60 && Math.abs(frame.getOffsetAngle()-_previousOffsetAngle) > Constants.Auto.Drive.AnglePID.TOLERANCE) {
             _previousOffsetAngle = frame.getOffsetAngle();
             TonyPose pose = (TonyPose)poseTracker.get(frame.getMillis());
             if (pose!=null) {
@@ -112,7 +114,7 @@ public class AutoVisualApproachTarget extends Command {
 
     @Override
     protected boolean isFinished() {
-        return distanceController.onTarget();// || driveTrain.getIrSensor().pidGet() <= Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_DISTANCE;
+        return distanceController.onTarget() || (System.currentTimeMillis() > maxMillis && driveTrain.getIrSensor().getDistance() > Constants.Auto.AnglesAndDistances.ABORT_APPROACH_THRESHOLD);
     }
 
     @Override
@@ -120,7 +122,6 @@ public class AutoVisualApproachTarget extends Command {
         DriverStation.reportError("AutoApproach Finished (" + driveTrain.getDistance() + ")", false);
         angleController.disable();
         driveTrain.tankDrive(0, 0);
-        lights.turnRingLightOff();
     }
 
     private class PIDListener implements PIDOutput {

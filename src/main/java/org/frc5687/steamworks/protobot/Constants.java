@@ -214,6 +214,9 @@ public class Constants {
 
             public static final long MANDIBLE_HOLD_TIME = 1000;
             public static final long PAUSE_AT_SPRING_TIME = 250;
+
+            public static final double ABORT_APPROACH_THRESHOLD = 12;
+            public static final long ABORT_APPROACH_TIMOUT = 5000;
         }
 
         public class Align {

@@ -17,6 +17,10 @@ public class TestRaiseDustpan extends RaiseDustpan {
 
     private double _maxAmps;
 
+    public TestRaiseDustpan() {
+        super();
+    }
+
     @Override
     protected void initialize() {
         _maxAmps = 0;
