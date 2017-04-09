@@ -114,7 +114,7 @@ public class AutoVisualApproachTarget extends Command {
 
     @Override
     protected boolean isFinished() {
-        return distanceController.onTarget() || (System.currentTimeMillis() > maxMillis && driveTrain.getIrSensor().getDistance() > Constants.Auto.AnglesAndDistances.ABORT_APPROACH_THRESHOLD);
+        return distanceController.onTarget(); // || (System.currentTimeMillis() > maxMillis && driveTrain.getIrSensor().getDistance() > Constants.Auto.AnglesAndDistances.ABORT_APPROACH_THRESHOLD);
     }
 
     @Override

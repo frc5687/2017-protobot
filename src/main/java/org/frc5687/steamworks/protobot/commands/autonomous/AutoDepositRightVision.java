@@ -18,13 +18,13 @@ public class AutoDepositRightVision extends CommandGroup {
         super();
 
         // Non-arc approach
-        // addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FAR_INITIAL_DISTANCE, Constants.Auto.Drive.SPEED, 5000));
-        // addSequential(new AutoAlign(-Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FAR_ANGLE, Constants.Auto.Align.SPEED));
+        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FAR_INITIAL_DISTANCE, Constants.Auto.Drive.SPEED, 5000));
+        addSequential(new AutoAlign(-Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FAR_ANGLE, Constants.Auto.Align.SPEED));
 
 
         // Arc approach
-        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_SIDE_BEFORE_ARC, Constants.Auto.Drive.SPEED, 5000));
-        addSequential(new DriveArc(0.367088608, 1, -60.0, 2000, true));
+        // addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_SIDE_BEFORE_ARC, Constants.Auto.Drive.SPEED, 5000));
+        // addSequential(new DriveArc(0.367088608, 1, -60.0, 2000, true));
 
         addSequential(new AutoVisualApproachTarget(0.7, -Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FAR_ANGLE));
 

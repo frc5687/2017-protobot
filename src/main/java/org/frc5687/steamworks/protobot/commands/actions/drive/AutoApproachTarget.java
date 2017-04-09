@@ -96,7 +96,7 @@ public class AutoApproachTarget extends Command {
 
     @Override
     protected boolean isFinished() {
-        return distanceController.onTarget() || (System.currentTimeMillis() > maxMillis && driveTrain.getIrSensor().pidGet() > Constants.Auto.AnglesAndDistances.ABORT_APPROACH_THRESHOLD);// || driveTrain.getIrSensor().pidGet() <= Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_DISTANCE;
+        return distanceController.onTarget(); // || (System.currentTimeMillis() > maxMillis && driveTrain.getIrSensor().pidGet() > Constants.Auto.AnglesAndDistances.ABORT_APPROACH_THRESHOLD);// || driveTrain.getIrSensor().pidGet() <= Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_DISTANCE;
     }
 
     @Override
