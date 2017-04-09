@@ -18,7 +18,8 @@ public class AutoApproachTarget extends Command {
     private PIDController angleController;
     private PIDListener distancePID;
     private PIDListener anglePID;
-//    private double endTime;
+    private long timeout;
+    private long maxMillis;
 
     public AutoApproachTarget(double speed) {
         requires(driveTrain);
@@ -28,6 +29,8 @@ public class AutoApproachTarget extends Command {
     @Override
     protected void initialize() {
         lights.turnRingLightOn();
+        this.maxMillis = System.currentTimeMillis() + Constants.Auto.AnglesAndDistances.ABORT_APPROACH_TIMOUT;
+
         distancePID = new PIDListener();
         driveTrain.resetDriveEncoders();
 
@@ -93,7 +96,7 @@ public class AutoApproachTarget extends Command {
 
     @Override
     protected boolean isFinished() {
-        return distanceController.onTarget();// || driveTrain.getIrSensor().pidGet() <= Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_DISTANCE;
+        return distanceController.onTarget(); // || (System.currentTimeMillis() > maxMillis && driveTrain.getIrSensor().pidGet() > Constants.Auto.AnglesAndDistances.ABORT_APPROACH_THRESHOLD);// || driveTrain.getIrSensor().pidGet() <= Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_IR_DISTANCE;
     }
 
     @Override
@@ -101,7 +104,6 @@ public class AutoApproachTarget extends Command {
         DriverStation.reportError("AutoApproachTarget Finished (" + driveTrain.getIrSensor().pidGet() + ")", false);
         angleController.disable();
         driveTrain.tankDrive(0, 0);
-        lights.turnRingLightOff();
     }
 
     private class PIDListener implements PIDOutput {

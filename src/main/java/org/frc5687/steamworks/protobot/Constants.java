@@ -149,7 +149,7 @@ public class Constants {
         public static final double SHIFT_DOWN_THRESHOLD = 40; // in inches per second TODO tune
 
         public static final long AUTO_WAIT_PERIOD = 500;
-        public static final long MANUAL_WAIT_PERIOD = 5000;
+        public static final long MANUAL_WAIT_PERIOD = 3000;
     }
 
     public class Dustpan {
@@ -198,7 +198,7 @@ public class Constants {
             public static final double TRAVERSE_NEUTRAL_ZONE_FROM_CENTER_DISTANCE = 200;
 
             public static final double CROSS_BASELINE_DISTANCE = 150;
-            public static final double RETREAT_DISTANCE = 24;
+            public static final double RETREAT_DISTANCE = 48;
             public static final double DEPOSIT_GEAR_IR_VOLTAGE = 1.155;
             public static final double DEPOSIT_GEAR_IR_DISTANCE = 9.0; // inches
             public static final double DEPOSIT_GEAR_NEAR_INITIAL_DISTANCE = 24;
@@ -206,13 +206,17 @@ public class Constants {
             public static final double DEPOSIT_GEAR_NEAR_DIAGONAL_DISTANCE = 59;
             public static final double ESCAPE_CENTER_ANGLE_RIGHT = 80;
             public static final double ESCAPE_CENTER_ANGLE_LEFT = -80;
-            public static final double ESCAPE_CENTER_DISTANCE = 78; // TODO correct value
+            public static final double ESCAPE_CENTER_DISTANCE = 84; // TODO correct value
 
+            public static final double DEPOSIT_GEAR_SIDE_BEFORE_ARC = 54;
             public static final double DEPOSIT_GEAR_FAR_INITIAL_DISTANCE = 89;
             public static final double DEPOSIT_GEAR_FAR_ANGLE = 60;
 
             public static final long MANDIBLE_HOLD_TIME = 1000;
             public static final long PAUSE_AT_SPRING_TIME = 250;
+
+            public static final double ABORT_APPROACH_THRESHOLD = 12;
+            public static final long ABORT_APPROACH_TIMOUT = 5000;
         }
 
         public class Align {

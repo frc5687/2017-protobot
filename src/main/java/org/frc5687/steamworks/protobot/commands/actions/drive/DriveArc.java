@@ -19,11 +19,13 @@ public class DriveArc extends Command {
     private double _angle = 1000;
     private long _endMillis;
     private boolean _stopOnFinish = false;
+    private boolean _clockwise;
 
     private DriveArc(double leftSpeed, double rightSpeed, boolean stopOnFinish) {
         _leftSpeed = leftSpeed;
         _rightSpeed = rightSpeed;
         _stopOnFinish = stopOnFinish;
+        _clockwise = _leftSpeed > _rightSpeed;
     }
 
     public DriveArc(double leftSpeed, double rightSpeed, long millis, boolean stopOnFinish) {
@@ -44,7 +46,11 @@ public class DriveArc extends Command {
     @Override
     protected void initialize() {
         if (_millis > 0) {
+            DriverStation.reportError("DriveArc started at " + _leftSpeed + ", " + _rightSpeed + " for " + _millis + " millis.", false);
             _endMillis = System.currentTimeMillis() + _millis;
+        }
+        if (_angle!=1000) {
+            DriverStation.reportError("DriveArc started at " + _leftSpeed + ", " + _rightSpeed + " from " + imu.getYaw() + " to " + _angle, false);
         }
     }
 
@@ -71,9 +77,21 @@ public class DriveArc extends Command {
             DriverStation.reportError("DriveArc timed out at " + _millis, false);
             return true;
         }
-        if (_angle != 1000 && Math.abs(imu.getYaw() - _angle) < Constants.Auto.Align.TOLERANCE) {
-            DriverStation.reportError("DriveArc reached angle " + imu.getYaw(), false);
-            return true;
+        if (_angle != 1000) {
+            double yaw = imu.getYaw();
+            if (_clockwise) {
+                if (yaw >= _angle) {
+                    DriverStation.reportError("DriveArc passed angle " + _angle + " to" + yaw, false);
+                    return true;
+                }
+                DriverStation.reportError("Clockwise at " + yaw, false);
+            } else {
+                if (yaw <= _angle) {
+                    DriverStation.reportError("DriveArc passed angle " + _angle + " to" + yaw, false);
+                    return true;
+                }
+                DriverStation.reportError("Counterclockwise at " + yaw, false);
+            }
         }
         return false;
     }

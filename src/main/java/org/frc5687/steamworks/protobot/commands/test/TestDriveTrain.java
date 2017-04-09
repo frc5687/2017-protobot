@@ -25,8 +25,9 @@ public class TestDriveTrain extends Command {
     private double _maxAmps = 0;
 
     public TestDriveTrain() {
+        requires(driveTrain);
         _runSpeed = 1.0;
-        _runMillis = 5000;
+        _runMillis = 2000;
         _targetAmps = 3;
         _targetTicks = 50;
     }
@@ -50,6 +51,7 @@ public class TestDriveTrain extends Command {
                 driveTrain.runRightFrontMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getRightFrontAmps());
                 if (System.currentTimeMillis() > _endMillis) {
+                    driveTrain.runRightFrontMotor(0);
                     _state = State.RIGHTFRONTDONE;
                 }
                 break;
@@ -63,6 +65,7 @@ public class TestDriveTrain extends Command {
                 driveTrain.runRightTopMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getRightTopAmps());
                 if (System.currentTimeMillis() > _endMillis) {
+                    driveTrain.runRightTopMotor(0);
                     _state = State.RIGHTTOPDONE;
                 }
                 break;
@@ -76,6 +79,7 @@ public class TestDriveTrain extends Command {
                 driveTrain.runRightRearMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getRightRearAmps());
                 if (System.currentTimeMillis() > _endMillis) {
+                    driveTrain.runRightRearMotor(_runSpeed);
                     _state = State.RIGHTREARDONE;
                 }
                 break;
@@ -89,6 +93,7 @@ public class TestDriveTrain extends Command {
                 driveTrain.runLeftFrontMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getLeftFrontAmps());
                 if (System.currentTimeMillis() > _endMillis) {
+                    driveTrain.runLeftFrontMotor(0);
                     _state = State.LEFTFRONTDONE;
                 }
                 break;
@@ -102,6 +107,7 @@ public class TestDriveTrain extends Command {
                 driveTrain.runLeftTopMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getLeftTopAmps());
                 if (System.currentTimeMillis() > _endMillis) {
+                    driveTrain.runLeftTopMotor(0);
                     _state = State.LEFTTOPDONE;
                 }
                 break;
@@ -115,6 +121,7 @@ public class TestDriveTrain extends Command {
                 driveTrain.runLeftRearMotor(_runSpeed);
                 _maxAmps = Math.max(_maxAmps, pdp.getLeftRearAmps());
                 if (System.currentTimeMillis() > _endMillis) {
+                    driveTrain.runLeftRearMotor(0);
                     _state = State.LEFTREARDONE;
                 }
                 break;

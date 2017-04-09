@@ -26,7 +26,7 @@ public class TestClimber extends Command {
 
 
     public TestClimber() {
-
+        requires(climber);
     }
 
     @Override

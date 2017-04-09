@@ -129,6 +129,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
     public void teleopInit() {
         if (autoCommand != null) autoCommand.cancel();
         ledStrip.setStripColor(LEDColors.TELEOP);
+        lights.turnRingLightOff();
     }
 
     @Override

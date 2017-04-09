@@ -24,28 +24,34 @@ public class AutoDrive extends Command {
 
     private boolean usePID;
     private boolean stopOnFinish;
+    private double angle;
 
     public AutoDrive(double distance, double speed) {
         this(distance, speed, false, true, 0);
     }
 
     public AutoDrive(double distance, double speed, long maxMillis) {
-        this(distance, speed, false, true, maxMillis);
+        this(distance, speed, false, true, 1000, maxMillis);
     }
 
-    /***
-     * Drives for a set distance at a set speed.
-     * @param distance Distance to drive
-     * @param speed Speed to drive
-     * @param usePID Whether to use pid or not
-     * @param stopOnFinish Whether to stop the motors when we are done
-     */
     public AutoDrive(double distance, double speed, boolean usePID, boolean stopOnFinish, long maxMillis) {
+        this(distance, speed, usePID, stopOnFinish, 1000, maxMillis);
+    }
+
+        /***
+         * Drives for a set distance at a set speed.
+         * @param distance Distance to drive
+         * @param speed Speed to drive
+         * @param usePID Whether to use pid or not
+         * @param stopOnFinish Whether to stop the motors when we are done
+         */
+    public AutoDrive(double distance, double speed, boolean usePID, boolean stopOnFinish, double angle, long maxMillis) {
         requires(driveTrain);
         this.speed = speed;
         this.distance = distance;
         this.usePID = usePID;
         this.stopOnFinish = stopOnFinish;
+        this.angle = angle;
         this.maxMillis = maxMillis;
     }
 
@@ -77,7 +83,8 @@ public class AutoDrive extends Command {
         SmartDashboard.putNumber("AutoDrive/setPoint", imu.getYaw());
         angleController.setOutputRange(-maxSpeed, maxSpeed);
         angleController.setContinuous();
-        angleController.setSetpoint(imu.getYaw());
+        // If an angle is supplied, use that as our setpoint.  Otherwise get the current heading and stick to it!
+        angleController.setSetpoint(angle==1000?imu.getYaw():angle);
         angleController.enable();
 
         DriverStation.reportError("Auto Drive initialized", false);
