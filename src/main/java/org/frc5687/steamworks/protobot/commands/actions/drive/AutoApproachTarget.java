@@ -90,8 +90,12 @@ public class AutoApproachTarget extends Command {
         synchronized (anglePID) {
             angleFactor = anglePID.get();
         }
-        driveTrain.tankDriveWithPositiveCaps(distanceFactor + angleFactor, distanceFactor - angleFactor, previousTime, System.currentTimeMillis());
-        previousTime = System.currentTimeMillis();
+        if (accelerationCaps) {
+            driveTrain.tankDriveWithPositiveCaps(distanceFactor + angleFactor, distanceFactor - angleFactor, previousTime, System.currentTimeMillis());
+            previousTime = System.currentTimeMillis();
+        } else {
+            driveTrain.tankDrive(distanceFactor + angleFactor, distanceFactor - angleFactor);
+        }
 
         SmartDashboard.putNumber("AutoApproachTarget/distanceFactor", distanceFactor);
         SmartDashboard.putNumber("AutoApproachTarget/angleFactor", angleFactor);
