@@ -155,17 +155,23 @@ public class DriveTrain extends Subsystem implements PIDSource {
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed, boolean overrideCaps) {
-        if (!overrideCaps) {
-            // Limit change in leftSpeed to +/- ACCELERATION_CAP
-            leftSpeed = Math.min(leftSpeed, getLeftSpeed() + Constants.Limits.ACCELERATION_CAP);
-            leftSpeed = Math.max(leftSpeed, getLeftSpeed() - Constants.Limits.ACCELERATION_CAP);
-
-            // Limit change in rightSpeed to +/- ACCELERATION_CAP
-            rightSpeed = Math.min(rightSpeed, getRightSpeed() + Constants.Limits.ACCELERATION_CAP);
-            rightSpeed = Math.max(rightSpeed, getRightSpeed() - Constants.Limits.ACCELERATION_CAP);
-        }
         setLeftSpeed(leftSpeed);
         setRightSpeed(rightSpeed);
+    }
+
+    public void tankDriveWithCaps(double leftSpeed, double rightSpeed, long lastCyleTime, long time) {
+        long dTime = time - lastCyleTime;
+        double maxAcceleration = dTime * Constants.Limits.ACCELERATION_CAP;
+
+        // Limit change in leftSpeed to +/- ACCELERATION_CAP
+        leftSpeed = Math.min(leftSpeed, getLeftSpeed() + maxAcceleration);
+        leftSpeed = Math.max(leftSpeed, getLeftSpeed() - maxAcceleration);
+
+        // Limit change in rightSpeed to +/- ACCELERATION_CAP
+        rightSpeed = Math.min(rightSpeed, getRightSpeed() + maxAcceleration);
+        rightSpeed = Math.max(rightSpeed, getRightSpeed() - maxAcceleration);
+
+        tankDrive(leftSpeed, rightSpeed);
     }
 
     public void tankDrive(double speed) {
