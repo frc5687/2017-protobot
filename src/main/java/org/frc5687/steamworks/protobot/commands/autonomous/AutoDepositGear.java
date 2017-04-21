@@ -11,9 +11,7 @@ public class AutoDepositGear extends CommandGroup {
 
     public AutoDepositGear() {
         super();
-        addSequential(new AutoDrive(12, .5, false, false, 250));
-        addSequential(new AutoDrive(18, 1, false, false, 1000));
-        addSequential(new AutoApproachTarget(0.7));
+        addSequential(new AutoApproachTarget(0.7, true));
         addSequential(new EjectMandibles());
         addSequential(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.PAUSE_AT_SPRING_TIME));
         addParallel(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.MANDIBLE_HOLD_TIME));

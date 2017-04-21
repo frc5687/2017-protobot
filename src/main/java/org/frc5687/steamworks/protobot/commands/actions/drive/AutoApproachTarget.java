@@ -14,6 +14,7 @@ import static org.frc5687.steamworks.protobot.Robot.lights;
 public class AutoApproachTarget extends Command {
 
     private double speed;
+    private boolean accelerationCaps;
     private PIDController distanceController;
     private PIDController angleController;
     private PIDListener distancePID;
@@ -21,9 +22,14 @@ public class AutoApproachTarget extends Command {
     private long timeout;
     private long maxMillis;
 
-    public AutoApproachTarget(double speed) {
+    public AutoApproachTarget(double speed, boolean accelerationCaps) {
         requires(driveTrain);
         this.speed = speed;
+        this.accelerationCaps = accelerationCaps;
+    }
+
+    public AutoApproachTarget(double speed) {
+        this(speed, false);
     }
 
     @Override
