@@ -40,6 +40,9 @@ public class Constants {
         public static final double THRESHOLD_OPEN_AMPS = 10.0;
         public static final double THRESHOLD_CLOSE_AMPS = 10.0;
         public static final double RETAIN_SPEED = -.2;
+
+        public static final boolean TONY_MOTOR_INVERTED = false;
+        public static final boolean RHODY_MOTOR_INVERTED = true;
     }
 
     public class DriveTrain {

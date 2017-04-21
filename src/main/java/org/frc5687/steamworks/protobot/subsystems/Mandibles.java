@@ -20,6 +20,7 @@ public class Mandibles extends Subsystem {
 
     public Mandibles() {
         gearMotor = new VictorSP(RobotMap.Mandibles.MANDIBLES_MOTOR);
+        gearMotor.setInverted(Constants.pickConstant(Constants.Mandibles.TONY_MOTOR_INVERTED, Constants.Mandibles.RHODY_MOTOR_INVERTED));
         limitPotentiometer = new AnalogPotentiometer(RobotMap.Mandibles.POTENTIOMETER);
         ir = new AnalogInput(RobotMap.Mandibles.MANDIBLES_IR);
     }
@@ -66,6 +67,7 @@ public class Mandibles extends Subsystem {
     }
 
     public void updateDashboard() {
+        SmartDashboard.putBoolean("Mandibles/MotorInverted", gearMotor.getInverted());
         SmartDashboard.putNumber("Mandibles/MotorSpeed", gearMotor.getSpeed());
         SmartDashboard.putNumber("Mandibles/PotentiometerValue", potentiometerValue());
         SmartDashboard.putNumber("Mandibles/MotorAmperage", pdp.getMandiblesAmps());
