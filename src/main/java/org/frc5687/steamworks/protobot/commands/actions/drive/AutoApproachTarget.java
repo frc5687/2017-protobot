@@ -21,6 +21,7 @@ public class AutoApproachTarget extends Command {
     private PIDListener anglePID;
     private long timeout;
     private long maxMillis;
+    private long previousTime;
 
     public AutoApproachTarget(double speed, boolean accelerationCaps) {
         requires(driveTrain);
@@ -73,6 +74,8 @@ public class AutoApproachTarget extends Command {
         angleController.setSetpoint(imu.getYaw());
         angleController.enable();
 
+        previousTime = System.currentTimeMillis();
+
         DriverStation.reportError("AutoApproach initialized", false);
     }
 
@@ -87,11 +90,12 @@ public class AutoApproachTarget extends Command {
         synchronized (anglePID) {
             angleFactor = anglePID.get();
         }
+        driveTrain.tankDriveWithPositiveCaps(distanceFactor + angleFactor, distanceFactor - angleFactor, previousTime, System.currentTimeMillis());
+        previousTime = System.currentTimeMillis();
+
         SmartDashboard.putNumber("AutoApproachTarget/distanceFactor", distanceFactor);
         SmartDashboard.putNumber("AutoApproachTarget/angleFactor", angleFactor);
         DriverStation.reportError("Distance="+driveTrain.getIrSensor().pidGet() +", DistanceFactor=" + distanceFactor + ", AngleFactor=" + angleFactor, false);
-        driveTrain.tankDrive(distanceFactor + angleFactor, distanceFactor - angleFactor);
-
         SmartDashboard.putBoolean("AutoApproachTarget/IRPID/onTarget", distanceController.onTarget());
         SmartDashboard.putNumber("AutoApproachTarget/IRPID/distance", driveTrain.getIrSensor().pidGet());
         SmartDashboard.putNumber("AutoApproachTarget/IRPID/raw", driveTrain.getIrSensor().getRaw());
