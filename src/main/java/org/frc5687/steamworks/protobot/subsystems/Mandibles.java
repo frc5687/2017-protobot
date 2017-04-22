@@ -16,7 +16,6 @@ import static org.frc5687.steamworks.protobot.Robot.pdp;
 public class Mandibles extends Subsystem {
 
     private VictorSP gearMotor;
-    private AnalogPotentiometer limitPotentiometer;
     private AnalogInput ir;
 
     public Mandibles() {
@@ -24,7 +23,6 @@ public class Mandibles extends Subsystem {
         boolean inverted = Constants.pickConstant(Constants.Mandibles.TONY_MOTOR_INVERTED, Constants.Mandibles.RHODY_MOTOR_INVERTED);
         gearMotor.setInverted(inverted);
         DriverStation.reportError("Mandibles inverted: " + inverted, false);
-        limitPotentiometer = new AnalogPotentiometer(RobotMap.Mandibles.POTENTIOMETER);
         ir = new AnalogInput(RobotMap.Mandibles.MANDIBLES_IR);
     }
 
@@ -61,17 +59,12 @@ public class Mandibles extends Subsystem {
         return ir.getValue() > Constants.Mandibles.IR_GEAR_DETECTED;
     }
 
-    public double potentiometerValue() {
-        return limitPotentiometer.get();
-    }
-
     public void poll() {
         ledStrip.setGearInMandibles(gearPresent());
     }
 
     public void updateDashboard() {
         SmartDashboard.putNumber("Mandibles/MotorSpeed", gearMotor.getSpeed());
-        SmartDashboard.putNumber("Mandibles/PotentiometerValue", potentiometerValue());
         SmartDashboard.putNumber("Mandibles/MotorAmperage", pdp.getMandiblesAmps());
         SmartDashboard.putNumber("Mandibles/IRValue", ir.getValue());
     }
