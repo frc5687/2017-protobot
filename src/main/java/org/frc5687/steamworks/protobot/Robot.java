@@ -9,7 +9,9 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.frc5687.steamworks.protobot.commands.actions.drive.AutoVisualApproachTarget;
 import org.frc5687.steamworks.protobot.commands.autonomous.*;
+import org.frc5687.steamworks.protobot.commands.test.AutoVisionTest;
 import org.frc5687.steamworks.protobot.subsystems.*;
 import org.frc5687.steamworks.protobot.utils.*;
 
@@ -120,6 +122,9 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         int spring = autoRotorChooser.springSwitchValue();
         int hopper = autoRotorChooser.hopperSwitchValue();
         autoCommand = new AutoGroup(spring, 0, hopper);
+        // autoCommand = new AutoGroup(4, 0, hopper);
+        // autoCommand = new AutoVisualApproachTarget(.7, 0);
+        // autoCommand = new AutoVisionTest();
         if (autoCommand != null) {
             autoCommand.start();
         }
