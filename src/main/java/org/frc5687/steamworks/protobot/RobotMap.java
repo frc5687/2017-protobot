@@ -10,7 +10,7 @@ public class RobotMap {
 
     public static class Drive {
         //  REAR - FRONT - TOP
-
+        // PWM
         public static final int RIGHT_MOTOR_FRONT = 3;
         public static final int RIGHT_MOTOR_REAR = 4;
         public static final int RIGHT_MOTOR_TOP = 5;
@@ -19,6 +19,7 @@ public class RobotMap {
         public static final int LEFT_MOTOR_REAR = 1;
         public static final int LEFT_MOTOR_TOP = 2;
 
+        // PDP ports
         public static final int PDP_RIGHT_MOTOR_FRONT = 15;
         public static final int PDP_RIGHT_MOTOR_TOP = 14;
         public static final int PDP_RIGHT_MOTOR_REAR = 13;
@@ -27,14 +28,16 @@ public class RobotMap {
         public static final int PDP_LEFT_MOTOR_TOP = 1;
         public static final int PDP_LEFT_MOTOR_REAR = 0;
 
+        // DIO
         public static final int LEFT_ENCODER_CHANNEL_A = 6;
         public static final int LEFT_ENCODER_CHANNEL_B = 7;
         public static final int RIGHT_ENCODER_CHANNEL_A = 8;
         public static final int RIGHT_ENCODER_CHANNEL_B = 9;
 
+        // Analog In
         public static final int RIGHT_IR_SENSOR = 0;
-        public static final int CENTER_IR_SENSOR = 0;
-        public static final int LEFT_IR_SENSOR = 0;
+        public static final int CENTER_IR_SENSOR = 3;
+        public static final int LEFT_IR_SENSOR = 1;
 
     }
 
