@@ -51,6 +51,11 @@ public class Constants {
         public static final double FULL_BACKWARDS_SPEED = -1;
 
         public static final double STRAIGHT_TOLERANCE = 0.2;
+
+        public static final double RIGHT_IR_SENSOR_OFFSET = 0;
+        public static final double CENTER_IR_SENSOR_OFFSET = 0;
+        public static final double LEFT_IR_SENSOR_OFFSET = 0;
+
     }
 
     public class Deadbands {

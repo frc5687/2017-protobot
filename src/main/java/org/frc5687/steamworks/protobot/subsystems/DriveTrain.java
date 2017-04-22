@@ -8,6 +8,7 @@ import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.actions.drive.DriveWith2Joysticks;
 import org.frc5687.steamworks.protobot.utils.CompoundIRPIDSource;
 import org.frc5687.steamworks.protobot.utils.IRPIDSource;
+import org.frc5687.steamworks.protobot.utils.OffsetIRPIDSource;
 
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 
@@ -35,7 +36,11 @@ public class DriveTrain extends Subsystem implements PIDSource {
         rightEncoder = initializeEncoder(RobotMap.Drive.RIGHT_ENCODER_CHANNEL_A, RobotMap.Drive.RIGHT_ENCODER_CHANNEL_B, Constants.Encoders.RightDrive.REVERSED, Constants.Encoders.RightDrive.INCHES_PER_PULSE);
         leftEncoder = initializeEncoder(RobotMap.Drive.LEFT_ENCODER_CHANNEL_A, RobotMap.Drive.LEFT_ENCODER_CHANNEL_B, Constants.Encoders.LeftDrive.REVERSED, Constants.Encoders.LeftDrive.INCHES_PER_PULSE);
 
-        irSensors = new CompoundIRPIDSource(RobotMap.Drive.IR_DRIVE_SENSOR, RobotMap.Drive.IR_DRIVE_SENSOR, RobotMap.Drive.IR_DRIVE_SENSOR);
+        IRPIDSource left = new OffsetIRPIDSource(RobotMap.Drive.LEFT_IR_SENSOR, Constants.DriveTrain.LEFT_IR_SENSOR_OFFSET);
+        IRPIDSource center = new OffsetIRPIDSource(RobotMap.Drive.CENTER_IR_SENSOR, Constants.DriveTrain.CENTER_IR_SENSOR_OFFSET);
+        IRPIDSource right = new OffsetIRPIDSource(RobotMap.Drive.RIGHT_IR_SENSOR, Constants.DriveTrain.RIGHT_IR_SENSOR_OFFSET);
+
+        irSensors = new CompoundIRPIDSource(left, center, right);
     }
 
     @Override

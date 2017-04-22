@@ -32,7 +32,9 @@ public class RobotMap {
         public static final int RIGHT_ENCODER_CHANNEL_A = 8;
         public static final int RIGHT_ENCODER_CHANNEL_B = 9;
 
-        public static final int IR_DRIVE_SENSOR = 3;
+        public static final int RIGHT_IR_SENSOR = 0;
+        public static final int CENTER_IR_SENSOR = 0;
+        public static final int LEFT_IR_SENSOR = 0;
 
     }
 
