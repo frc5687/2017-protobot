@@ -2,6 +2,7 @@ package org.frc5687.steamworks.protobot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,6 +21,9 @@ public class Mandibles extends Subsystem {
 
     public Mandibles() {
         gearMotor = new VictorSP(RobotMap.Mandibles.MANDIBLES_MOTOR);
+        boolean inverted = Constants.pickConstant(Constants.Mandibles.TONY_MOTOR_INVERTED, Constants.Mandibles.RHODY_MOTOR_INVERTED);
+        gearMotor.setInverted(inverted);
+        DriverStation.reportError("Mandibles inverted: " + inverted, false);
         limitPotentiometer = new AnalogPotentiometer(RobotMap.Mandibles.POTENTIOMETER);
         ir = new AnalogInput(RobotMap.Mandibles.MANDIBLES_IR);
     }
