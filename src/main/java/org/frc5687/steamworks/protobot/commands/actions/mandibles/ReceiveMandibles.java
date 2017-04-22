@@ -36,7 +36,7 @@ public class ReceiveMandibles extends Command {
                 if (System.currentTimeMillis() >= endTime || pdp.getMandiblesAmps() > Constants.Mandibles.THRESHOLD_CLOSE_AMPS) { state = State.CLAMP; }
                 break;
             case CLAMP:
-                mandibles.setSpeed(gearPresent ? Constants.Mandibles.CLAMP_SPEED : Constants.Mandibles.RETAIN_SPEED);
+                mandibles.setSpeed(gearPresent ? Constants.pickConstant(Constants.Mandibles.CLAMP_SPEED_TONY, Constants.Mandibles.CLAMP_SPEED_RHODY) : Constants.pickConstant(Constants.Mandibles.RETAIN_SPEED_TONY, Constants.Mandibles.RETAIN_SPEED_RHODY));
                 if (wiggle()) {
                     state = State.WIGGLE_OUT;
                     switchTime = System.currentTimeMillis() + Constants.Mandibles.WIGGLE_OUT_TIME;
@@ -59,7 +59,7 @@ public class ReceiveMandibles extends Command {
                 }
                 break;
             default:
-                mandibles.setSpeed(gearPresent ? Constants.Mandibles.CLAMP_SPEED : Constants.Mandibles.RETAIN_SPEED);
+                mandibles.setSpeed(gearPresent ? Constants.pickConstant(Constants.Mandibles.CLAMP_SPEED_TONY, Constants.Mandibles.CLAMP_SPEED_RHODY) : Constants.pickConstant(Constants.Mandibles.RETAIN_SPEED_TONY, Constants.Mandibles.RETAIN_SPEED_RHODY));
         }
         SmartDashboard.getString("Mandibles/ReceiveState", state.toString());
     }

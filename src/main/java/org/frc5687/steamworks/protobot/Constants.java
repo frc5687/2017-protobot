@@ -25,21 +25,27 @@ public class Constants {
 
     public class Mandibles {
 
-        public static final double OPEN_SPEED = .85;
-        public static final double CLOSE_SPEED = -.3;
-        public static final double CLAMP_SPEED = -.27;
-        public static final double HOLD_OPEN_SPEED = .15;
+        public static final double OPEN_SPEED_TONY = .85;
+        public static final double CLOSE_SPEED_TONY = -.3;
+        public static final double CLAMP_SPEED_TONY = -.27;
+        public static final double HOLD_OPEN_SPEED_TONY = .15;
+        public static final double OPEN_SPEED_RHODY = -.85;
+        public static final double CLOSE_SPEED_RHODY = .3;
+        public static final double CLAMP_SPEED_RHODY = .27;
+        public static final double HOLD_OPEN_SPEED_RHODY = -.15;
         public static final long OPEN_TIME = 500;
         public static final long CLOSE_TIME = 1000;
         public static final double TONY_MAX_POT_LIMIT = 0.5;
         public static final double PROTOBOT_MAX_POT_LIMIT = 0.5;
-        public static final double WIGGLE_SPEED = -0.2;
+        public static final double WIGGLE_SPEED_TONY = -0.2;
+        public static final double WIGGLE_SPEED_RHODY = 0.2;
         public static final long WIGGLE_OUT_TIME = 30;
         public static final long WIGGLE_IN_TIME = 70;
         public static final long IR_GEAR_DETECTED = 1500;
         public static final double THRESHOLD_OPEN_AMPS = 10.0;
         public static final double THRESHOLD_CLOSE_AMPS = 10.0;
-        public static final double RETAIN_SPEED = -.2;
+        public static final double RETAIN_SPEED_TONY = -.2;
+        public static final double RETAIN_SPEED_RHODY = .2;
     }
 
     public class DriveTrain {

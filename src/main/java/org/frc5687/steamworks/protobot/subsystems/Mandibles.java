@@ -34,19 +34,20 @@ public class Mandibles extends Subsystem {
     }
 
     public void open() {
-        setSpeed(Constants.Mandibles.OPEN_SPEED);
+        setSpeed(Constants.pickConstant(Constants.Mandibles.OPEN_SPEED_TONY,Constants.Mandibles.OPEN_SPEED_RHODY));
     }
 
     public void close() {
-        setSpeed(Constants.Mandibles.CLOSE_SPEED);
+
+        setSpeed(Constants.pickConstant(Constants.Mandibles.CLOSE_SPEED_TONY, Constants.Mandibles.CLOSE_SPEED_RHODY));
     }
 
     public void wiggleOut() {
-        setSpeed(Constants.Mandibles.WIGGLE_SPEED);
+        setSpeed(Constants.pickConstant(Constants.Mandibles.WIGGLE_SPEED_TONY, Constants.Mandibles.WIGGLE_SPEED_RHODY));
     }
 
     public void wiggleIn() {
-        setSpeed(-Constants.Mandibles.WIGGLE_SPEED);
+        setSpeed(Constants.pickConstant(-Constants.Mandibles.WIGGLE_SPEED_TONY, -Constants.Mandibles.WIGGLE_SPEED_RHODY));
     }
 
     public void stop() {

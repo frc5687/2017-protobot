@@ -1,11 +1,7 @@
 package org.frc5687.steamworks.protobot.commands.actions.mandibles;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
-import org.frc5687.steamworks.protobot.LEDColors;
-
-import java.util.Date;
 
 import static org.frc5687.steamworks.protobot.Robot.*;
 
@@ -37,7 +33,7 @@ public class OpenMandibles extends Command {
 
     @Override
     protected void end() {
-        mandibles.setSpeed(-Constants.Mandibles.CLAMP_SPEED);
+        mandibles.setSpeed(Constants.pickConstant(-Constants.Mandibles.CLAMP_SPEED_TONY, -Constants.Mandibles.CLAMP_SPEED_RHODY));
     }
 
     @Override
