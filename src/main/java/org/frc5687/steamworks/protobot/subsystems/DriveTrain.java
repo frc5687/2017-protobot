@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.actions.drive.DriveWith2Joysticks;
+import org.frc5687.steamworks.protobot.utils.CompoundIRPIDSource;
 import org.frc5687.steamworks.protobot.utils.IRPIDSource;
 
 import static org.frc5687.steamworks.protobot.Robot.pdp;
@@ -20,7 +21,7 @@ public class DriveTrain extends Subsystem implements PIDSource {
     private VictorSP rightTopMotor;
     private Encoder rightEncoder;
     private Encoder leftEncoder;
-    private IRPIDSource irSensor;
+    private CompoundIRPIDSource irSensors;
 
     public DriveTrain() {
         leftFrontMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_FRONT);
@@ -34,7 +35,7 @@ public class DriveTrain extends Subsystem implements PIDSource {
         rightEncoder = initializeEncoder(RobotMap.Drive.RIGHT_ENCODER_CHANNEL_A, RobotMap.Drive.RIGHT_ENCODER_CHANNEL_B, Constants.Encoders.RightDrive.REVERSED, Constants.Encoders.RightDrive.INCHES_PER_PULSE);
         leftEncoder = initializeEncoder(RobotMap.Drive.LEFT_ENCODER_CHANNEL_A, RobotMap.Drive.LEFT_ENCODER_CHANNEL_B, Constants.Encoders.LeftDrive.REVERSED, Constants.Encoders.LeftDrive.INCHES_PER_PULSE);
 
-        irSensor = new IRPIDSource(RobotMap.Drive.IR_DRIVE_SENSOR);
+        irSensors = new CompoundIRPIDSource(RobotMap.Drive.IR_DRIVE_SENSOR, RobotMap.Drive.IR_DRIVE_SENSOR, RobotMap.Drive.IR_DRIVE_SENSOR);
     }
 
     @Override
@@ -218,12 +219,11 @@ public class DriveTrain extends Subsystem implements PIDSource {
         SmartDashboard.putNumber("DriveTrain/Amps/Left/Rear", pdp.getLeftRearAmps());
         SmartDashboard.putNumber("DriveTrain/Amps/Average", pdp.getMeanDrivetrainAmps());
 
-        SmartDashboard.putNumber("DriveTrain/IR Sensor Distance", irSensor.pidGet());
-        SmartDashboard.putNumber("DriveTrain/IR Sensor Raw", irSensor.getRaw());
+        SmartDashboard.putNumber("DriveTrain/IR Sensor Distance", irSensors.pidGet());
     }
 
-    public IRPIDSource getIrSensor() {
-        return irSensor;
+    public CompoundIRPIDSource getIRSensors() {
+        return irSensors;
     }
 
     @Override

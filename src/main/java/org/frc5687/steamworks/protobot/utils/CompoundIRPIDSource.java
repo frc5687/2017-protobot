@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
 /**
- * Created by Baxter on 4/22/2017.
+ * PID source that returns the minimum of multiple ir sensor distances
  */
 public class CompoundIRPIDSource implements PIDSource {
 
@@ -16,6 +16,10 @@ public class CompoundIRPIDSource implements PIDSource {
         for(int i = 0; i < channels.length; i ++) {
             irSensors[i] = new IRPIDSource(channels[i]);
         }
+    }
+
+    public CompoundIRPIDSource(IRPIDSource... irSensors) {
+        this.irSensors = irSensors;
     }
 
     @Override
