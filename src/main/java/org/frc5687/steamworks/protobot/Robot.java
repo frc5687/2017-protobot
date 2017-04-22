@@ -46,6 +46,9 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
     public void robotInit() {
         robot = this;
 
+        pdp = new PDP(); // must be initialized after other subsystems
+        Constants.isTony = pdp.isTony(); // must be set before subsystems
+
         driveTrain = new DriveTrain();
         mandibles = new Mandibles();
         shifter = new Shifter();
@@ -55,11 +58,7 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
         dustpan = new Dustpan();
         autoRotorChooser = new AutoChooser();
 
-
-        pdp = new PDP(); // must be initialized after other subsystems
         oi = new OI(); // must be initialized after subsystems
-
-        Constants.isTony = pdp.isTony(); // must be set before subsystems
 
         driveTrain.resetDriveEncoders();
 

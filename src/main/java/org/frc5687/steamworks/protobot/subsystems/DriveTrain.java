@@ -22,6 +22,7 @@ public class DriveTrain extends Subsystem implements PIDSource {
     private VictorSP rightTopMotor;
     private Encoder rightEncoder;
     private Encoder leftEncoder;
+    private IRPIDSource leftIR, centerIR, rightIR;
     private CompoundIRPIDSource irSensors;
 
     public DriveTrain() {
@@ -36,11 +37,11 @@ public class DriveTrain extends Subsystem implements PIDSource {
         rightEncoder = initializeEncoder(RobotMap.Drive.RIGHT_ENCODER_CHANNEL_A, RobotMap.Drive.RIGHT_ENCODER_CHANNEL_B, Constants.Encoders.RightDrive.REVERSED, Constants.Encoders.RightDrive.INCHES_PER_PULSE);
         leftEncoder = initializeEncoder(RobotMap.Drive.LEFT_ENCODER_CHANNEL_A, RobotMap.Drive.LEFT_ENCODER_CHANNEL_B, Constants.Encoders.LeftDrive.REVERSED, Constants.Encoders.LeftDrive.INCHES_PER_PULSE);
 
-        IRPIDSource left = new OffsetIRPIDSource(RobotMap.Drive.LEFT_IR_SENSOR, Constants.DriveTrain.LEFT_IR_SENSOR_OFFSET);
-        IRPIDSource center = new OffsetIRPIDSource(RobotMap.Drive.CENTER_IR_SENSOR, Constants.DriveTrain.CENTER_IR_SENSOR_OFFSET);
-        IRPIDSource right = new OffsetIRPIDSource(RobotMap.Drive.RIGHT_IR_SENSOR, Constants.DriveTrain.RIGHT_IR_SENSOR_OFFSET);
+        leftIR = new OffsetIRPIDSource(RobotMap.Drive.LEFT_IR_SENSOR, Constants.DriveTrain.LEFT_IR_SENSOR_OFFSET);
+        centerIR = new OffsetIRPIDSource(RobotMap.Drive.CENTER_IR_SENSOR, Constants.DriveTrain.CENTER_IR_SENSOR_OFFSET);
+        rightIR = new OffsetIRPIDSource(RobotMap.Drive.RIGHT_IR_SENSOR, Constants.DriveTrain.RIGHT_IR_SENSOR_OFFSET);
 
-        irSensors = new CompoundIRPIDSource(left, center, right);
+        irSensors = new CompoundIRPIDSource(leftIR, centerIR, rightIR);
     }
 
     @Override
@@ -224,7 +225,10 @@ public class DriveTrain extends Subsystem implements PIDSource {
         SmartDashboard.putNumber("DriveTrain/Amps/Left/Rear", pdp.getLeftRearAmps());
         SmartDashboard.putNumber("DriveTrain/Amps/Average", pdp.getMeanDrivetrainAmps());
 
-        SmartDashboard.putNumber("DriveTrain/IR Sensor Distance", irSensors.pidGet());
+        SmartDashboard.putNumber("DriveTrain/IRDistance/Compound", irSensors.pidGet());
+        SmartDashboard.putNumber("DriveTrain/IRDistance/Left", leftIR.pidGet());
+        SmartDashboard.putNumber("DriveTrain/IRDistance/Center", centerIR.pidGet());
+        SmartDashboard.putNumber("DriveTrain/IRDistance/Right", rightIR.pidGet());
     }
 
     public CompoundIRPIDSource getIRSensors() {
