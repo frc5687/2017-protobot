@@ -38,6 +38,7 @@ public class HoldMandiblesOpen extends Command {
 
     @Override
     protected void end() {
+        DriverStation.reportError("HoldMandiblesOpen done (" + millis + ")", false);
     }
 
     @Override

@@ -7,7 +7,7 @@ public class AutoCrossField extends SteamworksBaseCommandGroup {
 
     public AutoCrossField() {
         super();
-        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.TRAVERSE_NEUTRAL_ZONE_FROM_WALL_DISTANCE, Constants.Auto.Drive.SPEED, 5000));
+        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.TRAVERSE_NEUTRAL_ZONE_FROM_WALL_DISTANCE, Constants.Auto.Drive.SPEED, 5000, "Coss Field"));
     }
 
 }

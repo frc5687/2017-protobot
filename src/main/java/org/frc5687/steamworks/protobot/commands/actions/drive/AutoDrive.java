@@ -26,16 +26,18 @@ public class AutoDrive extends Command {
     private boolean stopOnFinish;
     private double angle;
 
-    public AutoDrive(double distance, double speed) {
-        this(distance, speed, false, true, 0);
+    private String debug;
+
+    public AutoDrive(double distance, double speed, String debug) {
+        this(distance, speed, false, true, 0, debug);
     }
 
-    public AutoDrive(double distance, double speed, long maxMillis) {
-        this(distance, speed, false, true, 1000, maxMillis);
+    public AutoDrive(double distance, double speed, long maxMillis, String debug) {
+        this(distance, speed, false, true, 1000, maxMillis, debug);
     }
 
-    public AutoDrive(double distance, double speed, boolean usePID, boolean stopOnFinish, long maxMillis) {
-        this(distance, speed, usePID, stopOnFinish, 1000, maxMillis);
+    public AutoDrive(double distance, double speed, boolean usePID, boolean stopOnFinish, long maxMillis, String debug) {
+        this(distance, speed, usePID, stopOnFinish, 1000, maxMillis, debug);
     }
 
         /***
@@ -45,7 +47,7 @@ public class AutoDrive extends Command {
          * @param usePID Whether to use pid or not
          * @param stopOnFinish Whether to stop the motors when we are done
          */
-    public AutoDrive(double distance, double speed, boolean usePID, boolean stopOnFinish, double angle, long maxMillis) {
+    public AutoDrive(double distance, double speed, boolean usePID, boolean stopOnFinish, double angle, long maxMillis, String debug) {
         requires(driveTrain);
         this.speed = speed;
         this.distance = distance;
@@ -53,6 +55,7 @@ public class AutoDrive extends Command {
         this.stopOnFinish = stopOnFinish;
         this.angle = angle;
         this.maxMillis = maxMillis;
+        this.debug = debug;
     }
 
     @Override
@@ -87,7 +90,7 @@ public class AutoDrive extends Command {
         angleController.setSetpoint(angle==1000?imu.getYaw():angle);
         angleController.enable();
 
-        DriverStation.reportError("Auto Drive initialized", false);
+        DriverStation.reportError("Auto Drive initialized: " + (debug==null?"":debug), false);
     }
 
     @Override
@@ -108,7 +111,7 @@ public class AutoDrive extends Command {
         SmartDashboard.putNumber("AutoDrive/distanceFactor", distanceFactor);
         SmartDashboard.putNumber("AutoDrive/angleFactor", angleFactor);
 
-        driveTrain.tankDrive(distanceFactor + angleFactor, distanceFactor - angleFactor, true);
+        driveTrain.tankDrive(distanceFactor + angleFactor, distanceFactor - angleFactor, false);
 
         SmartDashboard.putBoolean("AutoDrive/onTarget", distanceController == null ? false : distanceController.onTarget());
         SmartDashboard.putNumber("AutoDrive/imu", imu.getYaw());
@@ -131,10 +134,14 @@ public class AutoDrive extends Command {
 
     @Override
     protected void end() {
-        DriverStation.reportError("AutoDrive Finished (" + driveTrain.getDistance() + ", " + (imu.getYaw() - angleController.getSetpoint()) + ")", false);
+        DriverStation.reportError("AutoDrive Finished (" + driveTrain.getDistance() + ", " + (imu.getYaw() - angleController.getSetpoint()) + ") " + (debug==null?"":debug), false);
         angleController.disable();
+        if (distanceController!=null) {
+            distanceController.disable();
+        }
         if (stopOnFinish) {
-            driveTrain.tankDrive(0, 0);
+            DriverStation.reportError("Stopping.", false);
+            driveTrain.tankDrive(0, 0, true);
         }
     }
 

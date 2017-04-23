@@ -6,7 +6,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.RobotMap;
 import org.frc5687.steamworks.protobot.commands.actions.drive.DriveWith2Joysticks;
+import org.frc5687.steamworks.protobot.utils.CompoundIRPIDSource;
 import org.frc5687.steamworks.protobot.utils.IRPIDSource;
+import org.frc5687.steamworks.protobot.utils.OffsetIRPIDSource;
 
 import static org.frc5687.steamworks.protobot.Robot.pdp;
 
@@ -20,7 +22,8 @@ public class DriveTrain extends Subsystem implements PIDSource {
     private VictorSP rightTopMotor;
     private Encoder rightEncoder;
     private Encoder leftEncoder;
-    private IRPIDSource irSensor;
+    private IRPIDSource centerIR;
+    //private CompoundIRPIDSource irSensors;
 
     public DriveTrain() {
         leftFrontMotor = new VictorSP(RobotMap.Drive.LEFT_MOTOR_FRONT);
@@ -31,10 +34,14 @@ public class DriveTrain extends Subsystem implements PIDSource {
         rightRearMotor = new VictorSP(RobotMap.Drive.RIGHT_MOTOR_REAR);
         rightTopMotor = new VictorSP(RobotMap.Drive.RIGHT_MOTOR_TOP);
 
-        rightEncoder = initializeEncoder(RobotMap.Drive.RIGHT_ENCODER_CHANNEL_A, RobotMap.Drive.RIGHT_ENCODER_CHANNEL_B, Constants.Encoders.RightDrive.REVERSED, Constants.Encoders.RightDrive.INCHES_PER_PULSE);
-        leftEncoder = initializeEncoder(RobotMap.Drive.LEFT_ENCODER_CHANNEL_A, RobotMap.Drive.LEFT_ENCODER_CHANNEL_B, Constants.Encoders.LeftDrive.REVERSED, Constants.Encoders.LeftDrive.INCHES_PER_PULSE);
+        rightEncoder = initializeEncoder(RobotMap.Drive.RIGHT_ENCODER_CHANNEL_A, RobotMap.Drive.RIGHT_ENCODER_CHANNEL_B, Constants.Encoders.RightDrive.REVERSED, Constants.pickConstant(Constants.Encoders.RightDrive.INCHES_PER_PULSE_TONY, Constants.Encoders.RightDrive.INCHES_PER_PULSE_RHODY));
+        leftEncoder = initializeEncoder(RobotMap.Drive.LEFT_ENCODER_CHANNEL_A, RobotMap.Drive.LEFT_ENCODER_CHANNEL_B, Constants.Encoders.LeftDrive.REVERSED, Constants.pickConstant(Constants.Encoders.LeftDrive.INCHES_PER_PULSE_TONY, Constants.Encoders.LeftDrive.INCHES_PER_PULSE_RHODY));
 
-        irSensor = new IRPIDSource(RobotMap.Drive.IR_DRIVE_SENSOR);
+        //leftIR = new OffsetIRPIDSource(RobotMap.Drive.LEFT_IR_SENSOR, Constants.DriveTrain.LEFT_IR_SENSOR_OFFSET);
+        centerIR = new OffsetIRPIDSource(RobotMap.Drive.CENTER_IR_SENSOR, Constants.DriveTrain.CENTER_IR_SENSOR_OFFSET);
+        //rightIR = new OffsetIRPIDSource(RobotMap.Drive.RIGHT_IR_SENSOR, Constants.DriveTrain.RIGHT_IR_SENSOR_OFFSET);
+
+        //irSensors = new CompoundIRPIDSource(centerIR);
     }
 
     @Override
@@ -218,13 +225,21 @@ public class DriveTrain extends Subsystem implements PIDSource {
         SmartDashboard.putNumber("DriveTrain/Amps/Left/Rear", pdp.getLeftRearAmps());
         SmartDashboard.putNumber("DriveTrain/Amps/Average", pdp.getMeanDrivetrainAmps());
 
-        SmartDashboard.putNumber("DriveTrain/IR Sensor Distance", irSensor.pidGet());
-        SmartDashboard.putNumber("DriveTrain/IR Sensor Raw", irSensor.getRaw());
+        //SmartDashboard.putNumber("DriveTrain/IRDistance/Compound", irSensors.pidGet());
+        //SmartDashboard.putNumber("DriveTrain/IRDistance/Left", leftIR.pidGet());
+        SmartDashboard.putNumber("DriveTrain/IRDistance/Center", centerIR.pidGet());
+        //SmartDashboard.putNumber("DriveTrain/IRDistance/Right", rightIR.pidGet());
     }
 
-    public IRPIDSource getIrSensor() {
-        return irSensor;
+/*
+    public CompoundIRPIDSource getIRSensors() {
+        return irSensors;
     }
+*/
+    public IRPIDSource getIRSensor() {
+        return centerIR;
+    }
+
 
     @Override
     public double pidGet() {

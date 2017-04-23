@@ -61,7 +61,8 @@ public class ReceiveMandibles extends Command {
             default:
                 mandibles.setSpeed(gearPresent ? Constants.pickConstant(Constants.Mandibles.CLAMP_SPEED_TONY, Constants.Mandibles.CLAMP_SPEED_RHODY) : Constants.pickConstant(Constants.Mandibles.RETAIN_SPEED_TONY, Constants.Mandibles.RETAIN_SPEED_RHODY));
         }
-        SmartDashboard.getString("Mandibles/ReceiveState", state.toString());
+        SmartDashboard.putString("Mandibles/ReceiveState", state.toString());
+        SmartDashboard.putString("Mandibles/millis", Long.toString(System.currentTimeMillis()));
     }
 
     protected boolean wiggle() {

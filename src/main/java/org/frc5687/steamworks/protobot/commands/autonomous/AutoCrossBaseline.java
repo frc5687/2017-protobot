@@ -7,7 +7,7 @@ public class AutoCrossBaseline extends SteamworksBaseCommandGroup {
 
     public AutoCrossBaseline() {
         super();
-        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.CROSS_BASELINE_DISTANCE, Constants.Auto.Drive.SPEED, 5000));
+        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.CROSS_BASELINE_DISTANCE, Constants.Auto.Drive.SPEED, 5000, "Cross Baseline"));
     }
 
 }

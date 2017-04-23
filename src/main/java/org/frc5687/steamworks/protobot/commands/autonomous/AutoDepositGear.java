@@ -5,19 +5,20 @@ import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.commands.actions.drive.AutoApproachTarget;
 import org.frc5687.steamworks.protobot.commands.actions.drive.AutoDrive;
 import org.frc5687.steamworks.protobot.commands.actions.mandibles.HoldMandiblesOpen;
+import org.frc5687.steamworks.protobot.commands.actions.mandibles.ReceiveMandibles;
 import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
 
 public class AutoDepositGear extends CommandGroup {
 
     public AutoDepositGear() {
         super();
-        addSequential(new AutoDrive(12, .5, false, false, 250));
-        addSequential(new AutoDrive(18, 1, false, false, 1000));
+        addSequential(new AutoDrive(30, Constants.Auto.Drive.SPEED, false, false, 250, "Initial Center"));
         addSequential(new AutoApproachTarget(0.7));
         addSequential(new EjectMandibles());
         addSequential(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.PAUSE_AT_SPRING_TIME));
         addParallel(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.MANDIBLE_HOLD_TIME));
-        addSequential(new AutoDrive(-48, Constants.Auto.Drive.SPEED, false, true, 5000));
+        addSequential(new AutoDrive(-48, Constants.Auto.Drive.SPEED, false, true, 5000, "Retreat Center"));
+        addSequential(new ReceiveMandibles());
     }
 
 }

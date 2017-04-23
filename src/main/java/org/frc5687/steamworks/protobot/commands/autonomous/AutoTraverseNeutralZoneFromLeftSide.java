@@ -5,6 +5,8 @@ import org.frc5687.steamworks.protobot.Constants;
 import org.frc5687.steamworks.protobot.commands.actions.drive.AutoAlign;
 import org.frc5687.steamworks.protobot.commands.actions.drive.AutoDrive;
 import org.frc5687.steamworks.protobot.commands.actions.drive.DriveArc;
+import org.frc5687.steamworks.protobot.commands.actions.drive.Shift;
+import org.frc5687.steamworks.protobot.subsystems.Shifter;
 
 /**
  * Command for traversing the neutral zone from a side airship peg. To be added to a command group after depositing a gear
@@ -16,7 +18,9 @@ public class AutoTraverseNeutralZoneFromLeftSide extends CommandGroup {
         // addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.TRAVERSE_NEUTRAL_ZONE_FROM_SIDE_DISTANCE, 0.7, true, true, Constants.Auto.AnglesAndDistances.STRAIGHT_ANGLE, 4000));
 
         addSequential(new AutoAlign(Constants.Auto.AnglesAndDistances.STRAIGHT_ANGLE, Constants.Auto.Align.SPEED));
-        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.TRAVERSE_NEUTRAL_ZONE_FROM_SIDE_DISTANCE, Constants.Auto.Drive.SPEED, 4000));
+        addSequential(new Shift(Shifter.Gear.HIGH, false));
+        addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.TRAVERSE_NEUTRAL_ZONE_FROM_SIDE_DISTANCE, Constants.Auto.Drive.SPEED, 4000, "Traverse From Right"));
+        addSequential(new Shift(Shifter.Gear.LOW, false));
     }
 
 }

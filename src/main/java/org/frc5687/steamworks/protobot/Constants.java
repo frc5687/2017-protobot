@@ -29,23 +29,29 @@ public class Constants {
         public static final double CLOSE_SPEED_TONY = -.3;
         public static final double CLAMP_SPEED_TONY = -.27;
         public static final double HOLD_OPEN_SPEED_TONY = .15;
-        public static final double OPEN_SPEED_RHODY = -.85;
-        public static final double CLOSE_SPEED_RHODY = .3;
-        public static final double CLAMP_SPEED_RHODY = .27;
-        public static final double HOLD_OPEN_SPEED_RHODY = -.15;
+
+        public static final double OPEN_SPEED_RHODY = .85;
+        public static final double CLOSE_SPEED_RHODY = -.3;
+        public static final double CLAMP_SPEED_RHODY = -.2;
+        public static final double HOLD_OPEN_SPEED_RHODY = .15;
+
         public static final long OPEN_TIME = 500;
         public static final long CLOSE_TIME = 1000;
         public static final double TONY_MAX_POT_LIMIT = 0.5;
         public static final double PROTOBOT_MAX_POT_LIMIT = 0.5;
         public static final double WIGGLE_SPEED_TONY = -0.2;
-        public static final double WIGGLE_SPEED_RHODY = 0.2;
+        public static final double WIGGLE_SPEED_RHODY = -0.3;
         public static final long WIGGLE_OUT_TIME = 30;
         public static final long WIGGLE_IN_TIME = 70;
         public static final long IR_GEAR_DETECTED = 1500;
         public static final double THRESHOLD_OPEN_AMPS = 10.0;
         public static final double THRESHOLD_CLOSE_AMPS = 10.0;
         public static final double RETAIN_SPEED_TONY = -.2;
-        public static final double RETAIN_SPEED_RHODY = .2;
+        public static final double RETAIN_SPEED_RHODY = -.2;
+
+        public static final boolean RHODY_MOTOR_INVERTED = true;
+        public static final boolean TONY_MOTOR_INVERTED = false;
+
     }
 
     public class DriveTrain {
@@ -57,6 +63,11 @@ public class Constants {
         public static final double FULL_BACKWARDS_SPEED = -1;
 
         public static final double STRAIGHT_TOLERANCE = 0.2;
+
+        public static final double RIGHT_IR_SENSOR_OFFSET = -2.0;
+        public static final double CENTER_IR_SENSOR_OFFSET = 0;
+        public static final double LEFT_IR_SENSOR_OFFSET = -2.0;
+
     }
 
     public class Deadbands {
@@ -79,7 +90,7 @@ public class Constants {
         /***
          * Maximum accelerations per cycle
          */
-        public static final double ACCELERATION_CAP = TIME_OF_ACCEL / CYCLES_PER_SECOND * 100;
+        public static final double ACCELERATION_CAP = 1000 / TIME_OF_ACCEL / CYCLES_PER_SECOND;
 
     }
 
@@ -105,9 +116,9 @@ public class Constants {
             public static final double WHEEL_DIAMETER = 6;
             public static final double INCHES_PER_ROTATION = Math.PI * WHEEL_DIAMETER;
             public static final double SCALAR_RATIO = 8;
-//            public static final double INCHES_PER_PULSE = INCHES_PER_ROTATION * SCALAR_RATIO / PULSES_PER_ROTATION;
+//            public static final double INCHES_PER_PULSE_TONY = INCHES_PER_ROTATION * SCALAR_RATIO / PULSES_PER_ROTATION;
             public static final double INCHES_PER_PULSE = .0973;
-            // public static final double INCHES_PER_PULSE = 0.12371134;
+            // public static final double INCHES_PER_PULSE_TONY = 0.12371134;
             public static final double MAX_PERIOD = 5;
 
         }
@@ -115,14 +126,16 @@ public class Constants {
         public class RightDrive {
 
             public static final boolean REVERSED = Defaults.REVERSED;
-            public static final double INCHES_PER_PULSE = Encoders.Defaults.INCHES_PER_PULSE;
+            public static final double INCHES_PER_PULSE_TONY = Encoders.Defaults.INCHES_PER_PULSE;
+            public static final double INCHES_PER_PULSE_RHODY = 0.0406;
 
         }
 
         public class LeftDrive {
 
             public static final boolean REVERSED = Defaults.REVERSED;
-            public static final double INCHES_PER_PULSE = Defaults.INCHES_PER_PULSE;
+            public static final double INCHES_PER_PULSE_TONY = Defaults.INCHES_PER_PULSE;
+            public static final double INCHES_PER_PULSE_RHODY = 0.1145;
 
         }
 
@@ -199,7 +212,7 @@ public class Constants {
 
             public static final double STRAIGHT_ANGLE = 0.001;
 
-            public static final double TRAVERSE_NEUTRAL_ZONE_FROM_SIDE_DISTANCE = 150;
+            public static final double TRAVERSE_NEUTRAL_ZONE_FROM_SIDE_DISTANCE = 240; //julian updated
             public static final double TRAVERSE_NEUTRAL_ZONE_FROM_WALL_DISTANCE = 200;
             public static final double TRAVERSE_NEUTRAL_ZONE_FROM_CENTER_DISTANCE = 200;
 
@@ -216,9 +229,10 @@ public class Constants {
 
             public static final double DEPOSIT_GEAR_SIDE_BEFORE_ARC = 54;
             public static final double DEPOSIT_GEAR_FAR_INITIAL_DISTANCE = 89;
+            public static final double DEPOSIT_GEAR_VISION_INITIAL_DISTANCE = 73;
             public static final double DEPOSIT_GEAR_FAR_ANGLE = 60;
 
-            public static final long MANDIBLE_HOLD_TIME = 1000;
+            public static final long MANDIBLE_HOLD_TIME = 2000;
             public static final long PAUSE_AT_SPRING_TIME = 250;
 
             public static final double ABORT_APPROACH_THRESHOLD = 12;
@@ -243,7 +257,7 @@ public class Constants {
 
         public class Drive {
 
-            public static final double SPEED = 0.7;
+            public static final double SPEED = 1.0;
 
             public static final long STEADY_TIME = 100;
             public static final long ALIGN_STEADY_TIME = 100;
