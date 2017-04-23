@@ -75,11 +75,12 @@ public class AutoAlignVision extends Command implements PIDOutput {
         SmartDashboard.putBoolean("AutoAlignVision/onTarget", controller.onTarget());
         SmartDashboard.putNumber("AutoAlignVision/imu", imu.getYaw());
         SmartDashboard.putNumber("AutoAlignVision/pidOut", pidOut);
+        SmartDashboard.putData("VisionPid", controller);
     }
 
     @Override
     protected boolean isFinished() {
-        return System.currentTimeMillis() > endTime && controller.onTarget();
+        return false;// System.currentTimeMillis() > endTime && controller.onTarget();
     }
 
     @Override

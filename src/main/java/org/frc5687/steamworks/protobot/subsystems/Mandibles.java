@@ -18,10 +18,11 @@ public class Mandibles extends Subsystem {
     private VictorSP gearMotor;
     private AnalogInput ir;
 
+    private boolean inverted = false;
+
     public Mandibles() {
         gearMotor = new VictorSP(RobotMap.Mandibles.MANDIBLES_MOTOR);
-        boolean inverted = Constants.pickConstant(Constants.Mandibles.TONY_MOTOR_INVERTED, Constants.Mandibles.RHODY_MOTOR_INVERTED);
-        gearMotor.setInverted(inverted);
+        inverted = Constants.pickConstant(Constants.Mandibles.TONY_MOTOR_INVERTED, Constants.Mandibles.RHODY_MOTOR_INVERTED);
         DriverStation.reportError("Mandibles inverted: " + inverted, false);
         ir = new AnalogInput(RobotMap.Mandibles.MANDIBLES_IR);
     }
@@ -32,23 +33,24 @@ public class Mandibles extends Subsystem {
     }
 
     public void setSpeed(double speed) {
-        gearMotor.set(speed);
+        gearMotor.set((inverted?-1:1) * speed);
     }
 
     public void open() {
-        setSpeed(Constants.Mandibles.OPEN_SPEED);
+        setSpeed(Constants.pickConstant(Constants.Mandibles.OPEN_SPEED_TONY,Constants.Mandibles.OPEN_SPEED_RHODY));
     }
 
     public void close() {
-        setSpeed(Constants.Mandibles.CLOSE_SPEED);
+
+        setSpeed(Constants.pickConstant(Constants.Mandibles.CLOSE_SPEED_TONY, Constants.Mandibles.CLOSE_SPEED_RHODY));
     }
 
     public void wiggleOut() {
-        setSpeed(Constants.Mandibles.WIGGLE_SPEED);
+        setSpeed(Constants.pickConstant(Constants.Mandibles.WIGGLE_SPEED_TONY, Constants.Mandibles.WIGGLE_SPEED_RHODY));
     }
 
     public void wiggleIn() {
-        setSpeed(-Constants.Mandibles.WIGGLE_SPEED);
+        setSpeed(Constants.pickConstant(-Constants.Mandibles.WIGGLE_SPEED_TONY, -Constants.Mandibles.WIGGLE_SPEED_RHODY));
     }
 
     public void stop() {

@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import org.frc5687.steamworks.protobot.Constants;
 
-import static org.frc5687.steamworks.protobot.Robot.ledStrip;
 import static org.frc5687.steamworks.protobot.Robot.mandibles;
 import static org.frc5687.steamworks.protobot.Robot.oi;
 
@@ -34,11 +33,12 @@ public class HoldMandiblesOpen extends Command {
 
     @Override
     protected void execute() {
-        mandibles.setSpeed(Constants.Mandibles.HOLD_OPEN_SPEED);
+        mandibles.setSpeed(Constants.pickConstant(Constants.Mandibles.HOLD_OPEN_SPEED_TONY, Constants.Mandibles.HOLD_OPEN_SPEED_RHODY));
     }
 
     @Override
     protected void end() {
+        DriverStation.reportError("HoldMandiblesOpen done (" + millis + ")", false);
     }
 
     @Override

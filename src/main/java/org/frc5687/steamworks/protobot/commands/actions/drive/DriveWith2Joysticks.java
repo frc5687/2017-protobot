@@ -25,7 +25,7 @@ public class DriveWith2Joysticks extends Command {
 
     @Override
     protected void execute() {
-        driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed());
+        driveTrain.tankDrive(oi.getLeftSpeed(), oi.getRightSpeed(), true);
         runShifterAutomatically();
     }
 

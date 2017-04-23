@@ -43,7 +43,7 @@ public class AutoApproachTarget extends Command {
         double kI = Constants.Auto.Drive.IRPID.kI;
         double kD = Constants.Auto.Drive.IRPID.kD;
 
-        distanceController = new PIDController(kP, kI, kD, driveTrain.getIRSensors(), distancePID);
+        distanceController = new PIDController(kP, kI, kD, driveTrain.getIRSensor(), distancePID);
         distanceController.setAbsoluteTolerance(Constants.Auto.Drive.IRPID.TOLERANCE);
         distanceController.setInputRange(0, 90);  // Inches
         distanceController.setOutputRange(-speed, speed);
@@ -83,11 +83,11 @@ public class AutoApproachTarget extends Command {
         }
         SmartDashboard.putNumber("AutoApproachTarget/distanceFactor", distanceFactor);
         SmartDashboard.putNumber("AutoApproachTarget/angleFactor", angleFactor);
-        DriverStation.reportError("Distance="+driveTrain.getIRSensors().pidGet() +", DistanceFactor=" + distanceFactor + ", AngleFactor=" + angleFactor, false);
+        DriverStation.reportError("Distance="+driveTrain.getIRSensor().pidGet() +", DistanceFactor=" + distanceFactor + ", AngleFactor=" + angleFactor, false);
         driveTrain.tankDrive(distanceFactor + angleFactor, distanceFactor - angleFactor);
 
         SmartDashboard.putBoolean("AutoApproachTarget/IRPID/onTarget", distanceController.onTarget());
-        SmartDashboard.putNumber("AutoApproachTarget/IRPID/distance", driveTrain.getIRSensors().pidGet());
+        SmartDashboard.putNumber("AutoApproachTarget/IRPID/distance", driveTrain.getIRSensor().pidGet());
         SmartDashboard.putNumber("AutoApproachTarget/IRPID/error", distanceController.getError());
         SmartDashboard.putNumber("AutoApproachTarget/AnglePID/yaw", imu.getYaw());
         SmartDashboard.putNumber("AutoApproachTarget/AnglePID/value", anglePID.get());
@@ -100,7 +100,7 @@ public class AutoApproachTarget extends Command {
 
     @Override
     protected void end() {
-        DriverStation.reportError("AutoApproachTarget Finished (" + driveTrain.getIRSensors().pidGet() + ")", false);
+        DriverStation.reportError("AutoApproachTarget Finished (" + driveTrain.getIRSensor().pidGet() + ")", false);
         angleController.disable();
         driveTrain.tankDrive(0, 0);
     }

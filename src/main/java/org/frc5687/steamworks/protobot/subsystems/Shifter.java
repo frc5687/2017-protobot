@@ -14,7 +14,7 @@ public class Shifter extends Subsystem {
     private DoubleSolenoid shifterSolenoid;
     private Compressor compressor;
     private long waitPeriodEndTime = 0;
-    private boolean autShiftEnabled = true;
+    private boolean autShiftEnabled = false;
 
     public Shifter() {
         shifterSolenoid = new DoubleSolenoid(RobotMap.Shifter.PISTON_EXTENDER, RobotMap.Shifter.PISTON_RETRACTOR);

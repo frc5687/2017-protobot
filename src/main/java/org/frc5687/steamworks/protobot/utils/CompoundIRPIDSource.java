@@ -11,6 +11,7 @@ public class CompoundIRPIDSource implements PIDSource {
 
     IRPIDSource[] irSensors;
 
+
     public CompoundIRPIDSource(int... channels) {
         irSensors = new IRPIDSource[channels.length];
         for(int i = 0; i < channels.length; i ++) {
