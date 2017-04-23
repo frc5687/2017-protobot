@@ -8,9 +8,9 @@ import org.frc5687.steamworks.protobot.commands.actions.mandibles.HoldMandiblesO
 import org.frc5687.steamworks.protobot.commands.actions.mandibles.ReceiveMandibles;
 import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
 
-public class AutoDepositGear extends CommandGroup {
+public class AutoDepositCenterDeadReckoning extends CommandGroup {
 
-    public AutoDepositGear() {
+    public AutoDepositCenterDeadReckoning() {
         super();
         addSequential(new AutoDrive(30, Constants.Auto.Drive.SPEED, false, false, 250, "Initial Center"));
         addSequential(new AutoApproachTarget(0.7));

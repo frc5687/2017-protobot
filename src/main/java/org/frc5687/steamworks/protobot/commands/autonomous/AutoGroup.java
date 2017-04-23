@@ -15,7 +15,7 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
                 break;
             case 1:
                 DriverStation.reportError("Adding AutoDepositLeftFromFarLeft", false);
-                addSequential(new AutoDepositLeftFromFarLeft());
+                addSequential(new AutoDepositLeftDeadReckoning());
                 break;
             case 2:
                 DriverStation.reportError("Adding AutoDepositLeftVision", false);
@@ -23,7 +23,7 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
                 break;
             case 3:
                 DriverStation.reportError("Adding AutoDepositGear", false);
-                addSequential(new AutoDepositGear());
+                addSequential(new AutoDepositCenterDeadReckoning());
                 break;
             case 4:
                 DriverStation.reportError("Adding AutoDepositRightVision", false);
@@ -31,7 +31,7 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
                 break;
             case 5:
                 DriverStation.reportError("Adding AutoDepositRightFromFarRight", false);
-                addSequential(new AutoDepositRightFromFarRight());
+                addSequential(new AutoDepositRightDeadReckoning());
                 break;
             default:
                 break;

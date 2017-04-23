@@ -12,9 +12,9 @@ import org.frc5687.steamworks.protobot.commands.composite.EjectMandibles;
 /**
  * Created by Baxter on 2/25/2017.
  */
-public class AutoDepositLeftFromFarLeft extends CommandGroup {
+public class AutoDepositLeftDeadReckoning extends CommandGroup {
 
-    public AutoDepositLeftFromFarLeft() {
+    public AutoDepositLeftDeadReckoning() {
         super();
         // addParallel(new ReceiveMandibles());
         addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FAR_INITIAL_DISTANCE, Constants.Auto.Drive.SPEED, 5000, "Initial Left"));
