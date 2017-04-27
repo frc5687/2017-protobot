@@ -23,6 +23,7 @@ public class AutoDepositCenterFromLeft extends CommandGroup {
         addSequential(new AutoApproachTarget(Constants.Auto.Drive.SPEED));
         addSequential(new EjectMandibles());
         addSequential(new AutoDrive(-Constants.Auto.AnglesAndDistances.RETREAT_DISTANCE, Constants.Auto.Drive.SPEED, ""));
+        // addParallel(new ReceiveMandibles());
     }
 
 }

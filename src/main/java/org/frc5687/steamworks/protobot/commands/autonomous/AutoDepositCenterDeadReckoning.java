@@ -18,7 +18,7 @@ public class AutoDepositCenterDeadReckoning extends CommandGroup {
         addSequential(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.PAUSE_AT_SPRING_TIME));
         addParallel(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.MANDIBLE_HOLD_TIME));
         addSequential(new AutoDrive(-48, Constants.Auto.Drive.SPEED, false, true, 5000, "Retreat Center"));
-        addSequential(new ReceiveMandibles());
+        // addParallel(new ReceiveMandibles());
     }
 
 }

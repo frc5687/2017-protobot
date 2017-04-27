@@ -32,7 +32,7 @@ public class AutoDepositLeftVision extends CommandGroup {
         addSequential(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.PAUSE_AT_SPRING_TIME));
         addParallel(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.MANDIBLE_HOLD_TIME));
         addSequential(new AutoDrive(-Constants.Auto.AnglesAndDistances.RETREAT_DISTANCE, Constants.Auto.Drive.SPEED, false, true, 5000, "Retreat Left"));
-        addSequential(new ReceiveMandibles());
+        // addParallel(new ReceiveMandibles());
 
         // addSequential(new DriveArc(0.367088608, 1.0, Constants.Auto.AnglesAndDistances.STRAIGHT_ANGLE, 2000, true));
         // addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.TRAVERSE_NEUTRAL_ZONE_FROM_SIDE_DISTANCE, 0.7, true, true, 0, 5000));
