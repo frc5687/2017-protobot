@@ -158,7 +158,7 @@ public class DriveTrain extends Subsystem implements PIDSource {
      * @param rightSpeed desired speed for right motors
      */
     public void tankDrive(double leftSpeed, double rightSpeed) {
-        tankDrive(leftSpeed, rightSpeed, false);
+        tankDrive(leftSpeed, rightSpeed, true);
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed, boolean overrideCaps) {
