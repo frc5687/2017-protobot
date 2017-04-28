@@ -12,8 +12,7 @@ public class AutoDepositCenterDeadReckoning extends CommandGroup {
 
     public AutoDepositCenterDeadReckoning() {
         super();
-        addSequential(new AutoDrive(12, Constants.Auto.Drive.SPEED * .5, false, false, 500, "Initial Center"));
-        addSequential(new AutoDrive(18, Constants.Auto.Drive.SPEED, false, false, 1000, "Fast Center"));
+        addSequential(new AutoDrive(36, .7, false, false, 2000, "Initial Center"));
         addSequential(new AutoApproachTarget(0.7));
         addSequential(new EjectMandibles());
         addSequential(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.PAUSE_AT_SPRING_TIME));
