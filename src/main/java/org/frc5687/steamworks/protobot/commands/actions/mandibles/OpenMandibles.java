@@ -9,6 +9,7 @@ import static org.frc5687.steamworks.protobot.Robot.*;
  * Created by Ben Bernard on 2/27/2017.
  */
 public class OpenMandibles extends Command {
+    private long minMillis;
     private long endMillis;
 
     public OpenMandibles() {
@@ -18,7 +19,8 @@ public class OpenMandibles extends Command {
     @Override
     protected void initialize() {
         ledStrip.setMandiblesOpen(true);
-        endMillis = System.currentTimeMillis() + Constants.Mandibles.OPEN_TIME;
+        minMillis = System.currentTimeMillis() + Constants.Mandibles.MIN_OPEN_TIME;
+        endMillis = System.currentTimeMillis() + Constants.Mandibles.MAX_OPEN_TIME;
     }
 
     @Override
@@ -28,7 +30,7 @@ public class OpenMandibles extends Command {
 
     @Override
     protected boolean isFinished() {
-        return (System.currentTimeMillis() > endMillis || pdp.getMandiblesAmps() > Constants.Mandibles.THRESHOLD_OPEN_AMPS);
+        return (System.currentTimeMillis() > endMillis || (System.currentTimeMillis() > minMillis && pdp.getMandiblesAmps() > Constants.Mandibles.THRESHOLD_OPEN_AMPS));
     }
 
     @Override

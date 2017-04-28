@@ -35,8 +35,10 @@ public class Constants {
         public static final double CLAMP_SPEED_RHODY = -.2;
         public static final double HOLD_OPEN_SPEED_RHODY = .15;
 
-        public static final long OPEN_TIME = 500;
-        public static final long CLOSE_TIME = 1000;
+        public static final long MIN_OPEN_TIME = 500;
+        public static final long MAX_OPEN_TIME = 1000;
+        public static final long MIN_CLOSE_TIME = 500;
+        public static final long MAX_CLOSE_TIME = 1000;
         public static final double TONY_MAX_POT_LIMIT = 0.5;
         public static final double PROTOBOT_MAX_POT_LIMIT = 0.5;
         public static final double WIGGLE_SPEED_TONY = -0.2;

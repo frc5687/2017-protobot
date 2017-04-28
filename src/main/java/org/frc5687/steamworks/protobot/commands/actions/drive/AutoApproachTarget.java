@@ -67,7 +67,7 @@ public class AutoApproachTarget extends Command {
         angleController.setSetpoint(imu.getYaw());
         angleController.enable();
 
-        DriverStation.reportError("AutoApproach initialized", false);
+        DriverStation.reportError("AutoApproach initialized to " + imu.getYaw(), false);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class AutoApproachTarget extends Command {
         SmartDashboard.putNumber("AutoApproachTarget/distanceFactor", distanceFactor);
         SmartDashboard.putNumber("AutoApproachTarget/angleFactor", angleFactor);
         DriverStation.reportError("Distance="+driveTrain.getIRSensor().pidGet() +", DistanceFactor=" + distanceFactor + ", AngleFactor=" + angleFactor, false);
-        driveTrain.tankDrive(distanceFactor + angleFactor, distanceFactor - angleFactor);
+        driveTrain.tankDrive(distanceFactor + angleFactor, distanceFactor - angleFactor, true);
 
         SmartDashboard.putBoolean("AutoApproachTarget/IRPID/onTarget", distanceController.onTarget());
         SmartDashboard.putNumber("AutoApproachTarget/IRPID/distance", driveTrain.getIRSensor().pidGet());
@@ -102,7 +102,7 @@ public class AutoApproachTarget extends Command {
     protected void end() {
         DriverStation.reportError("AutoApproachTarget Finished (" + driveTrain.getIRSensor().pidGet() + ")", false);
         angleController.disable();
-        driveTrain.tankDrive(0, 0);
+        driveTrain.tankDrive(0, 0, true);
     }
 
     private class PIDListener implements PIDOutput {
