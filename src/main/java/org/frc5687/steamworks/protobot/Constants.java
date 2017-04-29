@@ -185,7 +185,7 @@ public class Constants {
         public static final int IR_THRESHOLD = 1500;
         public static final long RAISE_TIME = 1000;
         public static final long LOWER_TIME = 500;
-        public static final double HARDSTOP_AMPS = 7.0;
+        public static final double HARDSTOP_AMPS = 11.0;
         public static final long OVERRIDE_TIME = 200;
         public static final long EJECT_ROLLERS_DELAY = 100;
         public static final double COLLECT_SPEED = .75;
