@@ -16,7 +16,6 @@ public class AutoDepositLeftDeadReckoning extends CommandGroup {
 
     public AutoDepositLeftDeadReckoning() {
         super();
-        // addParallel(new ReceiveMandibles());
         addSequential(new AutoDrive(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FAR_INITIAL_DISTANCE, Constants.Auto.Drive.SPEED, 5000, "Initial Left"));
         addSequential(new AutoAlign(Constants.Auto.AnglesAndDistances.DEPOSIT_GEAR_FAR_ANGLE, Constants.Auto.Align.SPEED));
         addSequential(new AutoApproachTarget(0.7));
@@ -24,7 +23,7 @@ public class AutoDepositLeftDeadReckoning extends CommandGroup {
         addSequential(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.PAUSE_AT_SPRING_TIME));
         addParallel(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.MANDIBLE_HOLD_TIME));
         addSequential(new AutoDrive(-48, Constants.Auto.Drive.SPEED, false, true, 5000, "Retreat Left"));
-        addSequential(new ReceiveMandibles());
+        // addParallel(new ReceiveMandibles());
     }
 
 }

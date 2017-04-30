@@ -33,7 +33,7 @@ public class AutoDepositRightVision extends CommandGroup {
         addSequential(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.PAUSE_AT_SPRING_TIME));
         addParallel(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.MANDIBLE_HOLD_TIME));
         addSequential(new AutoDrive(-Constants.Auto.AnglesAndDistances.RETREAT_DISTANCE, Constants.Auto.Drive.SPEED, false, true, 5000, "Retreat Right"));
-        addSequential(new ReceiveMandibles());
+        // addParallel(new ReceiveMandibles());
 
         // Traverse
         // addSequential(new DriveArc(1.0, 0.367088608, Constants.Auto.AnglesAndDistances.STRAIGHT_ANGLE, 2000, true));

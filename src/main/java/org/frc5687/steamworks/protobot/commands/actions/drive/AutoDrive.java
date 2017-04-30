@@ -111,7 +111,7 @@ public class AutoDrive extends Command {
         SmartDashboard.putNumber("AutoDrive/distanceFactor", distanceFactor);
         SmartDashboard.putNumber("AutoDrive/angleFactor", angleFactor);
 
-        driveTrain.tankDrive(distanceFactor + angleFactor, distanceFactor - angleFactor, false);
+        driveTrain.tankDrive(distanceFactor + angleFactor, distanceFactor - angleFactor, true);
 
         SmartDashboard.putBoolean("AutoDrive/onTarget", distanceController == null ? false : distanceController.onTarget());
         SmartDashboard.putNumber("AutoDrive/imu", imu.getYaw());

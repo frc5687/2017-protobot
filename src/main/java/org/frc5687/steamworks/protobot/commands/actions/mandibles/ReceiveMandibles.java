@@ -13,7 +13,8 @@ import static org.frc5687.steamworks.protobot.Robot.*;
 public class ReceiveMandibles extends Command {
 
     protected State state;
-    private long endTime;
+    private long minMillis;
+    private long endCloseMillis;
     private long switchTime;
 
     public ReceiveMandibles() {
@@ -23,7 +24,8 @@ public class ReceiveMandibles extends Command {
     @Override
     protected void initialize() {
         state = State.CLOSE;
-        endTime = System.currentTimeMillis() + Constants.Mandibles.CLOSE_TIME;
+        minMillis = System.currentTimeMillis() + Constants.Mandibles.MIN_CLOSE_TIME;
+        endCloseMillis = System.currentTimeMillis() + Constants.Mandibles.MAX_CLOSE_TIME;
         ledStrip.setMandiblesOpen(false);
     }
 
@@ -33,7 +35,7 @@ public class ReceiveMandibles extends Command {
         switch (state) {
             case CLOSE:
                 mandibles.close();
-                if (System.currentTimeMillis() >= endTime || pdp.getMandiblesAmps() > Constants.Mandibles.THRESHOLD_CLOSE_AMPS) { state = State.CLAMP; }
+                if (System.currentTimeMillis() >= endCloseMillis ||(System.currentTimeMillis() >= minMillis && pdp.getMandiblesAmps() > Constants.Mandibles.THRESHOLD_CLOSE_AMPS)) { state = State.CLAMP; }
                 break;
             case CLAMP:
                 mandibles.setSpeed(gearPresent ? Constants.pickConstant(Constants.Mandibles.CLAMP_SPEED_TONY, Constants.Mandibles.CLAMP_SPEED_RHODY) : Constants.pickConstant(Constants.Mandibles.RETAIN_SPEED_TONY, Constants.Mandibles.RETAIN_SPEED_RHODY));

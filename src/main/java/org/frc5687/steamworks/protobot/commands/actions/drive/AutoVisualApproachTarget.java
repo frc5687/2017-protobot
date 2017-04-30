@@ -67,7 +67,7 @@ public class AutoVisualApproachTarget extends Command {
         angleController.setSetpoint(initialAngle);
         angleController.enable();
 
-        DriverStation.reportError("AutoVisualApproachTarget initialized with angle " + angleController.getSetpoint(), false);
+        DriverStation.reportError("AutoVisualApproachTarget initialized with angle " + initialAngle, false);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class AutoVisualApproachTarget extends Command {
                 else if (targetAngle < -180) { targetAngle+=360; }
                 synchronized (angleController) {
                     angleController.setSetpoint(targetAngle);
-                    DriverStation.reportError("AutoVisualApproachTarget retargeting angle " + angleController.getSetpoint(), false);
+                    DriverStation.reportError("AutoVisualApproachTarget retargeting angle " + targetAngle, false);
                     angleController.enable();
                 }
             }
@@ -102,7 +102,7 @@ public class AutoVisualApproachTarget extends Command {
         SmartDashboard.putNumber("AutoApproachTarget/distanceFactor", distanceFactor);
         SmartDashboard.putNumber("AutoApproachTarget/angleFactor", angleFactor);
 
-        driveTrain.tankDrive(distanceFactor + angleFactor, distanceFactor - angleFactor);
+        driveTrain.tankDrive(distanceFactor + angleFactor, distanceFactor - angleFactor, true);
 
         SmartDashboard.putBoolean("AutoApproachTarget/IRPID/onTarget", distanceController.onTarget());
         SmartDashboard.putNumber("AutoApproachTarget/IRPID/distance", driveTrain.getIRSensor().pidGet());
@@ -120,7 +120,7 @@ public class AutoVisualApproachTarget extends Command {
     protected void end() {
         DriverStation.reportError("AutoApproach Finished (" + driveTrain.getDistance() + ")", false);
         angleController.disable();
-        driveTrain.tankDrive(0, 0);
+        driveTrain.tankDrive(0, 0, true);
         lights.turnRingLightOff();
     }
 

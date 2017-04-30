@@ -12,13 +12,13 @@ public class AutoDepositCenterDeadReckoning extends CommandGroup {
 
     public AutoDepositCenterDeadReckoning() {
         super();
-        addSequential(new AutoDrive(30, Constants.Auto.Drive.SPEED, false, false, 250, "Initial Center"));
+        addSequential(new AutoDrive(36, .7, false, false, 2000, "Initial Center"));
         addSequential(new AutoApproachTarget(0.7));
         addSequential(new EjectMandibles());
         addSequential(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.PAUSE_AT_SPRING_TIME));
         addParallel(new HoldMandiblesOpen(Constants.Auto.AnglesAndDistances.MANDIBLE_HOLD_TIME));
         addSequential(new AutoDrive(-48, Constants.Auto.Drive.SPEED, false, true, 5000, "Retreat Center"));
-        addSequential(new ReceiveMandibles());
+        // addParallel(new ReceiveMandibles());
     }
 
 }

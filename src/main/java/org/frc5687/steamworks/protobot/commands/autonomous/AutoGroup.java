@@ -176,19 +176,19 @@ public class AutoGroup extends SteamworksBaseCommandGroup {
                 result.append("No Spring ");
                 break;
             case 1:
-                result.append("Left Spring ");
+                result.append("Left Spring Dead Reckoning");
                 break;
             case 2:
                 result.append("Left Spring Using Vision ");
                 break;
             case 3:
-                result.append("Center Spring ");
+                result.append("Center Spring Dead Reckoning");
                 break;
             case 4:
                 result.append("Right Spring Using Vision ");
                 break;
             case 5:
-                result.append("Right Spring ");
+                result.append("Right Spring Dead Reckoning");
                 break;
             default:
                 break;

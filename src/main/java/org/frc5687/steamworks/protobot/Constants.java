@@ -35,8 +35,10 @@ public class Constants {
         public static final double CLAMP_SPEED_RHODY = -.2;
         public static final double HOLD_OPEN_SPEED_RHODY = .15;
 
-        public static final long OPEN_TIME = 500;
-        public static final long CLOSE_TIME = 1000;
+        public static final long MIN_OPEN_TIME = 500;
+        public static final long MAX_OPEN_TIME = 1000;
+        public static final long MIN_CLOSE_TIME = 500;
+        public static final long MAX_CLOSE_TIME = 1000;
         public static final double TONY_MAX_POT_LIMIT = 0.5;
         public static final double PROTOBOT_MAX_POT_LIMIT = 0.5;
         public static final double WIGGLE_SPEED_TONY = -0.2;
@@ -117,7 +119,7 @@ public class Constants {
             public static final double INCHES_PER_ROTATION = Math.PI * WHEEL_DIAMETER;
             public static final double SCALAR_RATIO = 8;
 //            public static final double INCHES_PER_PULSE_TONY = INCHES_PER_ROTATION * SCALAR_RATIO / PULSES_PER_ROTATION;
-            public static final double INCHES_PER_PULSE = .0973;
+            public static final double INCHES_PER_PULSE = 0.1076;
             // public static final double INCHES_PER_PULSE_TONY = 0.12371134;
             public static final double MAX_PERIOD = 5;
 
@@ -183,7 +185,7 @@ public class Constants {
         public static final int IR_THRESHOLD = 1500;
         public static final long RAISE_TIME = 1000;
         public static final long LOWER_TIME = 500;
-        public static final double HARDSTOP_AMPS = 7.0;
+        public static final double HARDSTOP_AMPS = 11.0;
         public static final long OVERRIDE_TIME = 200;
         public static final long EJECT_ROLLERS_DELAY = 100;
         public static final double COLLECT_SPEED = .75;
