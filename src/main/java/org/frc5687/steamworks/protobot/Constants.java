@@ -52,7 +52,7 @@ public class Constants {
         public static final double RETAIN_SPEED_RHODY = -.2;
 
         public static final boolean RHODY_MOTOR_INVERTED = true;
-        public static final boolean TONY_MOTOR_INVERTED = false;
+        public static final boolean TONY_MOTOR_INVERTED = true;
 
     }
 
@@ -128,7 +128,7 @@ public class Constants {
         public class RightDrive {
 
             public static final boolean REVERSED = Defaults.REVERSED;
-            public static final double INCHES_PER_PULSE_TONY = Encoders.Defaults.INCHES_PER_PULSE;
+            public static final double INCHES_PER_PULSE_TONY =  0.03609; //Encoders.Defaults.INCHES_PER_PULSE;
             public static final double INCHES_PER_PULSE_RHODY = 0.0406;
 
         }
@@ -174,6 +174,9 @@ public class Constants {
     }
 
     public class Dustpan {
+        public static final boolean RHODY_LIFTER_INVERTED = true;
+        public static final boolean TONY_LIFTER_INVERTED = true;
+
         public static final double LOWER_SPEED = 0.7;
         public static final double RAISE_SPEED = -0.7;
         public static final double HOLD_DOWN_SPEED = 0.2;

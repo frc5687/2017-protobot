@@ -11,22 +11,22 @@ public class RobotMap {
     public static class Drive {
         //  REAR - FRONT - TOP
         // PWM
-        public static final int RIGHT_MOTOR_FRONT = 3;
-        public static final int RIGHT_MOTOR_REAR = 4;
+        public static final int RIGHT_MOTOR_FRONT = 6;
+        public static final int RIGHT_MOTOR_REAR = 7;
         public static final int RIGHT_MOTOR_TOP = 5;
 
-        public static final int LEFT_MOTOR_FRONT = 0;
-        public static final int LEFT_MOTOR_REAR = 1;
-        public static final int LEFT_MOTOR_TOP = 2;
+        public static final int LEFT_MOTOR_FRONT = 3;
+        public static final int LEFT_MOTOR_REAR = 2;
+        public static final int LEFT_MOTOR_TOP = 4;
 
         // PDP ports
-        public static final int PDP_RIGHT_MOTOR_FRONT = 15;
-        public static final int PDP_RIGHT_MOTOR_TOP = 14;
-        public static final int PDP_RIGHT_MOTOR_REAR = 13;
+        public static final int PDP_RIGHT_MOTOR_FRONT = 2;
+        public static final int PDP_RIGHT_MOTOR_REAR = 3;
+        public static final int PDP_RIGHT_MOTOR_TOP = 1;
 
-        public static final int PDP_LEFT_MOTOR_FRONT = 3;
-        public static final int PDP_LEFT_MOTOR_TOP = 1;
-        public static final int PDP_LEFT_MOTOR_REAR = 0;
+        public static final int PDP_LEFT_MOTOR_FRONT = 14;
+        public static final int PDP_LEFT_MOTOR_REAR = 13;
+        public static final int PDP_LEFT_MOTOR_TOP = 15;
 
         // DIO
         public static final int LEFT_ENCODER_CHANNEL_A = 6;
@@ -43,9 +43,9 @@ public class RobotMap {
 
     public static class Mandibles {
 
-        public static final int MANDIBLES_MOTOR = 6;
+        public static final int MANDIBLES_MOTOR = 8;
         public static final int POTENTIOMETER = 1;
-        public static final int PDP_MANDIBLES_MOTOR = 10;
+        public static final int PDP_MANDIBLES_MOTOR = 4;
         public static final int MANDIBLES_IR = 2;
 
     }
@@ -62,16 +62,16 @@ public class RobotMap {
 
     public static class Shifter {
 
-        public static final int PISTON_EXTENDER = 1;
-        public static final int PISTON_RETRACTOR = 0;
+        public static final int PISTON_EXTENDER = 2;
+        public static final int PISTON_RETRACTOR = 1;
 
     }
 
     public static class Climber {
 
-        public static final int CLIMBER_MOTORS = 7;
-        public static final int PDP_CLIMBER_MOTOR_A = 2;
-        public static final int PDP_CLIMBER_MOTOR_B = 12;
+        public static final int CLIMBER_MOTORS = 1; // 9
+        public static final int PDP_CLIMBER_MOTOR_A = 12;
+        public static final int PDP_CLIMBER_MOTOR_B = 0;
 
     }
 
@@ -83,11 +83,11 @@ public class RobotMap {
 
     public static class Dustpan {
 
-        public static final int LIFTER_MOTOR = 8;
+        public static final int LIFTER_MOTOR = 0;
         public static final int ROLLER_MOTOR = 9;
         public static final int POTENTIOMETER = 0;
-        public static final int PDP_DUSTPAN_LIFTER_MOTOR = 4;
-        public static final int PDP_DUSTPAN_ROLLER_MOTOR = 5;
+        public static final int PDP_DUSTPAN_LIFTER_MOTOR = 9;
+        public static final int PDP_DUSTPAN_ROLLER_MOTOR = 8;
         public static final int IR = 7;
 
     }

@@ -118,9 +118,12 @@ public class Robot extends IterativeRobot implements IPoseTrackable {
     @Override
     public void autonomousInit() {
         imu.zeroYaw();
+        /*
         int spring = autoRotorChooser.springSwitchValue();
         int hopper = autoRotorChooser.hopperSwitchValue();
         autoCommand = new AutoGroup(spring, 0, hopper);
+        */
+        autoCommand = new AutoCrossBaseline();
         // autoCommand = new AutoGroup(spring, 0, 1);
         // autoCommand = new AutoVisualApproachTarget(.7, 0);
         // autoCommand = new AutoVisionTest();

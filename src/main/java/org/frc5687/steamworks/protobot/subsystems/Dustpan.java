@@ -23,6 +23,7 @@ public class Dustpan {
 
         public Lifter() {
             motor = new VictorSP(RobotMap.Dustpan.LIFTER_MOTOR);
+            motor.setInverted(Constants.pickConstant(Constants.Dustpan.TONY_LIFTER_INVERTED, Constants.Dustpan.RHODY_LIFTER_INVERTED));
         }
 
         public void set(double speed) {
